@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local SEO Health Check | Zoek Marketing Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--purple);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+
+.page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
+.page-intro strong{color:var(--white);font-weight:600;}
+.header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1.1rem;}
+.stat-row{display:flex;align-items:center;gap:1rem;}
+.stat-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple);min-width:55px;}
+.stat-text{font-size:0.82rem;color:var(--muted);line-height:1.5;}
+.stat-text strong{color:var(--white);}
+
+/* LAYOUT */
+.tool-layout{display:grid;grid-template-columns:320px 1fr;border-bottom:1px solid var(--border);min-height:85vh;}
+.inputs-panel{background:var(--sidebar);border-right:1px solid var(--border);padding:1.25rem;overflow-y:auto;}
+.panel-section{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-light);}
+.panel-section:last-child{border-bottom:none;}
+.panel-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.5rem;}
+.panel-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
+.input-group{margin-bottom:0.85rem;}
+.input-group label{display:block;font-size:0.72rem;font-weight:600;color:var(--muted);margin-bottom:0.3rem;letter-spacing:0.04em;}
+.tool-input{width:100%;padding:0.55rem 0.8rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:500;outline:none;transition:border-color 0.2s;}
+.tool-input:focus{border-color:var(--purple);}
+.tool-input::placeholder{color:rgba(255,255,255,0.2);}
+
+/* QUESTION GROUPS */
+.q-group{margin-bottom:1.25rem;}
+.q-group-title{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem;}
+.q-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.04);gap:0.75rem;}
+.q-row:last-child{border-bottom:none;}
+.q-row-text{font-size:0.8rem;font-weight:500;line-height:1.4;flex:1;}
+.q-row-text small{display:block;font-size:0.68rem;color:var(--muted);margin-top:2px;font-weight:400;}
+.toggle-group{display:flex;border:1px solid var(--border);border-radius:4px;overflow:hidden;flex-shrink:0;}
+.tog{padding:0.28rem 0.6rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.7rem;font-weight:700;border:none;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.tog:hover{background:rgba(255,255,255,0.06);}
+.tog.yes.active{background:rgba(79,255,176,0.15);color:var(--green);}
+.tog.partial.active{background:rgba(255,209,102,0.15);color:var(--yellow);}
+.tog.no.active{background:rgba(255,92,124,0.12);color:var(--red);}
+
+.btn-run{width:100%;padding:0.8rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:800;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);margin-top:0.5rem;}
+.btn-run:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.btn-reset-seo{width:100%;padding:0.5rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.75rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;margin-top:0.4rem;}
+.btn-reset-seo:hover{color:var(--red);border-color:var(--red);}
+
+/* RESULTS PANEL */
+.results-panel{padding:2rem;display:flex;flex-direction:column;gap:1.5rem;overflow-y:auto;}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;color:var(--muted);text-align:center;gap:1rem;}
+.empty-icon{font-size:4rem;opacity:0.3;}
+.empty-text{font-size:0.9rem;line-height:1.65;max-width:300px;}
+
+/* SCORE HERO */
+.score-hero{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:8px;padding:2rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;}
+.score-ring-wrap{position:relative;width:130px;height:130px;flex-shrink:0;}
+.score-ring-svg{transform:rotate(-90deg);}
+.score-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.score-num{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;line-height:1;}
+.score-denom{font-size:0.7rem;color:var(--muted);}
+.score-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+.score-grade{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;line-height:1.1;margin-bottom:0.5rem;}
+.score-desc{font-size:0.83rem;color:var(--muted);line-height:1.65;}
+.score-desc strong{color:var(--white);}
+
+/* CAT BARS */
+.cat-bars{display:flex;flex-direction:column;gap:0.5rem;}
+.cat-bar-row{display:grid;grid-template-columns:130px 1fr 42px;align-items:center;gap:0.75rem;}
+.cat-bar-name{font-size:0.78rem;font-weight:600;}
+.cat-bar-track{height:7px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
+.cat-bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease;}
+.cat-bar-pct{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:800;text-align:right;}
+
+/* FINDINGS */
+.section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.6rem;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
+.finding-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:0.75rem;}
+.finding-head{display:flex;align-items:center;gap:0.75rem;padding:0.9rem 1.1rem;cursor:pointer;user-select:none;}
+.finding-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.finding-title{font-weight:700;font-size:0.85rem;flex:1;line-height:1.3;}
+.finding-tag{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:3px;white-space:nowrap;}
+.tag-bad{background:rgba(255,92,124,0.12);color:var(--red);}
+.tag-warn{background:rgba(255,209,102,0.12);color:var(--yellow);}
+.tag-good{background:rgba(79,255,176,0.1);color:var(--green);}
+.finding-chev{color:var(--muted);font-size:0.65rem;transition:transform 0.2s;flex-shrink:0;}
+.finding-card.open .finding-chev{transform:rotate(180deg);}
+.finding-body{display:none;padding:1rem 1.1rem;border-top:1px solid var(--border-light);background:rgba(255,255,255,0.015);}
+.finding-card.open .finding-body{display:block;}
+.finding-why{font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.85rem;}
+.finding-why strong{color:var(--white);}
+.finding-fix-box{background:rgba(108,99,255,0.07);border:1px solid rgba(108,99,255,0.2);border-radius:4px;padding:0.75rem 1rem;}
+.ffb-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.25rem;}
+.ffb-text{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+.ffb-text strong{color:var(--white);}
+.ffb-link{display:inline-block;margin-top:0.4rem;font-size:0.75rem;font-weight:700;color:var(--purple);text-decoration:none;}
+.ffb-link:hover{color:var(--blue);}
+
+/* PRIORITY + CTA SIDEBAR */
+.results-outer{display:grid;grid-template-columns:1fr 300px;gap:1.5rem;align-items:start;}
+.results-sidebar{display:flex;flex-direction:column;gap:1.25rem;}
+.sidebar-box{background:var(--sidebar);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.sb-head{padding:0.85rem 1.1rem;border-bottom:1px solid var(--border-light);}
+.sb-title{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:800;}
+.sb-body{padding:1rem 1.1rem;}
+.priority-row{display:flex;gap:0.65rem;align-items:flex-start;padding:0.55rem 0;border-bottom:1px solid var(--border-light);}
+.priority-row:last-child{border-bottom:none;padding-bottom:0;}
+.pr-num{width:22px;height:22px;border-radius:3px;background:var(--gradient);color:white;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:800;flex-shrink:0;margin-top:1px;}
+.pr-title{font-size:0.8rem;font-weight:600;line-height:1.35;}
+.pr-svc{font-size:0.68rem;color:var(--purple);margin-top:0.1rem;}
+
+.cta-gradient-box{background:var(--gradient);border-radius:6px;padding:1.5rem;text-align:center;}
+.cgb-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.35rem;}
+.cgb-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.35rem;line-height:1.2;}
+.cgb-sub{font-size:0.75rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:1rem;}
+.cgb-btn{display:block;background:white;color:var(--purple);text-decoration:none;padding:0.65rem 1rem;border-radius:4px;font-size:0.82rem;font-weight:800;transition:all 0.15s;box-shadow:0 4px 14px rgba(0,0,0,0.2);}
+.cgb-btn:hover{transform:translateY(-1px);}
+.cgb-phone{font-size:0.7rem;color:rgba(255,255,255,0.6);margin-top:0.5rem;}
+.cgb-phone a{color:rgba(255,255,255,0.85);text-decoration:none;font-weight:600;}
+
+/* BENCHMARKS */
+.benchmarks-section{background:var(--sidebar);padding:3.5rem 2.5rem;border-top:1px solid var(--border);}
+.bench-intro{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.5rem;}
+.bench-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;max-width:560px;margin-bottom:2rem;}
+.bench-sub strong{color:var(--white);}
+.bench-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.bench-card{background:var(--navy);padding:1.25rem;}
+.bc-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--purple);line-height:1;margin-bottom:0.25rem;}
+.bc-title{font-weight:700;font-size:0.88rem;margin-bottom:0.35rem;}
+.bc-desc{font-size:0.75rem;color:var(--muted);line-height:1.6;}
+
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+.footer-link:hover{color:var(--white);}
+@media(max-width:1050px){.results-outer{grid-template-columns:1fr;}.results-sidebar{flex-direction:row;flex-wrap:wrap;}.results-sidebar>*{flex:1;min-width:240px;}}
+@media(max-width:860px){nav{padding:0.85rem 1rem;}.nav-links{display:none;}.page-header{grid-template-columns:1fr;}.header-left{border-right:none;border-bottom:1px solid var(--border);padding:2.5rem 1.5rem;}.tool-layout{grid-template-columns:1fr;}.inputs-panel{border-right:none;border-bottom:1px solid var(--border);}.results-panel{padding:1.5rem;}.score-hero{grid-template-columns:1fr;}.score-ring-wrap{margin:0 auto;}.benchmarks-section{padding:2.5rem 1.5rem;}.bench-cards{grid-template-columns:1fr 1fr;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+@media(max-width:480px){.bench-cards{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="funnel.html">Funnel</a></li>
+    <li><a href="calculator.html">CPL</a></li>
+    <li><a href="roi.html">ROI</a></li>
+    <li><a href="grader.html">Site Grader</a></li>
+    <li><a href="website-quiz.html">Website Quiz</a></li>
+    <li><a href="local-seo.html" class="active">Local SEO</a></li><li><a href="revenue-loss.html">Revenue Loss</a></li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<div class="page-header">
+  <div class="header-left">
+    <div class="page-tag">Tool 09 · Local SEO Health Check</div>
+    <h1 class="page-title">Can customers actually <span class="accent">find you online?</span></h1>
+    <p class="page-intro">Having a website isn't the same as being findable. <strong>Local SEO determines whether you show up when someone searches for what you do in your city</strong> — and most small businesses have serious gaps they don't know about.</p>
+  </div>
+  <div class="header-right">
+    <div class="stat-row"><div class="stat-num">97%</div><div class="stat-text"><strong>of consumers search online</strong> for local businesses. If you're not showing up, they're finding your competitors.</div></div>
+    <div class="stat-row"><div class="stat-num">5</div><div class="stat-text"><strong>categories audited:</strong> Google Presence, Citations & Listings, Reviews, On-Site SEO, and Local Content.</div></div>
+    <div class="stat-row"><div class="stat-num">Free</div><div class="stat-text"><strong>No crawlers, no signup.</strong> Honest answers to 25 questions. Real score. Specific fixes.</div></div>
+  </div>
+</div>
+
+<div class="tool-layout">
+  <!-- INPUTS -->
+  <div class="inputs-panel">
+    <div class="panel-section">
+      <div class="panel-label">Your business</div>
+      <div class="input-group">
+        <label>Business name</label>
+        <input class="tool-input" id="inp-biz" type="text" placeholder="e.g. Peak Plumbing Co.">
+      </div>
+      <div class="input-group">
+        <label>City / service area</label>
+        <input class="tool-input" id="inp-city" type="text" placeholder="e.g. Austin, TX">
+      </div>
+      <div class="input-group">
+        <label>Primary service / category</label>
+        <input class="tool-input" id="inp-service" type="text" placeholder="e.g. Plumber, Dentist, HVAC">
+      </div>
+    </div>
+
+    <div id="questions-panel"></div>
+
+    <button class="btn-run" onclick="runCheck()">Get My Local SEO Score →</button>
+    <button class="btn-reset-seo" onclick="resetAll()">Reset all answers</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel">
+    <div class="empty-state">
+      <div class="empty-icon">📍</div>
+      <p class="empty-text">Answer the questions on the left and click "Get My Score" to see how your local SEO stacks up.</p>
+    </div>
+  </div>
+</div>
+
+<div class="benchmarks-section">
+  <div class="bench-intro">Why local SEO matters more than ever</div>
+  <p class="bench-sub">Google's algorithm has shifted dramatically toward local relevance. <strong>These are the numbers every local business owner needs to understand.</strong></p>
+  <div class="bench-cards">
+    <div class="bench-card"><div class="bc-num">97%</div><div class="bc-title">Search for local businesses online</div><div class="bc-desc">Nearly every customer journey starts with a Google search. If you're not there, you don't exist in their consideration set.</div></div>
+    <div class="bench-card"><div class="bc-num">78%</div><div class="bc-title">Local mobile searches convert</div><div class="bc-desc">78% of local searches on mobile result in an offline purchase within 24 hours. Local intent = buying intent.</div></div>
+    <div class="bench-card"><div class="bc-num">42%</div><div class="bc-title">Of local clicks go to Map Pack</div><div class="bc-desc">The top 3 Google Maps results capture 42% of all local clicks. Outside the top 3, you're fighting for scraps.</div></div>
+    <div class="bench-card"><div class="bc-num">70%</div><div class="bc-title">Of consumers visit a store after local search</div><div class="bc-desc">Local SEO drives foot traffic, not just website traffic. Ranking well locally means more people walking through your door.</div></div>
+    <div class="bench-card"><div class="bc-num">5x</div><div class="bc-title">More clicks for complete GBP profiles</div><div class="bc-desc">A fully completed Google Business Profile gets 5x more clicks than an incomplete one. Most businesses leave this free traffic on the table.</div></div>
+    <div class="bench-card"><div class="bc-num">88%</div><div class="bc-title">Trust online reviews as much as personal recommendations</div><div class="bc-desc">Your Google reviews are as powerful as a word-of-mouth referral — if you have them and display them prominently.</div></div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · 1-888-737-9635</span>
+</footer>
+
+<script>
+const CATEGORIES=[
+  {
+    id:'gbp',label:'Google Business Profile',icon:'🗺️',
+    questions:[
+      {id:'g1',text:'Have you claimed your Google Business Profile?',why:'An unclaimed profile means Google shows incomplete info — or worse, a competitor\'s profile — when people search for you. This is the single most important free tool in local SEO.',points:10,svc:'getlisted'},
+      {id:'g2',text:'Is your GBP 100% complete? (hours, photos, services, description)',why:'Google ranks complete profiles significantly higher. Incomplete profiles miss the categories, photos, and service descriptions that determine when you appear in searches.',points:8,svc:'getlisted'},
+      {id:'g3',text:'Do you post updates to your GBP at least twice a month?',why:'GBP posts signal to Google that your business is active. Businesses that post regularly appear more prominently in Maps and local search results.',points:6,svc:'seo'},
+      {id:'g4',text:'Have you added all relevant service categories to your GBP?',why:'Google uses your selected categories to determine which searches you appear in. Missing categories means missing searches — and missing customers.',points:7,svc:'getlisted'},
+      {id:'g5',text:'Do you have at least 10 photos on your GBP (interior, exterior, team, work)?',why:'Profiles with photos receive 42% more requests for directions and 35% more website clicks than those without. Photos are free visibility.',points:5,svc:'getlisted'},
+    ]
+  },
+  {
+    id:'citations',label:'Citations & Listings',icon:'📋',
+    questions:[
+      {id:'c1',text:'Is your business listed on Yelp, Bing Places, and Apple Maps?',why:'Google cross-references your business info across dozens of sites to confirm your legitimacy. Missing from major platforms weakens your local authority.',points:8,svc:'getlisted'},
+      {id:'c2',text:'Is your Name, Address, and Phone number identical across all listings?',why:'Even small inconsistencies (St. vs Street, missing suite number) confuse Google\'s algorithm and can significantly hurt your local ranking.',points:9,svc:'getlisted'},
+      {id:'c3',text:'Are you listed in at least 20+ online directories?',why:'Citation volume is a direct local ranking factor. More high-quality citations = more confidence from Google = higher local rankings.',points:6,svc:'getlisted'},
+      {id:'c4',text:'Have you checked for and removed duplicate listings?',why:'Duplicate listings split your review equity, confuse customers, and send contradictory signals to Google — all of which hurt your local ranking.',points:5,svc:'getlisted'},
+      {id:'c5',text:'Are you listed in industry-specific directories? (e.g. Houzz, Healthgrades, Avvo)',why:'Industry directories add topical authority that general directories can\'t provide. Google rewards businesses with relevant, niche citations.',points:5,svc:'getlisted'},
+    ]
+  },
+  {
+    id:'reviews',label:'Reviews & Reputation',icon:'⭐',
+    questions:[
+      {id:'r1',text:'Do you have 10+ Google reviews?',why:'10 reviews is the rough threshold where Google begins treating your business as credible. Below this, you\'re competing at a serious disadvantage in local pack rankings.',points:9,svc:'reviews'},
+      {id:'r2',text:'Is your Google rating 4.0 stars or higher?',why:'88% of consumers say they wouldn\'t use a business with a rating below 4 stars. Below 4.0, you\'re losing customers before they\'ve even visited your site.',points:8,svc:'reviews'},
+      {id:'r3',text:'Do you respond to all your Google reviews (positive and negative)?',why:'Businesses that respond to reviews are seen as more trustworthy — and Google\'s algorithm actively rewards review engagement with better local ranking.',points:6,svc:'reviews'},
+      {id:'r4',text:'Do you have an active system for asking satisfied customers for reviews?',why:'Businesses that consistently ask get 3x more reviews than those that wait. Volume and recency both factor into your Google ranking.',points:7,svc:'reviews'},
+      {id:'r5',text:'Are your reviews recent? (at least a few in the last 90 days)',why:'Review recency matters to Google. A business with 100 old reviews can be outranked by one with 20 recent ones. Freshness is a ranking signal.',points:6,svc:'reviews'},
+    ]
+  },
+  {
+    id:'onsite',label:'On-Site Local SEO',icon:'🌐',
+    questions:[
+      {id:'o1',text:'Does your homepage mention your city or service area clearly?',why:'Google needs to see your location on your website to confidently rank you for local searches. "Serving Austin, TX" in your content is not optional.',points:8,svc:'seo'},
+      {id:'o2',text:'Do you have a dedicated contact page with your full address and embedded Google Map?',why:'An embedded map and full address on your contact page is a direct local ranking signal. It confirms your location to both Google and visitors.',points:7,svc:'design'},
+      {id:'o3',text:'Do you have separate pages for each service you offer?',why:'One page that lists all services is far weaker than individual pages for each. Dedicated service pages rank for specific searches and drive higher-intent traffic.',points:7,svc:'seo'},
+      {id:'o4',text:'Is your site\'s page speed good? (loads in under 3 seconds on mobile)',why:'Page speed is a Google ranking factor. A slow site gets penalized in local search results — especially on mobile where most local searches happen.',points:6,svc:'maintenance'},
+      {id:'o5',text:'Does your website have schema markup (structured data) for your business type?',why:'Schema markup tells Google exactly what your business is, where it\'s located, and what it offers — dramatically improving how you appear in local search results.',points:5,svc:'seo'},
+    ]
+  },
+  {
+    id:'content',label:'Local Content & Authority',icon:'✍️',
+    questions:[
+      {id:'l1',text:'Do you create content (blog posts, guides, FAQs) targeting local keywords?',why:'Local content — "best HVAC company in Austin" or "when to replace your AC in Texas heat" — drives organic local traffic that compounds over time.',points:7,svc:'seo'},
+      {id:'l2',text:'Do you have any local backlinks? (mentions from local news, chambers, partner sites)',why:'Local backlinks are among the most powerful local ranking signals. A mention from your city\'s Chamber of Commerce is worth more than 100 generic links.',points:8,svc:'seo'},
+      {id:'l3',text:'Do you have a FAQ page answering common questions your customers ask?',why:'FAQ pages capture "question" searches in Google — a growing category of local search traffic — and often appear in featured snippets above the regular results.',points:5,svc:'seo'},
+      {id:'l4',text:'Are you active on at least one social media platform with regular local content?',why:'Social signals and local engagement reinforce your authority in Google\'s local algorithm. A dormant social presence is a missed local SEO opportunity.',points:4,svc:'social'},
+      {id:'l5',text:'Does your content mention local landmarks, neighborhoods, or community events?',why:'Hyperlocal content signals to Google that you\'re deeply embedded in your community — not just a generic business that happens to be in your city.',points:4,svc:'seo'},
+    ]
+  },
+];
+
+const SVC_MAP={
+  getlisted:{label:'Get Listed',url:'https://gozoek.com/get-listed',desc:'Zoek\'s Get Listed service fixes your NAP across 50+ directories, optimizes your Google Business Profile, and builds the citation foundation your local ranking needs.'},
+  seo:{label:'Search Engine Optimization',url:'https://gozoek.com/wix-seo-services',desc:'Zoek\'s SEO team handles keyword strategy, on-page optimization, local content creation, and technical SEO to get you ranking where it counts.'},
+  reviews:{label:'Reviews & Reputation',url:'https://gozoek.com/wix-seo-services',desc:'Zoek helps you build automated review collection systems, respond at scale, and monitor your reputation across every platform.'},
+  design:{label:'Website Design & Redesign',url:'https://gozoek.com/website-design-and-redesign',desc:'Zoek builds SEO-smart websites with proper local signals — address schema, embedded maps, and city-specific landing pages built in from day one.'},
+  maintenance:{label:'Web Maintenance & Management',url:'https://gozoek.com/website-maintenance-management',desc:'Zoek\'s maintenance plans include performance optimization so your site loads fast — a direct factor in local search rankings.'},
+  social:{label:'Social Media Management',url:'https://gozoek.com/social-media-management',desc:'Zoek\'s social media team manages consistent, local content across your platforms — reinforcing your community authority and local SEO signals.'},
+};
+
+// State
+const qAnswers={};
+
+function initQuestions(){
+  document.getElementById('questions-panel').innerHTML=CATEGORIES.map(cat=>`
+    <div class="panel-section">
+      <div class="panel-label">${cat.icon} ${cat.label}</div>
+      <div class="q-group">
+        ${cat.questions.map(q=>`
+          <div class="q-row">
+            <div class="q-row-text">${q.text}</div>
+            <div class="toggle-group">
+              <button class="tog yes ${qAnswers[q.id]==='yes'?'active':''}" onclick="setAns('${q.id}','yes',this)">Yes</button>
+              <button class="tog partial ${qAnswers[q.id]==='partial'?'active':''}" onclick="setAns('${q.id}','partial',this)">Sort of</button>
+              <button class="tog no ${qAnswers[q.id]==='no'?'active':''}" onclick="setAns('${q.id}','no',this)">No</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function setAns(qid,val,btn){
+  qAnswers[qid]=val;
+  const tg=btn.closest('.toggle-group');
+  tg.querySelectorAll('.tog').forEach(b=>{b.classList.remove('active');});
+  btn.classList.add('active');
+}
+
+function resetAll(){
+  Object.keys(qAnswers).forEach(k=>delete qAnswers[k]);
+  document.getElementById('inp-biz').value='';
+  document.getElementById('inp-city').value='';
+  document.getElementById('inp-service').value='';
+  initQuestions();
+  document.getElementById('results-panel').innerHTML=`<div class="empty-state"><div class="empty-icon">📍</div><p class="empty-text">Answer the questions on the left and click "Get My Score" to see how your local SEO stacks up.</p></div>`;
+}
+
+function getCatScore(cat){
+  const earned=cat.questions.reduce((a,q)=>{
+    const ans=qAnswers[q.id];
+    return a+(ans==='yes'?q.points:ans==='partial'?Math.round(q.points*0.5):0);
+  },0);
+  const total=cat.questions.reduce((a,q)=>a+q.points,0);
+  return{earned,total,pct:Math.round((earned/total)*100)};
+}
+
+function runCheck(){
+  const biz=document.getElementById('inp-biz').value.trim()||'Your Business';
+  const city=document.getElementById('inp-city').value.trim()||'your city';
+  const service=document.getElementById('inp-service').value.trim()||'your service';
+
+  const totalPoints=CATEGORIES.reduce((a,c)=>a+c.questions.reduce((b,q)=>b+q.points,0),0);
+  const earnedPoints=CATEGORIES.reduce((a,c)=>a+c.questions.reduce((b,q)=>{
+    const ans=qAnswers[q.id];
+    return b+(ans==='yes'?q.points:ans==='partial'?Math.round(q.points*0.5):0);
+  },0),0);
+  const pct=Math.round((earnedPoints/totalPoints)*100);
+
+  let grade,gradeColor,gradeSub;
+  if(pct>=80){grade='Strong';gradeColor='#4fffb0';gradeSub=`${biz} has solid local SEO fundamentals. You\'re showing up for the searches that matter most. The gaps below are refinements, not emergencies — closing them will push you further ahead of competitors.`;}
+  else if(pct>=60){grade='Decent';gradeColor='#7df5c5';gradeSub=`${biz} has some of the right pieces in place but real gaps that are costing you local visibility. The good news: most local SEO wins are within your control and don\'t require a huge budget.`;}
+  else if(pct>=40){grade='Needs Work';gradeColor='#ffd166';gradeSub=`${biz} is missing several key local signals that Google uses to decide who shows up in local search results. Your competitors who\'ve fixed these are ranking above you every day.`;}
+  else if(pct>=20){grade='At Risk';gradeColor='#ff9a5c';gradeSub=`${biz}\'s local SEO has serious gaps across multiple areas. People searching for ${service} in ${city} are finding competitors instead of you — and this is fixable.`;}
+  else{grade='Critical';gradeColor='#ff5c7c';gradeSub=`${biz} has major local SEO problems that are making you effectively invisible in local search. Every day without fixing these is business going to your competitors.`;}
+
+  // Build failures list
+  const failures=[];
+  CATEGORIES.forEach(cat=>{
+    cat.questions.forEach(q=>{
+      const ans=qAnswers[q.id]||'no';
+      if(ans!=='yes')failures.push({...q,answer:ans,catLabel:cat.label});
+    });
+  });
+  failures.sort((a,b)=>{
+    const aw=a.answer==='no'?a.points:a.points*0.5;
+    const bw=b.answer==='no'?b.points:b.points*0.5;
+    return bw-aw;
+  });
+  const passed=[];
+  CATEGORIES.forEach(cat=>{cat.questions.forEach(q=>{if(qAnswers[q.id]==='yes')passed.push({...q,catLabel:cat.label});});});
+
+  // Ring
+  const r=52,circ=2*Math.PI*r,offset=circ-(pct/100)*circ;
+  const heroHTML=`
+    <div class="score-hero">
+      <div class="score-ring-wrap">
+        <svg class="score-ring-svg" width="130" height="130" viewBox="0 0 130 130">
+          <circle fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="9" cx="65" cy="65" r="${r}"/>
+          <circle fill="none" stroke="${gradeColor}" stroke-width="9" stroke-linecap="round" cx="65" cy="65" r="${r}" style="stroke-dasharray:${circ};stroke-dashoffset:${offset};transition:stroke-dashoffset 1.2s ease"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num" style="color:${gradeColor}">${pct}</div>
+          <div class="score-denom">/ 100</div>
+        </div>
+      </div>
+      <div>
+        <div class="score-eyebrow">Local SEO Health Score</div>
+        <div class="score-grade" style="color:${gradeColor}">${grade}.</div>
+        <div class="score-desc">${gradeSub}</div>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:0.65rem">Audit for: <strong style="color:var(--purple)">${biz}</strong>${city!=='your city'?' · '+city:''}${service!=='your service'?' · '+service:''}</div>
+      </div>
+    </div>`;
+
+  const catBarsHTML=`
+    <div class="section-label">Score by category</div>
+    <div class="cat-bars">
+      ${CATEGORIES.map(cat=>{
+        const s=getCatScore(cat);
+        const col=s.pct>=75?'#4fffb0':s.pct>=50?'#ffd166':'#ff5c7c';
+        return`<div class="cat-bar-row">
+          <span class="cat-bar-name">${cat.icon} ${cat.label.split(' ')[0]}</span>
+          <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${s.pct}%;background:${col}"></div></div>
+          <span class="cat-bar-pct" style="color:${col}">${s.pct}%</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+
+  const findingsHTML=failures.length===0
+    ?'<div style="padding:1.25rem;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);border-radius:6px;font-size:0.88rem;color:var(--green)">🎉 No major gaps — your local SEO fundamentals are solid. Keep it up.</div>'
+    :`<div class="section-label" style="margin-top:1.5rem">Issues found (${failures.length})</div>
+    ${failures.slice(0,12).map((f,i)=>{
+      const isNo=f.answer==='no';
+      const dot=isNo?'var(--red)':'var(--yellow)';
+      const tagCls=isNo?'tag-bad':'tag-warn';
+      const tagLabel=isNo?'Missing':'Partial';
+      const svc=SVC_MAP[f.svc]||SVC_MAP.seo;
+      const fix=getFixCopy(f.id,biz,city,service);
+      return`<div class="finding-card" id="lf-${i}" onclick="toggleFinding('lf-${i}')">
+        <div class="finding-head">
+          <div class="finding-dot" style="background:${dot}"></div>
+          <div class="finding-title">${f.text}</div>
+          <span class="finding-tag ${tagCls}">${tagLabel}</span>
+          <span class="finding-chev">▼</span>
+        </div>
+        <div class="finding-body">
+          <div class="finding-why">${fix}</div>
+          <div class="finding-fix-box">
+            <div class="ffb-label">How Zoek fixes this</div>
+            <div class="ffb-text"><strong>${svc.label}</strong> — ${svc.desc}</div>
+            <a href="${svc.url}" target="_blank" class="ffb-link">Learn about ${svc.label} →</a>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}`;
+
+  const passedHTML=passed.length?`
+    <div class="section-label" style="margin-top:1.5rem">What's working (${passed.length})</div>
+    ${passed.map(p=>`
+      <div class="finding-card">
+        <div class="finding-head" style="cursor:default">
+          <div class="finding-dot" style="background:var(--green)"></div>
+          <div class="finding-title">${p.text}</div>
+          <span class="finding-tag tag-good">✓ Done</span>
+        </div>
+      </div>`).join('')}`:'';
+
+  // Sidebar
+  const top5=failures.slice(0,5);
+  const sidebarHTML=`
+    <div class="sidebar-box">
+      <div class="sb-head"><div class="sb-title">🔥 Top priorities</div></div>
+      <div class="sb-body">
+        ${top5.map((f,i)=>{const svc=SVC_MAP[f.svc]||SVC_MAP.seo;return`<div class="priority-row"><div class="pr-num">${i+1}</div><div><div class="pr-title">${f.text.replace(/\?/,'')}</div><div class="pr-svc">${svc.label}</div></div></div>`;}).join('')}
+      </div>
+    </div>
+    <div class="cta-gradient-box">
+      <div class="cgb-eyebrow">Free strategy call</div>
+      <div class="cgb-title">Get a custom local SEO plan</div>
+      <div class="cgb-sub">${pct<60?`Your score is ${pct}/100 — that\'s <strong>${failures.length} fixable gaps</strong> keeping ${biz} from ranking above competitors in ${city}.`:`Your score is ${pct}/100. A Zoek strategist can show you how to close the remaining gaps and dominate local search in ${city}.`}</div>
+      <a href="https://calendly.com/expert-sales" target="_blank" class="cgb-btn">Book a Free Call →</a>
+      <div class="cgb-phone">Or call: <a href="tel:18887379635">1-888-737-9635</a></div>
+    </div>
+    <div class="sidebar-box">
+      <div class="sb-head"><div class="sb-title">📊 Quick summary</div></div>
+      <div class="sb-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
+          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Score</div><div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:${gradeColor}">${pct}/100</div></div>
+          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Issues</div><div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--red)">${failures.length}</div></div>
+          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Passing</div><div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--green)">${passed.length}</div></div>
+          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Grade</div><div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:${gradeColor}">${grade}</div></div>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('results-panel').innerHTML=`
+    ${heroHTML}
+    <div class="results-outer">
+      <div>
+        ${catBarsHTML}
+        ${findingsHTML}
+        ${passedHTML}
+      </div>
+      <div class="results-sidebar">${sidebarHTML}</div>
+    </div>`;
+  window.scrollTo(0,180);
+}
+
+function toggleFinding(id){document.getElementById(id).classList.toggle('open');}
+
+function getFixCopy(qid,biz,city,svc){
+  const m={
+    g1:`<strong>This is the single most important free action in local SEO.</strong> An unclaimed Google Business Profile means Google shows incomplete — or competitor — information when customers search for ${biz}. Claiming and verifying takes 15 minutes and unlocks everything else.`,
+    g2:`Google ranks complete profiles 5x higher than incomplete ones. Missing service categories, descriptions, photos, and hours means you\'re appearing for fewer searches and looking less credible when you do. <strong>Every blank field is a ranking opportunity you\'re skipping.</strong>`,
+    g3:`<strong>Posting to your GBP tells Google you\'re an active, engaged business.</strong> Businesses that post at least twice a month consistently rank higher in local pack results than those that don\'t. Posts take 5 minutes and compound over time.`,
+    g4:`Your GBP categories determine which searches you appear in. <strong>If you offer HVAC repair but only have "HVAC contractor" as your category, you\'re missing "AC repair", "furnace service", and dozens of other searches</strong> — each representing real customers looking for you.`,
+    g5:`Photos are one of the most overlooked local ranking signals. <strong>GBP profiles with photos get 42% more direction requests and 35% more website clicks.</strong> Add photos of your work, your team, your storefront — anything that makes your business feel real and trustworthy.`,
+    c1:`Google uses listings across the web to verify your business is legitimate. <strong>Missing from Yelp, Bing Places, and Apple Maps weakens your local authority</strong> and costs you visibility on platforms where millions of local searches happen every day.`,
+    c2:`NAP consistency is one of the most critical — and most overlooked — local ranking factors. <strong>If your address says "123 Main St" on your website but "123 Main Street" on Yelp, Google\'s algorithm registers these as conflicting data</strong> about two different businesses.`,
+    c3:`Citation volume signals to Google how established and legitimate your business is. <strong>Competitors with 50+ consistent citations outrank those with 10–15 on the same keywords</strong> — even when the smaller set performs better in other areas.`,
+    c4:`Duplicate listings split your review equity and send contradictory signals to Google. <strong>If you have two GBP listings, your 40 reviews are worth half as much as they should be.</strong> Removing duplicates often produces an immediate ranking improvement.`,
+    c5:`Industry-specific directories add topical authority that general directories can\'t. <strong>A listing on Houzz for a contractor, Healthgrades for a medical practice, or Avvo for a law firm signals deep relevance</strong> to Google\'s local algorithm for category-specific searches.`,
+    r1:`10 reviews is the credibility threshold where Google begins taking your business seriously in local rankings. <strong>Below 10, you\'re at a structural disadvantage</strong> against competitors with more reviews — regardless of how good your service actually is.`,
+    r2:`<strong>88% of consumers won\'t consider a business rated below 4 stars.</strong> A sub-4.0 rating means you\'re being filtered out of most people\'s consideration before they\'ve even visited your site. Addressing negative reviews and collecting new positive ones is the fastest ROI available.`,
+    r3:`<strong>Google\'s algorithm rewards review engagement.</strong> Businesses that respond to every review — positive and negative — rank higher in local results and are perceived as more trustworthy by potential customers who read your responses before deciding.`,
+    r4:`Reviews don\'t happen organically at scale. <strong>Businesses with a consistent ask system get 3x more reviews than those that wait.</strong> A simple post-service text with your review link is all it takes — but it has to be systematic, not occasional.`,
+    r5:`Google weighs review recency heavily. <strong>A business with 100 reviews from 3 years ago can be outranked by one with 25 reviews from the last 6 months.</strong> Fresh reviews signal that your business is actively serving customers and performing well right now.`,
+    o1:`<strong>If your website doesn\'t mention ${city} prominently, Google can\'t confidently rank you for local searches there.</strong> Your homepage, title tag, and meta description should all reference your city and service area. This is foundational — and most sites miss it.`,
+    o2:`An embedded Google Map and full address on your contact page is a direct local ranking signal. <strong>It confirms your physical location to both Google and visitors</strong> — and it makes your business feel real and trustworthy to anyone who lands on that page.`,
+    o3:`A single "Services" page listing everything you offer is far weaker than individual pages for each service. <strong>A dedicated "${svc} in ${city}" page can rank for that exact search.</strong> Separate pages for each service dramatically expand your local search footprint.`,
+    o4:`Page speed is a direct Google ranking factor — especially on mobile where most local searches happen. <strong>A site that takes 5 seconds to load loses more than half its visitors</strong> and is penalized in rankings compared to faster competitors. This has a direct impact on local pack placement.`,
+    o5:`Schema markup is code that tells Google exactly what your business is, where it\'s located, and what it offers. <strong>Without it, Google has to guess — and guessing leads to less accurate, less prominent placement</strong> in local search results and the Google Map pack.`,
+    l1:`Local content is how you capture searches that don\'t include your business name. <strong>"Best ${svc} in ${city}", "how to choose a ${svc} in ${city}", "${svc} cost ${city}"</strong> — these are high-intent searches your content can rank for and your competitors probably aren\'t targeting.`,
+    l2:`<strong>A single backlink from a local newspaper, Chamber of Commerce, or city blog is worth more for local rankings than dozens of generic links.</strong> Local backlinks signal to Google that you\'re a recognized part of the community — not just a business that happens to have an address there.`,
+    l3:`FAQ pages capture "question" searches — a fast-growing category of local queries. <strong>"How much does ${svc} cost in ${city}?" and "What should I look for in a ${svc}?"</strong> are the kinds of questions your customers are asking and your FAQ page can answer and rank for.`,
+    l4:`Social signals reinforce your community authority in Google\'s local algorithm. <strong>A consistent presence on even one platform — especially with local content — signals engagement</strong> that pure SEO tactics can\'t replicate. It also gives you a channel to share your reviews and content.`,
+    l5:`<strong>Mentioning local landmarks, neighborhoods, and community events in your content makes Google — and customers — see you as deeply local</strong>, not just a generic business with a ${city} address. Hyperlocal content builds the kind of authority that compounds over time.`,
+  };
+  return m[qid]||`This gap is affecting ${biz}\'s ability to rank in local search results in ${city}.`;
+}
+
+initQuestions();
+</script>
+<script src="cta.js"></script>
+</body>
+</html>

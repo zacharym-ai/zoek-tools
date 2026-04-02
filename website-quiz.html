@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do I Need a New Website? | Zoek Marketing Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--purple);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+
+/* HERO */
+.quiz-hero{margin-top:60px;padding:4rem 2rem 3rem;text-align:center;border-bottom:1px solid var(--border);background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,0.12) 0%,transparent 70%);}
+.quiz-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.5rem;}
+.quiz-hero-title{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1.25rem;}
+.quiz-hero-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.quiz-hero-sub{font-size:1rem;color:var(--muted);line-height:1.75;max-width:520px;margin:0 auto 2rem;}
+.quiz-hero-sub strong{color:var(--white);}
+.quiz-meta{display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;}
+.quiz-meta-item{display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--muted);}
+.quiz-meta-dot{width:6px;height:6px;border-radius:50%;background:var(--purple);}
+
+/* PROGRESS */
+.quiz-progress{padding:0.75rem 2rem;background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;position:sticky;top:60px;z-index:10;}
+.q-track{flex:1;height:5px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;}
+.q-fill{height:100%;background:var(--gradient);border-radius:3px;transition:width 0.4s ease;}
+.q-count{font-size:0.75rem;font-weight:600;color:var(--white);white-space:nowrap;}
+.q-pct{font-size:0.72rem;color:var(--muted);white-space:nowrap;}
+
+/* QUIZ BODY */
+.quiz-body{max-width:680px;margin:0 auto;padding:3.5rem 2rem 5rem;}
+
+/* START SCREEN */
+.start-screen{text-align:center;}
+.start-screen h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.75rem;}
+.start-screen p{font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;}
+.start-screen p strong{color:var(--white);}
+.results-preview{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-bottom:2.5rem;text-align:left;}
+.result-preview-card{padding:1rem 1.1rem;border:1px solid var(--border);border-radius:6px;background:rgba(255,255,255,0.02);}
+.rpc-emoji{font-size:1.3rem;margin-bottom:0.4rem;}
+.rpc-title{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:800;margin-bottom:0.2rem;}
+.rpc-sub{font-size:0.72rem;color:var(--muted);line-height:1.5;}
+.btn-start-quiz{display:inline-block;padding:0.95rem 2.5rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;border:none;border-radius:5px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 18px rgba(108,99,255,0.35);letter-spacing:0.02em;}
+.btn-start-quiz:hover{box-shadow:0 6px 26px rgba(108,99,255,0.55);transform:translateY(-1px);}
+
+/* QUESTION SCREEN */
+.question-screen{display:none;}
+.question-screen.active{display:block;}
+.q-num{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.85rem;}
+.q-headline{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;line-height:1.2;margin-bottom:0.6rem;}
+.q-context{font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;}
+.q-context strong{color:var(--white);}
+.answer-grid{display:flex;flex-direction:column;gap:0.65rem;}
+.answer-opt{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border:1px solid var(--border);border-radius:6px;background:rgba(255,255,255,0.02);cursor:pointer;transition:all 0.15s;text-align:left;width:100%;font-family:'Plus Jakarta Sans',sans-serif;}
+.answer-opt:hover{border-color:var(--purple);background:rgba(108,99,255,0.06);}
+.answer-opt.selected{border-color:var(--purple);background:rgba(108,99,255,0.1);}
+.answer-opt.selected .opt-radio{background:var(--purple);border-color:var(--purple);}
+.answer-opt.selected .opt-radio::after{opacity:1;}
+.opt-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;position:relative;transition:all 0.15s;}
+.opt-radio::after{content:'';position:absolute;top:4px;left:4px;width:8px;height:8px;border-radius:50%;background:white;opacity:0;transition:opacity 0.15s;}
+.opt-label{font-size:0.9rem;font-weight:600;line-height:1.35;}
+.opt-sub{font-size:0.75rem;color:var(--muted);margin-top:0.15rem;line-height:1.4;}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border-light);}
+.btn-back{padding:0.6rem 1.25rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
+.btn-back:hover{color:var(--white);border-color:rgba(255,255,255,0.3);}
+.btn-next-q{padding:0.65rem 1.75rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);opacity:0.4;pointer-events:none;}
+.btn-next-q.ready{opacity:1;pointer-events:all;}
+.btn-next-q.ready:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+
+/* RESULTS */
+.results-screen{display:none;}
+.results-screen.active{display:block;}
+.result-verdict{border-radius:10px;padding:2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;}
+.rv-bg{position:absolute;right:-10px;top:-20px;font-size:8rem;opacity:0.08;line-height:1;pointer-events:none;}
+.rv-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.6rem;}
+.rv-title{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1.1;margin-bottom:0.75rem;}
+.rv-desc{font-size:0.9rem;line-height:1.75;max-width:500px;}
+.rv-desc strong{font-weight:700;}
+.verdict-good{background:rgba(79,255,176,0.08);border:1px solid rgba(79,255,176,0.25);}
+.verdict-refresh{background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.25);}
+.verdict-redesign{background:rgba(255,150,80,0.08);border:1px solid rgba(255,150,80,0.25);}
+.verdict-new{background:rgba(255,92,124,0.08);border:1px solid rgba(255,92,124,0.25);}
+
+.signals-section{margin-bottom:2rem;}
+.signals-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;}
+.signal-item{display:flex;align-items:flex-start;gap:0.65rem;padding:0.85rem;border:1px solid var(--border-light);border-radius:5px;background:rgba(255,255,255,0.02);}
+.signal-icon{font-size:1rem;flex-shrink:0;margin-top:1px;}
+.signal-text{font-size:0.8rem;font-weight:600;line-height:1.4;}
+.signal-text.warn{color:var(--red);}
+.signal-text.ok{color:var(--green);}
+
+.plan-rec{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:8px;overflow:hidden;margin-bottom:2rem;}
+.plan-rec-head{background:var(--gradient);padding:1.25rem 1.5rem;}
+.plan-rec-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;}
+.plan-rec-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;}
+.plan-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.plan-card{background:var(--sidebar);padding:1.25rem;transition:background 0.15s;}
+.plan-card.highlighted{background:rgba(108,99,255,0.12);}
+.plan-badge{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);background:rgba(108,99,255,0.15);padding:0.15rem 0.5rem;border-radius:3px;display:inline-block;margin-bottom:0.5rem;}
+.plan-badge.rec{background:var(--gradient);color:white;}
+.plan-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
+.plan-price{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--purple);margin-bottom:0.5rem;}
+.plan-features{font-size:0.75rem;color:var(--muted);line-height:1.75;}
+.plan-features li{list-style:none;display:flex;gap:0.4rem;align-items:baseline;}
+.plan-features li::before{content:'✓';color:var(--green);font-size:0.7rem;flex-shrink:0;}
+.plan-link{display:block;margin-top:0.85rem;padding:0.5rem;text-align:center;border:1px solid var(--border);border-radius:4px;font-size:0.75rem;font-weight:700;color:var(--muted);text-decoration:none;transition:all 0.15s;}
+.plan-link:hover{border-color:var(--purple);color:var(--white);}
+.plan-link.rec-link{background:var(--gradient);border-color:transparent;color:white;box-shadow:0 4px 14px rgba(108,99,255,0.3);}
+
+.next-steps-box{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:2rem;}
+.ns-bar{background:var(--gradient);padding:0.9rem 1.4rem;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:white;}
+.ns-items{display:grid;grid-template-columns:repeat(3,1fr);}
+.ns-item{padding:1.1rem 1.25rem;border-right:1px solid var(--border-light);background:var(--sidebar);}
+.ns-item:last-child{border-right:none;}
+.ns-n{width:24px;height:24px;border-radius:4px;background:rgba(108,99,255,0.2);color:var(--purple);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;margin-bottom:0.4rem;}
+.ns-t{font-weight:700;font-size:0.82rem;line-height:1.35;margin-bottom:0.25rem;}
+.ns-d{font-size:0.75rem;color:var(--muted);line-height:1.6;}
+
+.cta-box{background:var(--gradient);border-radius:8px;padding:2rem;text-align:center;}
+.cta-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.4rem;}
+.cta-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:0.5rem;line-height:1.2;}
+.cta-sub{font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.65;margin-bottom:1.25rem;max-width:400px;margin-left:auto;margin-right:auto;}
+.cta-btn{display:inline-block;background:white;color:var(--purple);text-decoration:none;padding:0.85rem 2rem;border-radius:5px;font-size:0.9rem;font-weight:800;transition:all 0.15s;box-shadow:0 4px 18px rgba(0,0,0,0.2);}
+.cta-btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,0.25);}
+.cta-phone{font-size:0.78rem;color:rgba(255,255,255,0.65);margin-top:0.75rem;}
+.cta-phone a{color:rgba(255,255,255,0.85);text-decoration:none;font-weight:700;}
+.btn-retake{display:block;text-align:center;margin-top:1rem;padding:0.65rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;width:100%;}
+.btn-retake:hover{color:var(--white);border-color:rgba(255,255,255,0.3);}
+
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+.footer-link:hover{color:var(--white);}
+@media(max-width:700px){nav{padding:0.85rem 1rem;}.nav-links{display:none;}.quiz-hero{padding:3rem 1.25rem 2rem;}.quiz-body{padding:2rem 1.25rem 4rem;}.results-preview{grid-template-columns:1fr;}.signals-grid{grid-template-columns:1fr;}.plan-cards{grid-template-columns:1fr;}.ns-items{grid-template-columns:1fr;}.ns-item{border-right:none;border-bottom:1px solid var(--border-light);}.quiz-progress{padding:0.75rem 1rem;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="funnel.html">Funnel</a></li>
+    <li><a href="calculator.html">CPL</a></li>
+    <li><a href="roi.html">ROI</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="grader.html">Site Grader</a></li>
+    <li><a href="website-quiz.html" class="active">Website Quiz</a></li>
+    <li><a href="local-seo.html">Local SEO</a></li><li><a href="revenue-loss.html">Revenue Loss</a></li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<div class="quiz-hero">
+  <div class="quiz-tag">Tool 08 · Website Decision Quiz</div>
+  <h1 class="quiz-hero-title">Do I actually need<br>a <span class="accent">new website?</span></h1>
+  <p class="quiz-hero-sub">10 honest questions. A straight answer. <strong>No fluff, no pitch — just a clear recommendation based on where your business actually is right now.</strong></p>
+  <div class="quiz-meta">
+    <div class="quiz-meta-item"><div class="quiz-meta-dot"></div>10 questions</div>
+    <div class="quiz-meta-item"><div class="quiz-meta-dot"></div>Under 3 minutes</div>
+    <div class="quiz-meta-item"><div class="quiz-meta-dot"></div>4 possible outcomes</div>
+    <div class="quiz-meta-item"><div class="quiz-meta-dot"></div>Specific plan recommendation</div>
+  </div>
+</div>
+
+<div class="quiz-progress" id="quiz-progress" style="display:none">
+  <div class="q-track"><div class="q-fill" id="q-fill" style="width:0%"></div></div>
+  <span class="q-count" id="q-count">Question 1 of 10</span>
+  <span class="q-pct" id="q-pct">0%</span>
+</div>
+
+<div class="quiz-body">
+
+  <!-- START -->
+  <div class="start-screen" id="start-screen">
+    <h2>Here's what you'll find out</h2>
+    <p>Most business owners either think they need a brand new site when they don't, or keep putting off a rebuild that's costing them leads every day. <strong>This quiz gives you a straight answer in under 3 minutes.</strong></p>
+    <div class="results-preview">
+      <div class="result-preview-card"><div class="rpc-emoji">✅</div><div class="rpc-title">You're good</div><div class="rpc-sub">Your site is solid. We'll tell you what to protect.</div></div>
+      <div class="result-preview-card"><div class="rpc-emoji">🔧</div><div class="rpc-title">Minor refresh</div><div class="rpc-sub">Small updates with big impact. No full rebuild needed.</div></div>
+      <div class="result-preview-card"><div class="rpc-emoji">🔄</div><div class="rpc-title">Redesign time</div><div class="rpc-sub">The foundation is there but it's holding you back.</div></div>
+      <div class="result-preview-card"><div class="rpc-emoji">🚨</div><div class="rpc-title">Start fresh</div><div class="rpc-sub">Your current site is costing you more than a new one would.</div></div>
+    </div>
+    <button class="btn-start-quiz" onclick="startQuiz()">Start the Quiz →</button>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="questions-wrap"></div>
+
+  <!-- RESULTS -->
+  <div class="results-screen" id="results-screen"></div>
+
+</div>
+
+<footer>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · 1-888-737-9635</span>
+</footer>
+
+<script>
+const QUESTIONS=[
+  {
+    id:'q1',
+    headline:'How old is your current website?',
+    context:'Design trends, mobile standards, and Google\'s requirements change fast. A site that was great 4 years ago may be actively hurting you today.',
+    options:[
+      {label:'Less than 1 year old',sub:'Fresh build — likely still current',score:0},
+      {label:'1–2 years old',sub:'Probably solid but worth checking a few things',score:1},
+      {label:'3–4 years old',sub:'Starting to show its age in places',score:3},
+      {label:'5+ years old',sub:'Almost certainly behind on design and standards',score:5},
+      {label:'I have no idea',sub:'That itself is a signal worth noting',score:3},
+    ]
+  },
+  {
+    id:'q2',
+    headline:'Does your site look good on a mobile phone?',
+    context:'Over 60% of your visitors are on mobile. A site that isn\'t built mobile-first loses the majority of potential customers before they\'ve read a word.',
+    options:[
+      {label:'Yes — it looks great on mobile',sub:'Buttons work, text is readable, nothing overlaps',score:0},
+      {label:'Sort of — it works but it\'s not ideal',sub:'Some things are awkward or hard to tap',score:2},
+      {label:'Not really — it\'s hard to use on a phone',sub:'Customers have probably mentioned this',score:5},
+      {label:'I\'m not sure — I never checked',sub:'Worth pulling it up on your phone right now',score:3},
+    ]
+  },
+  {
+    id:'q3',
+    headline:'When someone lands on your homepage, is it immediately clear what you do?',
+    context:'You have about 5 seconds before a visitor decides to stay or leave. If your headline doesn\'t say exactly who you help and how, most people click away.',
+    options:[
+      {label:'Absolutely — it\'s very clear',sub:'Strong headline, obvious next step',score:0},
+      {label:'Mostly — but it could be sharper',sub:'People get it eventually but not instantly',score:2},
+      {label:'Not really — it\'s a bit vague or generic',sub:'Your headline is probably your business name or tagline',score:4},
+      {label:'No — visitors often ask what we do',sub:'This is a serious conversion problem',score:5},
+    ]
+  },
+  {
+    id:'q4',
+    headline:'Is there a clear, prominent call-to-action on your homepage?',
+    context:'A call-to-action tells visitors exactly what to do next. Without one, they\'ll read your site and leave without contacting you — even if they\'re interested.',
+    options:[
+      {label:'Yes — "Book Now", "Get a Quote", or similar is hard to miss',sub:'Visible above the fold, specific, and actionable',score:0},
+      {label:'There\'s a button but it\'s not that prominent',sub:'It\'s there if you look for it',score:2},
+      {label:'Just a "Contact Us" link in the menu',sub:'Passive — not driving anyone to act',score:4},
+      {label:'No real CTA — visitors have to figure out next steps',sub:'You\'re leaving a lot of leads on the table',score:5},
+    ]
+  },
+  {
+    id:'q5',
+    headline:'How does your site show up on Google for your main service + city?',
+    context:'If your ideal customer searches "plumber in Denver" and you\'re not on page one, you\'re invisible to them. Most people never scroll past the first 3 results.',
+    options:[
+      {label:'Top 3 results — we rank very well',sub:'Strong local presence',score:0},
+      {label:'Page 1 but not top 3',sub:'Decent but missing the most valuable real estate',score:1},
+      {label:'Page 2 or 3',sub:'Most people never get there — effectively invisible',score:4},
+      {label:'Not ranking at all that I know of',sub:'Losing significant business every day',score:5},
+      {label:'I\'ve never checked',sub:'Worth a quick Google right now',score:3},
+    ]
+  },
+  {
+    id:'q6',
+    headline:'Does your website show customer reviews or testimonials?',
+    context:'92% of consumers read reviews before buying. If your site doesn\'t show social proof, visitors have to trust you on faith alone — and most won\'t.',
+    options:[
+      {label:'Yes — reviews and testimonials are prominent',sub:'Multiple reviews, visible without scrolling',score:0},
+      {label:'A few testimonials buried somewhere',sub:'They exist but aren\'t doing much work',score:2},
+      {label:'No reviews on the site at all',sub:'Missing the most powerful trust signal available',score:4},
+      {label:'My Google reviews are good but not on the site',sub:'You have the proof but aren\'t using it',score:3},
+    ]
+  },
+  {
+    id:'q7',
+    headline:'How does your site look compared to your top 2 competitors?',
+    context:'Perception matters. When a potential customer compares you side by side with a competitor, your website design is often what tips the decision.',
+    options:[
+      {label:'Better — ours looks noticeably more professional',sub:'You\'re winning the design comparison',score:0},
+      {label:'About the same',sub:'No advantage, no disadvantage',score:1},
+      {label:'Theirs looks more modern or polished',sub:'You\'re losing business to better-looking competitors',score:4},
+      {label:'I don\'t know my competitors\' sites',sub:'Worth a 5-minute look right now',score:2},
+    ]
+  },
+  {
+    id:'q8',
+    headline:'How do you feel when you send someone to your website?',
+    context:'Your gut feeling about your site is a powerful signal. If you\'re hesitant to share it, your customers are noticing what you\'re noticing.',
+    options:[
+      {label:'Proud — I\'m happy to send anyone there',sub:'Confident it represents your business well',score:0},
+      {label:'Okay — it does the job but could be better',sub:'It\'s fine, not great',score:2},
+      {label:'A little embarrassed — it\'s not where I want it',sub:'You already know it\'s holding you back',score:4},
+      {label:'I don\'t share it — I\'d rather not draw attention to it',sub:'That\'s a costly problem with a clear solution',score:5},
+    ]
+  },
+  {
+    id:'q9',
+    headline:'Are you getting consistent leads or inquiries from your website?',
+    context:'Your website should be your hardest-working salesperson — generating leads around the clock. If it\'s not producing, something is broken.',
+    options:[
+      {label:'Yes — regular leads come in through the site',sub:'Website is working as a lead generation tool',score:0},
+      {label:'Occasionally but not consistently',sub:'Hit or miss — not reliable',score:2},
+      {label:'Rarely — almost nothing comes through it',sub:'The site exists but isn\'t producing',score:4},
+      {label:'Never — all our leads come from referrals or word of mouth',sub:'You\'re one bad referral month away from a slow period',score:5},
+    ]
+  },
+  {
+    id:'q10',
+    headline:'What is your honest goal for your online presence in the next 12 months?',
+    context:'Understanding where you want to go determines what kind of site you actually need right now.',
+    options:[
+      {label:'Maintain what\'s working and stay consistent',sub:'Happy with current trajectory',score:0},
+      {label:'Get more leads from Google and organic search',sub:'Grow without increasing ad spend',score:2},
+      {label:'Look more professional and beat competitors',sub:'Win the comparison when people shop around',score:3},
+      {label:'Significantly grow the business — more visibility, more clients',sub:'Ready to invest in serious growth',score:4},
+    ]
+  },
+];
+
+let currentQ=0;
+const answers=[];
+
+function startQuiz(){
+  document.getElementById('start-screen').style.display='none';
+  document.getElementById('quiz-progress').style.display='flex';
+  renderQuestion(0);
+}
+
+function renderQuestion(i){
+  currentQ=i;
+  const q=QUESTIONS[i];
+  const pct=Math.round((i/QUESTIONS.length)*100);
+  document.getElementById('q-fill').style.width=pct+'%';
+  document.getElementById('q-count').textContent=`Question ${i+1} of ${QUESTIONS.length}`;
+  document.getElementById('q-pct').textContent=pct+'%';
+
+  const selected=answers[i]!==undefined?answers[i]:-1;
+  document.getElementById('questions-wrap').innerHTML=`
+    <div class="question-screen active">
+      <div class="q-num">Question ${i+1} of ${QUESTIONS.length}</div>
+      <div class="q-headline">${q.headline}</div>
+      <div class="q-context">${q.context}</div>
+      <div class="answer-grid">
+        ${q.options.map((opt,oi)=>`
+          <button class="answer-opt ${selected===oi?'selected':''}" onclick="selectAnswer(${oi})">
+            <div class="opt-radio"></div>
+            <div>
+              <div class="opt-label">${opt.label}</div>
+              <div class="opt-sub">${opt.sub}</div>
+            </div>
+          </button>`).join('')}
+      </div>
+      <div class="q-nav">
+        ${i>0?`<button class="btn-back" onclick="goBack()">← Back</button>`:'<span></span>'}
+        <button class="btn-next-q ${selected>=0?'ready':''}" id="btn-next" onclick="${i<QUESTIONS.length-1?'goNext()':'showResults()'}">${i<QUESTIONS.length-1?'Next →':'See My Results →'}</button>
+      </div>
+    </div>`;
+  window.scrollTo(0,0);
+}
+
+function selectAnswer(oi){
+  answers[currentQ]=oi;
+  document.querySelectorAll('.answer-opt').forEach((b,i)=>{
+    b.classList.toggle('selected',i===oi);
+    const radio=b.querySelector('.opt-radio');
+    if(i===oi){radio.style.background='var(--purple)';radio.style.borderColor='var(--purple)';}
+    else{radio.style.background='';radio.style.borderColor='';}
+  });
+  document.getElementById('btn-next').classList.add('ready');
+}
+
+function goNext(){if(answers[currentQ]!==undefined)renderQuestion(currentQ+1);}
+function goBack(){if(currentQ>0)renderQuestion(currentQ-1);}
+
+function showResults(){
+  // Tally score
+  const totalScore=QUESTIONS.reduce((sum,q,qi)=>{
+    const ai=answers[qi];
+    return sum+(ai!==undefined?q.options[ai].score:0);
+  },0);
+  const maxScore=QUESTIONS.reduce((sum,q)=>sum+Math.max(...q.options.map(o=>o.score)),0);
+  const pct=Math.round((totalScore/maxScore)*100);
+
+  // Update progress
+  document.getElementById('q-fill').style.width='100%';
+  document.getElementById('q-count').textContent='Complete';
+  document.getElementById('q-pct').textContent='100%';
+
+  // Determine verdict
+  let verdict,signals,planRec,nextSteps;
+  if(pct<=20){
+    verdict={
+      type:'good',cls:'verdict-good',emoji:'✅',tag:'Your site is working',
+      title:'You\'re in good shape. Keep it that way.',
+      desc:'Based on your answers, your website is doing its job. It\'s modern, mobile-friendly, and generating leads. <strong>The goal now is to optimize what\'s working, not tear it down.</strong> A few smart tweaks can push a good site to a great one.'
+    };
+    planRec='maintain';
+    nextSteps=[
+      {t:'Run the Website Grader',d:'Use our free Website Grader tool to find the specific gaps that are holding back an otherwise solid site.'},
+      {t:'Set up monthly tracking',d:'Review your Google Analytics and Search Console monthly. Know your numbers before they become problems.'},
+      {t:'Add fresh content quarterly',d:'Regular blog posts and updated service pages keep Google happy and give you something to share on social.'},
+    ];
+  } else if(pct<=42){
+    verdict={
+      type:'refresh',cls:'verdict-refresh',emoji:'🔧',tag:'Minor refresh needed',
+      title:'Small updates. Significant difference.',
+      desc:'Your site has a solid foundation but a handful of things are leaking leads. <strong>You don\'t need to blow it up — you need targeted fixes that move the needle without starting from scratch.</strong> The right updates can meaningfully improve your leads within weeks.'
+    };
+    planRec='refresh';
+    nextSteps=[
+      {t:'Fix your homepage headline first',d:'If it\'s not immediately clear what you do and who it\'s for, that\'s your #1 priority. Everything else flows from this.'},
+      {t:'Add a visible CTA and review display',d:'A clear "Book Now" button and visible Google reviews are the two fastest conversion wins available to most small business sites.'},
+      {t:'Consider a Zoek Redesign plan',d:'If your site is 2–4 years old, a targeted redesign often costs less than you think and returns more than you expect.'},
+    ];
+  } else if(pct<=65){
+    verdict={
+      type:'redesign',cls:'verdict-redesign',emoji:'🔄',tag:'Redesign time',
+      title:'Your site is holding your business back.',
+      desc:'There\'s enough working here to build on, but your website is actively costing you leads right now. <strong>Visitors are forming negative first impressions, missing your CTA, and choosing competitors with sharper sites.</strong> A redesign isn\'t a luxury at this point — it\'s a business decision with a clear ROI.'
+    };
+    planRec='redesign';
+    nextSteps=[
+      {t:'Book a free strategy call with Zoek',d:'We\'ll review what you have, what\'s salvageable, and what a redesign roadmap looks like for your specific business and budget.'},
+      {t:'Look at the Express Design option',d:'If you need to move fast, Zoek\'s Express Website Design gets you a professional site in weeks — not months.'},
+      {t:'Don\'t touch your current site in the meantime',d:'Piecemeal changes to a site that needs a rebuild waste time and money. Invest it in the right fix instead.'},
+    ];
+  } else {
+    verdict={
+      type:'new',cls:'verdict-new',emoji:'🚨',tag:'Start fresh',
+      title:'Your website is costing you more than a new one would.',
+      desc:'Based on your answers, your current site is actively damaging your credibility, costing you Google ranking, and sending leads to competitors. <strong>The math is simple: the leads you\'re losing every month likely exceed the cost of a new site.</strong> The longer you wait, the more expensive this gets.'
+    };
+    planRec='new';
+    nextSteps=[
+      {t:'Get a free consultation today',d:'Zoek builds professional small business websites starting at $999. In a 30-minute call, we can show you exactly what\'s possible and what it costs.'},
+      {t:'Check out the Express option',d:'Need something fast? Zoek\'s Express Website Design gets you a live, professional site in as little as 2–3 weeks.'},
+      {t:'Don\'t put this off another quarter',d:'Every month with your current site is another month of lost leads, lost rankings, and lost revenue. The fix is closer and more affordable than you think.'},
+    ];
+  }
+
+  // Build signals from answers
+  const warnSignals=[];
+  const okSignals=[];
+  if(answers[0]>=2)warnSignals.push('Site is 3+ years old');else okSignals.push('Site age is recent');
+  if(answers[1]>=2)warnSignals.push('Mobile experience is poor');else okSignals.push('Mobile-friendly');
+  if(answers[2]>=2)warnSignals.push('Homepage message is unclear');else okSignals.push('Clear homepage message');
+  if(answers[3]>=2)warnSignals.push('No strong call-to-action');else okSignals.push('Strong CTA in place');
+  if(answers[4]>=2)warnSignals.push('Poor Google ranking');else if(answers[4]===0||answers[4]===1)okSignals.push('Ranking on Google');
+  if(answers[5]>=2)warnSignals.push('No reviews displayed');else okSignals.push('Social proof visible');
+  if(answers[6]>=2)warnSignals.push('Losing to competitors on design');else if(answers[6]===0)okSignals.push('Design is competitive');
+  if(answers[7]>=2)warnSignals.push('You\'re not proud to share it');else if(answers[7]===0)okSignals.push('You\'re proud to share it');
+  if(answers[8]>=3)warnSignals.push('Website generates no leads');else if(answers[8]===0)okSignals.push('Website generates leads');
+
+  const signalsHTML=`
+    <div class="signals-section">
+      <div class="section-label" style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.6rem;">What your answers revealed <span style="flex:1;height:1px;background:rgba(255,255,255,0.07);display:block"></span></div>
+      <div class="signals-grid">
+        ${warnSignals.map(s=>`<div class="signal-item"><span class="signal-icon">⚠️</span><span class="signal-text warn">${s}</span></div>`).join('')}
+        ${okSignals.map(s=>`<div class="signal-item"><span class="signal-icon">✓</span><span class="signal-text ok">${s}</span></div>`).join('')}
+      </div>
+    </div>`;
+
+  // Plan recommendation
+  const plans={
+    maintain:{
+      title:'Recommended: Web Maintenance & Management',
+      desc:'Keep what\'s working protected and optimized.',
+      cards:[
+        {name:'Maintenance Plan',price:'$199/mo',badge:'Recommended',rec:true,features:['Regular updates & edits','Speed optimization','Security monitoring','Monthly reporting','Backup & recovery']},
+        {name:'SEO Service',price:'Custom',badge:'Boost rankings',rec:false,features:['Keyword strategy','On-page optimization','Content creation','Local SEO','Monthly reporting']},
+        {name:'Website Grader',price:'Free',badge:'Start here',rec:false,features:['Score across 6 categories','Design & mobile audit','SEO gap analysis','Conversion review','Specific fix plan']},
+      ]
+    },
+    refresh:{
+      title:'Recommended: Targeted Redesign',
+      desc:'Fix what\'s broken without starting from scratch.',
+      cards:[
+        {name:'Website Redesign',price:'Custom quote',badge:'Best fit',rec:true,features:['Scalable page options','Mobile-first rebuild','CTA optimization','SEO-smart design','Social proof integration']},
+        {name:'Express Design',price:'Fast & focused',badge:'Need it fast?',rec:false,features:['Live in 2–3 weeks','1-page to full site','3 rounds of edits','Mobile ready','Conducted via email']},
+        {name:'Classic Website',price:'$2,599',badge:'Full solution',rec:false,features:['3–5 pages','SEO-smart design','3 rounds of edits','Social media integration','Wix app integration']},
+      ]
+    },
+    redesign:{
+      title:'Recommended: Full Website Redesign',
+      desc:'A proper rebuild that fixes the root causes, not symptoms.',
+      cards:[
+        {name:'Classic Website',price:'$2,599',badge:'Most popular',rec:true,features:['3–5 custom pages','SEO-smart design','3 rounds of edits','Conversion-focused layout','Social & app integration']},
+        {name:'Express Design',price:'Fast launch',badge:'Need speed?',rec:false,features:['Live in 2–3 weeks','Conversion-focused','Mobile-first','3 rounds of edits','Dedicated manager']},
+        {name:'Advanced Website',price:'$3,495',badge:'Full power',rec:false,features:['Up to 8 pages','eCommerce ready','Booking & payments','Drop-shipping solutions','Client list builder']},
+      ]
+    },
+    new:{
+      title:'Recommended: New Custom Website',
+      desc:'Built right, from the ground up, for how you want to grow.',
+      cards:[
+        {name:'Classic Website',price:'$2,599',badge:'Best start',rec:false,features:['3–5 custom pages','SEO-smart design','Conversion-focused','3 rounds of edits','Social integration']},
+        {name:'Advanced Website',price:'$3,495',badge:'Recommended',rec:true,features:['Up to 8 pages','eCommerce & booking','Conversion-first build','Full Wix app suite','Dedicated manager']},
+        {name:'Express Design',price:'Fastest option',badge:'Need it now',rec:false,features:['Weeks not months','Professional & mobile-ready','3 rounds of edits','Immediate impact','Low barrier to start']},
+      ]
+    }
+  };
+  const p=plans[planRec];
+  const planHTML=`
+    <div class="plan-rec">
+      <div class="plan-rec-head">
+        <div class="plan-rec-eyebrow">Zoek plan recommendation</div>
+        <div class="plan-rec-title">${p.title}</div>
+      </div>
+      <div class="plan-cards">
+        ${p.cards.map(c=>`
+          <div class="plan-card ${c.rec?'highlighted':''}">
+            <span class="plan-badge ${c.rec?'rec':''}">${c.badge}</span>
+            <div class="plan-name">${c.name}</div>
+            <div class="plan-price" style="display:none"></div>
+            <ul class="plan-features">${c.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+            <a href="https://gozoek.com/website-design-and-redesign" target="_blank" class="plan-link ${c.rec?'rec-link':''}">Learn more →</a>
+          </div>`).join('')}
+      </div>
+    </div>`;
+
+  const ctaCopy={
+    good:'Your site is solid — let\'s make sure it stays that way. In a quick call, Zoek can review what you have and map out a simple maintenance plan that keeps it running at its best.',
+    refresh:'A few targeted fixes can make a real difference. In a free 30-minute call, Zoek will review your current site and show you exactly what to update, what to keep, and what it costs.',
+    redesign:'Your site needs a proper rebuild — and it\'s more affordable than you think. In 30 minutes, Zoek will walk you through what a redesign looks like for your business and your budget.',
+    new:'Every month with your current site is costing you leads. In a free call, Zoek will show you exactly what a new site looks like for your industry and how fast we can get you live.',
+  };
+
+  document.getElementById('questions-wrap').style.display='none';
+  const rs=document.getElementById('results-screen');
+  rs.classList.add('active');
+  rs.innerHTML=`
+    <div class="result-verdict ${verdict.cls}">
+      <div class="rv-bg">${verdict.emoji}</div>
+      <div class="rv-tag">${verdict.tag}</div>
+      <div class="rv-title">${verdict.title}</div>
+      <div class="rv-desc">${verdict.desc}</div>
+    </div>
+    ${signalsHTML}
+    ${planHTML}
+    <div class="next-steps-box">
+      <div class="ns-bar">Your next 3 steps</div>
+      <div class="ns-items">
+        ${nextSteps.map((s,i)=>`<div class="ns-item"><div class="ns-n">${i+1}</div><div class="ns-t">${s.t}</div><div class="ns-d">${s.d}</div></div>`).join('')}
+      </div>
+    </div>
+    <div class="cta-box">
+      <div class="cta-eyebrow">Free 30-minute strategy call</div>
+      <div class="cta-title">Talk to a Zoek website expert</div>
+      <div class="cta-sub">${ctaCopy[planRec]}</div>
+      <a href="https://calendly.com/expert-sales" target="_blank" class="cta-btn">Book a Free Call →</a>
+      <div class="cta-phone">Or call us now: <a href="tel:18887379635">1-888-737-9635</a></div>
+    </div>
+    <button class="btn-retake" onclick="retake()">Retake the quiz</button>`;
+  window.scrollTo(0,0);
+}
+
+function retake(){
+  answers.length=0;currentQ=0;
+  document.getElementById('results-screen').classList.remove('active');
+  document.getElementById('results-screen').innerHTML='';
+  document.getElementById('questions-wrap').style.display='';
+  document.getElementById('quiz-progress').style.display='none';
+  document.getElementById('start-screen').style.display='';
+  window.scrollTo(0,0);
+}
+</script>
+<script src="cta.js"></script>
+</body>
+</html>

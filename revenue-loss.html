@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Much Is a Bad Website Costing You? | Zoek Marketing Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-links{display:flex;gap:1.4rem;list-style:none;}
+.nav-links a{font-size:0.75rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--purple);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+
+/* HERO */
+.hero{margin-top:60px;padding:4.5rem 2rem 3.5rem;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,0.14) 0%,transparent 65%);border-bottom:1px solid var(--border);}
+.hero-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(255,92,124,0.12);color:var(--red);border:1px solid rgba(255,92,124,0.25);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.5rem;}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5.5vw,4.2rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1.25rem;}
+.hero-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:1rem;color:var(--muted);line-height:1.75;max-width:540px;margin:0 auto 0;}
+.hero-sub strong{color:var(--white);}
+
+/* MAIN LAYOUT */
+.tool-wrap{display:grid;grid-template-columns:400px 1fr;min-height:85vh;border-bottom:1px solid var(--border);}
+.inputs-col{background:var(--sidebar);border-right:1px solid var(--border);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1.75rem;}
+.results-col{padding:2.5rem;display:flex;flex-direction:column;gap:1.75rem;}
+
+/* INPUTS */
+.input-block{}
+.ib-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;}
+.ib-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
+.ib-desc{font-size:0.75rem;color:var(--muted);line-height:1.55;margin-bottom:0.65rem;}
+.ib-desc strong{color:rgba(255,255,255,0.6);}
+.number-input-wrap{position:relative;}
+.ni-prefix{position:absolute;left:0.8rem;top:50%;transform:translateY(-50%);font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--muted);pointer-events:none;}
+.ni-suffix{position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--muted);pointer-events:none;}
+.big-input{width:100%;padding:0.75rem 1rem 0.75rem 2rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:5px;color:var(--white);font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;outline:none;transition:border-color 0.2s;-moz-appearance:textfield;}
+.big-input::-webkit-outer-spin-button,.big-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+.big-input:focus{border-color:var(--purple);}
+.big-input::placeholder{color:rgba(255,255,255,0.12);}
+.big-input.pct-input{padding-left:1rem;padding-right:2.2rem;}
+
+/* SLIDER */
+.slider-block{}
+.slider-row{display:flex;align-items:center;gap:0.75rem;margin-top:0.35rem;}
+.slider-row input[type=range]{flex:1;accent-color:var(--purple);cursor:pointer;}
+.slider-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--purple);min-width:52px;text-align:right;}
+.bench-pills{display:flex;gap:0.35rem;margin-top:0.5rem;flex-wrap:wrap;}
+.bench-pill{padding:0.22rem 0.6rem;border:1px solid var(--border);border-radius:20px;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.68rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.15s;}
+.bench-pill:hover{border-color:var(--purple);color:var(--white);}
+.bench-pill.active{background:rgba(108,99,255,0.15);border-color:var(--purple);color:var(--white);}
+
+/* INDUSTRY SELECTOR */
+.ind-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.35rem;margin-top:0.4rem;}
+.ind-btn{padding:0.45rem 0.6rem;border:1px solid var(--border);border-radius:4px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.75rem;font-weight:600;cursor:pointer;transition:all 0.15s;text-align:left;}
+.ind-btn:hover{border-color:var(--purple);color:var(--white);}
+.ind-btn.active{background:rgba(108,99,255,0.12);border-color:var(--purple);color:var(--white);}
+
+/* RESULTS */
+.empty-results{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;text-align:center;gap:1rem;color:var(--muted);}
+.empty-icon{font-size:4rem;opacity:0.2;}
+.empty-hint{font-size:0.9rem;line-height:1.65;max-width:280px;}
+
+/* BIG LOSS NUMBER */
+.loss-hero{border-radius:10px;padding:2.5rem;position:relative;overflow:hidden;background:rgba(255,92,124,0.06);border:1px solid rgba(255,92,124,0.2);}
+.lh-bg-text{position:absolute;right:-15px;top:-15px;font-family:'Syne',sans-serif;font-size:9rem;font-weight:800;color:rgba(255,92,124,0.05);line-height:1;pointer-events:none;user-select:none;}
+.lh-eyebrow{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:0.6rem;}
+.lh-amount{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,5vw,4.5rem);font-weight:800;line-height:1;color:var(--red);margin-bottom:0.5rem;}
+.lh-period{font-size:0.85rem;color:var(--muted);margin-bottom:1rem;}
+.lh-period strong{color:var(--white);}
+.lh-context{font-size:0.88rem;line-height:1.7;color:var(--muted);max-width:480px;}
+.lh-context strong{color:var(--white);}
+
+/* METRICS GRID */
+.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.metric-box{background:var(--sidebar);padding:1.25rem;}
+.mb-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+.mb-val{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;line-height:1;margin-bottom:0.25rem;}
+.mb-sub{font-size:0.72rem;color:var(--muted);line-height:1.45;}
+
+/* COMPARISON TABLE */
+.comparison{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.comp-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(108,99,255,0.1);}
+.comp-head-cell{padding:0.75rem 1.1rem;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+.comp-head-cell.highlight{color:var(--green);}
+.comp-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border-light);}
+.comp-row:hover{background:rgba(108,99,255,0.03);}
+.comp-cell{padding:0.9rem 1.1rem;font-size:0.85rem;}
+.comp-cell-label{font-weight:600;}
+.comp-cell-yours{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;}
+.comp-cell-bench{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--green);}
+.comp-diff{display:inline-block;font-size:0.68rem;font-weight:700;padding:0.15rem 0.45rem;border-radius:3px;margin-top:0.2rem;}
+.diff-bad{background:rgba(255,92,124,0.1);color:var(--red);}
+.diff-good{background:rgba(79,255,176,0.1);color:var(--green);}
+.diff-ok{background:rgba(255,209,102,0.1);color:var(--yellow);}
+
+/* BREAKDOWN */
+.breakdown-card{background:var(--sidebar);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.bc-head{padding:1rem 1.25rem;border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between;}
+.bc-title{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;}
+.bc-body{padding:1.25rem;}
+.breakdown-item{display:flex;justify-content:space-between;align-items:center;padding:0.7rem 0;border-bottom:1px solid var(--border-light);}
+.breakdown-item:last-child{border-bottom:none;}
+.bi-label{font-size:0.83rem;font-weight:600;}
+.bi-sub{font-size:0.72rem;color:var(--muted);margin-top:0.1rem;}
+.bi-value{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;text-align:right;}
+.bi-value.loss{color:var(--red);}
+.bi-value.gain{color:var(--green);}
+
+/* WHAT-IF */
+.what-if{background:rgba(79,255,176,0.05);border:1px solid rgba(79,255,176,0.2);border-radius:8px;padding:2rem;}
+.wi-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:0.5rem;}
+.wi-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;line-height:1.2;margin-bottom:0.75rem;}
+.wi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(79,255,176,0.15);border:1px solid rgba(79,255,176,0.2);border-radius:6px;overflow:hidden;margin-bottom:1rem;}
+.wi-cell{background:rgba(79,255,176,0.04);padding:1.1rem;}
+.wi-cell-label{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(79,255,176,0.6);margin-bottom:0.3rem;}
+.wi-cell-val{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--green);line-height:1;}
+.wi-cell-sub{font-size:0.7rem;color:var(--muted);margin-top:0.2rem;}
+.wi-desc{font-size:0.83rem;color:var(--muted);line-height:1.7;}
+.wi-desc strong{color:var(--white);}
+
+/* CTA */
+.cta-block{background:var(--gradient);border-radius:10px;padding:2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.cta-left{}
+.cta-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.4rem;}
+.cta-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;line-height:1.15;margin-bottom:0.5rem;}
+.cta-sub{font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.65;max-width:400px;}
+.cta-sub strong{color:white;}
+.cta-actions{display:flex;flex-direction:column;align-items:flex-end;gap:0.6rem;flex-shrink:0;}
+.cta-btn-main{display:inline-block;background:white;color:var(--purple);text-decoration:none;padding:0.9rem 1.75rem;border-radius:5px;font-size:0.9rem;font-weight:800;white-space:nowrap;transition:all 0.15s;box-shadow:0 4px 18px rgba(0,0,0,0.2);}
+.cta-btn-main:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,0.25);}
+.cta-phone{font-size:0.78rem;color:rgba(255,255,255,0.65);text-align:right;}
+.cta-phone a{color:rgba(255,255,255,0.9);text-decoration:none;font-weight:700;}
+
+.btn-recalc{padding:0.6rem 1.25rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
+.btn-recalc:hover{color:var(--white);border-color:rgba(255,255,255,0.3);}
+
+/* TRUTH SECTION */
+.truth-section{background:var(--sidebar);padding:4rem 2.5rem;border-top:1px solid var(--border);}
+.ts-title{font-family:'Syne',sans-serif;font-size:1.75rem;font-weight:800;margin-bottom:0.5rem;}
+.ts-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;max-width:580px;margin-bottom:2.5rem;}
+.ts-sub strong{color:var(--white);}
+.truth-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.truth-card{background:var(--navy);padding:1.5rem;}
+.tc-stat{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--purple);line-height:1;margin-bottom:0.3rem;}
+.tc-title{font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;}
+.tc-desc{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+.footer-link:hover{color:var(--white);}
+
+@media(max-width:1050px){.tool-wrap{grid-template-columns:1fr;}.inputs-col{border-right:none;border-bottom:1px solid var(--border);}.metrics-row{grid-template-columns:1fr 1fr;}.wi-grid{grid-template-columns:1fr;}}
+@media(max-width:860px){nav{padding:0.85rem 1rem;}.nav-links{display:none;}.hero{padding:3rem 1.5rem 2.5rem;}.results-col{padding:1.5rem;}.cta-block{flex-direction:column;}.cta-actions{align-items:flex-start;}.truth-section{padding:2.5rem 1.5rem;}.comp-head,.comp-row{grid-template-columns:1fr 1fr;}.comp-head-cell:last-child,.comp-cell:last-child{display:none;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+@media(max-width:500px){.metrics-row{grid-template-columns:1fr;}.ind-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="funnel.html">Funnel</a></li>
+    <li><a href="calculator.html">CPL</a></li>
+    <li><a href="roi.html">ROI</a></li>
+    <li><a href="grader.html">Site Grader</a></li>
+    <li><a href="website-quiz.html">Website Quiz</a></li>
+    <li><a href="local-seo.html">Local SEO</a></li>
+    <li><a href="revenue-loss.html" class="active">Revenue Loss</a></li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Tool 10 · Revenue Loss Calculator</div>
+  <h1 class="hero-title">How much is your website<br><span class="accent">actually costing you?</span></h1>
+  <p class="hero-sub">Most business owners think of their website as a cost. <strong>The real question is how much revenue it's losing you every single month</strong> — and that number is almost always bigger than people expect.</p>
+</div>
+
+<div class="tool-wrap">
+  <!-- INPUTS -->
+  <div class="inputs-col">
+
+    <div class="input-block">
+      <div class="ib-label">Your industry</div>
+      <div class="ib-desc">Sets realistic industry benchmarks for conversion rate and close rate.</div>
+      <div class="ind-grid">
+        <button class="ind-btn active" onclick="setIndustry(this,'home_services','Home Services',3.2,45)">Home Services</button>
+        <button class="ind-btn" onclick="setIndustry(this,'health','Health &amp; Wellness',4.1,55)">Health &amp; Wellness</button>
+        <button class="ind-btn" onclick="setIndustry(this,'restaurant','Restaurant &amp; Food',2.8,70)">Restaurant &amp; Food</button>
+        <button class="ind-btn" onclick="setIndustry(this,'professional','Professional Services',3.5,40)">Professional Services</button>
+        <button class="ind-btn" onclick="setIndustry(this,'retail','Retail &amp; eCommerce',2.5,80)">Retail &amp; eCommerce</button>
+        <button class="ind-btn" onclick="setIndustry(this,'beauty','Beauty &amp; Aesthetics',4.5,60)">Beauty &amp; Aesthetics</button>
+        <button class="ind-btn" onclick="setIndustry(this,'realestate','Real Estate',2.2,20)">Real Estate</button>
+        <button class="ind-btn" onclick="setIndustry(this,'fitness','Fitness &amp; Athletics',5.0,50)">Fitness &amp; Athletics</button>
+      </div>
+    </div>
+
+    <div class="input-block">
+      <div class="ib-label">Monthly website visitors</div>
+      <div class="ib-desc">How many people visit your site each month. Check Google Analytics or Search Console — or estimate.</div>
+      <div class="number-input-wrap">
+        <input class="big-input" type="number" id="inp-visitors" placeholder="500" oninput="recalc()">
+      </div>
+      <div class="bench-pills" style="margin-top:0.5rem">
+        <button class="bench-pill" onclick="setVal('inp-visitors',150)">150/mo</button>
+        <button class="bench-pill" onclick="setVal('inp-visitors',500)">500/mo</button>
+        <button class="bench-pill" onclick="setVal('inp-visitors',1500)">1,500/mo</button>
+        <button class="bench-pill" onclick="setVal('inp-visitors',5000)">5,000/mo</button>
+      </div>
+    </div>
+
+    <div class="input-block slider-block">
+      <div class="ib-label">Your current conversion rate</div>
+      <div class="ib-desc">What % of visitors contact you, book, or fill out a form. <strong>Most underperforming sites are at 0.5–1.5%.</strong> Industry average is 2–4%.</div>
+      <div class="slider-row">
+        <input type="range" id="sl-conv" min="0.1" max="10" step="0.1" value="1.0" oninput="updateConvLabel();recalc()">
+        <span class="slider-val" id="lbl-conv">1.0%</span>
+      </div>
+      <div class="bench-pills">
+        <button class="bench-pill" onclick="setSlider('sl-conv','lbl-conv',0.5,'0.5%')">Struggling (0.5%)</button>
+        <button class="bench-pill" onclick="setSlider('sl-conv','lbl-conv',1.0,'1.0%')">Below avg (1%)</button>
+        <button class="bench-pill active" onclick="setSlider('sl-conv','lbl-conv',2.5,'2.5%')">Average (2.5%)</button>
+        <button class="bench-pill" onclick="setSlider('sl-conv','lbl-conv',4.0,'4.0%')">Strong (4%)</button>
+      </div>
+    </div>
+
+    <div class="input-block slider-block">
+      <div class="ib-label">Your close rate</div>
+      <div class="ib-desc">Of the leads your site generates, what % become paying customers.</div>
+      <div class="slider-row">
+        <input type="range" id="sl-close" min="1" max="100" step="1" value="30" oninput="updateCloseLabel();recalc()">
+        <span class="slider-val" id="lbl-close">30%</span>
+      </div>
+    </div>
+
+    <div class="input-block">
+      <div class="ib-label">Average client value</div>
+      <div class="ib-desc">What a new customer is worth to you in revenue — first transaction or average job value.</div>
+      <div class="number-input-wrap">
+        <span class="ni-prefix">$</span>
+        <input class="big-input" type="number" id="inp-acv" placeholder="1500" oninput="recalc()">
+      </div>
+      <div class="bench-pills" style="margin-top:0.5rem">
+        <button class="bench-pill" onclick="setVal('inp-acv',250)">$250</button>
+        <button class="bench-pill" onclick="setVal('inp-acv',750)">$750</button>
+        <button class="bench-pill" onclick="setVal('inp-acv',2000)">$2,000</button>
+        <button class="bench-pill" onclick="setVal('inp-acv',8000)">$8,000</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-col" id="results-col">
+    <div class="empty-results">
+      <div class="empty-icon">💸</div>
+      <p class="empty-hint">Enter your visitors and client value on the left to see how much your website is costing you.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TRUTH SECTION -->
+<div class="truth-section">
+  <div class="ts-title">The truth about website conversion rates</div>
+  <p class="ts-sub">Most small business owners have no idea what a normal website conversion rate looks like. <strong>These are the real numbers — and the gap between where most sites sit and where they should be is where all the lost revenue lives.</strong></p>
+  <div class="truth-grid">
+    <div class="truth-card">
+      <div class="tc-stat">0.5–1%</div>
+      <div class="tc-title">Where most underperforming sites sit</div>
+      <div class="tc-desc">If your site has no clear CTA, slow load time, outdated design, or no trust signals — this is likely your reality. Most owners don't know because they've never measured it.</div>
+    </div>
+    <div class="truth-card">
+      <div class="tc-stat">2–4%</div>
+      <div class="tc-title">Industry average conversion rate</div>
+      <div class="tc-desc">A well-designed site with clear messaging, fast load time, visible contact info, and social proof should convert at 2–4% minimum. This is the baseline, not the goal.</div>
+    </div>
+    <div class="truth-card">
+      <div class="tc-stat">5–8%</div>
+      <div class="tc-title">Top-performing local business sites</div>
+      <div class="tc-desc">Sites with optimized landing pages, strong offers, review integration, live chat, and proper local SEO can hit 5–8%. At this level, your site is your best salesperson.</div>
+    </div>
+    <div class="truth-card">
+      <div class="tc-stat">7x</div>
+      <div class="tc-title">The revenue multiplier of a great site</div>
+      <div class="tc-desc">The difference between a 1% and 7% conversion rate — with the same traffic — is a 7x increase in leads. Not more ad spend. Not more traffic. Just a better site.</div>
+    </div>
+    <div class="truth-card">
+      <div class="tc-stat">53%</div>
+      <div class="tc-title">Of visitors leave if your site loads slowly</div>
+      <div class="tc-desc">More than half of mobile visitors abandon a page that takes over 3 seconds to load. That's traffic you're paying for or earning — and losing before they see anything.</div>
+    </div>
+    <div class="truth-card">
+      <div class="tc-stat">75%</div>
+      <div class="tc-title">Judge credibility by website design alone</div>
+      <div class="tc-desc">Three quarters of consumers form their opinion about a business's credibility based on website design — before reading a single word. Design is trust, and trust is revenue.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · 1-888-737-9635</span>
+</footer>
+
+<script>
+// Industry benchmarks: [bench conv rate %, bench close rate %]
+let industry={id:'home_services',label:'Home Services',benchConv:3.2,benchClose:45};
+
+function setIndustry(btn,id,label,conv,close){
+  document.querySelectorAll('.ind-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  industry={id,label,benchConv:conv,benchClose:close};
+  recalc();
+}
+
+function setVal(id,val){
+  document.getElementById(id).value=val;
+  recalc();
+}
+
+function setSlider(slId,lblId,val,label){
+  document.getElementById(slId).value=val;
+  document.getElementById(lblId).textContent=label;
+  document.querySelectorAll(`#${slId}`).forEach(()=>{});
+  recalc();
+}
+
+function updateConvLabel(){
+  const v=parseFloat(document.getElementById('sl-conv').value)||0;
+  document.getElementById('lbl-conv').textContent=v.toFixed(1)+'%';
+}
+function updateCloseLabel(){
+  const v=parseInt(document.getElementById('sl-close').value)||0;
+  document.getElementById('lbl-close').textContent=v+'%';
+}
+
+function fmt(n){
+  if(n>=1000000)return'$'+(n/1000000).toFixed(1)+'M';
+  if(n>=1000)return'$'+(n/1000).toFixed(0)+'K';
+  return'$'+Math.round(n).toLocaleString();
+}
+function fmtFull(n){return'$'+Math.round(n).toLocaleString();}
+
+function recalc(){
+  const visitors=parseFloat(document.getElementById('inp-visitors').value)||0;
+  const convRate=parseFloat(document.getElementById('sl-conv').value)||1.0;
+  const closeRate=parseInt(document.getElementById('sl-close').value)||30;
+  const acv=parseFloat(document.getElementById('inp-acv').value)||0;
+
+  const panel=document.getElementById('results-col');
+  if(!visitors||!acv){
+    panel.innerHTML=`<div class="empty-results"><div class="empty-icon">💸</div><p class="empty-hint">Enter your monthly visitors and average client value to see your revenue loss calculation.</p></div>`;
+    return;
+  }
+
+  // Current performance
+  const currentLeads=visitors*(convRate/100);
+  const currentClients=currentLeads*(closeRate/100);
+  const currentRevenue=currentClients*acv;
+
+  // Industry benchmark performance (same traffic)
+  const benchLeads=visitors*(industry.benchConv/100);
+  const benchClients=benchLeads*(industry.benchClose/100);
+  const benchRevenue=benchClients*acv;
+
+  // Top performer (same traffic)
+  const topConv=Math.min(industry.benchConv*1.8,8.0);
+  const topLeads=visitors*(topConv/100);
+  const topClients=topLeads*(industry.benchClose/100);
+  const topRevenue=topClients*acv;
+
+  // Gap calculations
+  const monthlyGap=Math.max(0,benchRevenue-currentRevenue);
+  const annualGap=monthlyGap*12;
+  const leadsGap=Math.max(0,benchLeads-currentLeads);
+
+  // Determine if they're underperforming
+  const isUnderperforming=convRate<industry.benchConv;
+  const gapPct=Math.round(((industry.benchConv-convRate)/industry.benchConv)*100);
+
+  // Gap message
+  let lossMsg='';
+  if(!isUnderperforming){
+    lossMsg=`Your conversion rate of <strong>${convRate}%</strong> is already at or above the <strong>${industry.label}</strong> industry average of <strong>${industry.benchConv}%</strong>. You're not leaving obvious money on the table — but there's still a gap to the top performers in your category.`;
+  } else {
+    lossMsg=`Your conversion rate of <strong>${convRate}%</strong> is <strong>${gapPct}% below the ${industry.label} industry average</strong> of ${industry.benchConv}%. With the same traffic you already have, a better website would generate ${Math.round(leadsGap)} more leads per month and ${fmtFull(monthlyGap)} more in revenue.`;
+  }
+
+  // What-if at industry average
+  const wi_leads_gained=Math.round(Math.max(0,benchLeads-currentLeads));
+  const wi_clients_gained=Math.round(Math.max(0,benchClients-currentClients));
+  const wi_revenue_gained=Math.max(0,benchRevenue-currentRevenue);
+
+  // Annual numbers
+  const annualCurrent=currentRevenue*12;
+  const annualBench=benchRevenue*12;
+  const annualTop=topRevenue*12;
+
+  panel.innerHTML=`
+    ${monthlyGap>0?`
+    <div class="loss-hero">
+      <div class="lh-bg-text">$</div>
+      <div class="lh-eyebrow">Estimated monthly revenue your website is losing you</div>
+      <div class="lh-amount">${fmtFull(monthlyGap)}<span style="font-size:1.5rem;color:rgba(255,92,124,0.6)">/mo</span></div>
+      <div class="lh-period">That's <strong>${fmtFull(annualGap)}</strong> every year — with the exact same traffic you already have.</div>
+      <div class="lh-context">${lossMsg}</div>
+    </div>`:`
+    <div class="loss-hero" style="background:rgba(79,255,176,0.06);border-color:rgba(79,255,176,0.2)">
+      <div class="lh-eyebrow" style="color:var(--green)">Your conversion rate is competitive</div>
+      <div class="lh-amount" style="color:var(--green)">${convRate}%</div>
+      <div class="lh-period">At or above the <strong>${industry.label}</strong> average of <strong>${industry.benchConv}%</strong>.</div>
+      <div class="lh-context">${lossMsg}</div>
+    </div>`}
+
+    <div class="metrics-row">
+      <div class="metric-box">
+        <div class="mb-label">Current monthly leads</div>
+        <div class="mb-val">${Math.round(currentLeads)}</div>
+        <div class="mb-sub">at ${convRate}% conversion rate</div>
+      </div>
+      <div class="metric-box">
+        <div class="mb-label">Current monthly clients</div>
+        <div class="mb-val">${Math.round(currentClients)}</div>
+        <div class="mb-sub">at ${closeRate}% close rate</div>
+      </div>
+      <div class="metric-box">
+        <div class="mb-label">Current monthly revenue</div>
+        <div class="mb-val">${fmt(currentRevenue)}</div>
+        <div class="mb-sub">from website-sourced clients</div>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <div class="comp-head">
+        <div class="comp-head-cell">Metric</div>
+        <div class="comp-head-cell">Your site now</div>
+        <div class="comp-head-cell highlight">At industry average</div>
+      </div>
+      ${[
+        {label:'Conversion rate',sub:'Visitors who contact you',yours:convRate.toFixed(1)+'%',bench:industry.benchConv+'%',diff:convRate<industry.benchConv?`${(industry.benchConv-convRate).toFixed(1)}% below avg`:'At or above avg',diffCls:convRate<industry.benchConv?'diff-bad':'diff-good'},
+        {label:'Monthly leads',sub:'From existing traffic',yours:Math.round(currentLeads).toString(),bench:Math.round(benchLeads).toString(),diff:wi_leads_gained>0?`+${wi_leads_gained} leads/mo`:'On track',diffCls:wi_leads_gained>0?'diff-bad':'diff-good'},
+        {label:'Monthly new clients',sub:'Leads that close',yours:Math.round(currentClients).toString(),bench:Math.round(benchClients).toString(),diff:wi_clients_gained>0?`+${wi_clients_gained} clients/mo`:'On track',diffCls:wi_clients_gained>0?'diff-bad':'diff-good'},
+        {label:'Monthly revenue',sub:'From website leads',yours:fmtFull(currentRevenue),bench:fmtFull(benchRevenue),diff:monthlyGap>0?`+${fmtFull(monthlyGap)}/mo`:'On track',diffCls:monthlyGap>0?'diff-bad':'diff-good'},
+        {label:'Annual revenue',sub:'Projected full year',yours:fmtFull(annualCurrent),bench:fmtFull(annualBench),diff:annualGap>0?`+${fmtFull(annualGap)}/yr`:'On track',diffCls:annualGap>0?'diff-bad':'diff-good'},
+      ].map(r=>`
+        <div class="comp-row">
+          <div class="comp-cell"><div class="comp-cell-label">${r.label}</div><div style="font-size:0.7rem;color:var(--muted)">${r.sub}</div></div>
+          <div class="comp-cell"><div class="comp-cell-yours">${r.yours}</div><span class="comp-diff ${r.diffCls}">${r.diff}</span></div>
+          <div class="comp-cell"><div class="comp-cell-bench">${r.bench}</div></div>
+        </div>`).join('')}
+    </div>
+
+    ${wi_revenue_gained>500?`
+    <div class="what-if">
+      <div class="wi-eyebrow">What if your website just performed at the industry average?</div>
+      <div class="wi-title">Same traffic. Same close rate. Better website.</div>
+      <div class="wi-grid">
+        <div class="wi-cell">
+          <div class="wi-cell-label">Additional leads / month</div>
+          <div class="wi-cell-val">+${wi_leads_gained}</div>
+          <div class="wi-cell-sub">from existing traffic</div>
+        </div>
+        <div class="wi-cell">
+          <div class="wi-cell-label">Additional clients / month</div>
+          <div class="wi-cell-val">+${wi_clients_gained}</div>
+          <div class="wi-cell-sub">at your current close rate</div>
+        </div>
+        <div class="wi-cell">
+          <div class="wi-cell-label">Additional revenue / year</div>
+          <div class="wi-cell-val">${fmt(wi_revenue_gained*12)}</div>
+          <div class="wi-cell-sub">without spending more on ads</div>
+        </div>
+      </div>
+      <div class="wi-desc">This isn't a projection based on more traffic or bigger ad budgets. <strong>This is the revenue difference between your current website and one that performs at the ${industry.label} industry standard — with the exact same number of visitors you already have.</strong> The traffic isn't the problem. The site is.</div>
+    </div>`:''}
+
+    <div class="cta-block">
+      <div class="cta-left">
+        <div class="cta-eyebrow">Free 30-minute strategy call</div>
+        <div class="cta-title">Find out what's holding your site back</div>
+        <div class="cta-sub">${monthlyGap>1000?`Your website is leaving an estimated <strong>${fmtFull(monthlyGap)}/month</strong> on the table. In a free call, Zoek's team will show you exactly where the drop-off is happening and what it would take to fix it.`:`In a free 30-minute call, Zoek will review your site, identify exactly where visitors are dropping off, and walk you through a specific plan to improve your conversion rate.`}</div>
+      </div>
+      <div class="cta-actions">
+        <a href="https://calendly.com/expert-sales" target="_blank" class="cta-btn-main">Book a Free Call →</a>
+        <div class="cta-phone">Or call us: <a href="tel:18887379635">1-888-737-9635</a></div>
+      </div>
+    </div>
+
+    <div style="text-align:center"><button class="btn-recalc" onclick="resetCalc()">Reset &amp; recalculate</button></div>`;
+}
+
+function resetCalc(){
+  document.getElementById('inp-visitors').value='';
+  document.getElementById('inp-acv').value='';
+  document.getElementById('sl-conv').value=1.0;
+  document.getElementById('sl-close').value=30;
+  document.getElementById('lbl-conv').textContent='1.0%';
+  document.getElementById('lbl-close').textContent='30%';
+  document.getElementById('results-col').innerHTML=`<div class="empty-results"><div class="empty-icon">💸</div><p class="empty-hint">Enter your monthly visitors and average client value to see your revenue loss calculation.</p></div>`;
+}
+</script>
+<script src="cta.js"></script>
+</body>
+</html>
