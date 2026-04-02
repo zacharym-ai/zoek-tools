@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Grader | Zoek Marketing Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--purple);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+
+/* PAGE HEADER */
+.page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
+.page-intro strong{color:var(--white);font-weight:600;}
+.header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1rem;}
+.stat-row{display:flex;align-items:center;gap:1rem;}
+.stat-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple);min-width:55px;}
+.stat-text{font-size:0.82rem;color:var(--muted);line-height:1.5;}
+.stat-text strong{color:var(--white);}
+
+/* INTAKE FORM */
+.intake-section{max-width:700px;margin:0 auto;padding:3rem 2rem;}
+.intake-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.4rem;}
+.intake-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;}
+.intake-sub strong{color:var(--white);}
+.intake-field{margin-bottom:1.25rem;}
+.intake-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+.intake-input{width:100%;padding:0.7rem 1rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:5px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.95rem;font-weight:500;outline:none;transition:border-color 0.2s;}
+.intake-input:focus{border-color:var(--purple);}
+.intake-input::placeholder{color:rgba(255,255,255,0.2);}
+.industry-pills{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:0.4rem;}
+.ind-pill{padding:0.4rem 0.85rem;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.ind-pill:hover{border-color:var(--purple);color:var(--white);}
+.ind-pill.active{background:var(--purple);border-color:var(--purple);color:white;}
+.btn-start-audit{width:100%;margin-top:1.5rem;padding:0.95rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;border:none;border-radius:5px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 18px rgba(108,99,255,0.35);letter-spacing:0.02em;}
+.btn-start-audit:hover{box-shadow:0 6px 26px rgba(108,99,255,0.55);transform:translateY(-1px);}
+.intake-note{font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;line-height:1.5;}
+
+/* QUESTIONS */
+.questions-section{display:none;border-top:1px solid var(--border);}
+.questions-section.active{display:block;}
+.q-progress-bar{padding:0.75rem 2rem;background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;position:sticky;top:60px;z-index:10;}
+.q-progress-track{flex:1;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.q-progress-inner{height:100%;background:var(--gradient);border-radius:3px;transition:width 0.4s ease;}
+.q-progress-label{font-size:0.75rem;font-weight:600;white-space:nowrap;}
+.q-progress-pct{font-size:0.72rem;color:var(--muted);white-space:nowrap;}
+.q-layout{display:grid;grid-template-columns:240px 1fr;}
+.q-sidebar{background:var(--sidebar);border-right:1px solid var(--border);padding:1.5rem 1rem;position:sticky;top:105px;height:calc(100vh - 105px);overflow-y:auto;}
+.q-category-item{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.7rem;border-radius:4px;cursor:pointer;transition:all 0.15s;margin-bottom:0.2rem;font-size:0.8rem;font-weight:600;color:var(--muted);}
+.q-category-item.active{background:rgba(108,99,255,0.12);color:var(--white);}
+.q-category-item.done{color:var(--green);}
+.q-category-item.done .cat-dot{background:var(--green);}
+.cat-dot{width:7px;height:7px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.2s;}
+.q-category-item.active .cat-dot{background:var(--purple);}
+.cat-score{margin-left:auto;font-size:0.65rem;font-weight:700;color:var(--muted);}
+.q-main{padding:2.5rem 2.5rem 4rem;}
+.cat-heading{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:0.3rem;}
+.cat-desc{font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:2rem;max-width:520px;}
+.cat-desc strong{color:var(--white);}
+.question-block{margin-bottom:1.75rem;padding:1.25rem;border:1px solid var(--border-light);border-radius:6px;background:rgba(255,255,255,0.02);transition:border-color 0.15s;}
+.question-block.answered{border-color:rgba(108,99,255,0.25);background:rgba(108,99,255,0.04);}
+.q-text{font-size:0.9rem;font-weight:700;margin-bottom:0.3rem;line-height:1.45;}
+.q-why{font-size:0.75rem;color:var(--muted);line-height:1.55;margin-bottom:0.85rem;}
+.q-why strong{color:rgba(255,255,255,0.6);}
+.answer-pills{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.ans-pill{padding:0.4rem 1rem;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.ans-pill:hover{border-color:var(--purple);color:var(--white);}
+.ans-pill.yes{border-color:var(--green);background:rgba(79,255,176,0.1);color:var(--green);}
+.ans-pill.no{border-color:var(--red);background:rgba(255,92,124,0.1);color:var(--red);}
+.ans-pill.partial{border-color:var(--yellow);background:rgba(255,209,102,0.1);color:var(--yellow);}
+.q-nav-btns{display:flex;justify-content:space-between;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border-light);}
+.btn-q-prev{padding:0.6rem 1.4rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
+.btn-q-prev:hover{color:var(--white);border-color:rgba(255,255,255,0.3);}
+.btn-q-next{padding:0.6rem 1.75rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);}
+.btn-q-next:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+
+/* RESULTS */
+.results-section{display:none;}
+.results-section.active{display:block;}
+.score-hero{background:var(--sidebar);border-bottom:1px solid var(--border);padding:3rem 2.5rem;display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:center;max-width:1100px;margin:0 auto;}
+.score-ring-wrap{position:relative;width:160px;height:160px;flex-shrink:0;}
+.score-ring-svg{transform:rotate(-90deg);}
+.score-ring-bg{fill:none;stroke:rgba(255,255,255,0.07);stroke-width:10;}
+.score-ring-fill{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1.2s ease;}
+.score-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.score-num{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;line-height:1;}
+.score-denom{font-size:0.75rem;color:var(--muted);font-weight:600;}
+.score-right-eyebrow{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
+.score-right-title{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1.15;margin-bottom:0.75rem;}
+.score-right-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;max-width:500px;}
+.score-right-sub strong{color:var(--white);}
+.score-right-biz{font-size:0.78rem;color:var(--muted);margin-top:0.75rem;}
+.score-right-biz strong{color:var(--purple);}
+
+.results-body{max-width:1100px;margin:0 auto;padding:2.5rem;}
+.results-grid{display:grid;grid-template-columns:1fr 320px;gap:2rem;align-items:start;}
+
+.category-scores{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:2rem;}
+.cat-score-row{display:grid;grid-template-columns:160px 1fr 45px;align-items:center;gap:0.85rem;}
+.cat-score-name{font-size:0.82rem;font-weight:600;}
+.cat-score-track{height:7px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
+.cat-score-fill{height:100%;border-radius:4px;transition:width 0.8s ease;}
+.cat-score-pct{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:800;text-align:right;}
+
+.section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
+
+.finding-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1rem;}
+.finding-head{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.1rem;cursor:pointer;user-select:none;gap:1rem;}
+.finding-head-left{display:flex;align-items:center;gap:0.75rem;}
+.finding-status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.finding-title{font-weight:700;font-size:0.88rem;line-height:1.3;}
+.finding-cat{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:3px;}
+.f-bad{background:rgba(255,92,124,0.12);color:var(--red);}
+.f-warn{background:rgba(255,209,102,0.12);color:var(--yellow);}
+.f-good{background:rgba(79,255,176,0.1);color:var(--green);}
+.finding-chevron{color:var(--muted);font-size:0.7rem;transition:transform 0.2s;flex-shrink:0;}
+.finding-card.open .finding-chevron{transform:rotate(180deg);}
+.finding-body{display:none;padding:1rem 1.1rem;border-top:1px solid var(--border-light);background:rgba(255,255,255,0.02);}
+.finding-card.open .finding-body{display:block;}
+.finding-impact{font-size:0.82rem;line-height:1.7;color:var(--muted);margin-bottom:0.85rem;}
+.finding-impact strong{color:var(--white);}
+.finding-fix{background:rgba(108,99,255,0.07);border:1px solid rgba(108,99,255,0.2);border-radius:4px;padding:0.75rem 1rem;}
+.finding-fix-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.3rem;}
+.finding-fix-text{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+.finding-fix-text strong{color:var(--white);}
+.finding-fix-link{display:inline-block;margin-top:0.5rem;font-size:0.75rem;font-weight:700;color:var(--purple);text-decoration:none;}
+.finding-fix-link:hover{color:var(--blue);}
+
+.results-sidebar{display:flex;flex-direction:column;gap:1.25rem;}
+.sidebar-card{background:var(--sidebar);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.sidebar-card-head{padding:0.85rem 1.1rem;border-bottom:1px solid var(--border-light);}
+.sidebar-card-title{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:800;}
+.sidebar-card-body{padding:1.1rem;}
+.priority-item{display:flex;gap:0.65rem;align-items:flex-start;padding:0.65rem 0;border-bottom:1px solid var(--border-light);}
+.priority-item:last-child{border-bottom:none;padding-bottom:0;}
+.priority-num{width:22px;height:22px;border-radius:3px;background:var(--gradient);color:white;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:800;flex-shrink:0;margin-top:1px;}
+.priority-text{font-size:0.8rem;font-weight:600;line-height:1.4;}
+.priority-sub{font-size:0.72rem;color:var(--muted);line-height:1.5;margin-top:0.15rem;}
+
+.zoek-cta-results{background:var(--gradient);border-radius:6px;padding:1.5rem;text-align:center;}
+.zc-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.4rem;}
+.zc-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.4rem;line-height:1.2;}
+.zc-sub{font-size:0.75rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:1rem;}
+.zc-btn{display:block;background:white;color:var(--purple);text-decoration:none;padding:0.7rem 1rem;border-radius:4px;font-size:0.82rem;font-weight:800;transition:all 0.15s;box-shadow:0 4px 14px rgba(0,0,0,0.2);}
+.zc-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.25);}
+.zc-phone{font-size:0.72rem;color:rgba(255,255,255,0.6);margin-top:0.6rem;}
+.zc-phone a{color:rgba(255,255,255,0.8);text-decoration:none;font-weight:600;}
+
+.btn-restart-grader{width:100%;padding:0.65rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;margin-top:0.5rem;}
+.btn-restart-grader:hover{border-color:var(--white);color:var(--white);}
+
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);margin-top:4rem;}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.15s;}
+.footer-link:hover{color:var(--white);}
+
+@media(max-width:1000px){.results-grid{grid-template-columns:1fr;}.results-sidebar{}.score-hero{grid-template-columns:1fr;gap:1.5rem;padding:2rem 1.5rem;}.score-ring-wrap{margin:0 auto;}}
+@media(max-width:860px){.q-layout{grid-template-columns:1fr;}.q-sidebar{display:none;}.page-header{grid-template-columns:1fr;}.header-left{border-right:none;border-bottom:1px solid var(--border);padding:2.5rem 1.5rem;}nav{padding:0.85rem 1rem;}.nav-links{display:none;}.q-main{padding:1.5rem;}.intake-section{padding:2rem 1.25rem;}.results-body{padding:1.5rem;}}
+@media(max-width:480px){.cat-score-row{grid-template-columns:110px 1fr 40px;}.answer-pills{flex-direction:column;}.ans-pill{text-align:center;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto">
+  </a>
+  <ul class="nav-links">
+    <li><a href="funnel.html">Funnel</a></li>
+    <li><a href="calculator.html">CPL</a></li>
+    <li><a href="roi.html">ROI</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="positioning.html">Positioning</a></li>
+    <li><a href="reviews.html">Reputation</a></li>
+    <li><a href="grader.html" class="active">Site Grader</a></li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<div class="page-header">
+  <div class="header-left">
+    <div class="page-tag">Tool 07 · Website Grader</div>
+    <h1 class="page-title">How does your website <span class="accent">actually score?</span></h1>
+    <p class="page-intro">Most small business websites look okay but quietly lose customers every day. <strong>Answer 30 questions across 6 categories and get a real score with specific, actionable fixes</strong> — not generic advice.</p>
+  </div>
+  <div class="header-right">
+    <div class="stat-row"><div class="stat-num">6</div><div class="stat-text"><strong>Categories scored:</strong> Design, Conversion, SEO, Performance, Accessibility, and Trust.</div></div>
+    <div class="stat-row"><div class="stat-num">~5</div><div class="stat-text"><strong>Minutes to complete.</strong> No URL crawlers, no technical setup. Just honest answers to real questions.</div></div>
+    <div class="stat-row"><div class="stat-num">100%</div><div class="stat-text"><strong>Specific feedback.</strong> Every gap gets a plain-English fix mapped to how Zoek can help.</div></div>
+  </div>
+</div>
+
+<!-- INTAKE -->
+<div class="intake-section" id="intake-section">
+  <div class="intake-title">Let's start with your business</div>
+  <div class="intake-sub">Tell us a little about who you are so the feedback is specific to your situation — not generic advice that could apply to anyone.</div>
+  <div class="intake-field">
+    <label>Your business name</label>
+    <input class="intake-input" id="biz-name" type="text" placeholder="e.g. Peak Plumbing Co.">
+  </div>
+  <div class="intake-field">
+    <label>Your website URL (optional — for reference)</label>
+    <input class="intake-input" id="biz-url" type="text" placeholder="e.g. www.peakplumbing.com">
+  </div>
+  <div class="intake-field">
+    <label>Your industry</label>
+    <div class="industry-pills">
+      <button class="ind-pill" onclick="setIndustry(this,'Home Services')">Home Services</button>
+      <button class="ind-pill" onclick="setIndustry(this,'Health & Wellness')">Health & Wellness</button>
+      <button class="ind-pill" onclick="setIndustry(this,'Restaurant & Food')">Restaurant & Food</button>
+      <button class="ind-pill" onclick="setIndustry(this,'Professional Services')">Professional Services</button>
+      <button class="ind-pill" onclick="setIndustry(this,'Retail & eCommerce')">Retail & eCommerce</button>
+      <button class="ind-pill" onclick="setIndustry(this,'Beauty & Aesthetics')">Beauty & Aesthetics</button>
+      <button class="ind-pill" onclick="setIndustry(this,'Fitness & Athletics')">Fitness & Athletics</button>
+      <button class="ind-pill" onclick="setIndustry(this,'Real Estate')">Real Estate</button>
+      <button class="ind-pill" onclick="setIndustry(this,'Nonprofit')">Nonprofit</button>
+      <button class="ind-pill" onclick="setIndustry(this,'Other')">Other</button>
+    </div>
+    <input type="hidden" id="biz-industry">
+  </div>
+  <div class="intake-field">
+    <label>How old is your current website?</label>
+    <div class="industry-pills">
+      <button class="ind-pill" onclick="setSiteAge(this,'Less than 1 year')">Less than 1 year</button>
+      <button class="ind-pill" onclick="setSiteAge(this,'1–3 years')">1–3 years</button>
+      <button class="ind-pill" onclick="setSiteAge(this,'3–5 years')">3–5 years</button>
+      <button class="ind-pill" onclick="setSiteAge(this,'5+ years')">5+ years</button>
+      <button class="ind-pill" onclick="setSiteAge(this,'No website yet')">No website yet</button>
+    </div>
+    <input type="hidden" id="biz-age">
+  </div>
+  <button class="btn-start-audit" onclick="startAudit()">Start My Website Audit →</button>
+  <p class="intake-note">Free · No signup · Takes about 5 minutes · Results are instant</p>
+</div>
+
+<!-- QUESTIONS -->
+<div class="questions-section" id="questions-section">
+  <div class="q-progress-bar">
+    <div class="q-progress-track"><div class="q-progress-inner" id="q-progress-inner" style="width:0%"></div></div>
+    <span class="q-progress-label" id="q-progress-label">Category 1 of 6</span>
+    <span class="q-progress-pct" id="q-progress-pct">0% complete</span>
+  </div>
+  <div class="q-layout">
+    <div class="q-sidebar">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.85rem">Audit categories</div>
+      <div id="cat-nav"></div>
+    </div>
+    <div class="q-main" id="q-main"></div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="results-section" id="results-section">
+  <div class="score-hero" id="score-hero"></div>
+  <div class="results-body">
+    <div class="results-grid">
+      <div id="results-left"></div>
+      <div class="results-sidebar" id="results-sidebar"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · Irvine, CA · 1-888-737-9635</span>
+</footer>
+
+<script>
+// ============================
+// DATA
+// ============================
+let bizName='', bizUrl='', bizIndustry='', bizAge='';
+let currentCat=0;
+const answers={}; // questionId -> 'yes'|'no'|'partial'
+
+const CATEGORIES=[
+  {
+    id:'design',label:'Design & First Impressions',icon:'🎨',
+    desc:'Your design is your handshake. <strong>Visitors form an opinion in 0.05 seconds</strong> — before they read a single word. A dated or inconsistent design tells people you\'re behind the times before you\'ve had a chance to speak.',
+    questions:[
+      {id:'d1',text:'Does your website look modern and professional?',why:'Outdated design loses trust instantly. 75% of people judge a business\'s credibility by their website design.',points:8,service:'design'},
+      {id:'d2',text:'Is your branding consistent? (logo, colors, fonts match across every page)',why:'Inconsistent branding creates confusion and looks unprofessional. It tells visitors you\'re not detail-oriented.',points:6,service:'branding'},
+      {id:'d3',text:'Does your homepage tell a visitor exactly what you do within 5 seconds?',why:'If they have to search for what you do, they\'re gone. Clarity is the most important thing on your homepage.',points:8,service:'design'},
+      {id:'d4',text:'Do you have professional photos or high-quality images (not stock photos)?',why:'Real photos of your team, work, and location build trust faster than anything else. Stock photos signal inauthenticity.',points:5,service:'branding'},
+      {id:'d5',text:'Does your site look good on mobile devices?',why:'60%+ of your visitors are on their phones. A site that isn\'t mobile-friendly loses more than half your potential customers.',points:8,service:'design'},
+    ]
+  },
+  {
+    id:'conversion',label:'Conversion & Lead Generation',icon:'🎯',
+    desc:'Getting people to your site is only half the battle. <strong>Conversion is what turns visitors into leads and leads into customers.</strong> Most small business websites fail at this — not because of traffic, but because nothing on the site tells people what to do next.',
+    questions:[
+      {id:'c1',text:'Is there a clear, prominent call-to-action on your homepage? (Book now, Call us, Get a quote)',why:'Without a clear CTA, visitors don\'t know what you want them to do. A visible CTA can increase conversions by 200%.',points:10,service:'design'},
+      {id:'c2',text:'Is it easy to contact you? (Phone number and contact form visible without scrolling)',why:'Every extra step between a visitor and contacting you costs you leads. Contact info should be impossible to miss.',points:8,service:'design'},
+      {id:'c3',text:'Do you have an online booking or quote request form?',why:'Businesses with online booking convert 3x more than those that only offer a phone number. People want to act on their schedule.',points:7,service:'design'},
+      {id:'c4',text:'Do you have a lead capture mechanism? (newsletter, free download, special offer)',why:'95% of visitors aren\'t ready to buy today. A lead capture lets you stay in touch with the ones who are interested but not ready.',points:6,service:'design'},
+      {id:'c5',text:'Does your site have a clear offer or reason to contact you today?',why:'Urgency and incentive drive action. "Call for a free estimate" outperforms "contact us" every time.',points:6,service:'design'},
+    ]
+  },
+  {
+    id:'seo',label:'Search Engine Optimization',icon:'🔍',
+    desc:'SEO determines whether people can find you on Google when they\'re searching for what you do. <strong>88% of consumers research online before buying.</strong> If you\'re not on page one, you\'re essentially invisible to most of your potential customers.',
+    questions:[
+      {id:'s1',text:'Does your site show up on Google when you search for your main service + city?',why:'Local search ranking is the most valuable real estate in digital marketing. Not showing up means losing to competitors who do.',points:10,service:'seo'},
+      {id:'s2',text:'Do your pages have unique, descriptive titles and meta descriptions?',why:'Page titles and meta descriptions are what Google shows in search results. Generic titles hurt rankings and click-through rates.',points:7,service:'seo'},
+      {id:'s3',text:'Do you have a Google Business Profile that\'s complete and active?',why:'Google Business Profile is free and drives more local leads than most paid ads. An incomplete profile is a missed opportunity every single day.',points:9,service:'getlisted'},
+      {id:'s4',text:'Does your site have a blog or regularly updated content?',why:'Fresh content tells Google your site is active and relevant. Businesses that blog get 55% more website visitors than those that don\'t.',points:6,service:'seo'},
+      {id:'s5',text:'Is your business name, address, and phone number consistent across the web?',why:'Inconsistent NAP (Name, Address, Phone) across directories confuses Google and hurts your local ranking significantly.',points:7,service:'getlisted'},
+    ]
+  },
+  {
+    id:'performance',label:'Speed & Performance',icon:'⚡',
+    desc:'Website speed is not a technical detail — it\'s a revenue problem. <strong>A 1-second delay in page load time reduces conversions by 7%.</strong> Google also uses speed as a ranking factor, meaning a slow site gets penalized twice: fewer visitors and fewer conversions.',
+    questions:[
+      {id:'p1',text:'Does your website load in under 3 seconds?',why:'53% of mobile visitors leave a page that takes longer than 3 seconds to load. Speed is money.',points:9,service:'maintenance'},
+      {id:'p2',text:'Is your site free of broken links and 404 errors?',why:'Broken links hurt user experience, damage credibility, and are penalized by Google. They signal to search engines that your site is neglected.',points:6,service:'maintenance'},
+      {id:'p3',text:'Is your website secure? (HTTPS with padlock in browser bar)',why:'Google marks HTTP sites as "Not Secure" which kills trust instantly. SSL is now a basic requirement for any legitimate business website.',points:8,service:'maintenance'},
+      {id:'p4',text:'Are your images optimized for web? (not huge file sizes slowing the site)',why:'Unoptimized images are the #1 cause of slow websites. A photo from your phone can be 5MB — it should be 200KB for the web.',points:5,service:'maintenance'},
+      {id:'p5',text:'Is your website backed up regularly?',why:'A hacked or crashed website with no backup means losing everything. Regular backups are cheap insurance for your digital storefront.',points:5,service:'maintenance'},
+    ]
+  },
+  {
+    id:'accessibility',label:'Accessibility & Compliance',icon:'♿',
+    desc:'Website accessibility isn\'t just about compliance — it\'s about reaching every potential customer. <strong>1 in 4 Americans has a disability.</strong> Beyond the human case, ADA-compliant websites rank better on Google and protect you from the growing wave of accessibility lawsuits.',
+    questions:[
+      {id:'a1',text:'Can your website be navigated using only a keyboard?',why:'Keyboard navigation is essential for people with motor disabilities and is a core ADA requirement for websites.',points:6,service:'accessibility'},
+      {id:'a2',text:'Do your images have descriptive alt text?',why:'Alt text makes images accessible to visually impaired visitors using screen readers, and it also helps Google understand your images.',points:5,service:'accessibility'},
+      {id:'a3',text:'Is your text readable? (sufficient contrast, not too small)',why:'Low contrast text is one of the most common accessibility failures. It affects millions of users with low vision and older visitors.',points:6,service:'accessibility'},
+      {id:'a4',text:'Do you have an accessibility widget or ADA compliance tool installed?',why:'Accessibility lawsuits against small businesses have increased 300% in recent years. An accessibility tool provides protection and coverage.',points:7,service:'accessibility'},
+      {id:'a5',text:'Does your site have a privacy policy and terms of service?',why:'Legal pages protect your business and are required for compliance in most industries. Many platforms and ad networks require them.',points:5,service:'accessibility'},
+    ]
+  },
+  {
+    id:'trust',label:'Trust & Social Proof',icon:'⭐',
+    desc:'Trust is the invisible force behind every purchase decision. <strong>People don\'t buy from websites — they buy from businesses they trust.</strong> Your website has about 15 seconds to establish that trust before a visitor decides whether to stay or go.',
+    questions:[
+      {id:'t1',text:'Do you display customer reviews or testimonials on your site?',why:'92% of consumers read online reviews before buying. Displaying reviews on your site increases conversion rates by up to 270%.',points:9,service:'reviews'},
+      {id:'t2',text:'Do you display your Google star rating or review count?',why:'A visible star rating (4.5+ stars) is one of the fastest trust signals in existence. It works better than any headline you can write.',points:7,service:'reviews'},
+      {id:'t3',text:'Do you have an About page with real team photos and your story?',why:'People buy from people, not faceless businesses. An authentic About page with real photos humanizes your brand and builds connection.',points:6,service:'design'},
+      {id:'t4',text:'Do you display any certifications, awards, or partner badges?',why:'Third-party credibility signals (BBB, Google Partner, industry certs) dramatically increase trust. They borrow credibility you\'ve already earned.',points:5,service:'branding'},
+      {id:'t5',text:'Do you have a portfolio or examples of your work on your site?',why:'Showing your work is the fastest way to build confidence. Before/after photos, case studies, or project galleries close skeptical visitors.',points:7,service:'design'},
+    ]
+  },
+];
+
+const SERVICE_MAP={
+  design:{label:'Website Design & Redesign',url:'https://gozoek.com/website-design-and-redesign',desc:'Zoek builds custom, conversion-optimized websites starting at $999. Your account manager works with you directly to get it right.'},
+  branding:{label:'Graphic Design & Branding',url:'https://gozoek.com/graphic-design-and-branding',desc:'Zoek creates cohesive brand identities — logos, color systems, brand guidelines — that make every touchpoint look intentional.'},
+  seo:{label:'Search Engine Optimization',url:'https://gozoek.com/wix-seo-services',desc:'Zoek\'s SEO team handles on-page optimization, content strategy, and technical SEO to get you ranking for the searches that matter.'},
+  getlisted:{label:'Get Listed',url:'https://gozoek.com/get-listed',desc:'Zoek\'s Get Listed service ensures your business information is accurate and consistent across 50+ directories — including Google, Yelp, and Apple Maps.'},
+  maintenance:{label:'Web Maintenance & Management',url:'https://gozoek.com/website-maintenance-management',desc:'Zoek\'s maintenance plans include speed optimization, security monitoring, backups, and regular updates for one flat monthly fee.'},
+  accessibility:{label:'Website Accessibility',url:'https://gozoek.com/website-accessibility',desc:'Zoek installs and configures accessibility tools that make your site ADA-compliant, protect you legally, and improve your Google ranking.'},
+  reviews:{label:'Reviews & Reputation',url:'https://gozoek.com/wix-seo-services',desc:'Zoek helps you build a system to consistently collect reviews, monitor your reputation, and respond professionally at scale.'},
+};
+
+// ============================
+// STATE
+// ============================
+let selectedIndustry='', selectedAge='';
+
+function setIndustry(btn,val){
+  document.querySelectorAll('.industry-pills .ind-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('biz-industry').value=val;
+  selectedIndustry=val;
+}
+function setSiteAge(btn,val){
+  document.querySelectorAll('#biz-age').forEach(()=>{});
+  btn.closest('.intake-field').querySelectorAll('.ind-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('biz-age').value=val;
+  selectedAge=val;
+}
+
+function startAudit(){
+  bizName=document.getElementById('biz-name').value.trim()||'Your Business';
+  bizUrl=document.getElementById('biz-url').value.trim();
+  bizIndustry=selectedIndustry||'your industry';
+  bizAge=selectedAge||'unknown age';
+  document.getElementById('intake-section').style.display='none';
+  document.getElementById('questions-section').classList.add('active');
+  renderCatNav();
+  renderCategory(0);
+}
+
+function renderCatNav(){
+  document.getElementById('cat-nav').innerHTML=CATEGORIES.map((c,i)=>`
+    <div class="q-category-item ${i===currentCat?'active':''} ${isCatDone(i)?'done':''}" id="catnav-${i}" onclick="jumpCat(${i})">
+      <span class="cat-dot"></span>
+      <span>${c.label}</span>
+      ${isCatDone(i)?`<span class="cat-score">${getCatScore(i)}%</span>`:''}
+    </div>`).join('');
+}
+
+function isCatDone(ci){
+  return CATEGORIES[ci].questions.every(q=>answers[q.id]!==undefined);
+}
+function getCatScore(ci){
+  const cat=CATEGORIES[ci];
+  const earned=cat.questions.reduce((a,q)=>{
+    const ans=answers[q.id];
+    return a+(ans==='yes'?q.points:ans==='partial'?Math.round(q.points*0.5):0);
+  },0);
+  const total=cat.questions.reduce((a,q)=>a+q.points,0);
+  return Math.round((earned/total)*100);
+}
+
+function jumpCat(i){currentCat=i;renderCategory(i);}
+
+function renderCategory(ci){
+  const cat=CATEGORIES[ci];
+  const totalCats=CATEGORIES.length;
+  const totalQs=CATEGORIES.reduce((a,c)=>a+c.questions.length,0);
+  const answeredQs=Object.keys(answers).length;
+  const pct=Math.round((answeredQs/totalQs)*100);
+  document.getElementById('q-progress-inner').style.width=pct+'%';
+  document.getElementById('q-progress-label').textContent=`Category ${ci+1} of ${totalCats} — ${cat.label}`;
+  document.getElementById('q-progress-pct').textContent=pct+'% complete';
+
+  const isLast=ci===CATEGORIES.length-1;
+  document.getElementById('q-main').innerHTML=`
+    <div class="cat-heading">${cat.icon} ${cat.label}</div>
+    <div class="cat-desc">${cat.desc}</div>
+    ${cat.questions.map(q=>`
+      <div class="question-block ${answers[q.id]?'answered':''}" id="qb-${q.id}">
+        <div class="q-text">${q.text}</div>
+        <div class="q-why">${q.why}</div>
+        <div class="answer-pills">
+          <button class="ans-pill ${answers[q.id]==='yes'?'yes':''}" onclick="answer('${q.id}','yes',this)">✓ Yes</button>
+          <button class="ans-pill ${answers[q.id]==='partial'?'partial':''}" onclick="answer('${q.id}','partial',this)">~ Sort of</button>
+          <button class="ans-pill ${answers[q.id]==='no'?'no':''}" onclick="answer('${q.id}','no',this)">✗ No</button>
+        </div>
+      </div>`).join('')}
+    <div class="q-nav-btns">
+      ${ci>0?`<button class="btn-q-prev" onclick="prevCat()">← Back</button>`:'<span></span>'}
+      <button class="btn-q-next" onclick="${isLast?'showResults()':'nextCat()'}">${isLast?'See My Results →':'Next Category →'}</button>
+    </div>`;
+
+  renderCatNav();
+  window.scrollTo(0,0);
+}
+
+function answer(qid,val,btn){
+  answers[qid]=val;
+  const block=document.getElementById('qb-'+qid);
+  block.classList.add('answered');
+  block.querySelectorAll('.ans-pill').forEach(b=>{b.classList.remove('yes','no','partial');});
+  btn.classList.add(val);
+}
+function nextCat(){if(currentCat<CATEGORIES.length-1){currentCat++;renderCategory(currentCat);}}
+function prevCat(){if(currentCat>0){currentCat--;renderCategory(currentCat);}}
+
+// ============================
+// RESULTS
+// ============================
+function showResults(){
+  document.getElementById('questions-section').classList.remove('active');
+  document.getElementById('results-section').classList.add('active');
+
+  // Calculate scores
+  const totalPoints=CATEGORIES.reduce((a,c)=>a+c.questions.reduce((b,q)=>b+q.points,0),0);
+  const earnedPoints=CATEGORIES.reduce((a,c)=>a+c.questions.reduce((b,q)=>{
+    const ans=answers[q.id];
+    return b+(ans==='yes'?q.points:ans==='partial'?Math.round(q.points*0.5):0);
+  },0),0);
+  const overallPct=Math.round((earnedPoints/totalPoints)*100);
+
+  // Score label
+  let grade,gradeColor,gradeSub;
+  if(overallPct>=85){grade='Excellent';gradeColor='#4fffb0';gradeSub=`${bizName} is in strong shape. There are still a few opportunities to optimize — use the findings below to close the remaining gaps and stay ahead of competitors.`;}
+  else if(overallPct>=70){grade='Good';gradeColor='#7df5c5';gradeSub=`${bizName} has a solid foundation but real gaps that are costing leads. The issues below are fixable — and fixing them will directly impact how many customers find and trust you.`;}
+  else if(overallPct>=50){grade='Needs Work';gradeColor='#ffd166';gradeSub=`${bizName} has some things working but significant gaps that are actively hurting your ability to attract and convert customers online. These are solvable problems.`;}
+  else if(overallPct>=30){grade='At Risk';gradeColor='#ff9a5c';gradeSub=`${bizName}'s website has serious issues that are costing real leads every single day. The good news: most of these are fixable. Start with the top priorities below.`;}
+  else{grade='Critical';gradeColor='#ff5c7c';gradeSub=`${bizName}'s website has major problems across multiple areas. Every day without fixing these is business you're leaving on the table. Let's talk about where to start.`;}
+
+  // Ring chart
+  const r=66,circ=2*Math.PI*r,offset=circ-(overallPct/100)*circ;
+  document.getElementById('score-hero').innerHTML=`
+    <div class="score-ring-wrap">
+      <svg class="score-ring-svg" width="160" height="160" viewBox="0 0 160 160">
+        <circle class="score-ring-bg" cx="80" cy="80" r="${r}"/>
+        <circle class="score-ring-fill" cx="80" cy="80" r="${r}" style="stroke:${gradeColor};stroke-dasharray:${circ};stroke-dashoffset:${offset}"/>
+      </svg>
+      <div class="score-center">
+        <div class="score-num" style="color:${gradeColor}">${overallPct}</div>
+        <div class="score-denom">out of 100</div>
+      </div>
+    </div>
+    <div>
+      <div class="score-right-eyebrow">Website Audit Results</div>
+      <div class="score-right-title" style="color:${gradeColor}">${grade}.</div>
+      <div class="score-right-sub">${gradeSub}</div>
+      ${bizUrl?`<div class="score-right-biz">Audit for: <strong>${bizName}</strong> · ${bizUrl}${bizIndustry?' · '+bizIndustry:''}</div>`:`<div class="score-right-biz">Audit for: <strong>${bizName}</strong>${bizIndustry?' · '+bizIndustry:''}</div>`}
+    </div>`;
+
+  // Build findings — failed/partial questions sorted by impact
+  const findings=[];
+  CATEGORIES.forEach(cat=>{
+    cat.questions.forEach(q=>{
+      const ans=answers[q.id]||'no';
+      if(ans!=='yes'){
+        findings.push({...q,answer:ans,category:cat.label,catId:cat.id});
+      }
+    });
+  });
+  // Sort: no (full points) first, then partial, by points descending
+  findings.sort((a,b)=>{
+    const aWeight=a.answer==='no'?a.points:a.points*0.5;
+    const bWeight=b.answer==='no'?b.points:b.points*0.5;
+    return bWeight-aWeight;
+  });
+
+  // Category score bars
+  const catScoreHTML=`
+    <div class="section-label">Score by category</div>
+    <div class="category-scores">
+      ${CATEGORIES.map(cat=>{
+        const sc=getCatScore(CATEGORIES.indexOf(cat));
+        const col=sc>=80?'#4fffb0':sc>=60?'#ffd166':'#ff5c7c';
+        return`<div class="cat-score-row">
+          <span class="cat-score-name">${cat.icon} ${cat.label.split(' ')[0]}</span>
+          <div class="cat-score-track"><div class="cat-score-fill" style="width:${sc}%;background:${col}"></div></div>
+          <span class="cat-score-pct" style="color:${col}">${sc}%</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+
+  // Findings
+  const findingsHTML=findings.length===0
+    ?'<div style="padding:1.5rem;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);border-radius:6px;font-size:0.88rem;color:var(--green)">🎉 Outstanding — no major gaps found. Keep up the excellent work and check back in 6 months.</div>'
+    :`<div class="section-label" style="margin-top:1.5rem">What needs fixing (${findings.length} issue${findings.length!==1?'s':''})</div>
+    ${findings.slice(0,12).map((f,i)=>{
+      const isNeg=f.answer==='no';
+      const dotColor=isNeg?'#ff5c7c':'#ffd166';
+      const catLabel=isNeg?'Needs Fix':'Partial';
+      const catClass=isNeg?'f-bad':'f-warn';
+      const svc=SERVICE_MAP[f.service]||SERVICE_MAP.design;
+      const fixText=getFix(f.id,bizName,bizIndustry);
+      return`<div class="finding-card" id="fc-${i}" onclick="toggleFinding(${i})">
+        <div class="finding-head">
+          <div class="finding-head-left">
+            <div class="finding-status-dot" style="background:${dotColor}"></div>
+            <div>
+              <div class="finding-title">${f.text}</div>
+              <div style="font-size:0.7rem;color:var(--muted);margin-top:2px">${f.category}</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.6rem;flex-shrink:0">
+            <span class="finding-cat ${catClass}">${catLabel}</span>
+            <span class="finding-chevron">▼</span>
+          </div>
+        </div>
+        <div class="finding-body">
+          <div class="finding-impact">${fixText.impact}</div>
+          <div class="finding-fix">
+            <div class="finding-fix-label">How Zoek fixes this</div>
+            <div class="finding-fix-text">${fixText.fix} <strong>${svc.label}</strong> — ${svc.desc}</div>
+            <a href="${svc.url}" target="_blank" class="finding-fix-link">Learn about ${svc.label} →</a>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}`;
+
+  // Passed items
+  const passed=[];
+  CATEGORIES.forEach(cat=>{cat.questions.forEach(q=>{if(answers[q.id]==='yes')passed.push({...q,category:cat.label});});});
+  const passedHTML=passed.length?`
+    <div class="section-label" style="margin-top:1.5rem">What's working (${passed.length} item${passed.length!==1?'s':''})</div>
+    ${passed.map(p=>`
+      <div class="finding-card">
+        <div class="finding-head" style="cursor:default">
+          <div class="finding-head-left">
+            <div class="finding-status-dot" style="background:var(--green)"></div>
+            <div>
+              <div class="finding-title">${p.text}</div>
+              <div style="font-size:0.7rem;color:var(--muted);margin-top:2px">${p.category}</div>
+            </div>
+          </div>
+          <span class="finding-cat f-good">✓ Good</span>
+        </div>
+      </div>`).join('')}`:'';
+
+  document.getElementById('results-left').innerHTML=catScoreHTML+findingsHTML+passedHTML;
+
+  // Sidebar: top priorities
+  const topFindings=findings.slice(0,5);
+  const priorityHTML=topFindings.map((f,i)=>{
+    const svc=SERVICE_MAP[f.service]||SERVICE_MAP.design;
+    return`<div class="priority-item">
+      <div class="priority-num">${i+1}</div>
+      <div>
+        <div class="priority-text">${f.text.replace(/\?/,'')}</div>
+        <div class="priority-sub">${svc.label}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Score message for CTA
+  const ctaMsg=overallPct<60
+    ?`Your site scored <strong>${overallPct}/100</strong>. That's <strong>${findings.length} fixable issues</strong> costing you leads right now. Our team can walk you through a plan in 30 minutes — free.`
+    :`Your site scored <strong>${overallPct}/100</strong> — good start. Our experts can show you how to close the remaining gaps and get to 90+.`;
+
+  document.getElementById('results-sidebar').innerHTML=`
+    <div class="sidebar-card">
+      <div class="sidebar-card-head"><div class="sidebar-card-title">🔥 Top priorities</div></div>
+      <div class="sidebar-card-body">${priorityHTML}</div>
+    </div>
+    <div class="zoek-cta-results">
+      <div class="zc-eyebrow">Free 30-minute strategy call</div>
+      <div class="zc-title">Get a custom fix plan from Zoek</div>
+      <div class="zc-sub">${ctaMsg}</div>
+      <a href="https://calendly.com/expert-sales" target="_blank" class="zc-btn">Book a Free Call →</a>
+      <div class="zc-phone">Or call us: <a href="tel:18887379635">1-888-737-9635</a></div>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-card-head"><div class="sidebar-card-title">📊 Your audit summary</div></div>
+      <div class="sidebar-card-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Score</div><div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:${gradeColor}">${overallPct}/100</div></div>
+          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Grade</div><div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:${gradeColor}">${grade}</div></div>
+          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Issues found</div><div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--red)">${findings.length}</div></div>
+          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Passing</div><div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--green)">${passed.length}</div></div>
+        </div>
+        ${bizAge?`<div style="margin-top:0.85rem;padding-top:0.85rem;border-top:1px solid var(--border-light);font-size:0.75rem;color:var(--muted)">Site age: <strong style="color:var(--white)">${bizAge}</strong>${bizAge==='3–5 years'||bizAge==='5+ years'?` — <span style="color:var(--yellow)">consider a redesign</span>`:''}${bizAge==='No website yet'?` — <span style="color:var(--red)">getting online is your #1 priority</span>`:''}</div>`:''}
+      </div>
+    </div>
+    <button class="btn-restart-grader" onclick="restartGrader()">Start over / Grade another site</button>`;
+
+  window.scrollTo(0,0);
+}
+
+function toggleFinding(i){
+  const card=document.getElementById('fc-'+i);
+  card.classList.toggle('open');
+}
+
+function getCatScore(ci){
+  const cat=CATEGORIES[ci];
+  const earned=cat.questions.reduce((a,q)=>{const ans=answers[q.id];return a+(ans==='yes'?q.points:ans==='partial'?Math.round(q.points*0.5):0);},0);
+  const total=cat.questions.reduce((a,q)=>a+q.points,0);
+  return Math.round((earned/total)*100);
+}
+
+function restartGrader(){
+  Object.keys(answers).forEach(k=>delete answers[k]);
+  currentCat=0;
+  bizName='';bizUrl='';bizIndustry='';bizAge='';selectedIndustry='';selectedAge='';
+  document.getElementById('results-section').classList.remove('active');
+  document.getElementById('questions-section').classList.remove('active');
+  document.getElementById('intake-section').style.display='';
+  document.querySelectorAll('.ind-pill').forEach(b=>b.classList.remove('active'));
+  document.getElementById('biz-name').value='';
+  document.getElementById('biz-url').value='';
+  window.scrollTo(0,0);
+}
+
+// ============================
+// SPECIFIC FIX COPY
+// ============================
+function getFix(qid,biz,industry){
+  const fixes={
+    d1:{impact:`First impressions are formed in under a second. <strong>If your design looks outdated, visitors assume your service is too.</strong> In competitive markets like ${industry||'yours'}, you're often judged on appearance before a word is read.`,fix:'Zoek designs and builds modern, conversion-focused websites for small businesses starting at $999. Every site is custom-built by a dedicated account manager who works with you directly. Learn more about'},
+    d2:{impact:`Inconsistent branding — different logo versions, mismatched colors, varying fonts — makes your business look disorganized. <strong>Cohesive branding increases revenue by up to 23%</strong> by building the trust that makes people choose you.`,fix:'Zoek\'s Graphic Design & Branding team creates complete brand systems so every page, post, and printed piece looks intentional. Learn more about'},
+    d3:{impact:`If visitors can\'t immediately understand what ${biz} does and who it\'s for, they\'ll leave and find a competitor who makes it obvious. <strong>Clarity is the most important thing on your homepage.</strong> It\'s not about being clever — it\'s about being immediately understood.`,fix:'When Zoek rebuilds your site, we start with your homepage message — your headline, subheadline, and CTA — before anything else. Learn more about'},
+    d4:{impact:`Stock photos are invisible to visitors — they scroll right past them because everyone uses the same ones. <strong>Real photos of your team, space, and work build trust faster than any copy you can write.</strong> They\'re what makes your site feel real.`,fix:'Zoek\'s design team can work with your existing photos or help you plan a photo strategy that makes your site feel authentic and local. Learn more about'},
+    d5:{impact:`<strong>More than 60% of your website visitors are on a mobile device right now.</strong> If your site isn\'t optimized for mobile, you\'re losing the majority of your traffic before they\'ve had a chance to read anything. Mobile-first isn\'t a trend — it\'s the standard.`,fix:'Every Zoek website is built mobile-first from day one — designed, tested, and optimized for phones before anything else. Learn more about'},
+    c1:{impact:`Without a visible, specific call-to-action, visitors don\'t know what you want them to do next. <strong>A clear CTA can increase conversions by 200% or more.</strong> "Learn More" is not a CTA. "Book Your Free Estimate Today" is. The difference between them is real revenue.`,fix:'Zoek\'s conversion rate optimization (CRO) process is built into every website we design — every page is built around a clear next step that moves visitors toward becoming customers. Learn more about'},
+    c2:{impact:`If someone has to scroll to find your phone number or dig around for a contact form, <strong>you\'ve already lost them.</strong> Modern visitors expect zero friction. Your contact info should be visible from the moment the page loads.`,fix:'Zoek builds every site with contact visibility as a core requirement — sticky headers with click-to-call, prominent forms, and zero buried CTAs. Learn more about'},
+    c3:{impact:`Online booking converts 3x more visitors than "call us during business hours." <strong>People want to take action on their schedule, not yours.</strong> If you\'re not offering online booking or quote requests, you\'re losing leads to competitors who do — every night and weekend.`,fix:'Zoek integrates booking systems, quote forms, and scheduling tools directly into your website as part of the design process. Learn more about'},
+    c4:{impact:`<strong>95% of website visitors aren\'t ready to buy on their first visit.</strong> Without a lead capture — an offer, newsletter, or free download — you lose them permanently. With one, you have a chance to stay in touch until they\'re ready. That\'s the difference between a one-time visit and a future customer.`,fix:'Zoek builds lead capture systems into every site — opt-in forms, newsletter integrations, and lead magnets — and connects them to your email platform. Learn more about'},
+    c5:{impact:`Visitors need a reason to act today, not someday. <strong>"Contact us" is passive. "Get a free estimate this week" creates urgency.</strong> Without a specific offer or reason to reach out, most visitors will think "I\'ll come back later" — and they never do.`,fix:'Zoek\'s team will work with you on a lead generation offer and build it prominently into your homepage and service pages. Learn more about'},
+    s1:{impact:`<strong>If ${biz} doesn\'t show up on Google for your main service in ${industry||'your area'}, you\'re invisible to the customers who are actively searching for you right now.</strong> They\'re not going to page two. They\'re going to click on whoever shows up — and that\'s your competitor.`,fix:'Zoek\'s SEO team handles everything from keyword research to on-page optimization to local ranking strategy. We\'ve ranked 500,000+ keywords for our clients. Learn more about'},
+    s2:{impact:`Page titles and meta descriptions are literally what appears in Google search results. <strong>Generic titles like "Home" or "Services" tell Google and visitors nothing about who you are or what you do.</strong> Descriptive, keyword-rich titles improve both your ranking and how often people click on your result.`,fix:'Zoek\'s SEO service includes a complete audit and optimization of every page title, meta description, heading structure, and URL on your site. Learn more about'},
+    s3:{impact:`Your Google Business Profile is free real estate that drives more local leads than most paid advertising. <strong>A complete, active profile puts you in Google Maps, the Local Pack, and voice search results.</strong> An incomplete profile means you\'re being passed over for competitors who took 20 minutes to fill theirs out.`,fix:'Zoek\'s Get Listed service optimizes your Google Business Profile and ensures your information is consistent across 50+ directories including Google, Yelp, Bing, and Apple Maps. Learn more about'},
+    s4:{impact:`<strong>Businesses that publish regular content get 55% more website visitors than those that don\'t.</strong> Fresh content tells Google your site is active and relevant. It also gives you something to share on social media and positions you as the expert in your area.`,fix:'Zoek\'s SEO plans include content strategy and creation — blog posts, service pages, and location pages written to rank for the searches your customers are actually making. Learn more about'},
+    s5:{impact:`When your business name, address, and phone number appear differently across different websites — even slightly — <strong>Google gets confused about which information is correct and penalizes your local ranking.</strong> This is one of the most common and most overlooked local SEO problems.`,fix:'Zoek\'s Get Listed service audits, corrects, and locks your business information across 50+ directories so everything is consistent and Google can confidently rank you higher. Learn more about'},
+    p1:{impact:`<strong>53% of mobile visitors abandon a page that takes more than 3 seconds to load.</strong> That\'s not a statistic to file away — that\'s more than half your potential customers leaving before they\'ve seen anything. Speed is also a direct Google ranking factor, so a slow site gets penalized in search results too.`,fix:'Zoek\'s maintenance plans include speed optimization — image compression, caching, code cleanup, and CDN setup — so your site loads fast on every device. Learn more about'},
+    p2:{impact:`Broken links and 404 errors are the digital equivalent of a dead phone number. <strong>They tell visitors — and Google — that your site is neglected.</strong> Every broken link is a missed conversion. Google actively penalizes sites with crawl errors in their ranking algorithm.`,fix:'Zoek\'s monthly maintenance plans include regular link audits, error monitoring, and ongoing fixes so nothing slips through the cracks. Learn more about'},
+    p3:{impact:`<strong>Google marks HTTP sites as "Not Secure" in the browser bar.</strong> When visitors see that warning, the vast majority leave immediately. SSL (HTTPS) is no longer optional — it\'s a baseline requirement for any site that wants to be trusted, and it\'s a direct ranking factor in Google\'s algorithm.`,fix:'Zoek ensures every site we build or maintain has a valid SSL certificate, HTTPS everywhere, and regular security monitoring. Learn more about'},
+    p4:{impact:`Unoptimized images are the single most common cause of slow websites. <strong>A photo straight from your phone can be 8MB — a web-optimized version should be under 200KB.</strong> That\'s a 40x difference in load time. If your pages feel slow, images are almost always the culprit.`,fix:'Zoek\'s team optimizes every image on your site — compression, proper sizing, WebP conversion, and lazy loading — as part of our maintenance and design services. Learn more about'},
+    p5:{impact:`A hacked or crashed website with no backup means potentially losing your entire site, your content, and your customer data. <strong>Rebuilding from scratch takes weeks and thousands of dollars.</strong> Regular backups are the cheapest insurance you can buy for your digital storefront.`,fix:'Zoek\'s Web Maintenance & Management plans include automated daily backups stored securely off-site, so you\'re never one bad day away from losing everything. Learn more about'},
+    a1:{impact:`Keyboard navigation is essential for millions of people with motor disabilities. <strong>It\'s also a core requirement under ADA accessibility guidelines.</strong> Beyond the human case, accessibility-compliant sites rank better on Google — accessibility and SEO are more connected than most people realize.`,fix:'Zoek\'s Website Accessibility service installs and configures compliance tools that make your site navigable for everyone, protect you legally, and improve your search ranking. Learn more about'},
+    a2:{impact:`Alt text makes your images readable to people using screen readers — and to Google. <strong>Without it, your images are invisible to search engines</strong>, which means you\'re missing out on image search traffic and the SEO value of every visual on your site.`,fix:'Zoek adds descriptive, keyword-aware alt text to every image on your site as part of both our SEO and accessibility services. Learn more about'},
+    a3:{impact:`Low contrast text — light gray on white, for example — is one of the most common accessibility failures. <strong>It affects people with low vision, color blindness, and anyone in bright sunlight on their phone.</strong> If your text is hard to read, people don\'t read it — and they leave.`,fix:'Zoek\'s accessibility audit and remediation process checks every text element for WCAG-compliant contrast ratios and fixes anything that doesn\'t meet the standard. Learn more about'},
+    a4:{impact:`<strong>ADA accessibility lawsuits against small businesses have increased 300% in recent years.</strong> Any business with a website can be targeted — and the legal fees alone often exceed $25,000 even when you win. An accessibility tool provides both compliance and legal protection for a fraction of that cost.`,fix:'Zoek installs and configures industry-leading accessibility tools that make your site ADA-compliant, provide a compliance certificate, and offer legal protection coverage. Learn more about'},
+    a5:{impact:`Privacy policies and terms of service are legally required in most industries and for most advertising platforms. <strong>Running Google or Facebook Ads without a privacy policy violates their terms of service and can get your ads account suspended.</strong> Beyond ads, these pages build trust and protect your business.`,fix:'Zoek can help you get the right legal pages in place as part of your website build or maintenance plan. Learn more about'},
+    t1:{impact:`<strong>92% of consumers read reviews before making a purchase decision.</strong> If your website doesn\'t display testimonials or reviews, visitors have to trust you on faith alone — and most won\'t. Showing real customer experiences is the fastest way to convert a skeptical visitor into a confident lead.`,fix:'Zoek builds review display systems directly into your website — pulling in your Google, Yelp, and other reviews automatically — so social proof is always current and visible. Learn more about'},
+    t2:{impact:`A visible Google star rating is one of the most powerful trust signals in existence. <strong>Seeing "4.8 ★ (127 reviews)" does more work than any headline you can write.</strong> It\'s borrowed credibility that you\'ve already earned — displaying it is just making sure visitors see it.`,fix:'Zoek integrates your live Google review count and rating directly into your website header, footer, or homepage — automatically updated so it\'s always current. Learn more about'},
+    t3:{impact:`<strong>People buy from people, not from faceless businesses.</strong> An About page with real photos of your team, your space, and your story creates the human connection that turns casual visitors into loyal customers. It\'s often the most-read page on a small business website — and the most overlooked.`,fix:'Zoek designs compelling About pages that tell your story, showcase your team, and build the trust that makes visitors feel good about choosing you. Learn more about'},
+    t4:{impact:`Third-party credibility signals — industry certifications, Google Partner badges, BBB accreditation, awards — dramatically accelerate trust. <strong>They tell visitors that someone other than you thinks you\'re good.</strong> If you\'ve earned these credentials, displaying them is the easiest win available to you.`,fix:'Zoek incorporates trust badges, partner logos, and certification displays prominently throughout your website design. Learn more about'},
+    t5:{impact:`<strong>Showing your work is the fastest path to confident, high-quality leads.</strong> A portfolio, before/after gallery, or case study section closes skeptical visitors before they\'ve even spoken to you. Visitors who see proof of your work convert at dramatically higher rates than those who only read about it.`,fix:'Zoek builds beautiful portfolio and gallery sections into your website — organized, filterable, and designed to showcase your best work in the best possible light. Learn more about'},
+  };
+  return fixes[qid]||{impact:'This gap is affecting your website\'s ability to attract and convert customers.',fix:'Zoek can help address this as part of our website design and digital marketing services. Learn more about'};
+}
+</script>
+<script src="cta.js"></script>
+</body>
+</html>
