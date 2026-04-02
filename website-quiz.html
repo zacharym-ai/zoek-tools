@@ -7,17 +7,36 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-links{display:flex;align-items:center;gap:0.15rem;list-style:none;}
+.nav-links>li>a{font-size:0.82rem;font-weight:600;letter-spacing:0.03em;color:var(--muted);text-decoration:none;padding:0.45rem 0.9rem;border-radius:4px;transition:all 0.15s;display:block;}
+.nav-links>li>a:hover,.nav-links>li>a.active{color:var(--white);background:rgba(255,255,255,0.07);}
+.nav-dropdown{position:relative;}
+.nav-drop-btn{background:transparent;border:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:0.03em;padding:0.45rem 0.9rem;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:0.3rem;transition:all 0.15s;}
+.nav-drop-btn:hover,.nav-drop-btn.open{color:var(--white);background:rgba(255,255,255,0.07);}
+.nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
+.nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1a1630;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu.open{display:flex;}
+.ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
+.ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
+.nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(108,99,255,0.1);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+@media(max-width:700px){.nav-links{display:none;}}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
 html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
-.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
-.nav-links{display:flex;gap:1.5rem;list-style:none;}
-.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
-.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--purple);}
-.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
-.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+
+
+
+
+
+
+
 
 /* HERO */
 .quiz-hero{margin-top:60px;padding:4rem 2rem 3rem;text-align:center;border-bottom:1px solid var(--border);background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,0.12) 0%,transparent 70%);}
@@ -70,7 +89,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .opt-radio::after{content:'';position:absolute;top:4px;left:4px;width:8px;height:8px;border-radius:50%;background:white;opacity:0;transition:opacity 0.15s;}
 .opt-label{font-size:0.9rem;font-weight:600;line-height:1.35;}
 .opt-sub{font-size:0.75rem;color:var(--muted);margin-top:0.15rem;line-height:1.4;}
-.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border-light);}
+.q-
 .btn-back{padding:0.6rem 1.25rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
 .btn-back:hover{color:var(--white);border-color:rgba(255,255,255,0.3);}
 .btn-next-q{padding:0.65rem 1.75rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);opacity:0.4;pointer-events:none;}
@@ -141,20 +160,36 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 .footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
 .footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
 .footer-link:hover{color:var(--white);}
-@media(max-width:700px){nav{padding:0.85rem 1rem;}.nav-links{display:none;}.quiz-hero{padding:3rem 1.25rem 2rem;}.quiz-body{padding:2rem 1.25rem 4rem;}.results-preview{grid-template-columns:1fr;}.signals-grid{grid-template-columns:1fr;}.plan-cards{grid-template-columns:1fr;}.ns-items{grid-template-columns:1fr;}.ns-item{border-right:none;border-bottom:1px solid var(--border-light);}.quiz-progress{padding:0.75rem 1rem;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+@media(max-width:700px){.quiz-hero{padding:3rem 1.25rem 2rem;}.quiz-body{padding:2rem 1.25rem 4rem;}.results-preview{grid-template-columns:1fr;}.signals-grid{grid-template-columns:1fr;}.plan-cards{grid-template-columns:1fr;}.ns-items{grid-template-columns:1fr;}.ns-item{border-right:none;border-bottom:1px solid var(--border-light);}.quiz-progress{padding:0.75rem 1rem;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
 </style>
 </head>
 <body>
 <nav>
   <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
   <ul class="nav-links">
-    <li><a href="results.html">Results</a></li><li><a href="funnel.html">Funnel</a></li>
-    <li><a href="calculator.html">CPL</a></li>
-    <li><a href="roi.html">ROI</a></li>
-    <li><a href="budget.html">Budget</a></li>
-    <li><a href="grader.html">Site Grader</a></li>
-    <li><a href="website-quiz.html" class="active">Website Quiz</a></li>
-    <li><a href="local-seo.html">Local SEO</a></li><li><a href="revenue-loss.html">Revenue Loss</a></li>
+    <li><a href="index.html" id="nl-home">Home</a></li>
+    <li><a href="results.html" id="nl-results">Results</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-drop-btn" onclick="toggleNav(this)" id="nl-tools-btn" style="color:var(--white)">Tools <span class="nav-chevron">&#9660;</span></button>
+      <div class="nav-drop-menu" id="nl-tools-menu">
+        <div class="ndm-col">
+          <div class="ndm-label">Calculators</div>
+          <a href="funnel.html">Lead Funnel Visualizer</a>
+          <a href="calculator.html">Cost Per Lead</a>
+          <a href="roi.html">Marketing ROI</a>
+          <a href="budget.html">Ad Budget Planner</a>
+          <a href="revenue-loss.html">Revenue Loss</a>
+        </div>
+        <div class="ndm-col">
+          <div class="ndm-label">Audits &amp; Quizzes</div>
+          <a href="grader.html">Website Grader</a>
+          <a href="website-quiz.html">Website Quiz</a>
+          <a href="local-seo.html">Local SEO Check</a>
+          <a href="positioning.html">Positioning Worksheet</a>
+          <a href="reviews.html">Reputation Toolkit</a>
+        </div>
+      </div>
+    </li>
   </ul>
   <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
 </nav>
@@ -569,5 +604,22 @@ function retake(){
 }
 </script>
 <script src="cta.js"></script>
+<script>
+function toggleNav(btn){
+  var menu=document.getElementById('nl-tools-menu');
+  var isOpen=menu.classList.contains('open');
+  menu.classList.toggle('open',!isOpen);
+  btn.classList.toggle('open',!isOpen);
+}
+document.addEventListener('click',function(e){
+  var dd=document.querySelector('.nav-dropdown');
+  if(dd&&!dd.contains(e.target)){
+    var m=document.getElementById('nl-tools-menu');
+    var b=document.getElementById('nl-tools-btn');
+    if(m)m.classList.remove('open');
+    if(b)b.classList.remove('open');
+  }
+});
+</script>
 </body>
 </html>

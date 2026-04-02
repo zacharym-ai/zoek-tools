@@ -7,6 +7,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-links{display:flex;align-items:center;gap:0.15rem;list-style:none;}
+.nav-links>li>a{font-size:0.82rem;font-weight:600;letter-spacing:0.03em;color:var(--muted);text-decoration:none;padding:0.45rem 0.9rem;border-radius:4px;transition:all 0.15s;display:block;}
+.nav-links>li>a:hover,.nav-links>li>a.active{color:var(--white);background:rgba(255,255,255,0.07);}
+.nav-dropdown{position:relative;}
+.nav-drop-btn{background:transparent;border:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:0.03em;padding:0.45rem 0.9rem;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:0.3rem;transition:all 0.15s;}
+.nav-drop-btn:hover,.nav-drop-btn.open{color:var(--white);background:rgba(255,255,255,0.07);}
+.nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
+.nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1a1630;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu.open{display:flex;}
+.ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
+.ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
+.nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(108,99,255,0.1);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+@media(max-width:700px){.nav-links{display:none;}}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --navy: #1a1a2e; --navy-mid: #16213e; --sidebar: #1f1b3a;
@@ -19,17 +38,17 @@
 }
 html { scroll-behavior: smooth; }
 body { background: var(--navy); color: var(--white); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 2rem; background: rgba(26,26,46,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
-.nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-.nav-logo-mark { width: 30px; height: 30px; border-radius: 5px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 800; color: white; }
-.nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.95rem; color: var(--white); }
-.nav-logo-text span { color: var(--purple); }
-.nav-links { display: flex; gap: 1.5rem; list-style: none; }
-.nav-links a { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-.nav-links a:hover { color: var(--white); }
-.nav-links a.active { color: var(--purple); }
-.nav-cta { background: var(--gradient); color: white; text-decoration: none; padding: 0.5rem 1.1rem; border-radius: 4px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; transition: all 0.2s; box-shadow: 0 4px 14px rgba(108,99,255,0.3); white-space: nowrap; }
-.nav-cta:hover { box-shadow: 0 6px 20px rgba(108,99,255,0.5); transform: translateY(-1px); }
+
+
+
+
+
+
+
+
+
+
+
 
 .page-header { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
 .header-left { padding: 3.5rem 2.5rem; border-right: 1px solid var(--border); }
@@ -163,7 +182,7 @@ footer { padding: 1.75rem 2rem; display: flex; align-items: center; justify-cont
 .footer-link:hover { color: var(--white); }
 
 @media (max-width: 900px) {
-  nav { padding: 0.85rem 1rem; } .nav-links { display: none; }
+   
   .page-header { grid-template-columns: 1fr; }
   .header-left { border-right: none; border-bottom: 1px solid var(--border); padding: 2.5rem 1.5rem; }
   .tool-wrap { grid-template-columns: 1fr; }
@@ -180,16 +199,31 @@ footer { padding: 1.75rem 2rem; display: flex; align-items: center; justify-cont
 <body>
 
 <nav>
-  <a href="index.html" class="nav-brand">
-    <img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto">
-  </a>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
   <ul class="nav-links">
-    <li><a href="results.html">Results</a></li><li><a href="funnel.html" class="active">Funnel</a></li>
-    <li><a href="calculator.html">CPL</a></li>
-    <li><a href="roi.html">ROI</a></li>
-    <li><a href="budget.html">Budget</a></li>
-    <li><a href="positioning.html">Positioning</a></li>
-    <li><a href="reviews.html">Reputation</a></li><li><a href="grader.html">Site Grader</a></li><li><a href="website-quiz.html">Website Quiz</a></li><li><a href="local-seo.html">Local SEO</a></li><li><a href="revenue-loss.html">Revenue Loss</a></li>
+    <li><a href="index.html" id="nl-home">Home</a></li>
+    <li><a href="results.html" id="nl-results">Results</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-drop-btn" onclick="toggleNav(this)" id="nl-tools-btn" style="color:var(--white)">Tools <span class="nav-chevron">&#9660;</span></button>
+      <div class="nav-drop-menu" id="nl-tools-menu">
+        <div class="ndm-col">
+          <div class="ndm-label">Calculators</div>
+          <a href="funnel.html">Lead Funnel Visualizer</a>
+          <a href="calculator.html">Cost Per Lead</a>
+          <a href="roi.html">Marketing ROI</a>
+          <a href="budget.html">Ad Budget Planner</a>
+          <a href="revenue-loss.html">Revenue Loss</a>
+        </div>
+        <div class="ndm-col">
+          <div class="ndm-label">Audits &amp; Quizzes</div>
+          <a href="grader.html">Website Grader</a>
+          <a href="website-quiz.html">Website Quiz</a>
+          <a href="local-seo.html">Local SEO Check</a>
+          <a href="positioning.html">Positioning Worksheet</a>
+          <a href="reviews.html">Reputation Toolkit</a>
+        </div>
+      </div>
+    </li>
   </ul>
   <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
 </nav>
@@ -547,5 +581,22 @@ function render() {
 initSources();renderStages();render();
 </script>
 <script src="cta.js"></script>
+<script>
+function toggleNav(btn){
+  var menu=document.getElementById('nl-tools-menu');
+  var isOpen=menu.classList.contains('open');
+  menu.classList.toggle('open',!isOpen);
+  btn.classList.toggle('open',!isOpen);
+}
+document.addEventListener('click',function(e){
+  var dd=document.querySelector('.nav-dropdown');
+  if(dd&&!dd.contains(e.target)){
+    var m=document.getElementById('nl-tools-menu');
+    var b=document.getElementById('nl-tools-btn');
+    if(m)m.classList.remove('open');
+    if(b)b.classList.remove('open');
+  }
+});
+</script>
 </body>
 </html>
