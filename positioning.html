@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Positioning Worksheet | Zoek Marketing Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo-mark{width:30px;height:30px;border-radius:5px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:800;color:white;}
+.nav-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;color:var(--white);}
+.nav-logo-text span{color:var(--purple);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--purple);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
+.page-intro strong{color:var(--white);font-weight:600;}
+.header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1rem;}
+.step-nav-item{padding:0.5rem 0.75rem;border:1px solid var(--border);border-radius:4px;font-size:0.78rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:0.6rem;}
+.step-nav-item.active{border-color:var(--purple);color:var(--white);background:rgba(108,99,255,0.1);}
+.step-nav-item.done{border-color:rgba(79,255,176,0.3);color:var(--green);}
+.step-nav-item.done::before{content:'✓';font-size:0.75rem;}
+.progress-bar{margin-top:60px;padding:0.75rem 2rem;background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;}
+.progress-track{flex:1;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
+.progress-inner{height:100%;background:var(--gradient);border-radius:2px;transition:width 0.4s ease;}
+.progress-text{font-size:0.75rem;font-weight:600;color:var(--white);white-space:nowrap;}
+.progress-pct{font-size:0.72rem;color:var(--muted);white-space:nowrap;}
+.worksheet-body{max-width:760px;margin:0 auto;padding:3rem 2rem;}
+.step-block{display:none;}
+.step-block.active{display:block;}
+.step-tag{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;}
+.step-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.4rem;}
+.step-sub{font-size:0.88rem;color:var(--muted);line-height:1.65;margin-bottom:2rem;}
+.step-sub strong{color:var(--white);}
+.q-block{margin-bottom:1.75rem;}
+.q-label{font-size:0.82rem;font-weight:700;margin-bottom:0.25rem;}
+.q-hint{font-size:0.72rem;color:var(--muted);margin-bottom:0.5rem;line-height:1.5;}
+.ws-input{width:100%;padding:0.65rem 0.85rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;resize:vertical;}
+.ws-input:focus{border-color:var(--purple);}
+.ws-input::placeholder{color:rgba(255,255,255,0.2);}
+.mc-grid{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.4rem;}
+.mc-option{padding:0.4rem 0.85rem;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.mc-option:hover{border-color:var(--purple);color:var(--white);}
+.mc-option.selected{background:var(--purple);border-color:var(--purple);color:white;}
+.step-nav-btns{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.btn-prev{padding:0.65rem 1.4rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
+.btn-prev:hover{border-color:var(--white);color:var(--white);}
+.btn-next{padding:0.65rem 1.75rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);}
+.btn-next:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.results-section{display:none;padding:2.5rem 2rem;max-width:900px;margin:0 auto;}
+.results-section.active{display:block;}
+.ps-block{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:8px;overflow:hidden;margin-bottom:1.5rem;}
+.ps-header{background:var(--gradient);padding:1.5rem 2rem;}
+.ps-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.4rem;}
+.ps-headline{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;line-height:1.2;}
+.ps-body{padding:1.5rem 2rem;}
+.ps-copy{font-size:0.9rem;line-height:1.8;color:var(--muted);}
+.ps-copy strong{color:var(--white);}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1.5rem;}
+.result-box{background:var(--sidebar);padding:1.1rem;}
+.result-box-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+.result-box-val{font-size:0.85rem;font-weight:600;line-height:1.5;}
+.warnings-box{padding:1rem 1.25rem;border-left:3px solid var(--red);background:rgba(255,92,124,0.07);border-radius:0 4px 4px 0;font-size:0.83rem;line-height:1.75;margin-bottom:1.5rem;}
+.usage-items{display:flex;flex-direction:column;gap:0.85rem;}
+.usage-item{display:flex;gap:0.85rem;align-items:flex-start;}
+.usage-item-num{width:26px;height:26px;border-radius:4px;background:var(--gradient);color:white;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;flex-shrink:0;}
+.usage-item-text strong{display:block;font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;}
+.usage-item-text span{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.result-actions{display:flex;gap:0.75rem;margin-top:2rem;flex-wrap:wrap;}
+.btn-restart{padding:0.65rem 1.4rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
+.btn-restart:hover{border-color:var(--white);color:var(--white);}
+.zoek-cta-embed{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem;}
+.zce-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.3rem;}
+.zce-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
+.zce-sub{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.zce-sub strong{color:var(--white);}
+.zce-btn{background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.4rem;border-radius:4px;font-size:0.85rem;font-weight:700;white-space:nowrap;transition:all 0.2s;box-shadow:0 4px 16px rgba(108,99,255,0.3);display:inline-block;}
+.zce-btn:hover{box-shadow:0 6px 24px rgba(108,99,255,0.5);transform:translateY(-1px);}
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.footer-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.footer-logo-mark{width:24px;height:24px;border-radius:3px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:800;color:white;}
+.footer-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.82rem;}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.15s;}
+.footer-link:hover{color:var(--white);}
+@media(max-width:900px){nav{padding:0.85rem 1rem;}.nav-links{display:none;}.page-header{grid-template-columns:1fr;}.header-left{border-right:none;border-bottom:1px solid var(--border);padding:2.5rem 1.5rem;}.header-right{padding:1.5rem;}.result-grid{grid-template-columns:1fr 1fr;}.worksheet-body{padding:2rem 1.25rem;}.results-section{padding:1.5rem 1.25rem;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr;}.zoek-cta-embed{flex-direction:column;}.step-nav-btns{flex-direction:column-reverse;gap:0.5rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="funnel.html">Funnel</a></li><li><a href="calculator.html">CPL</a></li><li><a href="roi.html">ROI</a></li><li><a href="budget.html">Budget</a></li><li><a href="positioning.html" class="active">Positioning</a></li><li><a href="reviews.html">Reputation</a></li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<div class="page-header">
+  <div class="header-left">
+    <div class="page-tag">Tool 05 · Positioning Worksheet</div>
+    <h1 class="page-title">Why should someone choose <span class="accent">you over everyone else?</span></h1>
+    <p class="page-intro">If you can't answer that in one sentence, your marketing can't either. <strong>This guided worksheet builds your positioning statement from scratch</strong> — your ICP, differentiators, proof points, and core message.</p>
+  </div>
+  <div class="header-right">
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.5rem">6 Steps</div>
+    <div class="step-nav-item active" onclick="goStep(0)" id="nav-0">Your Business</div>
+    <div class="step-nav-item" onclick="goStep(1)" id="nav-1">Your Customer</div>
+    <div class="step-nav-item" onclick="goStep(2)" id="nav-2">Their Problem</div>
+    <div class="step-nav-item" onclick="goStep(3)" id="nav-3">Your Competition</div>
+    <div class="step-nav-item" onclick="goStep(4)" id="nav-4">Your Difference</div>
+    <div class="step-nav-item" onclick="goStep(5)" id="nav-5">Your Proof</div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-track"><div class="progress-inner" id="progress-inner" style="width:0%"></div></div>
+  <span class="progress-text" id="progress-text">Step 1 of 6 — Your Business</span>
+  <span class="progress-pct" id="progress-pct">0% complete</span>
+</div>
+
+<div class="worksheet-body">
+
+  <div class="step-block active" id="step-0">
+    <div class="step-tag">Step 1 of 6</div>
+    <div class="step-title">Your Business</div>
+    <div class="step-sub">Start simple. <strong>What does your business do?</strong> Not the mission statement version — the version you'd tell a stranger at a party.</div>
+    <div class="q-block">
+      <div class="q-label">Business name</div>
+      <input class="ws-input" id="q-biz-name" type="text" placeholder="e.g. Peak Plumbing, Northside Dental, Blue Sky Marketing">
+    </div>
+    <div class="q-block">
+      <div class="q-label">What type of business are you?</div>
+      <div class="mc-grid">
+        <button class="mc-option" onclick="selectMC(this,'q-biz-type','local service business')">Local Service</button>
+        <button class="mc-option" onclick="selectMC(this,'q-biz-type','healthcare or medical practice')">Healthcare</button>
+        <button class="mc-option" onclick="selectMC(this,'q-biz-type','fitness or wellness business')">Fitness / Wellness</button>
+        <button class="mc-option" onclick="selectMC(this,'q-biz-type','restaurant or food business')">Restaurant</button>
+        <button class="mc-option" onclick="selectMC(this,'q-biz-type','real estate business')">Real Estate</button>
+        <button class="mc-option" onclick="selectMC(this,'q-biz-type','e-commerce or retail business')">E-commerce</button>
+        <button class="mc-option" onclick="selectMC(this,'q-biz-type','B2B or professional services business')">B2B / Professional</button>
+        <button class="mc-option" onclick="selectMC(this,'q-biz-type','agency or marketing business')">Agency</button>
+      </div>
+      <input type="hidden" id="q-biz-type">
+    </div>
+    <div class="q-block">
+      <div class="q-label">In one sentence, what do you actually do?</div>
+      <div class="q-hint">Not your tagline. Not your mission. What you do, for who, and where.</div>
+      <textarea class="ws-input" id="q-biz-what" rows="2" placeholder="e.g. We fix HVAC systems for homeowners in the Phoenix metro area, same day."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">Where do you serve? (city, region, or nationwide)</div>
+      <input class="ws-input" id="q-biz-geo" type="text" placeholder="e.g. Irvine, CA / Orange County / Nationwide">
+    </div>
+    <div class="step-nav-btns">
+      <span></span>
+      <button class="btn-next" onclick="nextStep()">Next: Your Customer →</button>
+    </div>
+  </div>
+
+  <div class="step-block" id="step-1">
+    <div class="step-tag">Step 2 of 6</div>
+    <div class="step-title">Your Customer</div>
+    <div class="step-sub"><strong>Most businesses say they serve "everyone."</strong> That's a lie that costs you money. The more specific your customer, the more your marketing resonates with the right people.</div>
+    <div class="q-block">
+      <div class="q-label">Who is your best customer?</div>
+      <div class="q-hint">Be specific: age, situation, income level, job title, lifestyle. The more detail, the better.</div>
+      <textarea class="ws-input" id="q-cust-who" rows="3" placeholder="e.g. Homeowners aged 35–55 in Irvine who own a house built before 2000 and are dealing with their first major HVAC issue."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">What outcome do they want when they hire you?</div>
+      <div class="q-hint">Not what you deliver — what they're hoping for on the other side of working with you.</div>
+      <textarea class="ws-input" id="q-cust-outcome" rows="2" placeholder="e.g. They want their home comfortable again before the weekend, without being overcharged or jerked around."></textarea>
+    </div>
+    <div class="step-nav-btns">
+      <button class="btn-prev" onclick="prevStep()">← Back</button>
+      <button class="btn-next" onclick="nextStep()">Next: Their Problem →</button>
+    </div>
+  </div>
+
+  <div class="step-block" id="step-2">
+    <div class="step-tag">Step 3 of 6</div>
+    <div class="step-title">Their Problem</div>
+    <div class="step-sub">Every buying decision is motivated by a problem. <strong>There's the practical problem</strong> (HVAC is broken) <strong>and the emotional problem</strong> (they're scared of being ripped off). You need to speak to both.</div>
+    <div class="q-block">
+      <div class="q-label">What's the practical problem you solve?</div>
+      <div class="q-hint">The functional thing that's broken, missing, or painful.</div>
+      <textarea class="ws-input" id="q-prob-practical" rows="2" placeholder="e.g. Their HVAC stopped working and it's 95 degrees outside."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">What's the emotional problem underneath it?</div>
+      <div class="q-hint">The fear, frustration, or feeling they're dealing with. This is what your marketing should actually tap into.</div>
+      <textarea class="ws-input" id="q-prob-emotional" rows="2" placeholder="e.g. They're afraid of being overcharged, given the runaround, or stuck in a 3-week wait."></textarea>
+    </div>
+    <div class="step-nav-btns">
+      <button class="btn-prev" onclick="prevStep()">← Back</button>
+      <button class="btn-next" onclick="nextStep()">Next: Competition →</button>
+    </div>
+  </div>
+
+  <div class="step-block" id="step-3">
+    <div class="step-tag">Step 4 of 6</div>
+    <div class="step-title">Your Competition</div>
+    <div class="step-sub"><strong>If you don't know what your competitors say, you might be saying the exact same thing without knowing it.</strong> Most businesses in any category say "experienced, reliable, trusted." That's table stakes — not a differentiator.</div>
+    <div class="q-block">
+      <div class="q-label">What do most of your competitors claim?</div>
+      <div class="q-hint">Go look at 3 competitor websites right now. Write down what they say. Be honest.</div>
+      <textarea class="ws-input" id="q-comp-common" rows="3" placeholder="e.g. 'Experienced, licensed, and insured.' '24/7 service.' 'Family owned since 1985.' 'Fair prices.' They all sound identical."></textarea>
+    </div>
+    <div class="step-nav-btns">
+      <button class="btn-prev" onclick="prevStep()">← Back</button>
+      <button class="btn-next" onclick="nextStep()">Next: Your Difference →</button>
+    </div>
+  </div>
+
+  <div class="step-block" id="step-4">
+    <div class="step-tag">Step 5 of 6</div>
+    <div class="step-title">Your Difference</div>
+    <div class="step-sub"><strong>This is the most important part of the entire worksheet.</strong> If you can't name something genuinely different about your business, your marketing will always be fighting on price. Push yourself to be specific.</div>
+    <div class="q-block">
+      <div class="q-label">What do you do better than anyone else?</div>
+      <div class="q-hint">Speed, process, results, specialization, guarantee, pricing model, experience, something proprietary.</div>
+      <textarea class="ws-input" id="q-diff-better" rows="3" placeholder="e.g. We're the only HVAC company in Orange County that guarantees same-day service or your next visit is free. Every tech is background checked and drug tested."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">What would surprise your customer to hear you offer?</div>
+      <div class="q-hint">Something unexpected that competitors don't do or don't talk about.</div>
+      <textarea class="ws-input" id="q-diff-surprise" rows="2" placeholder="e.g. We give a flat-rate quote before starting any work — no surprise invoices."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">If you had to boil your difference down to one sentence, what is it?</div>
+      <textarea class="ws-input" id="q-diff-one" rows="2" placeholder="e.g. We're the only HVAC company that guarantees same-day service in Orange County."></textarea>
+    </div>
+    <div class="step-nav-btns">
+      <button class="btn-prev" onclick="prevStep()">← Back</button>
+      <button class="btn-next" onclick="nextStep()">Next: Your Proof →</button>
+    </div>
+  </div>
+
+  <div class="step-block" id="step-5">
+    <div class="step-tag">Step 6 of 6</div>
+    <div class="step-title">Your Proof</div>
+    <div class="step-sub">Claims without proof get ignored. <strong>Any specific number, result, guarantee, or testimonial you have turns your positioning from an opinion into evidence.</strong></div>
+    <div class="q-block">
+      <div class="q-label">What specific numbers or stats back you up?</div>
+      <div class="q-hint">Reviews, jobs completed, years in business, response time, satisfaction rate — anything real and specific.</div>
+      <textarea class="ws-input" id="q-proof-numbers" rows="2" placeholder="e.g. 4.9 stars across 340+ Google reviews. 2,000+ systems serviced in Orange County since 2018."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">What's a specific result a client got from working with you?</div>
+      <textarea class="ws-input" id="q-proof-result" rows="2" placeholder="e.g. 'Fixed in 4 hours on a Sunday. No runaround. Fair price.' — Mike T., Irvine"></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">Do you offer any guarantee?</div>
+      <div class="q-hint">A guarantee removes risk from the buyer's decision. Even something simple works.</div>
+      <textarea class="ws-input" id="q-proof-guarantee" rows="2" placeholder="e.g. If we can't fix it same-day, your next service call is free."></textarea>
+    </div>
+    <div class="step-nav-btns">
+      <button class="btn-prev" onclick="prevStep()">← Back</button>
+      <button class="btn-next" onclick="generateResults()">Generate My Positioning →</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="results-section" id="step-results">
+  <div style="margin-bottom:2rem">
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:0.5rem">✓ Complete</div>
+    <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:0.5rem">Your positioning is ready.</div>
+    <p style="font-size:0.9rem;color:var(--muted);line-height:1.7">This is a starting point — not a final draft. Refine it until it sounds exactly like you, then put it everywhere: your homepage headline, your Google Business profile, your ads.</p>
+  </div>
+  <div class="ps-block"><div class="ps-header" id="ps-output"></div><div class="ps-body" id="ps-body-output"></div></div>
+  <div class="result-grid" id="result-grid-output"></div>
+  <div class="warnings-box" id="warnings-output"></div>
+  <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:1rem">Put it to work — 3 places to use this today</div>
+  <div id="next-steps-output"></div>
+  <div class="zoek-cta-embed">
+    <div>
+      <div class="zce-label">Turn positioning into growth</div>
+      <div class="zce-title">Let Zoek build your marketing around this</div>
+      <div class="zce-sub">Your positioning statement is the foundation. Zoek builds the campaigns, website, and content on top of it — <strong>with a track record of 132,000+ sites and 50,000+ active clients</strong>.</div>
+    </div>
+    <a href="https://calendly.com/expert-sales" target="_blank" class="zce-btn">Book a Free Strategy Call →</a>
+  </div>
+  <div class="result-actions">
+    <button class="btn-restart" onclick="restartWorksheet()">Start over</button>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · Irvine, CA</span>
+</footer>
+
+<script>
+let currentStep=0;const TOTAL=6;
+const STEPS=[{id:'step-0',label:'Your Business'},{id:'step-1',label:'Your Customer'},{id:'step-2',label:'Their Problem'},{id:'step-3',label:'Your Competition'},{id:'step-4',label:'Your Difference'},{id:'step-5',label:'Your Proof'}];
+function goStep(n){if(n<0||n>=TOTAL)return;document.querySelectorAll('.step-block').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.step-nav-item').forEach((i,idx)=>{i.classList.remove('active');if(idx<n)i.classList.add('done');else i.classList.remove('done');});document.getElementById('step-results').classList.remove('active');currentStep=n;document.getElementById('step-'+n).classList.add('active');document.getElementById('nav-'+n).classList.add('active');updateProgress();window.scrollTo(0,0);}
+function nextStep(){if(currentStep<TOTAL-1)goStep(currentStep+1);}
+function prevStep(){if(currentStep>0)goStep(currentStep-1);}
+function updateProgress(){const pct=Math.round((currentStep/TOTAL)*100);document.getElementById('progress-inner').style.width=pct+'%';document.getElementById('progress-text').textContent='Step '+(currentStep+1)+' of '+TOTAL+' — '+STEPS[currentStep].label;document.getElementById('progress-pct').textContent=pct+'% complete';}
+function selectMC(btn,fieldId,value){btn.closest('.mc-grid').querySelectorAll('.mc-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');document.getElementById(fieldId).value=value;}
+function generateResults(){
+  const biz=document.getElementById('q-biz-name').value.trim()||'Your Business';
+  const type=document.getElementById('q-biz-type').value||'your type of business';
+  const who=document.getElementById('q-cust-who').value.trim();
+  const outcome=document.getElementById('q-cust-outcome').value.trim();
+  const probE=document.getElementById('q-prob-emotional').value.trim();
+  const probP=document.getElementById('q-prob-practical').value.trim();
+  const compCommon=document.getElementById('q-comp-common').value.trim();
+  const diffBetter=document.getElementById('q-diff-better').value.trim();
+  const diffOne=document.getElementById('q-diff-one').value.trim();
+  const proofNums=document.getElementById('q-proof-numbers').value.trim();
+  const proofResult=document.getElementById('q-proof-result').value.trim();
+  const proofGuarantee=document.getElementById('q-proof-guarantee').value.trim();
+  const core=diffOne||diffBetter;
+  const headline=biz?`${biz} — ${core?core.split('.')[0]:'A different kind of '+type}`:'A different kind of '+type;
+  const para1=`Most ${type} all sound the same. ${compCommon?'"'+compCommon.split('.')[0]+'."':'"Experienced. Reliable. Trusted."'} ${biz} is different.`;
+  const para2=core?core.charAt(0).toUpperCase()+core.slice(1)+(core.endsWith('.')?''):'We believe our clients deserve straight answers, fair prices, and a team that actually shows up.';
+  const para3=proofNums?proofNums.split('.')[0]+'.':outcome?'The result: '+outcome.split('.')[0]+'.':'';
+  document.getElementById('ps-output').innerHTML=`<div class="ps-label">Your core positioning statement</div><div class="ps-headline">${headline}</div>`;
+  document.getElementById('ps-body-output').innerHTML=`<p class="ps-copy">${para1}</p><br><p class="ps-copy"><strong>${para2}</strong></p>${para3?'<br><p class="ps-copy">'+para3+'</p>':''}`;
+  document.getElementById('result-grid-output').innerHTML=[{label:'Who you\'re for',val:who||'—'},{label:'Core differentiator',val:diffBetter||diffOne||'—'},{label:'Their real problem',val:probE||probP||'—'},{label:'The proof',val:proofNums||proofResult||'—'},{label:'Outcome they want',val:outcome||'—'},{label:'Your guarantee',val:proofGuarantee||'—'}].map(r=>`<div class="result-box"><div class="result-box-label">${r.label}</div><div class="result-box-val">${r.val}</div></div>`).join('');
+  const warns=[];
+  if(!diffBetter&&!diffOne)warns.push('Your differentiator is empty. This is the most important part. Go back and be specific.');
+  if(!who)warns.push('"Everyone" is not a target market. The more specific your customer, the better your marketing converts.');
+  if(!proofNums&&!proofResult)warns.push('No proof points. Even your Google star rating counts — add something specific.');
+  if(!compCommon)warns.push('You didn\'t analyze competitors. You might be saying the same thing as everyone else without knowing it.');
+  const wb=document.getElementById('warnings-output');
+  wb.innerHTML=warns.length?'<strong>Before you use this — gaps to close:</strong><br><br>'+warns.map((w,i)=>`${i+1}. ${w}`).join('<br><br>'):'<strong style="color:var(--green)">Solid work.</strong> You\'ve built a real positioning foundation. Refine it until it sounds exactly like you.';
+  wb.style.borderLeftColor=warns.length?'var(--red)':'var(--green)';
+  wb.style.background=warns.length?'rgba(255,92,124,0.07)':'rgba(79,255,176,0.07)';
+  const steps=[{t:'Put it on your homepage today',d:'Take your core differentiator and make it the first headline on your website. Not your name. Not "welcome." The reason someone should choose you.'},
+    {t:'Test it on your next ad',d:'Run your next Google or Meta ad using your positioning statement as the headline. Compare it against your current headline. See which gets more clicks.'},
+    {t:'Add it to your Google Business profile',d:'Your business description is free real estate most businesses waste. Put your positioning statement there — you\'ll stand out from every competitor on the map.'}];
+  document.getElementById('next-steps-output').innerHTML=`<div class="usage-items">${steps.map((s,i)=>`<div class="usage-item"><div class="usage-item-num">${i+1}</div><div class="usage-item-text"><strong>${s.t}</strong><span>${s.d}</span></div></div>`).join('')}</div>`;
+  document.querySelectorAll('.step-block').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.step-nav-item').forEach(i=>{i.classList.remove('active');i.classList.add('done');});
+  document.getElementById('step-results').classList.add('active');
+  document.getElementById('progress-inner').style.width='100%';
+  document.getElementById('progress-text').textContent='Complete — Your positioning is ready';
+  document.getElementById('progress-pct').textContent='100% complete';
+  window.scrollTo(0,0);
+}
+function restartWorksheet(){document.querySelectorAll('.ws-input').forEach(i=>i.value='');document.querySelectorAll('.mc-option').forEach(b=>b.classList.remove('selected'));document.querySelectorAll('input[type=hidden]').forEach(i=>i.value='');goStep(0);}
+updateProgress();
+</script>
+<script src="cta.js"></script>
+</body>
+</html>

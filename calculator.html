@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost Per Lead Calculator | Zoek Marketing Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo-mark{width:30px;height:30px;border-radius:5px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:800;color:white;}
+.nav-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;color:var(--white);}
+.nav-logo-text span{color:var(--purple);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--purple);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
+.page-intro strong{color:var(--white);font-weight:600;}
+.header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1.25rem;}
+.how-title{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.2rem;}
+.how-step{display:flex;gap:1rem;align-items:flex-start;}
+.how-num{width:26px;height:26px;border-radius:4px;background:var(--gradient);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;color:white;}
+.how-text{font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.6;padding-top:3px;}
+.how-text strong{color:var(--white);font-weight:600;}
+.tool-layout{display:grid;grid-template-columns:340px 1fr;border-bottom:1px solid var(--border);min-height:80vh;}
+.inputs-panel{background:var(--sidebar);border-right:1px solid var(--border);overflow-y:auto;}
+.panel-section{padding:1rem 1.1rem;border-bottom:1px solid var(--border-light);}
+.panel-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;}
+.panel-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
+.client-val-wrap{display:flex;align-items:center;gap:0.5rem;}
+.client-val-prefix{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--green);}
+.client-val-input{flex:1;padding:0.55rem 0.7rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;outline:none;transition:border-color 0.2s;-moz-appearance:textfield;}
+.client-val-input::-webkit-outer-spin-button,.client-val-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+.client-val-input:focus{border-color:var(--purple);}
+.client-val-input::placeholder{color:rgba(255,255,255,0.15);}
+.source-card{border:1px solid var(--border);border-radius:5px;margin-bottom:0.6rem;transition:border-color 0.15s;overflow:hidden;}
+.source-card.on{border-color:rgba(108,99,255,0.4);}
+.source-header{display:flex;align-items:center;justify-content:space-between;padding:0.7rem 0.9rem;cursor:pointer;user-select:none;gap:0.75rem;}
+.source-header-left{display:flex;align-items:center;gap:0.65rem;}
+.source-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.source-name{font-weight:600;font-size:0.84rem;}
+.toggle{width:34px;height:18px;border-radius:9px;background:rgba(255,255,255,0.1);position:relative;cursor:pointer;border:none;flex-shrink:0;transition:background 0.2s;}
+.toggle.on{background:var(--purple);}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:white;transition:transform 0.2s;}
+.toggle.on::after{transform:translateX(16px);}
+.source-inputs{padding:0 0.9rem 0.9rem;display:flex;flex-direction:column;gap:0.65rem;}
+.source-inputs.hidden{display:none;}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
+.input-group{display:flex;flex-direction:column;gap:0.3rem;}
+.input-group label{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+.input-wrap{position:relative;}
+.input-prefix{position:absolute;left:0.6rem;top:50%;transform:translateY(-50%);font-size:0.8rem;color:var(--muted);pointer-events:none;}
+.input-wrap input{width:100%;padding:0.42rem 0.55rem 0.42rem 1.4rem;border:1px solid var(--border);border-radius:4px;background:rgba(255,255,255,0.04);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;outline:none;transition:border-color 0.2s;-moz-appearance:textfield;}
+.input-wrap input::-webkit-outer-spin-button,.input-wrap input::-webkit-inner-spin-button{-webkit-appearance:none;}
+.input-wrap input:focus{border-color:var(--purple);}
+.input-wrap input::placeholder{color:rgba(255,255,255,0.15);}
+.website-box{background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.2);border-radius:4px;padding:0.75rem;}
+.website-box-title{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.65rem;}
+.conv-display{display:flex;align-items:center;justify-content:space-between;margin-top:0.6rem;padding:0.5rem 0.75rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;}
+.conv-num{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;}
+.conv-badge{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:3px;}
+.badge-good{background:rgba(79,255,176,0.12);color:var(--green);}
+.badge-ok{background:rgba(255,209,102,0.12);color:var(--yellow);}
+.badge-bad{background:rgba(255,92,124,0.1);color:var(--red);}
+.bench-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-top:0.5rem;}
+.bench-cell{background:var(--navy);padding:0.4rem 0.5rem;text-align:center;}
+.bench-cell-label{font-size:0.6rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;}
+.bench-cell-label.good{color:var(--green);}.bench-cell-label.ok{color:var(--yellow);}.bench-cell-label.bad{color:var(--red);}
+.bench-cell-range{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;}
+.bench-cell-note{font-size:0.6rem;color:var(--muted);}
+.add-btn{width:100%;padding:0.5rem;border:1.5px dashed var(--border);border-radius:4px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.15s;margin-top:0.25rem;}
+.add-btn:hover{border-color:var(--purple);color:var(--purple);}
+.results-panel{padding:2rem;display:flex;flex-direction:column;gap:1.5rem;overflow-y:auto;}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;color:var(--muted);text-align:center;gap:1rem;}
+.empty-big{font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;color:rgba(108,99,255,0.15);line-height:1;}
+.empty-text{font-size:0.9rem;line-height:1.65;max-width:300px;}
+.big-moment{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:8px;padding:2rem;position:relative;overflow:hidden;}
+.bm-bg{position:absolute;top:-10px;right:-5px;font-family:'Syne',sans-serif;font-size:10rem;font-weight:800;color:rgba(108,99,255,0.05);line-height:1;pointer-events:none;}
+.bm-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;}
+.bm-value{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;line-height:1;color:var(--purple);margin-bottom:0.4rem;}
+.bm-sub{font-size:0.88rem;color:var(--muted);line-height:1.65;}
+.bm-sub strong{color:var(--white);font-weight:600;}
+.verdict{padding:1rem 1.25rem;border-left:3px solid var(--yellow);background:rgba(255,209,102,0.07);border-radius:0 4px 4px 0;font-size:0.85rem;line-height:1.7;}
+.verdict.good{border-color:var(--green);background:rgba(79,255,176,0.07);}
+.verdict.bad{border-color:var(--red);background:rgba(255,92,124,0.07);}
+.verdict strong{font-weight:700;}
+.section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.6rem;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
+.bar-chart{display:flex;flex-direction:column;gap:0.65rem;}
+.bar-row{display:grid;grid-template-columns:110px 1fr 70px;align-items:center;gap:0.75rem;}
+.bar-label{font-size:0.78rem;font-weight:600;text-align:right;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bar-track{height:8px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;transition:width 0.5s ease;}
+.bar-value{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;}
+.breakdown-wrap{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.breakdown-head{display:grid;grid-template-columns:1fr 85px 85px 80px;padding:0.6rem 1.1rem;background:rgba(108,99,255,0.1);color:var(--muted);font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;gap:0.5rem;}
+.breakdown-row{display:grid;grid-template-columns:1fr 85px 85px 80px;padding:0.85rem 1.1rem;border-top:1px solid var(--border-light);align-items:center;gap:0.5rem;transition:background 0.15s;}
+.breakdown-row:hover{background:rgba(108,99,255,0.05);}
+.bdr-source{display:flex;align-items:center;gap:0.6rem;}
+.bdr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.bdr-name{font-size:0.85rem;font-weight:600;}
+.bdr-cell{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;}
+.roi-pill{display:inline-block;font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:800;padding:0.2rem 0.55rem;border-radius:3px;}
+.roi-great{background:rgba(79,255,176,0.12);color:var(--green);}
+.roi-ok{background:rgba(255,209,102,0.12);color:var(--yellow);}
+.roi-bad{background:rgba(255,92,124,0.1);color:var(--red);}
+.takeaway-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.takeaway-card{background:var(--sidebar);padding:1.25rem;}
+.ta-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+.ta-value{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;line-height:1;margin-bottom:0.4rem;}
+.ta-insight{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.ta-insight strong{color:var(--white);font-weight:600;}
+.next-steps-wrap{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.ns-header{background:var(--gradient);padding:0.9rem 1.4rem;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.04em;color:white;}
+.ns-body{display:grid;grid-template-columns:repeat(3,1fr);}
+.ns-item{padding:1.1rem 1.25rem;border-right:1px solid var(--border-light);display:flex;flex-direction:column;gap:0.4rem;background:var(--sidebar);}
+.ns-item:last-child{border-right:none;}
+.ns-num{width:24px;height:24px;border-radius:4px;background:rgba(108,99,255,0.2);color:var(--purple);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;}
+.ns-title{font-weight:700;font-size:0.82rem;line-height:1.35;}
+.ns-body-text{font-size:0.75rem;color:var(--muted);line-height:1.6;}
+.zoek-cta-embed{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+.zce-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.3rem;}
+.zce-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
+.zce-sub{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.zce-sub strong{color:var(--white);}
+.zce-btn{background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.4rem;border-radius:4px;font-size:0.85rem;font-weight:700;white-space:nowrap;transition:all 0.2s;box-shadow:0 4px 16px rgba(108,99,255,0.3);display:inline-block;}
+.zce-btn:hover{box-shadow:0 6px 24px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.btn-row{display:flex;gap:0.75rem;}
+.btn-reset{padding:0.65rem 1.4rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
+.btn-reset:hover{border-color:var(--red);color:var(--red);}
+.benchmarks-section{background:var(--sidebar);padding:4rem 2.5rem;border-top:1px solid var(--border);}
+.bench-title{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:0.5rem;}
+.bench-sub{font-size:0.88rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.7;max-width:580px;}
+.bench-sub strong{color:var(--white);}
+.bench-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.bench-card{background:var(--navy);padding:1.4rem;}
+.bench-card-industry{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem;}
+.bench-card-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.85rem;}
+.bench-range{display:flex;align-items:baseline;gap:0.3rem;margin-bottom:0.3rem;}
+.bench-range-val{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple);}
+.bench-range-label{font-size:0.72rem;color:var(--muted);}
+.bench-note{font-size:0.72rem;color:var(--muted);line-height:1.5;}
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.footer-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.footer-logo-mark{width:24px;height:24px;border-radius:3px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:800;color:white;}
+.footer-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.82rem;}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.15s;}
+.footer-link:hover{color:var(--white);}
+@media(max-width:900px){nav{padding:0.85rem 1rem;}.nav-links{display:none;}.page-header{grid-template-columns:1fr;}.header-left{border-right:none;border-bottom:1px solid var(--border);padding:2.5rem 1.5rem;}.tool-layout{grid-template-columns:1fr;}.inputs-panel{border-right:none;border-bottom:1px solid var(--border);}.results-panel{padding:1.5rem;}.breakdown-head{grid-template-columns:1fr 70px 65px;}.breakdown-row{grid-template-columns:1fr 70px 65px;}.breakdown-head>*:nth-child(4),.breakdown-row>*:nth-child(4){display:none;}.ns-body{grid-template-columns:1fr;}.ns-item{border-right:none;border-bottom:1px solid var(--border-light);}.bar-row{grid-template-columns:80px 1fr 56px;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+@media(max-width:480px){.takeaway-grid{grid-template-columns:1fr;}.zoek-cta-embed{flex-direction:column;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="funnel.html">Funnel</a></li><li><a href="calculator.html" class="active">CPL</a></li><li><a href="roi.html">ROI</a></li><li><a href="budget.html">Budget</a></li><li><a href="positioning.html">Positioning</a></li><li><a href="reviews.html">Reputation</a></li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<div class="page-header">
+  <div class="header-left">
+    <div class="page-tag">Tool 02 · Cost Per Lead Calculator</div>
+    <h1 class="page-title">Are you paying too much <span class="accent">for your leads?</span></h1>
+    <p class="page-intro">Most businesses have no idea what they're actually paying per lead — or whether that number is good, bad, or ruinous. <strong>This calculator breaks it down by channel so you know exactly where to cut and where to scale.</strong></p>
+  </div>
+  <div class="header-right">
+    <div class="how-title">How it works</div>
+    <div class="how-step"><div class="how-num">1</div><div class="how-text"><strong>Enter your average client value</strong> — what one new client is worth in revenue.</div></div>
+    <div class="how-step"><div class="how-num">2</div><div class="how-text"><strong>Toggle on your lead sources</strong> and enter monthly spend and lead counts for each.</div></div>
+    <div class="how-step"><div class="how-num">3</div><div class="how-text"><strong>See CPL and ROI by channel</strong> and find out which ones are worth scaling.</div></div>
+  </div>
+</div>
+
+<div class="tool-layout">
+  <div class="inputs-panel">
+    <div class="panel-section">
+      <div class="panel-label">Average client value</div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-bottom:0.5rem">What is one new client worth to you in revenue?</p>
+      <div class="client-val-wrap">
+        <span class="client-val-prefix">$</span>
+        <input class="client-val-input" type="number" id="client-value" placeholder="2500" oninput="recalc()">
+      </div>
+      <p style="font-size:0.68rem;color:var(--muted);margin-top:0.4rem;line-height:1.5">Use average first-transaction value. For recurring clients, consider lifetime value.</p>
+    </div>
+    <div class="panel-section">
+      <div class="panel-label">Lead sources</div>
+      <div id="sources-list"></div>
+      <button class="add-btn" onclick="addCustom()">+ Add a source</button>
+    </div>
+  </div>
+  <div class="results-panel" id="results-panel">
+    <div class="empty-state">
+      <div class="empty-big">$?</div>
+      <p class="empty-text">Enter your client value and at least one lead source with data to see your breakdown.</p>
+    </div>
+  </div>
+</div>
+
+<div class="benchmarks-section">
+  <div class="bench-title">Industry CPL benchmarks</div>
+  <p class="bench-sub">What's a "good" cost per lead depends on your industry and client value. <strong>These are typical ranges Zoek sees across our 50,000+ active clients</strong> — use as a gut-check, not gospel.</p>
+  <div class="bench-grid">
+    <div class="bench-card"><div class="bench-card-industry">Home services</div><div class="bench-card-name">Plumbing / HVAC / Electrical</div><div class="bench-range"><span class="bench-range-val">$30–$80</span><span class="bench-range-label">per lead</span></div><p class="bench-note">High competition on Google. Reviews and referrals are critical differentiators.</p></div>
+    <div class="bench-card"><div class="bench-card-industry">Legal services</div><div class="bench-card-name">Law Firms</div><div class="bench-range"><span class="bench-range-val">$50–$300</span><span class="bench-range-label">per lead</span></div><p class="bench-note">Wide range by practice area. High client LTV justifies the premium.</p></div>
+    <div class="bench-card"><div class="bench-card-industry">Healthcare</div><div class="bench-card-name">Medical / Dental / Clinics</div><div class="bench-range"><span class="bench-range-val">$25–$100</span><span class="bench-range-label">per lead</span></div><p class="bench-note">Patient LTV makes higher CPLs sustainable. Local SEO is highest-ROI channel here.</p></div>
+    <div class="bench-card"><div class="bench-card-industry">Real estate</div><div class="bench-card-name">Agents &amp; Brokerages</div><div class="bench-range"><span class="bench-range-val">$20–$120</span><span class="bench-range-label">per lead</span></div><p class="bench-note">Close rate is the real variable. At 2–5% close, even $100/lead is profitable.</p></div>
+    <div class="bench-card"><div class="bench-card-industry">E-commerce</div><div class="bench-card-name">Online Retail / DTC</div><div class="bench-range"><span class="bench-range-val">$5–$30</span><span class="bench-range-label">per lead</span></div><p class="bench-note">Email capture costs are lower but conversion and retention matter most. Think ROAS.</p></div>
+    <div class="bench-card"><div class="bench-card-industry">B2B / SaaS</div><div class="bench-card-name">Software &amp; Services</div><div class="bench-range"><span class="bench-range-val">$40–$200</span><span class="bench-range-label">per lead</span></div><p class="bench-note">LinkedIn tends to be expensive but high-quality. High LTV contracts justify premium CPLs.</p></div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · Irvine, CA</span>
+</footer>
+
+<script>
+const SOURCES=[{id:1,name:'Website / Organic',color:'#6c63ff',on:true,isWebsite:true,visitors:'',leads:'',spend:''},{id:2,name:'Google Ads',color:'#4285F4',on:true,spend:'',leads:''},{id:3,name:'Facebook Ads',color:'#1877F2',on:true,spend:'',leads:''},{id:4,name:'Instagram',color:'#E1306C',on:false,spend:'',leads:''},{id:5,name:'Word of Mouth',color:'#4fffb0',on:true,spend:'',leads:''},{id:6,name:'Referrals',color:'#ffd166',on:true,spend:'',leads:''}];
+let nextId=7;
+function convRate(v,l){return(v&&l&&v>0)?(l/v)*100:null;}
+function convBadge(r){if(r===null)return'';if(r>=3)return'<span class="conv-badge badge-good">Strong</span>';if(r>=1)return'<span class="conv-badge badge-ok">Okay</span>';return'<span class="conv-badge badge-bad">Fix it</span>';}
+function renderSources(){
+  document.getElementById('sources-list').innerHTML=SOURCES.map(s=>{
+    const cr=s.isWebsite?convRate(parseFloat(s.visitors),parseFloat(s.leads)):null;
+    return`<div class="source-card ${s.on?'on':''}">
+      <div class="source-header" onclick="toggleSrc(${s.id})">
+        <div class="source-header-left"><div class="source-dot" style="background:${s.color}"></div><span class="source-name">${s.name}</span></div>
+        <button class="toggle ${s.on?'on':''}" onclick="event.stopPropagation();toggleSrc(${s.id})"></button>
+      </div>
+      <div class="source-inputs ${s.on?'':'hidden'}">
+        ${s.isWebsite?`<div class="website-box"><div class="website-box-title">Website traffic</div><div class="input-row"><div class="input-group"><label>Monthly visitors</label><div class="input-wrap"><span class="input-prefix">#</span><input type="number" placeholder="1000" value="${s.visitors||''}" oninput="updateSrc(${s.id},'visitors',this.value)"></div></div><div class="input-group"><label>Leads from site</label><div class="input-wrap"><span class="input-prefix">#</span><input type="number" placeholder="20" value="${s.leads||''}" oninput="updateSrc(${s.id},'leads',this.value)"></div></div></div>${cr!==null?`<div class="conv-display"><div><div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px">Conversion rate</div><div class="conv-num">${cr.toFixed(2)}%</div></div>${convBadge(cr)}</div><div class="bench-strip"><div class="bench-cell"><div class="bench-cell-label good">Strong</div><div class="bench-cell-range">3%+</div><div class="bench-cell-note">Top site</div></div><div class="bench-cell"><div class="bench-cell-label ok">Okay</div><div class="bench-cell-range">1–3%</div><div class="bench-cell-note">Average</div></div><div class="bench-cell"><div class="bench-cell-label bad">Fix it</div><div class="bench-cell-range">&lt;1%</div><div class="bench-cell-note">Redesign CTA</div></div></div>`:''}</div><div class="input-group"><label>Monthly site cost</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" placeholder="200" value="${s.spend||''}" oninput="updateSrc(${s.id},'spend',this.value)"></div></div>`:`<div class="input-row"><div class="input-group"><label>Monthly spend</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" placeholder="500" value="${s.spend||''}" oninput="updateSrc(${s.id},'spend',this.value)"></div></div><div class="input-group"><label>Leads per month</label><div class="input-wrap"><span class="input-prefix">#</span><input type="number" placeholder="20" value="${s.leads||''}" oninput="updateSrc(${s.id},'leads',this.value)"></div></div></div>`}
+      </div>
+    </div>`;
+  }).join('');
+}
+function toggleSrc(id){const s=SOURCES.find(s=>s.id===id);if(s){s.on=!s.on;renderSources();recalc();}}
+function updateSrc(id,field,val){const s=SOURCES.find(s=>s.id===id);if(s){s[field]=val;if(field==='visitors'||field==='leads'){const ws=SOURCES.find(s=>s.isWebsite);if(ws){const cr=convRate(parseFloat(ws.visitors),parseFloat(ws.leads));const cw=document.querySelector('.conv-display');if(cr!==null&&cw){cw.querySelector('.conv-num').textContent=cr.toFixed(2)+'%';const b=convBadge(cr);if(b&&cw.querySelector('.conv-badge'))cw.querySelector('.conv-badge').outerHTML=b;}}}recalc();}}
+function addCustom(){const name=prompt('Name your lead source:');if(!name||!name.trim())return;const colors=['#a78bfa','#f472b6','#34d399','#fb923c','#38bdf8'];SOURCES.push({id:nextId++,name:name.trim(),color:colors[SOURCES.length%colors.length],on:true,spend:'',leads:''});renderSources();recalc();}
+function recalc(){
+  const clientVal=parseFloat(document.getElementById('client-value').value)||0;
+  const active=SOURCES.filter(s=>s.on&&(parseFloat(s.leads)||0)>0);
+  const panel=document.getElementById('results-panel');
+  if(!active.length||!clientVal){panel.innerHTML='<div class="empty-state"><div class="empty-big">$?</div><p class="empty-text">Enter your client value and at least one active source with lead counts to see results.</p></div>';return;}
+  const computed=active.map(s=>{const leads=parseFloat(s.leads)||0;const spend=parseFloat(s.spend)||0;const cpl=spend>0?spend/leads:0;const roi=cpl>0?clientVal/cpl:null;const cr=s.isWebsite?convRate(parseFloat(s.visitors),leads):null;return{...s,leads,spend,cpl,roi,cr};});
+  const totalLeads=computed.reduce((a,b)=>a+b.leads,0);
+  const totalSpend=computed.reduce((a,b)=>a+b.spend,0);
+  const paidSources=computed.filter(s=>s.cpl>0);
+  const paidLeads=paidSources.reduce((a,b)=>a+b.leads,0);
+  const avgCpl=paidLeads>0?totalSpend/paidLeads:0;
+  const avgRoi=avgCpl>0?clientVal/avgCpl:null;
+  const maxCpl=Math.max(...computed.map(c=>c.cpl),1);
+  const bestPaid=[...paidSources].sort((a,b)=>a.cpl-b.cpl)[0];
+  const worstPaid=[...paidSources].sort((a,b)=>b.cpl-a.cpl)[0];
+  const freeSources=computed.filter(s=>s.cpl===0);
+  const websiteSrc=computed.find(s=>s.isWebsite&&s.cr!==null);
+  let verdictClass='',verdictText='';
+  if(avgRoi!==null){if(avgRoi>=10){verdictClass='good';verdictText=`<strong>Your marketing math is working.</strong> You're getting roughly ${avgRoi.toFixed(1)}x back for every dollar spent. That's a strong signal to scale your best channel.`;}else if(avgRoi>=4){verdictText=`<strong>You're profitable — real room to improve.</strong> A ${avgRoi.toFixed(1)}x return is solid. Find your cheapest source and squeeze more volume from it before spending more elsewhere.`;}else{verdictClass='bad';verdictText=`<strong>The math is tight right now.</strong> At $${avgCpl.toFixed(0)}/lead and a $${clientVal.toLocaleString()} client value, margins are thin. Either lower CPL or improve close rate — Zoek can help with both.`;}}else{verdictClass='good';verdictText=`<strong>You're running on organic leads</strong> — low cost, strong margin. The risk: it's hard to scale. Consider which paid channel makes sense to test when you want more volume.`;}
+  const steps=[];
+  if(bestPaid&&worstPaid&&bestPaid.id!==worstPaid.id)steps.push({title:`Double down on ${bestPaid.name}`,body:`At $${bestPaid.cpl.toFixed(0)}/lead it's your cheapest paid source. Before spending more anywhere else, find out how much more volume you can extract here.`});
+  if(worstPaid&&worstPaid.roi!==null&&worstPaid.roi<3)steps.push({title:`Audit your ${worstPaid.name} spend`,body:`At $${worstPaid.cpl.toFixed(0)}/lead and ${worstPaid.roi.toFixed(1)}x return, the math is tight. Improve the creative or redirect that budget to what's working.`});
+  if(websiteSrc&&websiteSrc.cr<2)steps.push({title:'Fix your website conversion rate',body:`Your site converts at ${websiteSrc.cr.toFixed(1)}%. Industry average is 1–3%. Zoek has redesigned 132,000+ sites — a clearer CTA and faster load time is usually the fix.`});
+  if(freeSources.length>0&&freeSources.reduce((a,b)=>a+b.leads,0)/totalLeads>0.5)steps.push({title:'Systematize your free sources',body:`More than half your leads come free. That's great but fragile. Build a referral program or review system to keep this channel growing.`});
+  if(steps.length<3)steps.push({title:'Track cost per closed client',body:`CPL is step one. Cost per closed client is where decisions really happen. Use the funnel tool to map your close rate and connect the full picture.`});
+  if(steps.length<3)steps.push({title:'Factor in lifetime value',body:`If clients return, refer others, or buy more over time, your real ROI is higher than shown. True LTV changes every calculation on this page.`});
+  panel.innerHTML=`
+    <div class="big-moment"><div class="bm-bg">$</div><div class="bm-label">Your blended cost per lead</div><div class="bm-value">${avgCpl>0?'$'+avgCpl.toFixed(2)+' / lead':totalLeads+' free leads / mo'}</div><div class="bm-sub">At a <strong>$${clientVal.toLocaleString()}</strong> client value${avgRoi?', that\'s a <strong>'+avgRoi.toFixed(1)+'x return</strong> on every lead that closes':' — organic leads are your most valuable asset right now'}.</div></div>
+    <div class="verdict ${verdictClass}">${verdictText}</div>
+    <div><div class="section-label">Cost per lead by source</div><div class="bar-chart">${computed.filter(s=>s.cpl>0).map(s=>`<div class="bar-row"><span class="bar-label">${s.name}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round((s.cpl/maxCpl)*100)}%;background:${s.color}"></div></div><span class="bar-value">$${s.cpl.toFixed(0)}</span></div>`).join('')}${computed.filter(s=>s.cpl===0).map(s=>`<div class="bar-row"><span class="bar-label">${s.name}</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:${s.color};opacity:0.2"></div></div><span class="bar-value" style="color:var(--green);font-size:0.82rem">Free</span></div>`).join('')}</div></div>
+    <div class="breakdown-wrap"><div class="breakdown-head"><span>Source</span><span>CPL</span><span>ROI</span><span>Spend/mo</span></div>${computed.map(s=>{const rc=s.roi===null?'roi-great':s.roi>=5?'roi-great':s.roi>=2?'roi-ok':'roi-bad';const rl=s.roi===null?'Free':s.roi.toFixed(1)+'x';return`<div class="breakdown-row"><div class="bdr-source"><div class="bdr-dot" style="background:${s.color}"></div><span class="bdr-name">${s.name}</span></div><div class="bdr-cell">${s.cpl>0?'$'+s.cpl.toFixed(0):'—'}</div><div><span class="roi-pill ${rc}">${rl}</span></div><div class="bdr-cell">${s.spend>0?'$'+s.spend.toLocaleString():'Free'}</div></div>`;}).join('')}</div>
+    <div class="takeaway-grid"><div class="takeaway-card"><div class="ta-label">Total leads / month</div><div class="ta-value">${totalLeads}</div><div class="ta-insight">Across ${active.length} active source${active.length!==1?'s':''}. ${totalSpend>0?'You\'re spending <strong>$'+totalSpend.toLocaleString()+'</strong> to get them.':'All organic — no paid spend recorded.'}</div></div><div class="takeaway-card"><div class="ta-label">Potential monthly revenue</div><div class="ta-value" style="color:var(--green)">$${(totalLeads*clientVal).toLocaleString()}</div><div class="ta-insight">If every lead converted. Real close rates are lower — but this is the <strong>size of the opportunity</strong> in your pipeline.</div></div></div>
+    <div class="next-steps-wrap"><div class="ns-header">What to do with this</div><div class="ns-body">${steps.slice(0,3).map((s,i)=>`<div class="ns-item"><div class="ns-num">${i+1}</div><div class="ns-title">${s.title}</div><div class="ns-body-text">${s.body}</div></div>`).join('')}</div></div>
+    <div class="zoek-cta-embed"><div><div class="zce-label">Ready to lower your CPL?</div><div class="zce-title">Let Zoek optimize your ad spend</div><div class="zce-sub">Our team manages campaigns across Google, Meta, and more for <strong>50,000+ active clients</strong>. We'll find where you're overpaying and fix it.</div></div><a href="https://calendly.com/expert-sales" target="_blank" class="zce-btn">Book a Free Strategy Call →</a></div>
+    <div class="btn-row"><button class="btn-reset" onclick="resetAll()">Reset all inputs</button></div>`;
+}
+function resetAll(){SOURCES.forEach(s=>{s.spend='';s.leads='';if(s.isWebsite)s.visitors='';});document.getElementById('client-value').value='';renderSources();recalc();}
+renderSources();recalc();
+</script>
+<script src="cta.js"></script>
+</body>
+</html>

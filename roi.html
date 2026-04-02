@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing ROI Calculator | Zoek Marketing Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo-mark{width:30px;height:30px;border-radius:5px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:800;color:white;}
+.nav-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;color:var(--white);}
+.nav-logo-text span{color:var(--purple);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--purple);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
+.page-intro strong{color:var(--white);font-weight:600;}
+.header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1.25rem;}
+.how-title{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.2rem;}
+.how-step{display:flex;gap:1rem;align-items:flex-start;}
+.how-num{width:26px;height:26px;border-radius:4px;background:var(--gradient);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;color:white;}
+.how-text{font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.6;padding-top:3px;}
+.how-text strong{color:var(--white);font-weight:600;}
+.tool-layout{display:grid;grid-template-columns:320px 1fr;border-bottom:1px solid var(--border);min-height:80vh;}
+.inputs-panel{background:var(--sidebar);border-right:1px solid var(--border);overflow-y:auto;padding:1.25rem;}
+.panel-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.5rem;}
+.panel-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
+.input-group{margin-bottom:1rem;}
+.input-group label{display:block;font-size:0.72rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;letter-spacing:0.04em;}
+.input-wrap{position:relative;}
+.input-prefix{position:absolute;left:0.65rem;top:50%;transform:translateY(-50%);font-size:0.85rem;color:var(--muted);pointer-events:none;font-weight:600;}
+.tool-input{width:100%;padding:0.55rem 0.65rem 0.55rem 1.5rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.95rem;font-weight:600;outline:none;transition:border-color 0.2s;-moz-appearance:textfield;}
+.tool-input::-webkit-outer-spin-button,.tool-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+.tool-input:focus{border-color:var(--purple);}
+.tool-input::placeholder{color:rgba(255,255,255,0.15);}
+.industry-pills{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.25rem;}
+.industry-pill{padding:0.3rem 0.75rem;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.72rem;font-weight:600;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.industry-pill:hover{border-color:var(--purple);color:var(--white);}
+.industry-pill.active{background:var(--purple);border-color:var(--purple);color:white;}
+.slider-wrap{margin-bottom:1rem;}
+.slider-row{display:flex;align-items:center;gap:0.75rem;}
+.slider-row input[type=range]{flex:1;accent-color:var(--purple);}
+.slider-val{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--purple);min-width:40px;text-align:right;}
+.bench-hint{font-size:0.7rem;margin-top:0.3rem;padding:0.25rem 0.6rem;border-radius:3px;font-weight:600;}
+.bench-hint.good{background:rgba(79,255,176,0.1);color:var(--green);}
+.bench-hint.ok{background:rgba(255,209,102,0.1);color:var(--yellow);}
+.bench-hint.bad{background:rgba(255,92,124,0.1);color:var(--red);}
+.results-panel{padding:2rem;display:flex;flex-direction:column;gap:1.5rem;overflow-y:auto;}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;color:var(--muted);text-align:center;gap:1rem;}
+.empty-big{font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;color:rgba(108,99,255,0.15);line-height:1;}
+.grade-hero{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:8px;padding:2rem;display:flex;align-items:center;gap:2rem;position:relative;overflow:hidden;}
+.grade-bg{position:absolute;right:-10px;top:-20px;font-family:'Syne',sans-serif;font-size:10rem;font-weight:800;opacity:0.05;line-height:1;pointer-events:none;}
+.grade-letter{font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;line-height:1;flex-shrink:0;width:72px;height:72px;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.grade-A{background:rgba(79,255,176,0.15);color:var(--green);}
+.grade-B{background:rgba(79,255,176,0.1);color:#7dffc5;}
+.grade-C{background:rgba(255,209,102,0.12);color:var(--yellow);}
+.grade-D{background:rgba(255,92,124,0.1);color:#ff8fa3;}
+.grade-F{background:rgba(255,92,124,0.15);color:var(--red);}
+.grade-eyebrow{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+.grade-headline{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;line-height:1.2;margin-bottom:0.5rem;}
+.grade-sub{font-size:0.85rem;color:var(--muted);line-height:1.65;}
+.grade-sub strong{color:var(--white);font-weight:600;}
+.verdict{padding:1rem 1.25rem;border-left:3px solid var(--yellow);background:rgba(255,209,102,0.07);border-radius:0 4px 4px 0;font-size:0.85rem;line-height:1.7;}
+.verdict.A,.verdict.B{border-color:var(--green);background:rgba(79,255,176,0.07);}
+.verdict.D,.verdict.F{border-color:var(--red);background:rgba(255,92,124,0.07);}
+.verdict strong{font-weight:700;}
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.metric-box{background:var(--sidebar);padding:1.1rem 1.25rem;}
+.metric-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+.metric-val{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;line-height:1;margin-bottom:0.25rem;}
+.metric-val.good{color:var(--green);}.metric-val.warn{color:var(--yellow);}.metric-val.bad{color:var(--red);}
+.metric-sub{font-size:0.7rem;color:var(--muted);line-height:1.45;}
+.budget-rec{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.budget-rec-header{background:rgba(108,99,255,0.1);padding:0.9rem 1.25rem;display:flex;align-items:center;justify-content:space-between;}
+.budget-rec-title{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:800;}
+.budget-rec-badge{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);background:rgba(108,99,255,0.15);padding:0.2rem 0.6rem;border-radius:3px;}
+.budget-rec-body{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-light);}
+.budget-rec-body>div{background:var(--sidebar);padding:1.25rem;}
+.budget-col-title{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;}
+.budget-row{display:flex;justify-content:space-between;align-items:center;padding:0.35rem 0;border-bottom:1px solid var(--border-light);font-size:0.82rem;}
+.budget-row:last-child{border-bottom:none;}
+.budget-row-label{color:var(--muted);}
+.budget-row-val{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;}
+.budget-row-val.highlight{color:var(--green);}
+.budget-row-val.low{color:var(--yellow);}
+.bench-compare{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.bench-compare-head{display:grid;grid-template-columns:1fr 100px 130px 90px;padding:0.6rem 1.1rem;background:rgba(108,99,255,0.1);font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);gap:0.5rem;}
+.bench-compare-row{display:grid;grid-template-columns:1fr 100px 130px 90px;padding:0.85rem 1.1rem;border-top:1px solid var(--border-light);align-items:center;gap:0.5rem;transition:background 0.15s;}
+.bench-compare-row:hover{background:rgba(108,99,255,0.04);}
+.bcr-metric{font-weight:600;font-size:0.85rem;}
+.bcr-yours{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;}
+.bcr-industry{font-size:0.8rem;color:var(--muted);}
+.bcr-status{font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:3px;}
+.s-good{background:rgba(79,255,176,0.1);color:var(--green);}
+.s-ok{background:rgba(255,209,102,0.1);color:var(--yellow);}
+.s-bad{background:rgba(255,92,124,0.1);color:var(--red);}
+.ns-wrap{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.ns-head{background:var(--gradient);padding:0.9rem 1.4rem;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:white;}
+.ns-body{display:grid;grid-template-columns:repeat(3,1fr);}
+.ns-item{padding:1.1rem 1.25rem;border-right:1px solid var(--border-light);display:flex;flex-direction:column;gap:0.4rem;background:var(--sidebar);}
+.ns-item:last-child{border-right:none;}
+.ns-num{width:24px;height:24px;border-radius:4px;background:rgba(108,99,255,0.2);color:var(--purple);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;}
+.ns-title{font-weight:700;font-size:0.82rem;line-height:1.35;}
+.ns-desc{font-size:0.75rem;color:var(--muted);line-height:1.6;}
+.zoek-cta-embed{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+.zce-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.3rem;}
+.zce-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
+.zce-sub{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.zce-sub strong{color:var(--white);}
+.zce-btn{background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.4rem;border-radius:4px;font-size:0.85rem;font-weight:700;white-space:nowrap;transition:all 0.2s;box-shadow:0 4px 16px rgba(108,99,255,0.3);display:inline-block;}
+.zce-btn:hover{box-shadow:0 6px 24px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.btn-row{display:flex;gap:0.75rem;}
+.btn-reset{padding:0.65rem 1.4rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
+.btn-reset:hover{border-color:var(--red);color:var(--red);}
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.footer-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.footer-logo-mark{width:24px;height:24px;border-radius:3px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:800;color:white;}
+.footer-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.82rem;}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.15s;}
+.footer-link:hover{color:var(--white);}
+@media(max-width:900px){nav{padding:0.85rem 1rem;}.nav-links{display:none;}.page-header{grid-template-columns:1fr;}.header-left{border-right:none;border-bottom:1px solid var(--border);padding:2.5rem 1.5rem;}.tool-layout{grid-template-columns:1fr;}.inputs-panel{border-right:none;border-bottom:1px solid var(--border);}.results-panel{padding:1.5rem;}.metrics-grid{grid-template-columns:1fr 1fr;}.ns-body{grid-template-columns:1fr;}.ns-item{border-right:none;border-bottom:1px solid var(--border-light);}.bench-compare-head,.bench-compare-row{grid-template-columns:1fr 80px 80px;}.bench-compare-head>*:nth-child(4),.bench-compare-row>*:nth-child(4){display:none;}.grade-hero{flex-direction:column;gap:1rem;}.budget-rec-body{grid-template-columns:1fr;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+@media(max-width:480px){.metrics-grid{grid-template-columns:1fr;}.zoek-cta-embed{flex-direction:column;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="funnel.html">Funnel</a></li><li><a href="calculator.html">CPL</a></li><li><a href="roi.html" class="active">ROI</a></li><li><a href="budget.html">Budget</a></li><li><a href="positioning.html">Positioning</a></li><li><a href="reviews.html">Reputation</a></li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+<div class="page-header">
+  <div class="header-left">
+    <div class="page-tag">Tool 03 · Marketing ROI Calculator</div>
+    <h1 class="page-title">Is your marketing <span class="accent">actually paying off?</span></h1>
+    <p class="page-intro">Most businesses don't know their marketing ROI — they guess. <strong>This calculator gives you a letter grade, a benchmark comparison, and a recommended budget based on what businesses like yours actually spend.</strong></p>
+  </div>
+  <div class="header-right">
+    <div class="how-title">What you get</div>
+    <div class="how-step"><div class="how-num">A</div><div class="how-text"><strong>A letter grade</strong> on your current marketing ROI. A through F. No sugarcoating.</div></div>
+    <div class="how-step"><div class="how-num">$</div><div class="how-text"><strong>A recommended budget</strong> based on your revenue and what your industry actually spends.</div></div>
+    <div class="how-step"><div class="how-num">≡</div><div class="how-text"><strong>Industry benchmarks</strong> so you know if you're ahead, behind, or wasting money differently than everyone else.</div></div>
+  </div>
+</div>
+
+<div class="tool-layout">
+  <div class="inputs-panel">
+    <div class="panel-label">Your industry</div>
+    <div class="industry-pills" id="industry-pills"></div>
+    <div class="panel-label">Your numbers</div>
+    <div class="input-group">
+      <label>Monthly revenue</label>
+      <div class="input-wrap"><span class="input-prefix">$</span><input class="tool-input" type="number" id="inp-revenue" placeholder="25000" oninput="recalc()"></div>
+    </div>
+    <div class="input-group">
+      <label>Average client value (ACV)</label>
+      <div class="input-wrap"><span class="input-prefix">$</span><input class="tool-input" type="number" id="inp-acv" placeholder="1500" oninput="recalc()"></div>
+    </div>
+    <div class="input-group">
+      <label>New clients from marketing / month</label>
+      <div class="input-wrap"><span class="input-prefix">#</span><input class="tool-input" type="number" id="inp-newclients" placeholder="10" oninput="recalc()"></div>
+    </div>
+    <div class="input-group">
+      <label>Monthly marketing spend</label>
+      <div class="input-wrap"><span class="input-prefix">$</span><input class="tool-input" type="number" id="inp-spend" placeholder="2000" oninput="recalc()"></div>
+    </div>
+    <div class="panel-label" style="margin-top:0.5rem">Conversion metrics</div>
+    <div class="slider-wrap">
+      <label style="font-size:0.72rem;font-weight:600;color:var(--muted);letter-spacing:0.04em;display:block;margin-bottom:0.35rem">Close rate</label>
+      <div class="slider-row">
+        <input type="range" id="inp-close" min="1" max="100" value="25" step="1" oninput="document.getElementById('close-val').textContent=this.value+'%';updateBenchHints();recalc()">
+        <span class="slider-val" id="close-val">25%</span>
+      </div>
+      <span class="bench-hint" id="close-bench">Loading...</span>
+    </div>
+    <div class="slider-wrap">
+      <label style="font-size:0.72rem;font-weight:600;color:var(--muted);letter-spacing:0.04em;display:block;margin-bottom:0.35rem">Client retention rate</label>
+      <div class="slider-row">
+        <input type="range" id="inp-retain" min="1" max="100" value="60" step="1" oninput="document.getElementById('retain-val').textContent=this.value+'%';updateBenchHints();recalc()">
+        <span class="slider-val" id="retain-val">60%</span>
+      </div>
+      <span class="bench-hint" id="retain-bench">Loading...</span>
+    </div>
+  </div>
+  <div class="results-panel" id="results-panel">
+    <div class="empty-state">
+      <div class="empty-big">?</div>
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;max-width:300px">Fill in your numbers on the left and we'll tell you exactly where you stand.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · Irvine, CA</span>
+</footer>
+
+<script>
+const INDUSTRIES={general:{label:'General',budgetPct:[5,12],closeRate:[20,35],retention:[55,75],cac:[50,200],roiGood:5,roiOk:2.5},fitness:{label:'Fitness / Wellness',budgetPct:[7,15],closeRate:[25,45],retention:[60,80],cac:[40,120],roiGood:6,roiOk:3},home:{label:'Home Services',budgetPct:[5,10],closeRate:[30,55],retention:[45,70],cac:[80,300],roiGood:4,roiOk:2},restaurant:{label:'Restaurant / Food',budgetPct:[3,9],closeRate:[15,30],retention:[30,60],cac:[10,50],roiGood:4,roiOk:2},health:{label:'Health / Med Spa',budgetPct:[8,18],closeRate:[30,55],retention:[65,85],cac:[100,350],roiGood:6,roiOk:3},realestate:{label:'Real Estate',budgetPct:[10,20],closeRate:[10,25],retention:[20,45],cac:[500,2000],roiGood:5,roiOk:2.5}};
+let activeIndustry='general';
+function initPills(){document.getElementById('industry-pills').innerHTML=Object.entries(INDUSTRIES).map(([k,v])=>`<button class="industry-pill ${k===activeIndustry?'active':''}" onclick="setIndustry('${k}')">${v.label}</button>`).join('');}
+function setIndustry(k){activeIndustry=k;initPills();updateBenchHints();recalc();}
+function updateBenchHints(){
+  const ind=INDUSTRIES[activeIndustry];
+  const cv=parseInt(document.getElementById('inp-close').value)||25;
+  const rv=parseInt(document.getElementById('inp-retain').value)||60;
+  const cb=document.getElementById('close-bench');
+  cb.textContent=`${ind.label}: ${ind.closeRate[0]}–${ind.closeRate[1]}%`;
+  cb.className='bench-hint '+(cv>=ind.closeRate[1]?'good':cv>=ind.closeRate[0]?'ok':'bad');
+  const rb=document.getElementById('retain-bench');
+  rb.textContent=`${ind.label}: ${ind.retention[0]}–${ind.retention[1]}%`;
+  rb.className='bench-hint '+(rv>=ind.retention[1]?'good':rv>=ind.retention[0]?'ok':'bad');
+}
+function getGrade(roi,ind){if(roi>=ind.roiGood*1.5)return{letter:'A',label:'Crushing it'};if(roi>=ind.roiGood)return{letter:'B',label:'Solid work'};if(roi>=ind.roiOk)return{letter:'C',label:'Room to grow'};if(roi>=1)return{letter:'D',label:'Barely breaking even'};return{letter:'F',label:'Losing money'};}
+function getVerdict(g,roi,spend,rLow,rHigh,revenue,cac,acv,closeRate,ind){
+  const over=spend>rHigh,under=spend<rLow;
+  const v={
+    A:`<strong>Your marketing is genuinely working.</strong> A ${roi.toFixed(1)}x return means every dollar spent brings back ${roi.toFixed(1)} dollars. The question now: can you scale without breaking what's working? Before doubling the budget, make sure operations can handle the volume.`,
+    B:`<strong>You're in good shape but not maximizing it yet.</strong> A ${roi.toFixed(1)}x return is solid. ${under?`You're underspending for your revenue — ${ind.label} businesses typically invest ${ind.budgetPct[0]}–${ind.budgetPct[1]}% of revenue. There's room to grow faster.`:over?`Your spend is on the high side. Make sure you know which channels drive the most return before adding budget.`:`Your spend is in the right range. Improving close rate and retention will push this toward an A.`}`,
+    C:`<strong>The math works but barely.</strong> ${roi.toFixed(1)}x is positive but thin. ${over?`You're spending more than typical for ${ind.label}. Either tighten campaigns or improve lead conversion.`:`At a ${closeRate}% close rate, you're leaving money on the table before marketing even matters. Conversion fixes move this faster than any ad change.`}`,
+    D:`<strong>You're close to breaking even — not a good place to be.</strong> At ${roi.toFixed(1)}x you're getting something back but not enough to justify the risk. Fix one thing: lower CPL, improve close rate, or increase client value.`,
+    F:`<strong>Your marketing is costing more than it's making.</strong> That's fixable — but requires honesty about where the breakdown is. Is it traffic that doesn't convert? Leads that don't close? Use the funnel tool to map exactly where you're losing people.`,
+  };
+  return v[g.letter];
+}
+function recalc(){
+  const revenue=parseFloat(document.getElementById('inp-revenue').value)||0;
+  const acv=parseFloat(document.getElementById('inp-acv').value)||0;
+  const newClients=parseFloat(document.getElementById('inp-newclients').value)||0;
+  const spend=parseFloat(document.getElementById('inp-spend').value)||0;
+  const closeRate=parseInt(document.getElementById('inp-close').value)||25;
+  const retention=parseInt(document.getElementById('inp-retain').value)||60;
+  updateBenchHints();
+  const panel=document.getElementById('results-panel');
+  if(!revenue||!acv||!newClients||!spend){panel.innerHTML='<div class="empty-state"><div class="empty-big">?</div><p style="font-size:0.9rem;color:var(--muted);line-height:1.65;max-width:300px">Fill in your numbers on the left to see your ROI grade and analysis.</p></div>';return;}
+  const ind=INDUSTRIES[activeIndustry];
+  const revFromMkt=newClients*acv;
+  const roi=spend>0?revFromMkt/spend:0;
+  const cac=newClients>0?spend/newClients:0;
+  const spendPct=revenue>0?(spend/revenue)*100:0;
+  const rLow=revenue*(ind.budgetPct[0]/100);
+  const rHigh=revenue*(ind.budgetPct[1]/100);
+  const ltv=acv*(1+(retention/100));
+  const ltvCac=cac>0?ltv/cac:0;
+  const grade=getGrade(roi,ind);
+  const verdict=getVerdict(grade,roi,spend,rLow,rHigh,revenue,cac,acv,closeRate,ind);
+  const spendStatus=spend<rLow?'underspending':spend>rHigh?'overspending':'on target';
+  const spendDiff=spend<rLow?rLow-spend:spend-rHigh;
+  const steps=[];
+  if(closeRate<ind.closeRate[0])steps.push({title:'Fix your close rate first',desc:`At ${closeRate}% you're below the ${ind.label} average of ${ind.closeRate[0]}–${ind.closeRate[1]}%. Improving this moves your ROI more than any budget change.`});
+  if(retention<ind.retention[0])steps.push({title:'Retention is leaking money',desc:`At ${retention}% you're churning more than you should. A 10% lift in retention typically costs less than acquiring the same number of new clients.`});
+  if(spendStatus==='underspending')steps.push({title:'You can afford to spend more',desc:`${ind.label} businesses invest ${ind.budgetPct[0]}–${ind.budgetPct[1]}% of revenue in marketing. You're at ${spendPct.toFixed(1)}%. There's room to grow faster.`});
+  if(spendStatus==='overspending')steps.push({title:'Audit spend before adding more',desc:`You're above the typical ${ind.label} range. Know which channels are earning their keep before increasing budget.`});
+  if(ltvCac<3)steps.push({title:'Improve LTV to CAC ratio',desc:`Your LTV:CAC is ${ltvCac.toFixed(1)}x. Goal is 3x or higher. Increasing retention or upsells is the fastest path.`});
+  if(steps.length<3)steps.push({title:'Track cost per closed client',desc:'You know CPL — now track cost per closed client. That number drives every real marketing decision.'});
+  if(steps.length<3)steps.push({title:'Test one thing at a time',desc:'Change one variable — creative, offer, or landing page. Never all three at once or you won\'t know what moved the needle.'});
+  const benchRows=[
+    {metric:'Marketing spend',yours:spendPct.toFixed(1)+'%',industry:`${ind.budgetPct[0]}–${ind.budgetPct[1]}%`,status:spendStatus==='on target'?'good':spendStatus==='underspending'?'ok':'bad',statusLabel:spendStatus==='on target'?'On target':spendStatus==='underspending'?'Under':'Over'},
+    {metric:'Close rate',yours:closeRate+'%',industry:`${ind.closeRate[0]}–${ind.closeRate[1]}%`,status:closeRate>=ind.closeRate[1]?'good':closeRate>=ind.closeRate[0]?'ok':'bad',statusLabel:closeRate>=ind.closeRate[1]?'Above avg':closeRate>=ind.closeRate[0]?'Average':'Below avg'},
+    {metric:'Retention',yours:retention+'%',industry:`${ind.retention[0]}–${ind.retention[1]}%`,status:retention>=ind.retention[1]?'good':retention>=ind.retention[0]?'ok':'bad',statusLabel:retention>=ind.retention[1]?'Above avg':retention>=ind.retention[0]?'Average':'Below avg'},
+    {metric:'Cost per client',yours:'$'+Math.round(cac).toLocaleString(),industry:`$${ind.cac[0]}–$${ind.cac[1]}`,status:cac<=ind.cac[0]?'good':cac<=ind.cac[1]?'ok':'bad',statusLabel:cac<=ind.cac[0]?'Great':cac<=ind.cac[1]?'Average':'High'},
+  ];
+  panel.innerHTML=`
+    <div class="grade-hero"><div class="grade-bg">${grade.letter}</div><div class="grade-letter grade-${grade.letter}">${grade.letter}</div><div class="grade-right"><div class="grade-eyebrow">Your marketing ROI grade</div><div class="grade-headline">${grade.label}. ${roi.toFixed(1)}x return on your marketing spend.</div><div class="grade-sub">For every <strong>$1</strong> spent on marketing you're getting back <strong>$${(revFromMkt/spend).toFixed(2)}</strong> in client revenue.${ind.label!=='General'?` The ${ind.label} benchmark is ${ind.roiOk}x–${ind.roiGood}x.`:''}</div></div></div>
+    <div class="verdict ${grade.letter}">${verdict}</div>
+    <div class="metrics-grid">
+      <div class="metric-box"><div class="metric-label">Marketing ROI</div><div class="metric-val ${roi>=ind.roiGood?'good':roi>=ind.roiOk?'warn':'bad'}">${roi.toFixed(1)}x</div><div class="metric-sub">Revenue per dollar spent</div></div>
+      <div class="metric-box"><div class="metric-label">Cost per new client</div><div class="metric-val ${cac<=ind.cac[0]?'good':cac<=ind.cac[1]?'warn':'bad'}">$${Math.round(cac).toLocaleString()}</div><div class="metric-sub">${ind.label} range: $${ind.cac[0]}–$${ind.cac[1]}</div></div>
+      <div class="metric-box"><div class="metric-label">LTV : CAC ratio</div><div class="metric-val ${ltvCac>=3?'good':ltvCac>=1.5?'warn':'bad'}">${ltvCac.toFixed(1)}x</div><div class="metric-sub">Goal is 3x or higher</div></div>
+      <div class="metric-box"><div class="metric-label">Spend as % of revenue</div><div class="metric-val ${spendStatus==='on target'?'good':'warn'}">${spendPct.toFixed(1)}%</div><div class="metric-sub">Target: ${ind.budgetPct[0]}–${ind.budgetPct[1]}%</div></div>
+      <div class="metric-box"><div class="metric-label">Estimated client LTV</div><div class="metric-val">$${Math.round(ltv).toLocaleString()}</div><div class="metric-sub">ACV × retention adjustment</div></div>
+      <div class="metric-box"><div class="metric-label">Revenue from new clients</div><div class="metric-val good">$${Math.round(revFromMkt).toLocaleString()}</div><div class="metric-sub">${newClients} clients × $${acv.toLocaleString()}</div></div>
+    </div>
+    <div class="budget-rec">
+      <div class="budget-rec-header"><div class="budget-rec-title">What you should be spending</div><div class="budget-rec-badge">${ind.label} benchmarks</div></div>
+      <div class="budget-rec-body">
+        <div><div class="budget-col-title">Recommended range</div><div class="budget-row"><span class="budget-row-label">Low end (${ind.budgetPct[0]}%)</span><span class="budget-row-val">$${Math.round(rLow).toLocaleString()}/mo</span></div><div class="budget-row"><span class="budget-row-label">High end (${ind.budgetPct[1]}%)</span><span class="budget-row-val">$${Math.round(rHigh).toLocaleString()}/mo</span></div><div class="budget-row"><span class="budget-row-label">You're spending</span><span class="budget-row-val ${spendStatus==='on target'?'highlight':spendStatus==='overspending'?'low':''}">$${Math.round(spend).toLocaleString()}/mo</span></div></div>
+        <div><div class="budget-col-title">What that means</div><p style="font-size:0.82rem;color:var(--muted);line-height:1.7">${spendStatus==='on target'?`Your spend is right in the sweet spot for ${ind.label}. Focus on optimizing what you already have.`:spendStatus==='underspending'?`You're spending <strong style="color:var(--white)">$${Math.round(spendDiff).toLocaleString()}/mo less</strong> than the low end for ${ind.label}. You may be leaving growth on the table.`:`You're spending <strong style="color:var(--white)">$${Math.round(spendDiff).toLocaleString()}/mo more</strong> than the high end for ${ind.label}. Make sure every dollar has a clear job.`}</p></div>
+      </div>
+    </div>
+    ${ind.label!=='General'?`<div class="bench-compare"><div class="bench-compare-head"><span>Metric</span><span>Your number</span><span>Industry avg</span><span>Status</span></div>${benchRows.map(r=>`<div class="bench-compare-row"><span class="bcr-metric">${r.metric}</span><span class="bcr-yours">${r.yours}</span><span class="bcr-industry">${r.industry}</span><span class="bcr-status s-${r.status}">${r.statusLabel}</span></div>`).join('')}</div>`:''}
+    <div class="ns-wrap"><div class="ns-head">What to do with this</div><div class="ns-body">${steps.slice(0,3).map((s,i)=>`<div class="ns-item"><div class="ns-num">${i+1}</div><div class="ns-title">${s.title}</div><div class="ns-desc">${s.desc}</div></div>`).join('')}</div></div>
+    <div class="zoek-cta-embed"><div><div class="zce-label">Improve your grade</div><div class="zce-title">Let Zoek build you a better marketing system</div><div class="zce-sub">Our strategists will review your ROI, identify your biggest levers, and build a <strong>custom growth plan</strong> — free, no commitment.</div></div><a href="https://calendly.com/expert-sales" target="_blank" class="zce-btn">Book a Free Strategy Call →</a></div>
+    <div class="btn-row"><button class="btn-reset" onclick="resetAll()">Reset</button></div>`;
+}
+function resetAll(){['inp-revenue','inp-acv','inp-newclients','inp-spend'].forEach(id=>document.getElementById(id).value='');document.getElementById('inp-close').value=25;document.getElementById('inp-retain').value=60;document.getElementById('close-val').textContent='25%';document.getElementById('retain-val').textContent='60%';recalc();}
+initPills();updateBenchHints();recalc();
+</script>
+<script src="cta.js"></script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Funnel Visualizer | Zoek Marketing Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #1a1a2e; --navy-mid: #16213e; --sidebar: #1f1b3a;
+  --purple: #6c63ff; --blue: #00a8ff; --highlight: #4a4080;
+  --white: #ffffff; --muted: #a0a0c0;
+  --border: rgba(108,99,255,0.2); --border-light: rgba(255,255,255,0.07);
+  --card-bg: rgba(255,255,255,0.04);
+  --green: #4fffb0; --red: #ff5c7c; --yellow: #ffd166;
+  --gradient: linear-gradient(135deg, #6c63ff 0%, #00a8ff 100%);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--navy); color: var(--white); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 2rem; background: rgba(26,26,46,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+.nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.nav-logo-mark { width: 30px; height: 30px; border-radius: 5px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 800; color: white; }
+.nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.95rem; color: var(--white); }
+.nav-logo-text span { color: var(--purple); }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-links a.active { color: var(--purple); }
+.nav-cta { background: var(--gradient); color: white; text-decoration: none; padding: 0.5rem 1.1rem; border-radius: 4px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; transition: all 0.2s; box-shadow: 0 4px 14px rgba(108,99,255,0.3); white-space: nowrap; }
+.nav-cta:hover { box-shadow: 0 6px 20px rgba(108,99,255,0.5); transform: translateY(-1px); }
+
+.page-header { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+.header-left { padding: 3.5rem 2.5rem; border-right: 1px solid var(--border); }
+.page-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(108,99,255,0.15); color: var(--purple); border: 1px solid rgba(108,99,255,0.3); padding: 0.25rem 0.75rem; border-radius: 3px; margin-bottom: 1.25rem; }
+.page-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+.page-title .accent { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-intro { font-size: 0.9rem; color: var(--muted); line-height: 1.75; max-width: 440px; }
+.page-intro strong { color: var(--white); font-weight: 600; }
+.header-right { background: var(--sidebar); padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; gap: 1.25rem; }
+.how-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 0.25rem; }
+.how-step { display: flex; gap: 1rem; align-items: flex-start; }
+.how-num { width: 26px; height: 26px; border-radius: 4px; background: var(--gradient); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 800; color: white; }
+.how-text { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; padding-top: 3px; }
+.how-text strong { color: var(--white); font-weight: 600; }
+
+.tool-wrap { display: grid; grid-template-columns: 300px 1fr; border-bottom: 1px solid var(--border); min-height: 80vh; }
+.left-panel { border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto; background: var(--sidebar); }
+.panel-section { padding: 1rem 1.1rem; border-bottom: 1px solid var(--border-light); }
+.panel-section:last-child { border-bottom: none; }
+.panel-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.6rem; }
+.panel-label::after { content: ''; flex: 1; height: 1px; background: var(--border-light); }
+
+.source-row { display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 0.65rem; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; transition: all 0.15s; margin-bottom: 0.3rem; user-select: none; }
+.source-row.active { border-color: var(--purple); background: rgba(108,99,255,0.08); }
+.source-row:not(.active) { opacity: 0.4; }
+.src-left { display: flex; align-items: center; gap: 0.6rem; }
+.src-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.src-name { font-size: 0.8rem; font-weight: 600; }
+.src-input { width: 58px; text-align: right; border: none; border-bottom: 1px solid var(--border); background: transparent; color: var(--white); font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; outline: none; padding: 0.1rem 0.2rem; -moz-appearance: textfield; }
+.src-input::-webkit-outer-spin-button, .src-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.src-input:focus { border-color: var(--purple); }
+
+.stage-row { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.3rem; }
+.stage-input { flex: 1; padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 4px; background: rgba(255,255,255,0.04); color: var(--white); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; outline: none; transition: border-color 0.2s; min-width: 0; }
+.stage-input:focus { border-color: var(--purple); }
+.stage-input::placeholder { color: rgba(255,255,255,0.2); }
+.stage-del { width: 26px; height: 26px; border: 1px solid var(--border); background: transparent; cursor: pointer; font-size: 1rem; color: var(--muted); display: flex; align-items: center; justify-content: center; border-radius: 3px; flex-shrink: 0; transition: all 0.15s; }
+.stage-del:hover { border-color: var(--red); color: var(--red); }
+.drag-handle { width: 18px; font-size: 0.9rem; color: rgba(255,255,255,0.2); flex-shrink: 0; text-align: center; cursor: grab; user-select: none; }
+.stage-row:hover .drag-handle { color: var(--muted); }
+.count-input { width: 58px; padding: 0.38rem 0.4rem; border: 1px solid var(--border); border-radius: 4px; background: rgba(255,255,255,0.04); color: var(--white); font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; text-align: right; outline: none; transition: border-color 0.2s; -moz-appearance: textfield; flex-shrink: 0; }
+.count-input::-webkit-outer-spin-button, .count-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.count-input:focus { border-color: var(--purple); }
+.count-input::placeholder { color: rgba(255,255,255,0.2); }
+.add-stage-btn { width: 100%; margin-top: 0.4rem; padding: 0.55rem; border: 1.5px dashed var(--border); border-radius: 4px; background: transparent; color: var(--muted); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.add-stage-btn:hover { border-color: var(--purple); color: var(--purple); }
+.crm-input { width: 100%; padding: 0.5rem 0.7rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 4px; color: var(--white); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+.crm-input:focus { border-color: var(--purple); }
+.crm-input::placeholder { color: rgba(255,255,255,0.2); }
+
+.right-panel { padding: 1.75rem 2rem; overflow-x: auto; }
+.empty-funnel { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; color: var(--muted); text-align: center; gap: 1rem; }
+.empty-big { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: rgba(108,99,255,0.2); line-height: 1; }
+
+.crm-block { background: var(--sidebar); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; }
+.crm-block-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.crm-block-name { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; }
+.crm-total-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--purple); line-height: 1; text-align: right; }
+.crm-total-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; text-align: right; }
+.stage-connector { width: 2px; height: 18px; margin: 0 auto; background: linear-gradient(to bottom, var(--purple), var(--blue)); position: relative; }
+.stage-connector::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--blue); }
+.funnel-stage { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; transition: all 0.15s; margin-bottom: 0.5rem; background: rgba(255,255,255,0.02); }
+.funnel-stage:hover { background: rgba(108,99,255,0.06); border-color: rgba(108,99,255,0.35); }
+.funnel-stage-left { display: flex; flex-direction: column; gap: 0.15rem; }
+.funnel-stage-name { font-weight: 600; font-size: 0.9rem; }
+.funnel-stage-drop { font-size: 0.75rem; }
+.drop-leak { color: var(--red); font-weight: 600; }
+.drop-ok { color: var(--green); font-weight: 600; }
+.drop-neutral { color: var(--muted); }
+.funnel-stage-right { display: flex; align-items: baseline; gap: 0.4rem; }
+.funnel-stage-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1; }
+.funnel-stage-pct { font-family: 'Syne', sans-serif; font-size: 0.9rem; color: var(--muted); }
+.client-win { background: var(--gradient); border-radius: 6px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+.client-win-label { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; }
+.client-win-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; }
+
+.insights-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 1.25rem; }
+.insight-box { background: var(--sidebar); padding: 1.1rem 1.25rem; }
+.insight-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+.insight-val { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; line-height: 1; margin-bottom: 0.3rem; }
+.insight-val.warn { color: var(--red); }
+.insight-val.good { color: var(--green); }
+.insight-sub { font-size: 0.73rem; color: var(--muted); line-height: 1.5; }
+
+.hole-callout { background: rgba(255,92,124,0.08); border-left: 3px solid var(--red); border-radius: 0 4px 4px 0; padding: 1rem 1.25rem; margin-top: 1rem; font-size: 0.85rem; line-height: 1.7; }
+.hole-callout strong { font-weight: 700; color: var(--red); }
+.good-callout { background: rgba(79,255,176,0.08); border-left: 3px solid var(--green); border-radius: 0 4px 4px 0; padding: 1rem 1.25rem; margin-top: 1rem; font-size: 0.85rem; line-height: 1.7; }
+.good-callout strong { font-weight: 700; color: var(--green); }
+.warn-callout { background: rgba(255,209,102,0.08); border-left: 3px solid var(--yellow); border-radius: 0 4px 4px 0; padding: 1rem 1.25rem; margin-top: 1rem; font-size: 0.85rem; line-height: 1.7; }
+.warn-callout strong { font-weight: 700; color: var(--yellow); }
+
+.next-steps-wrap { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 1.25rem; }
+.ns-header { background: var(--gradient); padding: 0.9rem 1.4rem; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.04em; color: white; }
+.ns-body { display: grid; grid-template-columns: repeat(3,1fr); }
+.ns-item { padding: 1.1rem 1.25rem; border-right: 1px solid var(--border-light); display: flex; flex-direction: column; gap: 0.4rem; background: var(--sidebar); }
+.ns-item:last-child { border-right: none; }
+.ns-num { width: 24px; height: 24px; border-radius: 4px; background: rgba(108,99,255,0.2); color: var(--purple); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 800; }
+.ns-title { font-weight: 700; font-size: 0.82rem; line-height: 1.35; }
+.ns-body-text { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+
+.zoek-cta-embed { background: var(--sidebar); border: 1px solid rgba(108,99,255,0.3); border-radius: 6px; padding: 1.5rem; margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.zce-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 0.3rem; }
+.zce-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.25rem; }
+.zce-sub { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+.zce-sub strong { color: var(--white); }
+.zce-btn { background: var(--gradient); color: white; text-decoration: none; padding: 0.75rem 1.4rem; border-radius: 4px; font-size: 0.85rem; font-weight: 700; white-space: nowrap; transition: all 0.2s; box-shadow: 0 4px 16px rgba(108,99,255,0.3); display: inline-block; }
+.zce-btn:hover { box-shadow: 0 6px 24px rgba(108,99,255,0.5); transform: translateY(-1px); }
+
+.funnel-benchmarks { padding: 4rem 2.5rem; border-top: 1px solid var(--border); background: var(--sidebar); }
+.fb-title { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.fb-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.7; max-width: 580px; }
+.fb-sub strong { color: var(--white); }
+.fb-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.fb-card { background: var(--navy); padding: 1.5rem; }
+.fb-card-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+.fb-card-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 1rem; }
+.fb-tiers { display: flex; flex-direction: column; gap: 0.35rem; }
+.fb-tier { display: flex; align-items: center; justify-content: space-between; padding: 0.35rem 0.65rem; border-radius: 3px; }
+.fb-tier.good { background: rgba(79,255,176,0.08); } .fb-tier.ok { background: rgba(255,209,102,0.08); } .fb-tier.bad { background: rgba(255,92,124,0.08); }
+.fb-tier-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.fb-tier-label.good { color: var(--green); } .fb-tier-label.ok { color: var(--yellow); } .fb-tier-label.bad { color: var(--red); }
+.fb-tier-range { font-family: 'Syne', sans-serif; font-size: 0.9rem; }
+.fb-card-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.65rem; line-height: 1.55; }
+
+footer { padding: 1.75rem 2rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.footer-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.footer-logo-mark { width: 24px; height: 24px; border-radius: 3px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 800; color: white; }
+.footer-logo-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.82rem; }
+.footer-note { font-size: 0.72rem; color: rgba(255,255,255,0.25); }
+.footer-link { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.15s; }
+.footer-link:hover { color: var(--white); }
+
+@media (max-width: 900px) {
+  nav { padding: 0.85rem 1rem; } .nav-links { display: none; }
+  .page-header { grid-template-columns: 1fr; }
+  .header-left { border-right: none; border-bottom: 1px solid var(--border); padding: 2.5rem 1.5rem; }
+  .tool-wrap { grid-template-columns: 1fr; }
+  .left-panel { border-right: none; border-bottom: 1px solid var(--border); }
+  .right-panel { padding: 1.5rem; }
+  .insights-grid { grid-template-columns: 1fr 1fr; }
+  .ns-body { grid-template-columns: 1fr; }
+  .ns-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+  footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+}
+@media (max-width: 480px) { .insights-grid { grid-template-columns: 1fr; } .zoek-cta-embed { flex-direction: column; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto">
+  </a>
+  <ul class="nav-links">
+    <li><a href="funnel.html" class="active">Funnel</a></li>
+    <li><a href="calculator.html">CPL</a></li>
+    <li><a href="roi.html">ROI</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="positioning.html">Positioning</a></li>
+    <li><a href="reviews.html">Reputation</a></li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<div class="page-header">
+  <div class="header-left">
+    <div class="page-tag">Tool 01 · Lead Funnel Visualizer</div>
+    <h1 class="page-title">Where are your leads <span class="accent">actually going?</span></h1>
+    <p class="page-intro">Most businesses have no idea where leads disappear between first contact and closed client. <strong>This funnel shows every step so you can see exactly where you're leaking revenue</strong> — and what Zoek can fix.</p>
+  </div>
+  <div class="header-right">
+    <div class="how-title">How it works</div>
+    <div class="how-step"><div class="how-num">1</div><div class="how-text"><strong>Toggle your lead sources</strong> and enter how many leads each one brings per month.</div></div>
+    <div class="how-step"><div class="how-num">2</div><div class="how-text"><strong>Add your funnel stages.</strong> Name every step between first contact and closed client.</div></div>
+    <div class="how-step"><div class="how-num">3</div><div class="how-text"><strong>Enter how many reach each stage.</strong> Your funnel builds in real time — spot leaks instantly.</div></div>
+  </div>
+</div>
+
+<div class="tool-wrap">
+  <div class="left-panel">
+    <div class="panel-section">
+      <div class="panel-label">Step 1: Total leads / month</div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-bottom:0.5rem">All sources combined.</p>
+      <div style="display:flex;align-items:center;gap:0.5rem">
+        <span style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple)">#</span>
+        <input type="number" id="total-leads" placeholder="100"
+          style="flex:1;padding:0.5rem 0.6rem;border:1px solid var(--border);border-radius:4px;background:rgba(255,255,255,0.05);font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--white);outline:none;-moz-appearance:textfield;"
+          oninput="render()">
+        <span style="font-size:0.72rem;color:var(--muted);white-space:nowrap">leads/mo</span>
+      </div>
+      <div id="dont-know-callout" style="display:none;margin-top:0.5rem;padding:0.6rem 0.75rem;border-left:3px solid var(--red);background:rgba(255,92,124,0.07);font-size:0.75rem;line-height:1.55;border-radius:0 4px 4px 0;">
+        <strong style="font-weight:700;color:var(--red)">Don't know this number?</strong> That's the real problem. Every marketing dollar is a guess until you track this.
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-label">Step 2: Lead sources</div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-bottom:0.5rem">Toggle on, enter counts.</p>
+      <div id="source-list"></div>
+      <button class="add-stage-btn" onclick="addCustomSource()" style="margin-top:0.4rem;font-size:0.72rem">+ Add a source</button>
+      <div id="source-total-wrap" style="margin-top:0.75rem;display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0.65rem;background:rgba(108,99,255,0.08);border:1px solid var(--border);border-radius:4px;font-size:0.75rem;">
+          <span style="font-weight:600">Total from sources</span>
+          <span id="source-total" style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--purple)"></span>
+        </div>
+        <div id="source-mismatch" style="display:none;margin-top:0.5rem;padding:0.5rem 0.75rem;border-left:3px solid var(--yellow);background:rgba(255,209,102,0.07);font-size:0.75rem;color:var(--muted);line-height:1.5;border-radius:0 4px 4px 0;"></div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-label">Step 3: Funnel stages</div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-bottom:0.5rem">Name each step. Enter monthly counts. Drag to reorder.</p>
+      <div id="stages-list"></div>
+      <button class="add-stage-btn" onclick="addStage()">+ Add a stage</button>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-label">Your CRM / system</div>
+      <input class="crm-input" id="crm-name" type="text" placeholder="e.g. HubSpot, Salesforce, spreadsheet..." value="Your CRM" oninput="render()">
+    </div>
+  </div>
+
+  <div class="right-panel" id="funnel-output">
+    <div class="empty-funnel">
+      <div class="empty-big">↓</div>
+      <p style="font-size:0.9rem;line-height:1.65;max-width:280px">Enter your total monthly leads and at least one funnel stage to see your funnel.</p>
+    </div>
+  </div>
+</div>
+
+<div class="funnel-benchmarks">
+  <div class="fb-title">Funnel conversion benchmarks</div>
+  <p class="fb-sub">Not sure if your drop-off rates are normal? Here's what Zoek sees across 50,000+ active clients. <strong>If you're dropping more than the "needs work" threshold at any stage, that's your biggest opportunity — and where we start.</strong></p>
+  <div class="fb-grid">
+    <div class="fb-card">
+      <div class="fb-card-label">Funnel stage</div>
+      <div class="fb-card-title">Lead → Appointment</div>
+      <div class="fb-tiers">
+        <div class="fb-tier good"><span class="fb-tier-label good">Strong</span><span class="fb-tier-range">60%+ book</span></div>
+        <div class="fb-tier ok"><span class="fb-tier-label ok">Okay</span><span class="fb-tier-range">40–60%</span></div>
+        <div class="fb-tier bad"><span class="fb-tier-label bad">Needs work</span><span class="fb-tier-range">Under 40%</span></div>
+      </div>
+      <p class="fb-card-note">Speed-to-lead is the #1 factor. Responding in under 5 minutes increases contact rate by 9x. Zoek's CRM integrations automate this.</p>
+    </div>
+    <div class="fb-card">
+      <div class="fb-card-label">Funnel stage</div>
+      <div class="fb-card-title">Appointment → Show</div>
+      <div class="fb-tiers">
+        <div class="fb-tier good"><span class="fb-tier-label good">Strong</span><span class="fb-tier-range">80%+ show</span></div>
+        <div class="fb-tier ok"><span class="fb-tier-label ok">Okay</span><span class="fb-tier-range">60–80%</span></div>
+        <div class="fb-tier bad"><span class="fb-tier-label bad">Needs work</span><span class="fb-tier-range">Under 60%</span></div>
+      </div>
+      <p class="fb-card-note">Low show rates are almost always a confirmation problem. A text reminder the day before and a call the morning of moves this 15–20 points.</p>
+    </div>
+    <div class="fb-card">
+      <div class="fb-card-label">Funnel stage</div>
+      <div class="fb-card-title">Show → Close</div>
+      <div class="fb-tiers">
+        <div class="fb-tier good"><span class="fb-tier-label good">Strong</span><span class="fb-tier-range">50%+ close</span></div>
+        <div class="fb-tier ok"><span class="fb-tier-label ok">Okay</span><span class="fb-tier-range">30–50%</span></div>
+        <div class="fb-tier bad"><span class="fb-tier-label bad">Needs work</span><span class="fb-tier-range">Under 30%</span></div>
+      </div>
+      <p class="fb-card-note">If someone showed up they're interested. A low close rate here points to a pricing, positioning, or presentation issue — all fixable.</p>
+    </div>
+    <div class="fb-card">
+      <div class="fb-card-label">Funnel stage</div>
+      <div class="fb-card-title">Lead → Close (overall)</div>
+      <div class="fb-tiers">
+        <div class="fb-tier good"><span class="fb-tier-label good">Strong</span><span class="fb-tier-range">25%+ overall</span></div>
+        <div class="fb-tier ok"><span class="fb-tier-label ok">Okay</span><span class="fb-tier-range">10–25%</span></div>
+        <div class="fb-tier bad"><span class="fb-tier-label bad">Needs work</span><span class="fb-tier-range">Under 10%</span></div>
+      </div>
+      <p class="fb-card-note">Your end-to-end close rate tells the full story. Under 10% means there's at least one critical leak dragging the whole funnel down.</p>
+    </div>
+    <div class="fb-card">
+      <div class="fb-card-label">Funnel stage</div>
+      <div class="fb-card-title">Website conversion</div>
+      <div class="fb-tiers">
+        <div class="fb-tier good"><span class="fb-tier-label good">Strong</span><span class="fb-tier-range">3%+ of visitors</span></div>
+        <div class="fb-tier ok"><span class="fb-tier-label ok">Okay</span><span class="fb-tier-range">1–3%</span></div>
+        <div class="fb-tier bad"><span class="fb-tier-label bad">Needs work</span><span class="fb-tier-range">Under 1%</span></div>
+      </div>
+      <p class="fb-card-note">Zoek has redesigned 132,000+ websites. Clear headline, one CTA, fast mobile — the three biggest levers. Most sites double conversion with basic fixes.</p>
+    </div>
+    <div class="fb-card">
+      <div class="fb-card-label">Funnel stage</div>
+      <div class="fb-card-title">Client retention</div>
+      <div class="fb-tiers">
+        <div class="fb-tier good"><span class="fb-tier-label good">Strong</span><span class="fb-tier-range">80%+ stay</span></div>
+        <div class="fb-tier ok"><span class="fb-tier-label ok">Okay</span><span class="fb-tier-range">60–80%</span></div>
+        <div class="fb-tier bad"><span class="fb-tier-label bad">Needs work</span><span class="fb-tier-range">Under 60%</span></div>
+      </div>
+      <p class="fb-card-note">Retention is the most overlooked funnel stage. A 10% lift in retention often doubles profit without spending another dollar on ads.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-brand">
+    <img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto">
+  </a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · Irvine, CA</span>
+</footer>
+
+<script>
+const SOURCES = [
+  { id:1, name:'Google Ads',    color:'#4285F4', on:true,  leads:'' },
+  { id:2, name:'Facebook Ads', color:'#1877F2', on:true,  leads:'' },
+  { id:3, name:'Instagram',    color:'#E1306C', on:false, leads:'' },
+  { id:4, name:'Word of Mouth',color:'#4fffb0', on:true,  leads:'' },
+  { id:5, name:'Referrals',    color:'#ffd166', on:true,  leads:'' },
+  { id:6, name:'Organic/SEO',  color:'#6c63ff', on:false, leads:'' },
+];
+let nextSrcId = 7;
+
+const SOURCE_BENCHMARKS = {
+  'Google Ads':    { pct: '25–45%', note: 'Highest intent for local services — often best CPL' },
+  'Facebook Ads':  { pct: '20–40%', note: 'Typical for service businesses on paid social' },
+  'Instagram':     { pct: '10–25%', note: 'Strong for visual brands; lower intent than Google' },
+  'Word of Mouth': { pct: '20–40%', note: 'Best leads you can get. Should grow over time.' },
+  'Referrals':     { pct: '15–30%', note: 'High close rate, zero ad cost. Nurture this.' },
+  'Organic/SEO':   { pct: '10–20%', note: 'Grows slowly but compounds. Zoek specializes here.' },
+};
+
+let stages = [
+  { id:1, name:'Schedules appointment', count:'' },
+  { id:2, name:'Shows up',              count:'' },
+  { id:3, name:'Converts to client',    count:'' },
+];
+let nextStageId = 4;
+let dragId = null;
+
+function initSources() {
+  document.getElementById('source-list').innerHTML = SOURCES.map(s => `
+    <div class="source-row ${s.on?'active':''}" id="srow-${s.id}" onclick="toggleSrc(${s.id})">
+      <div class="src-left">
+        <div class="src-dot" style="background:${s.color}"></div>
+        <span class="src-name">${s.name}</span>
+      </div>
+      <input class="src-input" type="number" placeholder="0" value="${s.leads||''}"
+        onclick="event.stopPropagation()"
+        oninput="event.stopPropagation();srcLeadChange(${s.id},this.value)"
+        ${s.on?'':'disabled'}>
+    </div>`).join('');
+  updateSourceTotal();
+}
+
+function updateSourceTotal() {
+  const total = parseFloat(document.getElementById('total-leads').value)||0;
+  const active = SOURCES.filter(s=>s.on);
+  const srcSum = active.reduce((a,s)=>a+(parseFloat(s.leads)||0),0);
+  const wrap = document.getElementById('source-total-wrap');
+  const totalEl = document.getElementById('source-total');
+  const mismatch = document.getElementById('source-mismatch');
+  document.getElementById('dont-know-callout').style.display = (!document.getElementById('total-leads').value)?'block':'none';
+  if (srcSum > 0) {
+    wrap.style.display='block';
+    const pct = total>0?Math.round((srcSum/total)*100):null;
+    totalEl.textContent = srcSum + (pct!==null?' ('+pct+'% of total)':'');
+    if (total>0&&Math.abs(srcSum-total)>2) {
+      mismatch.style.display='block';
+      mismatch.textContent = srcSum>total
+        ? `Your sources add up to ${srcSum} but your total is ${total}. Reconcile these.`
+        : `Sources only account for ${srcSum} of ${total} total leads. Where are the other ${total-srcSum} coming from?`;
+    } else { mismatch.style.display='none'; }
+  } else { wrap.style.display='none'; }
+}
+
+function toggleSrc(id) { const s=SOURCES.find(s=>s.id===id); if(s){s.on=!s.on;initSources();render();} }
+function srcLeadChange(id,val) { const s=SOURCES.find(s=>s.id===id); if(s){s.leads=val;updateSourceTotal();render();} }
+function addCustomSource() {
+  const name=prompt('Name your lead source (e.g. LinkedIn, Direct Mail, Events):');
+  if(!name||!name.trim())return;
+  const colors=['#a78bfa','#f472b6','#34d399','#fb923c','#38bdf8'];
+  SOURCES.push({id:nextSrcId++,name:name.trim(),color:colors[SOURCES.length%colors.length],on:true,leads:''});
+  initSources();render();
+}
+
+function drawPie(sources,total) {
+  const canvas=document.getElementById('pie-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const cx=canvas.width/2,cy=canvas.height/2,r=Math.min(cx,cy)-8;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const data=sources.filter(s=>(parseFloat(s.leads)||0)>0);
+  if(!data.length)return;
+  const sum=data.reduce((a,s)=>a+(parseFloat(s.leads)||0),0);
+  let angle=-Math.PI/2;
+  data.forEach(s=>{
+    const val=parseFloat(s.leads)||0;
+    const slice=(val/sum)*Math.PI*2;
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,angle,angle+slice);ctx.closePath();
+    ctx.fillStyle=s.color;ctx.fill();
+    ctx.strokeStyle='#1a1a2e';ctx.lineWidth=2;ctx.stroke();
+    angle+=slice;
+  });
+  ctx.fillStyle='#ffffff';
+  ctx.font='bold 20px "Syne",sans-serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(sum,cx,cy-7);
+  ctx.font='11px "Plus Jakarta Sans",sans-serif';
+  ctx.fillStyle='#a0a0c0';ctx.fillText('leads',cx,cy+9);
+}
+
+function renderStages() {
+  document.getElementById('stages-list').innerHTML=stages.map(s=>`
+    <div class="stage-row" id="stage-drag-${s.id}" draggable="true"
+      ondragstart="dragStart(${s.id})" ondragover="dragOver(event,${s.id})" ondragend="dragEnd()">
+      <div class="drag-handle" title="Drag to reorder">⇅</div>
+      <input class="stage-input" type="text" placeholder="Stage name..." value="${s.name}" onchange="updateStageName(${s.id},this.value)">
+      <input class="count-input" type="number" placeholder="0" value="${s.count||''}" oninput="stageCountChange(${s.id},this.value)" onclick="event.stopPropagation()">
+      ${stages.length>1?`<button class="stage-del" onclick="removeStage(${s.id})">×</button>`:''}
+    </div>`).join('');
+}
+function updateStageName(id,val){const s=stages.find(s=>s.id===id);if(s){s.name=val;render();}}
+function stageCountChange(id,val){const s=stages.find(s=>s.id===id);if(s){s.count=val;render();}}
+function addStage(){stages.push({id:nextStageId++,name:'',count:''});renderStages();render();}
+function removeStage(id){stages=stages.filter(s=>s.id!==id);renderStages();render();}
+function dragStart(id){dragId=id;setTimeout(()=>{const el=document.getElementById('stage-drag-'+id);if(el)el.style.opacity='0.4';},0);}
+function dragOver(e,id){e.preventDefault();if(dragId===id)return;const fi=stages.findIndex(s=>s.id===dragId),ti=stages.findIndex(s=>s.id===id);if(fi===-1||ti===-1)return;const m=stages.splice(fi,1)[0];stages.splice(ti,0,m);renderStages();render();}
+function dragEnd(){dragId=null;document.querySelectorAll('.stage-row').forEach(el=>el.style.opacity='1');}
+
+function render() {
+  updateSourceTotal();
+  const output=document.getElementById('funnel-output');
+  const totalLeads=parseFloat(document.getElementById('total-leads').value)||0;
+  const crmName=document.getElementById('crm-name').value||'Your CRM';
+  const activeSrcs=SOURCES.filter(s=>s.on&&(parseFloat(s.leads)||0)>0);
+  const hasData=totalLeads>0||stages.some(s=>parseFloat(s.count)>0);
+  if(!hasData){output.innerHTML=`<div class="empty-funnel"><div class="empty-big">↓</div><p style="font-size:0.9rem;line-height:1.65;max-width:280px">Enter your total monthly leads and at least one stage count to see your funnel.</p></div>`;return;}
+
+  const stageData=stages.map((s,i)=>{
+    const count=parseFloat(s.count)||0;
+    const prev=i===0?totalLeads:(parseFloat(stages[i-1].count)||0);
+    const drop=prev>0?Math.round(((prev-count)/prev)*100):0;
+    return{...s,count,drop,prev};
+  });
+  const lastStage=stageData[stageData.length-1];
+  const closeRate=totalLeads>0?Math.round((lastStage.count/totalLeads)*100):0;
+  const leadsLost=totalLeads-lastStage.count;
+  const worstStage=[...stageData].sort((a,b)=>b.drop-a.drop)[0];
+  const hasSources=activeSrcs.length>0;
+  const srcSum=activeSrcs.reduce((a,s)=>a+(parseFloat(s.leads)||0),0);
+
+  const pieHTML=hasSources?`
+    <div style="border:1px solid var(--border);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem;">
+      <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Lead source breakdown</div>
+      <div style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap;">
+        <canvas id="pie-canvas" width="100" height="100" style="flex-shrink:0"></canvas>
+        <div style="flex:1;display:flex;flex-direction:column;gap:0.5rem;min-width:160px;">
+          ${activeSrcs.map(s=>{
+            const leads=parseFloat(s.leads)||0;
+            const pct=srcSum>0?Math.round((leads/srcSum)*100):0;
+            const bench=SOURCE_BENCHMARKS[s.name];
+            return`<div><div style="display:flex;align-items:center;gap:0.5rem;">
+              <div style="width:10px;height:10px;border-radius:50%;background:${s.color};flex-shrink:0"></div>
+              <span style="font-size:0.8rem;font-weight:600;flex:1">${s.name}</span>
+              <span style="font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800">${leads} <span style="font-size:0.7rem;color:var(--muted)">${pct}%</span></span>
+            </div>${bench?`<div style="font-size:0.67rem;color:var(--muted);padding-left:1.25rem;line-height:1.4">Benchmark: ${bench.pct}</div>`:''}</div>`;
+          }).join('')}
+        </div>
+      </div>
+    </div>`:' ';
+
+  const crmHTML=`<div class="crm-block"><div><div class="crm-block-label">All leads enter</div><div class="crm-block-name">${crmName}</div></div><div><div class="crm-total-num">${totalLeads>0?totalLeads:'?'}</div><div class="crm-total-label">leads / month</div></div></div>`;
+  const stagesHTML=stageData.map(s=>{
+    const dc=s.drop>=50?'drop-leak':s.drop<=20?'drop-ok':'drop-neutral';
+    const dt=s.prev>0&&s.count>0?`${s.drop}% dropped from previous step`:'';
+    return`<div class="stage-connector"></div><div class="funnel-stage"><div class="funnel-stage-left"><span class="funnel-stage-name">${s.name||'Unnamed stage'}</span><span class="funnel-stage-drop ${dc}">${dt}</span></div><div class="funnel-stage-right"><span class="funnel-stage-num">${s.count>0?s.count:'?'}</span>${totalLeads>0&&s.count>0?`<span class="funnel-stage-pct">${Math.round((s.count/totalLeads)*100)}%</span>`:''}</div></div>`;
+  }).join('');
+  const clientWinHTML=`<div class="stage-connector"></div><div class="client-win"><span class="client-win-label">New clients this month</span><span class="client-win-num">${lastStage.count>0?lastStage.count:'?'}</span></div>`;
+
+  const insightsHTML=totalLeads>0&&lastStage.count>0?`
+    <div class="insights-grid">
+      <div class="insight-box"><div class="insight-label">Overall close rate</div><div class="insight-val ${closeRate>=25?'good':closeRate<10?'warn':''}">${closeRate}%</div><div class="insight-sub">${closeRate>=25?'Strong — industry avg is 15–25%.':closeRate>=10?'Room to grow. Target 25%+.':'Needs attention. Find the leak.'}</div></div>
+      <div class="insight-box"><div class="insight-label">Leads lost per month</div><div class="insight-val warn">${leadsLost>0?leadsLost:0}</div><div class="insight-sub">People who showed interest and never became clients.</div></div>
+      <div class="insight-box"><div class="insight-label">Biggest drop-off</div><div class="insight-val ${worstStage&&worstStage.drop>=40?'warn':''}">${worstStage?worstStage.drop+'%':'N/A'}</div><div class="insight-sub">${worstStage&&worstStage.drop>0?`"${worstStage.name}" is your biggest leak.`:''}</div></div>
+    </div>`:'';
+
+  let calloutHTML='';
+  if(worstStage&&worstStage.drop>=55&&totalLeads>0)calloutHTML=`<div class="hole-callout"><strong>Serious leak in your funnel.</strong> "${worstStage.name}" is dropping ${worstStage.drop}% of people. Fix this before spending more on ads.</div>`;
+  else if(worstStage&&worstStage.drop>=35&&totalLeads>0)calloutHTML=`<div class="warn-callout"><strong>There's a fixable leak here.</strong> "${worstStage.name}" drops ${worstStage.drop}% of people. A process fix here moves your close rate meaningfully.</div>`;
+  else if(closeRate>=30&&totalLeads>0)calloutHTML=`<div class="good-callout"><strong>Your funnel is working well.</strong> A ${closeRate}% close rate is genuinely strong. Focus on getting more volume in at the top.</div>`;
+
+  const steps=[];
+  if(worstStage&&worstStage.drop>=40)steps.push({title:`Fix "${worstStage.name}"`,body:`You're losing ${worstStage.drop}% of people here. This one fix will move your close rate more than any ad spend change. Zoek's growth team specializes in exactly this.`});
+  if(closeRate>0&&closeRate<15)steps.push({title:'Diagnose your full pipeline',body:`A ${closeRate}% close rate means ${100-closeRate} out of 100 leads go nowhere. Book a free call — Zoek will walk through your funnel and identify the exact fix.`});
+  if(!hasSources)steps.push({title:'Track your lead sources',body:'You haven\'t broken down where your leads come from. Knowing your source split is the difference between scaling what works and wasting money on what doesn\'t.'});
+  if(steps.length<3)steps.push({title:'Update this funnel monthly',body:'Trends tell you more than snapshots. Set a reminder at month-end to update these numbers and watch where they move.'});
+  if(steps.length<3)steps.push({title:'Check your speed to lead',body:'Responding within 5 minutes makes you 9x more likely to make contact. If your follow-up is slow, that\'s likely your biggest hidden leak.'});
+
+  const nextStepsHTML=`
+    <div class="next-steps-wrap">
+      <div class="ns-header">What to do with this</div>
+      <div class="ns-body">
+        ${steps.slice(0,3).map((s,i)=>`<div class="ns-item"><div class="ns-num">${i+1}</div><div class="ns-title">${s.title}</div><div class="ns-body-text">${s.body}</div></div>`).join('')}
+      </div>
+    </div>`;
+
+  const zoekCTA=`
+    <div class="zoek-cta-embed">
+      <div>
+        <div class="zce-label">Turn these insights into growth</div>
+        <div class="zce-title">Want Zoek to fix this for you?</div>
+        <div class="zce-sub">Our strategists will review your funnel, identify the #1 leak, and build a <strong>custom action plan</strong> — free, no commitment.</div>
+      </div>
+      <a href="https://calendly.com/expert-sales" target="_blank" class="zce-btn">Book a Free Strategy Call →</a>
+    </div>`;
+
+  output.innerHTML=`${pieHTML}${crmHTML}${stagesHTML}${clientWinHTML}${insightsHTML}${calloutHTML}${nextStepsHTML}${zoekCTA}`;
+  if(hasSources)drawPie(activeSrcs,totalLeads);
+}
+
+initSources();renderStages();render();
+</script>
+<script src="cta.js"></script>
+</body>
+</html>

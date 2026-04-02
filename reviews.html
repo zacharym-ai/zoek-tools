@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews & Reputation | Zoek Marketing Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo-mark{width:30px;height:30px;border-radius:5px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:800;color:white;}
+.nav-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;color:var(--white);}
+.nav-logo-text span{color:var(--purple);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--purple);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
+.page-intro strong{color:var(--white);font-weight:600;}
+.header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1.1rem;}
+.stat-row{display:flex;align-items:center;gap:1rem;}
+.stat-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple);min-width:60px;}
+.stat-text{font-size:0.82rem;color:var(--muted);line-height:1.5;}
+.stat-text strong{color:var(--white);}
+
+/* TOOLS LAYOUT */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.tool-col{padding:2.5rem;border-right:1px solid var(--border);}
+.tool-col:last-child{border-right:none;}
+.tool-col-title{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;margin-bottom:0.35rem;}
+.tool-col-sub{font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:1.75rem;}
+
+/* RESPONSE GENERATOR */
+.rg-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;margin-top:1rem;display:block;}
+.rg-label:first-child{margin-top:0;}
+.rg-textarea{width:100%;padding:0.65rem 0.85rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;outline:none;resize:vertical;min-height:90px;line-height:1.65;transition:border-color 0.2s;}
+.rg-textarea:focus{border-color:var(--purple);}
+.rg-textarea::placeholder{color:rgba(255,255,255,0.2);}
+.rg-input{width:100%;padding:0.5rem 0.75rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
+.rg-input:focus{border-color:var(--purple);}
+.rg-input::placeholder{color:rgba(255,255,255,0.2);}
+.stars-row{display:flex;align-items:center;gap:0.5rem;margin-top:0.4rem;}
+.star-btn{font-size:1.4rem;cursor:pointer;background:none;border:none;color:rgba(255,255,255,0.2);transition:color 0.15s;line-height:1;}
+.star-btn.lit{color:var(--yellow);}
+.star-label{font-size:0.75rem;color:var(--muted);margin-top:0.3rem;}
+.tone-pills{display:flex;gap:0.4rem;margin-top:0.4rem;flex-wrap:wrap;}
+.tone-pill{padding:0.3rem 0.7rem;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.72rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.tone-pill:hover{border-color:var(--purple);color:var(--white);}
+.tone-pill.active{background:var(--purple);border-color:var(--purple);color:white;}
+.btn-generate{width:100%;margin-top:1rem;padding:0.7rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);}
+.btn-generate:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.rg-output{margin-top:1.25rem;background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.25);border-radius:6px;overflow:hidden;display:none;}
+.rg-output.show{display:block;}
+.rg-output-head{padding:0.65rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:0.75rem;}
+.rg-response-type{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:3px;}
+.positive{background:rgba(79,255,176,0.1);color:var(--green);}
+.neutral{background:rgba(255,209,102,0.1);color:var(--yellow);}
+.negative{background:rgba(255,92,124,0.1);color:var(--red);}
+.btn-copy{padding:0.3rem 0.75rem;background:transparent;border:1px solid var(--border);border-radius:3px;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.72rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.btn-copy:hover{border-color:var(--purple);color:var(--white);}
+.rg-text{padding:1rem;font-size:0.85rem;line-height:1.8;white-space:pre-wrap;color:var(--white);}
+.rg-tip{padding:0.65rem 1rem;border-top:1px solid var(--border);font-size:0.75rem;color:var(--muted);line-height:1.6;background:rgba(255,255,255,0.02);}
+.rg-tip strong{color:var(--white);}
+.rg-empty{padding:2rem;text-align:center;color:rgba(255,255,255,0.2);font-size:0.85rem;}
+
+/* RATING CALCULATOR */
+.rating-calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1.25rem;}
+.rc-cell{background:var(--sidebar);padding:1rem;}
+.rc-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem;}
+.rc-input{width:100%;padding:0.5rem 0.65rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;outline:none;-moz-appearance:textfield;transition:border-color 0.2s;}
+.rc-input::-webkit-outer-spin-button,.rc-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+.rc-input:focus{border-color:var(--purple);}
+.rc-output{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.rc-stat{padding:1rem 1.25rem;border-bottom:1px solid var(--border-light);}
+.rc-stat:last-child{border-bottom:none;}
+.rc-stat-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;}
+.rc-stat-val{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:0.2rem;}
+.rc-stat-sub{font-size:0.72rem;color:var(--muted);}
+
+/* REVIEW ASK SECTION */
+.reviews-section{padding:3rem 2.5rem;border-top:1px solid var(--border);}
+.section-eyebrow{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;}
+.section-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.5rem;}
+.section-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;max-width:580px;}
+.section-sub strong{color:var(--white);}
+.ask-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:2.5rem;}
+.ask-card{background:var(--sidebar);padding:1.25rem;}
+.ask-icon{font-size:1.4rem;margin-bottom:0.5rem;}
+.ask-title{font-weight:700;font-size:0.88rem;margin-bottom:0.3rem;}
+.ask-desc{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.ask-desc strong{color:var(--white);}
+.platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:2.5rem;}
+.platform-card{background:var(--navy);padding:1.25rem;}
+.platform-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.2rem;}
+.priority-badge{display:inline-block;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:3px;margin-bottom:0.65rem;}
+.p1{background:rgba(79,255,176,0.12);color:var(--green);}
+.p2{background:rgba(255,209,102,0.12);color:var(--yellow);}
+.p3{background:rgba(160,160,192,0.12);color:var(--muted);}
+.platform-desc{font-size:0.78rem;color:var(--muted);line-height:1.55;margin-bottom:0.65rem;}
+.platform-tip{font-size:0.75rem;background:rgba(108,99,255,0.08);border:1px solid var(--border);border-radius:3px;padding:0.5rem 0.75rem;line-height:1.55;color:var(--muted);}
+.platform-tip strong{color:var(--white);}
+.rules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:2rem;}
+.rule-card{background:var(--sidebar);padding:1.25rem;display:flex;gap:0.85rem;align-items:flex-start;}
+.rule-icon{font-size:1.2rem;flex-shrink:0;}
+.rule-title{font-weight:700;font-size:0.85rem;margin-bottom:0.25rem;}
+.rule-desc{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.zoek-cta-embed{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+.zce-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.3rem;}
+.zce-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
+.zce-sub{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.zce-sub strong{color:var(--white);}
+.zce-btn{background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.4rem;border-radius:4px;font-size:0.85rem;font-weight:700;white-space:nowrap;transition:all 0.2s;box-shadow:0 4px 16px rgba(108,99,255,0.3);display:inline-block;}
+.zce-btn:hover{box-shadow:0 6px 24px rgba(108,99,255,0.5);transform:translateY(-1px);}
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.footer-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.footer-logo-mark{width:24px;height:24px;border-radius:3px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:800;color:white;}
+.footer-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.82rem;}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.15s;}
+.footer-link:hover{color:var(--white);}
+@media(max-width:900px){nav{padding:0.85rem 1rem;}.nav-links{display:none;}.page-header{grid-template-columns:1fr;}.header-left{border-right:none;border-bottom:1px solid var(--border);padding:2.5rem 1.5rem;}.tools-grid{grid-template-columns:1fr;}.tool-col{border-right:none;border-bottom:1px solid var(--border);}.ask-grid,.platform-grid{grid-template-columns:1fr;}.rules-grid{grid-template-columns:1fr;}.reviews-section{padding:2rem 1.5rem;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+@media(max-width:480px){.rating-calc-grid{grid-template-columns:1fr;}.zoek-cta-embed{flex-direction:column;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="funnel.html">Funnel</a></li><li><a href="calculator.html">CPL</a></li><li><a href="roi.html">ROI</a></li><li><a href="budget.html">Budget</a></li><li><a href="positioning.html">Positioning</a></li><li><a href="reviews.html" class="active">Reputation</a></li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<div class="page-header">
+  <div class="header-left">
+    <div class="page-tag">Tool 06 · Reviews &amp; Reputation</div>
+    <h1 class="page-title">Your reviews are your <span class="accent">most powerful ad.</span></h1>
+    <p class="page-intro">88% of consumers trust online reviews as much as personal recommendations. <strong>This tool helps you generate perfect review responses, calculate your rating math, and build a system to collect more 5-star reviews consistently.</strong></p>
+  </div>
+  <div class="header-right">
+    <div class="stat-row"><div class="stat-num">88%</div><div class="stat-text"><strong>of consumers trust reviews</strong> as much as a personal recommendation from a friend or family member.</div></div>
+    <div class="stat-row"><div class="stat-num">1★</div><div class="stat-text">One bad review can take <strong>12 positive reviews</strong> to neutralize in a consumer's mind. Response time and tone matter.</div></div>
+    <div class="stat-row"><div class="stat-num">4.4</div><div class="stat-text">The minimum rating consumers consider acceptable before <strong>choosing a competitor</strong>. Below 4.4, you're losing business every day.</div></div>
+  </div>
+</div>
+
+<div class="tools-grid">
+  <!-- RESPONSE GENERATOR -->
+  <div class="tool-col">
+    <div class="tool-col-title">Review Response Generator</div>
+    <div class="tool-col-sub">Paste any review, pick a tone, and get a professional response in seconds. Responding to every review — positive or negative — is one of the highest-ROI things you can do for local SEO.</div>
+
+    <label class="rg-label">Paste the customer review</label>
+    <textarea class="rg-textarea" id="rg-review" placeholder="Paste the review here exactly as the customer wrote it..."></textarea>
+
+    <label class="rg-label">Star rating of this review</label>
+    <div class="stars-row">
+      <button class="star-btn" onclick="setStar(1)">★</button>
+      <button class="star-btn" onclick="setStar(2)">★</button>
+      <button class="star-btn" onclick="setStar(3)">★</button>
+      <button class="star-btn" onclick="setStar(4)">★</button>
+      <button class="star-btn" onclick="setStar(5)">★</button>
+    </div>
+    <div class="star-label" id="star-label">Select a rating above</div>
+
+    <label class="rg-label" style="margin-top:0.85rem">Your business name</label>
+    <input class="rg-input" type="text" id="rg-bizname" placeholder="e.g. Peak Plumbing Co.">
+
+    <label class="rg-label">Your name (owner/manager)</label>
+    <input class="rg-input" type="text" id="rg-ownername" placeholder="e.g. Mike">
+
+    <label class="rg-label">Response tone</label>
+    <div class="tone-pills">
+      <button class="tone-pill active" onclick="setTone(this,'professional')">Professional</button>
+      <button class="tone-pill" onclick="setTone(this,'warm')">Warm &amp; personal</button>
+      <button class="tone-pill" onclick="setTone(this,'direct')">Short &amp; direct</button>
+    </div>
+
+    <button class="btn-generate" onclick="generateResponse()">Generate Response →</button>
+
+    <div class="rg-output" id="rg-output">
+      <div class="rg-empty" id="rg-empty">Your response will appear here.</div>
+      <div class="rg-output-head">
+        <span class="rg-response-type" id="rg-type"></span>
+        <button class="btn-copy" onclick="copyResponse()">Copy response</button>
+      </div>
+      <div class="rg-text" id="rg-text"></div>
+      <div class="rg-tip" id="rg-tip"></div>
+    </div>
+  </div>
+
+  <!-- RATING CALCULATOR -->
+  <div class="tool-col">
+    <div class="tool-col-title">Rating Recovery Calculator</div>
+    <div class="tool-col-sub">See exactly how many 5-star reviews it takes to hit your target rating — and how much damage one 1-star review actually does.</div>
+
+    <div class="rating-calc-grid">
+      <div class="rc-cell">
+        <div class="rc-label">Current review count</div>
+        <input class="rc-input" type="number" id="rc-count" placeholder="47" oninput="calcRating()">
+      </div>
+      <div class="rc-cell">
+        <div class="rc-label">Current average rating</div>
+        <input class="rc-input" type="number" id="rc-current" placeholder="4.2" step="0.1" min="1" max="5" oninput="calcRating()">
+      </div>
+      <div class="rc-cell">
+        <div class="rc-label">Target rating</div>
+        <input class="rc-input" type="number" id="rc-target" placeholder="4.8" step="0.1" min="1" max="5" oninput="calcRating()">
+      </div>
+      <div class="rc-cell" style="background:rgba(108,99,255,0.06)">
+        <div class="rc-label" style="color:var(--purple)">Goal</div>
+        <div style="font-size:0.82rem;color:var(--muted);padding-top:0.3rem;line-height:1.55">Enter your numbers to see the math →</div>
+      </div>
+    </div>
+
+    <div class="rc-output" id="rc-output">
+      <div class="rc-stat"><div class="rc-stat-label">Fill in your numbers above</div><div style="font-size:0.82rem;color:rgba(255,255,255,0.3)">Your rating math will appear here.</div></div>
+    </div>
+
+    <div style="margin-top:2rem">
+      <div style="font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;margin-bottom:0.85rem">The 3 rules of reputation management</div>
+      <div style="display:flex;flex-direction:column;gap:0.65rem;">
+        <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.85rem;background:rgba(255,255,255,0.03);border:1px solid var(--border-light);border-radius:4px;">
+          <span style="font-size:1.1rem;flex-shrink:0">⏱</span>
+          <div><div style="font-weight:700;font-size:0.82rem;margin-bottom:0.2rem">Respond within 24 hours</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.6">Google factors response rate and speed into your local ranking. Every review deserves a response — yes, even old ones. Start with your most recent and work backward.</div></div>
+        </div>
+        <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.85rem;background:rgba(255,255,255,0.03);border:1px solid var(--border-light);border-radius:4px;">
+          <span style="font-size:1.1rem;flex-shrink:0">📞</span>
+          <div><div style="font-weight:700;font-size:0.82rem;margin-bottom:0.2rem">Ask at peak happiness</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.6">The best time to ask for a review is right when the client is most satisfied — the moment the job is done, the result is visible, or the service exceeded their expectations. Not a week later.</div></div>
+        </div>
+        <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.85rem;background:rgba(255,255,255,0.03);border:1px solid var(--border-light);border-radius:4px;">
+          <span style="font-size:1.1rem;flex-shrink:0">📊</span>
+          <div><div style="font-weight:700;font-size:0.82rem;margin-bottom:0.2rem">Track velocity, not just count</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.6">A steady flow of recent reviews beats a large number of old ones. Google weighs recency heavily. 5 new reviews this month matters more than 50 from 2 years ago.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ASK SECTION -->
+<div class="reviews-section">
+  <div class="section-eyebrow">Get more reviews</div>
+  <div class="section-title">How to ask for reviews without being annoying</div>
+  <div class="section-sub">Most businesses never ask. The ones that do usually ask wrong. <strong>The ask needs to be personal, timely, and frictionless.</strong> Here's what actually works.</div>
+
+  <div class="ask-grid">
+    <div class="ask-card">
+      <div class="ask-icon">💬</div>
+      <div class="ask-title">Ask in person, then text the link</div>
+      <div class="ask-desc">The most effective approach: <strong>ask verbally the moment they're happiest</strong>, then immediately text them your Google review link. The in-person ask gets buy-in. The text gives them frictionless follow-through.</div>
+    </div>
+    <div class="ask-card">
+      <div class="ask-icon">📱</div>
+      <div class="ask-title">Make the link one tap away</div>
+      <div class="ask-desc"><strong>Every extra click kills your conversion.</strong> Create a short URL (bit.ly or your own domain) that goes directly to your Google review form. Put it in your email signature, invoice footer, and post-service text.</div>
+    </div>
+    <div class="ask-card">
+      <div class="ask-icon">🤝</div>
+      <div class="ask-title">Give them a reason to say yes</div>
+      <div class="ask-desc">You don't need an incentive — you need a story. <strong>"Reviews are how small businesses like ours compete with the big guys"</strong> consistently outperforms generic requests. It makes the ask feel meaningful, not transactional.</div>
+    </div>
+  </div>
+
+  <div class="section-eyebrow" style="margin-top:2.5rem">Where to focus first</div>
+  <div class="section-title" style="margin-bottom:0.5rem">Platform priority guide</div>
+  <div class="section-sub">Not all review platforms are equal. <strong>Start where it moves the needle most for your business</strong> — usually Google — then expand from there once you have a system.</div>
+
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-name">Google Business</div>
+      <div><span class="priority-badge p1">Priority 1 — Every business</span></div>
+      <div class="platform-desc">The most important review platform in existence. Google reviews directly impact your local search ranking, your Google Maps position, and whether someone calls you or your competitor.</div>
+      <div class="platform-tip"><strong>Get your review link:</strong> Search your business on Google → click "Get more reviews" in your Business Profile dashboard. Send this link in every post-service message.</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">Facebook / Meta</div>
+      <div><span class="priority-badge p2">Priority 2 — Consumer businesses</span></div>
+      <div class="platform-desc">Facebook reviews (now called Recommendations) show up in local searches and are visible to your existing followers. High-value for restaurants, retail, and service businesses with a social presence.</div>
+      <div class="platform-tip"><strong>Enable recommendations</strong> in your Business Page settings → Edit Page → Turn on Recommendations. Then share the link in your post-service follow-up.</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">Yelp</div>
+      <div><span class="priority-badge p2">Priority 2 — Restaurants &amp; local services</span></div>
+      <div class="platform-desc">Critical for restaurants and home services in major metros. Yelp's algorithm is aggressive about filtering reviews — focus on making the ask feel organic and authentic, not scripted.</div>
+      <div class="platform-tip"><strong>Warning:</strong> Yelp penalizes businesses that ask for reviews directly. Focus on making service excellent and letting reviews come naturally. Respond to every review you do get.</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">Houzz / Angi</div>
+      <div><span class="priority-badge p3">Priority 3 — Home services</span></div>
+      <div class="platform-desc">If you're in home services — remodeling, landscaping, plumbing, electrical — Houzz and Angi are active lead-gen platforms where reviews directly impact quote requests.</div>
+      <div class="platform-tip">Build your profile fully, add project photos, and ask every satisfied client for a review on whichever platform they found you through.</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">Healthgrades / Zocdoc</div>
+      <div><span class="priority-badge p3">Priority 3 — Healthcare</span></div>
+      <div class="platform-desc">For medical and dental practices, patients search Healthgrades before calling. A strong profile with recent reviews builds trust before a prospect ever visits your website.</div>
+      <div class="platform-tip">Claim and fully complete your Healthgrades profile. Add a post-appointment follow-up text or email asking patients to share their experience.</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">G2 / Capterra</div>
+      <div><span class="priority-badge p3">Priority 3 — B2B / SaaS</span></div>
+      <div class="platform-desc">For software and B2B services, G2 and Capterra are where buyers research before purchase decisions. Reviews here carry significant weight in enterprise sales cycles.</div>
+      <div class="platform-tip">After a successful onboarding or milestone, email your customer with a direct link to your G2 profile and explain why reviews help your team grow.</div>
+    </div>
+  </div>
+
+  <div class="section-eyebrow" style="margin-top:2.5rem">The rules that don't change</div>
+  <div class="section-title" style="margin-bottom:0.5rem">Reputation management fundamentals</div>
+  <div class="section-sub">These principles apply regardless of platform, industry, or business size. <strong>The businesses that consistently win on reviews follow all of them.</strong></div>
+
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rule-icon">⚡</div><div><div class="rule-title">Speed is a signal</div><div class="rule-desc">Responding to reviews within 24 hours signals to both Google and future customers that you're engaged and care. Businesses that respond quickly are rated higher in local search results.</div></div></div>
+    <div class="rule-card"><div class="rule-icon">🧠</div><div><div class="rule-title">Never argue, never delete</div><div class="rule-desc">Your response to a negative review is read by hundreds of future customers. They're watching to see if you're professional — not if you're right. Keep it short, calm, and move the conversation offline.</div></div></div>
+    <div class="rule-card"><div class="rule-icon">📅</div><div><div class="rule-title">Track your rating monthly</div><div class="rule-desc">Set a monthly reminder to check your review count and average on every platform. Trends tell you more than snapshots. A declining velocity is a warning sign worth catching early.</div></div></div>
+    <div class="rule-card"><div class="rule-icon">🔗</div><div><div class="rule-title">Use keywords naturally in responses</div><div class="rule-desc">When responding, include your service and location naturally: "Thanks for trusting Peak Plumbing with your emergency pipe repair in Irvine." It helps SEO without looking spammy. Natural, not robotic.</div></div></div>
+  </div>
+
+  <div class="zoek-cta-embed">
+    <div>
+      <div class="zce-label">Get a done-for-you reputation system</div>
+      <div class="zce-title">Let Zoek build your review strategy</div>
+      <div class="zce-sub">We help our <strong>50,000+ active clients</strong> build automated review collection systems, respond to reviews at scale, and monitor reputation across platforms — so you can focus on the work, not the inbox.</div>
+    </div>
+    <a href="https://calendly.com/expert-sales" target="_blank" class="zce-btn">Book a Free Strategy Call →</a>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · Irvine, CA</span>
+</footer>
+
+<script>
+let selectedStars=0,selectedTone='professional';
+function setStar(n){selectedStars=n;document.querySelectorAll('.star-btn').forEach((b,i)=>b.classList.toggle('lit',i<n));const labels=['','That stings. Let\'s fix it.','Rough. Respond carefully.','Mixed bag. Acknowledge both sides.','Almost there. A simple thank-you works.','Perfect. Keep it warm and specific.'];document.getElementById('star-label').textContent=labels[n];}
+function setTone(btn,tone){selectedTone=tone;document.querySelectorAll('.tone-pill').forEach(p=>p.classList.remove('active'));btn.classList.add('active');}
+function generateResponse(){
+  const review=document.getElementById('rg-review').value.trim();
+  const bizname=document.getElementById('rg-bizname').value.trim()||'our business';
+  const owner=document.getElementById('rg-ownername').value.trim();
+  const stars=selectedStars,tone=selectedTone;
+  if(!review){alert('Paste a review first.');return;}
+  if(!stars){alert('Pick a star rating.');return;}
+  const isPos=stars>=4,isMix=stars===3,isNeg=stars<=2;
+  const nm=review.match(/^([A-Z][a-z]+)[\s,]/);
+  const rname=nm?nm[1]:null;
+  const sign=owner?`— ${owner}, ${bizname}`:`— The ${bizname} Team`;
+  const greeting=rname?`Hi ${rname},`:'Hi there,';
+  let response='',tip='',typeLabel='';
+  if(isPos){
+    typeLabel='Positive review response';
+    const pool={professional:[`${greeting} Thank you so much for the kind words — we really appreciate you taking the time to share your experience. It means a lot to the whole team. We look forward to serving you again!\n\n${sign}`,`${greeting} This made our day! Reviews like yours are exactly why we do what we do. Thank you for trusting ${bizname} and for taking the time to share your experience.\n\n${sign}`,`${greeting} Thank you — we're so glad everything went smoothly. We take a lot of pride in what we do, so this feedback is genuinely rewarding to read. See you next time!\n\n${sign}`],warm:[`${greeting} Honestly, this just made my whole week. Thank you for trusting us and for taking a couple minutes to leave a review. It really does make a difference for a small business like ours.\n\n${sign}`,`${greeting} You are so kind! We genuinely love what we do and reviews like this remind us why. Thank you for choosing ${bizname} — we hope to see you again soon!\n\n${sign}`],direct:[`${greeting} Thank you — really appreciate the review. Glad we could help!\n\n${sign}`,`${greeting} Thanks so much! Really means a lot. Come back any time.\n\n${sign}`]};
+    const p=pool[tone]||pool.professional;response=p[Math.floor(Math.random()*p.length)];
+    tip='<strong>Tip:</strong> For positive reviews, always mention your business name naturally in the response — it helps with local SEO. "Thanks for trusting ${bizname}" works better than just "Thanks so much!"';
+  } else if(isMix){
+    typeLabel='Mixed review response';
+    const pool={professional:[`${greeting} Thank you for the honest feedback — we appreciate both the kind words and the constructive criticism. You're right that [their concern] is something we're actively working on. If you'd like to share more details, please reach out directly. We'd love to earn that fifth star.\n\n${sign}`],warm:[`${greeting} Thank you for taking the time to share this. We love hearing what went well and we take the rest seriously too. Would you be open to reaching out directly? We'd love to make it right.\n\n${sign}`],direct:[`${greeting} Thanks for the honest review. Glad the [positive part] worked out — and we hear you on [concern]. Working on it. Feel free to reach out directly.\n\n${sign}`]};
+    const p=pool[tone]||pool.professional;response=p[0];
+    tip='<strong>Tip:</strong> For mixed reviews, acknowledge the positive first, then address the criticism briefly. Never be defensive. The goal is for future readers to see you as reasonable — not right.';
+  } else {
+    typeLabel='Negative review response';
+    const pool={professional:[`${greeting} Thank you for sharing this feedback, even though I know it wasn't the experience you were hoping for. I sincerely apologize that we fell short. Please reach out to me directly at [your contact info] so we can discuss what happened and make it right.\n\n${sign}`,`${greeting} I'm sorry to hear your experience didn't meet expectations. I take full responsibility for looking into this. Would you please contact me directly at [your contact info]? I want to understand exactly what happened.\n\n${sign}`],warm:[`${greeting} I'm really sorry — this is not the experience we want anyone to have, and reading this genuinely hurts because we care so much about getting it right. Please reach out to me personally at [contact info]. I want to hear everything.\n\n${sign}`],direct:[`${greeting} I'm sorry this happened. Please contact me directly at [contact info] — I want to fix this.\n\n${sign}`]};
+    const p=pool[tone]||pool.professional;response=p[Math.floor(Math.random()*p.length)];
+    tip='<strong>Remember:</strong> Your response to a negative review is read by hundreds of future customers. They\'re watching to see if you\'re professional. Stay calm, stay short, and take it offline.';
+  }
+  document.getElementById('rg-empty').style.display='none';
+  document.getElementById('rg-type').textContent=typeLabel;
+  document.getElementById('rg-type').className='rg-response-type '+(isPos?'positive':isMix?'neutral':'negative');
+  document.getElementById('rg-text').textContent=response;
+  document.getElementById('rg-tip').innerHTML=tip;
+  document.getElementById('rg-output').classList.add('show');
+}
+function copyResponse(){const text=document.getElementById('rg-text').textContent;navigator.clipboard.writeText(text).then(()=>{const btn=event.target;btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy response',1800);});}
+function calcRating(){
+  const count=parseFloat(document.getElementById('rc-count').value)||0;
+  const current=parseFloat(document.getElementById('rc-current').value)||0;
+  const target=parseFloat(document.getElementById('rc-target').value)||0;
+  const out=document.getElementById('rc-output');
+  if(!count||!current||current<1||current>5){out.innerHTML='<div class="rc-stat"><div class="rc-stat-label">Fill in your numbers above</div><div style="font-size:0.82rem;color:rgba(255,255,255,0.3)">Your rating math will appear here.</div></div>';return;}
+  const totalPoints=current*count;
+  let needed=0;
+  if(target>current&&target<=5){needed=Math.ceil((target*count-totalPoints)/(5-target));}
+  const afterBad=((totalPoints+1)/(count+1)).toFixed(2);
+  const drop=(current-parseFloat(afterBad)).toFixed(2);
+  let toRecover=0;
+  if(5-current>0){toRecover=Math.max(0,Math.ceil((current*(count+1)-totalPoints-1)/(5-current)));}
+  out.innerHTML=`<div class="rc-stat"><div class="rc-stat-label">Current total score</div><div class="rc-stat-val">${totalPoints.toFixed(0)} pts</div><div class="rc-stat-sub">from ${count} reviews at ${current} stars avg</div></div>${target>current&&target<=5&&needed>0?`<div class="rc-stat"><div class="rc-stat-label">5-star reviews needed to reach ${target}</div><div class="rc-stat-val" style="color:var(--yellow)">${needed}</div><div class="rc-stat-sub">all new reviews must be 5-star to hit your target</div></div>`:target<=current&&target>0?`<div class="rc-stat"><div class="rc-stat-label">Target: ${target} stars</div><div class="rc-stat-val" style="color:var(--green)">Already there ✓</div><div class="rc-stat-sub">you're at or above your target rating</div></div>`:''}<div class="rc-stat"><div class="rc-stat-label">Impact of one 1-star review</div><div class="rc-stat-val" style="color:var(--red)">${afterBad} ★</div><div class="rc-stat-sub">drops you ${drop} stars. Takes ${toRecover} five-star reviews to fully recover.</div></div>`;
+}
+</script>
+<script src="cta.js"></script>
+</body>
+</html>
