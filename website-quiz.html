@@ -87,12 +87,17 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .answer-opt.selected .opt-radio::after{opacity:1;}
 .opt-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;position:relative;transition:all 0.15s;}
 .opt-radio::after{content:'';position:absolute;top:4px;left:4px;width:8px;height:8px;border-radius:50%;background:white;opacity:0;transition:opacity 0.15s;}
-.opt-label{font-size:0.9rem;font-weight:600;line-height:1.35;}
-.opt-sub{font-size:0.75rem;color:var(--muted);margin-top:0.15rem;line-height:1.4;}
-.q-
-.btn-back{padding:0.6rem 1.25rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
-.btn-back:hover{color:var(--white);border-color:rgba(255,255,255,0.3);}
-.btn-next-q{padding:0.65rem 1.75rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);opacity:0.4;pointer-events:none;}
+.opt-label{font-size:0.92rem;font-weight:700;line-height:1.35;color:var(--white);}
+.opt-sub{font-size:0.76rem;color:var(--muted);margin-top:0.15rem;line-height:1.4;}
+/* unselected options get a slightly lighter background so text pops */
+.answer-opt{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);}
+.answer-opt:hover{border-color:var(--purple);background:rgba(108,99,255,0.1);}
+.answer-opt.selected{border-color:var(--purple);background:rgba(108,99,255,0.15);}
+/* nav buttons row */
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border-light);gap:1rem;}
+.btn-back{padding:0.65rem 1.4rem;background:rgba(255,255,255,0.05);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:600;border:1px solid rgba(255,255,255,0.15);border-radius:4px;cursor:pointer;transition:all 0.15s;}
+.btn-back:hover{background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.3);}
+.btn-next-q{padding:0.7rem 2rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.92rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);opacity:0.35;pointer-events:none;}
 .btn-next-q.ready{opacity:1;pointer-events:all;}
 .btn-next-q.ready:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
 
@@ -390,8 +395,8 @@ function renderQuestion(i){
           </button>`).join('')}
       </div>
       <div class="q-nav">
-        ${i>0?`<button class="btn-back" onclick="goBack()">← Back</button>`:'<span></span>'}
-        <button class="btn-next-q ${selected>=0?'ready':''}" id="btn-next" onclick="${i<QUESTIONS.length-1?'goNext()':'showResults()'}">${i<QUESTIONS.length-1?'Next →':'See My Results →'}</button>
+        ${i>0?`<button class="btn-back" onclick="goBack()">← Back</button>`:`<span style="display:inline-block;min-width:80px"></span>`}
+        <button class="btn-next-q ${selected>=0?'ready':''}" id="btn-next" onclick="${i<QUESTIONS.length-1?'goNext()':'showResults()'}">${i<QUESTIONS.length-1?'Next Question →':'See My Results →'}</button>
       </div>
     </div>`;
   window.scrollTo(0,0);
