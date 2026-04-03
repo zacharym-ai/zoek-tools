@@ -243,6 +243,21 @@ body {
 }
 .tool-card:hover .tool-arrow { gap: 0.65rem; }
 
+
+/* INDUSTRY SELECTOR */
+.industry-bar{display:flex;align-items:center;gap:1rem;padding:0 2.5rem 2rem;flex-wrap:wrap;}
+.industry-label{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.industry-pills{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.ind-pill{padding:0.4rem 0.9rem;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.ind-pill:hover{border-color:var(--purple);color:var(--white);}
+.ind-pill.active{background:var(--purple);border-color:var(--purple);color:white;}
+.tool-card{transition:all 0.3s;}
+.tool-card.dimmed{opacity:0.35;}
+.tool-card.highlighted{border-color:rgba(108,99,255,0.4);box-shadow:0 0 0 1px rgba(108,99,255,0.15);}
+.ind-tip{display:none;font-size:0.75rem;color:var(--muted);padding:0 2.5rem 1.5rem;line-height:1.6;}
+.ind-tip.show{display:block;}
+.ind-tip strong{color:var(--white);}
+
 /* CTA BANNER */
 .cta-banner {
   background: var(--sidebar);
@@ -416,38 +431,53 @@ footer {
     <h2 class="section-title">Built for growth. Used by pros.</h2>
     <p class="section-sub">Diagnose your funnel, calculate ROI, plan your budget — in minutes, not spreadsheets.</p>
   </div>
-  <div class="tools-grid">
-    <a class="tool-card" href="funnel.html">
+
+  <div class="industry-bar">
+    <span class="industry-label">I'm in:</span>
+    <div class="industry-pills">
+      <button class="ind-pill active" onclick="setIndustry('all',this)">All industries</button>
+      <button class="ind-pill" onclick="setIndustry('home',this)">🏠 Home Services</button>
+      <button class="ind-pill" onclick="setIndustry('health',this)">🏥 Healthcare</button>
+      <button class="ind-pill" onclick="setIndustry('retail',this)">🛍️ Retail</button>
+      <button class="ind-pill" onclick="setIndustry('restaurant',this)">🍽️ Restaurant</button>
+      <button class="ind-pill" onclick="setIndustry('professional',this)">💼 Professional Services</button>
+      <button class="ind-pill" onclick="setIndustry('fitness',this)">💪 Fitness &amp; Wellness</button>
+    </div>
+  </div>
+  <div id="ind-tip" class="ind-tip"></div>
+
+  <div class="tools-grid" id="tools-grid">
+    <a class="tool-card" href="funnel.html" data-industry="professional,health,home,retail">
       <div class="tool-icon">🔽</div>
       <div class="tool-name">Lead Funnel Visualizer</div>
       <p class="tool-desc">Map every stage of your pipeline. See exactly where leads drop off and how many you need at the top to hit your revenue goal.</p>
       <div class="tool-arrow">Open Tool →</div>
     </a>
-    <a class="tool-card" href="calculator.html">
+    <a class="tool-card" href="calculator.html" data-industry="retail,professional,health">
       <div class="tool-icon">💰</div>
       <div class="tool-name">Cost Per Lead Calculator</div>
       <p class="tool-desc">Break down your ad spend by channel, calculate true CPL, and compare against industry benchmarks to spot where you're overpaying.</p>
       <div class="tool-arrow">Open Tool →</div>
     </a>
-    <a class="tool-card" href="roi.html">
+    <a class="tool-card" href="roi.html" data-industry="professional,retail,health">
       <div class="tool-icon">📊</div>
       <div class="tool-name">Marketing ROI Calculator</div>
       <p class="tool-desc">Get a full picture of your marketing return — ROAS, payback period, break-even point, and a clear signal on whether to scale or cut.</p>
       <div class="tool-arrow">Open Tool →</div>
     </a>
-    <a class="tool-card" href="budget.html">
+    <a class="tool-card" href="budget.html" data-industry="retail,restaurant,home">
       <div class="tool-icon">📅</div>
       <div class="tool-name">Ad Budget Planner</div>
       <p class="tool-desc">Enter your revenue target and work backwards to the exact budget you need across paid search, social, and display to get there.</p>
       <div class="tool-arrow">Open Tool →</div>
     </a>
-    <a class="tool-card" href="positioning.html">
+    <a class="tool-card" href="positioning.html" data-industry="professional,health,fitness">
       <div class="tool-icon">🎯</div>
       <div class="tool-name">Positioning Worksheet</div>
       <p class="tool-desc">Sharpen your market position with a guided framework: ICP, differentiators, value props, and messaging — all in one place.</p>
       <div class="tool-arrow">Open Tool →</div>
     </a>
-    <a class="tool-card" href="reviews.html">
+    <a class="tool-card" href="reviews.html" data-industry="restaurant,home,health,fitness,retail">
       <div class="tool-icon">⭐</div>
       <div class="tool-name">Reviews & Reputation Tool</div>
       <p class="tool-desc">Audit your online reputation score, track review velocity across platforms, and get a prioritized action plan to build social proof.</p>
@@ -490,6 +520,69 @@ footer {
 
 <script src="cta.js"></script>
 <script>
+
+// ── INDUSTRY SELECTOR ──────────────────────────────────
+const IND_TIPS = {
+  home: '<strong>Home Services tip:</strong> Start with the Website Grader and Local SEO Check — 73% of homeowners search online before hiring a contractor.',
+  health: '<strong>Healthcare tip:</strong> Reviews and Local SEO are your biggest drivers. Patients trust Google ratings more than any ad.',
+  retail: '<strong>Retail tip:</strong> Revenue Loss Calculator and Ad Budget Planner first — retail margins make every unoptimized dollar hurt more.',
+  restaurant: '<strong>Restaurant tip:</strong> Reviews, Local SEO, and Website Grader. 90% of diners check a restaurant online before visiting.',
+  professional: '<strong>Professional Services tip:</strong> Positioning Worksheet and Marketing ROI — your differentiation and cost-per-client are the levers that matter most.',
+  fitness: '<strong>Fitness & Wellness tip:</strong> Marketing Wheel and Local SEO Check — studio and gym businesses live and die by local search and reputation.',
+};
+
+// Priority order per industry (tool hrefs, most relevant first)
+const IND_ORDER = {
+  home:         ['grader.html','local-seo.html','reviews.html','revenue-loss.html','marketing-wheel.html','funnel.html','budget.html','package-builder.html','results.html','calculator.html','roi.html','website-quiz.html','positioning.html'],
+  health:       ['reviews.html','local-seo.html','grader.html','marketing-wheel.html','website-quiz.html','calculator.html','roi.html','funnel.html','revenue-loss.html','package-builder.html','results.html','budget.html','positioning.html'],
+  retail:       ['revenue-loss.html','budget.html','calculator.html','grader.html','marketing-wheel.html','reviews.html','roi.html','funnel.html','local-seo.html','package-builder.html','results.html','website-quiz.html','positioning.html'],
+  restaurant:   ['reviews.html','local-seo.html','grader.html','revenue-loss.html','marketing-wheel.html','budget.html','website-quiz.html','funnel.html','calculator.html','package-builder.html','results.html','roi.html','positioning.html'],
+  professional: ['positioning.html','roi.html','funnel.html','calculator.html','marketing-wheel.html','grader.html','revenue-loss.html','budget.html','website-quiz.html','package-builder.html','results.html','local-seo.html','reviews.html'],
+  fitness:      ['marketing-wheel.html','local-seo.html','reviews.html','grader.html','website-quiz.html','funnel.html','revenue-loss.html','package-builder.html','results.html','calculator.html','roi.html','budget.html','positioning.html'],
+};
+
+function setIndustry(ind, btn) {
+  document.querySelectorAll('.ind-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+
+  const grid = document.getElementById('tools-grid');
+  const cards = [...grid.querySelectorAll('a.tool-card')];
+  const tip = document.getElementById('ind-tip');
+
+  if (ind === 'all') {
+    // Restore original order, remove highlights
+    cards.sort((a,b) => parseInt(a.dataset.origIndex||0) - parseInt(b.dataset.origIndex||0));
+    cards.forEach(c => { c.classList.remove('highlighted','dimmed'); grid.appendChild(c); });
+    tip.className = 'ind-tip';
+    tip.innerHTML = '';
+    return;
+  }
+
+  // Save original order once
+  cards.forEach((c,i) => { if (!c.dataset.origIndex) c.dataset.origIndex = i; });
+
+  const order = IND_ORDER[ind] || [];
+  const sorted = [...cards].sort((a,b) => {
+    const ai = order.indexOf(a.getAttribute('href'));
+    const bi = order.indexOf(b.getAttribute('href'));
+    const av = ai === -1 ? 999 : ai;
+    const bv = bi === -1 ? 999 : bi;
+    return av - bv;
+  });
+
+  // Re-append in new order with highlight on top 3
+  sorted.forEach((c, i) => {
+    c.classList.toggle('highlighted', i < 3);
+    c.classList.toggle('dimmed', false);
+    grid.appendChild(c);
+  });
+
+  // Show tip
+  tip.innerHTML = IND_TIPS[ind] || '';
+  tip.className = 'ind-tip show';
+}
+// ───────────────────────────────────────────────────────
+
 function toggleNav(btn){
   var menu=document.getElementById('nl-tools-menu');
   var isOpen=menu.classList.contains('open');
