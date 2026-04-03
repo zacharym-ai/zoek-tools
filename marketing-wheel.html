@@ -127,6 +127,18 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   .score-guide{padding:2rem 1.25rem;}
   footer{flex-direction:column;gap:0.75rem;text-align:center;}
 }
+
+/* SCORE GUIDE TOP */
+.score-guide-top{padding:1.5rem 2rem;background:rgba(108,99,255,0.06);border-bottom:1px solid var(--border);}
+.sgt-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.85rem;}
+.sgt-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:0.75rem;}
+.sgt-card{background:var(--navy);padding:0.85rem 0.75rem;}
+.sgt-num{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:800;line-height:1;margin-bottom:0.2rem;}
+.sgt-name{font-weight:700;font-size:0.75rem;margin-bottom:0.2rem;}
+.sgt-desc{font-size:0.68rem;color:var(--muted);line-height:1.45;}
+.sgt-warning{font-size:0.75rem;color:var(--muted);line-height:1.55;}
+.sgt-warning strong{color:var(--white);}
+@media(max-width:700px){.sgt-grid{grid-template-columns:1fr 1fr;}.sgt-grid .sgt-card:last-child{grid-column:1/-1;}.score-guide-top{padding:1.25rem;}}
 </style>
 </head>
 <body>
@@ -146,6 +158,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           <a href="roi.html">Marketing ROI</a>
           <a href="budget.html">Ad Budget Planner</a>
           <a href="revenue-loss.html">Revenue Loss</a>
+          <a href="package-builder.html">Package Builder</a>
         </div>
         <div class="ndm-col">
           <div class="ndm-label">Audits &amp; Quizzes</div>
@@ -166,6 +179,19 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <div class="hero-tag">Tool 11 · Marketing Wheel</div>
   <h1 class="hero-title">How balanced is your<br><span class="accent">marketing wheel?</span></h1>
   <p class="hero-sub">A business with a lopsided marketing wheel works twice as hard for half the results. <strong>Rate yourself across 6 pillars and see exactly which spokes are flat</strong> — and what it's costing you.</p>
+</div>
+
+<!-- SCORE GUIDE TOP -->
+<div class="score-guide-top">
+  <div class="sgt-label">Before you rate yourself — what each score actually means</div>
+  <div class="sgt-grid">
+    <div class="sgt-card"><div class="sgt-num" style="color:var(--red)">1–2</div><div class="sgt-name">Doesn't exist</div><div class="sgt-desc">No presence, no strategy, no activity. You're invisible here.</div></div>
+    <div class="sgt-card"><div class="sgt-num" style="color:#ff8c5a">3–4</div><div class="sgt-name">Broken</div><div class="sgt-desc">Something exists but actively hurting you more than helping.</div></div>
+    <div class="sgt-card"><div class="sgt-num" style="color:var(--yellow)">5–6</div><div class="sgt-name">Functional</div><div class="sgt-desc">Basics covered but nothing optimized. Leaving results on the table.</div></div>
+    <div class="sgt-card"><div class="sgt-num" style="color:#a0f090">7–8</div><div class="sgt-name">Competitive</div><div class="sgt-desc">Working well, consistent, ahead of most competitors.</div></div>
+    <div class="sgt-card"><div class="sgt-num" style="color:var(--green)">9–10</div><div class="sgt-name">Market leader</div><div class="sgt-desc">You dominate this pillar. Competitors are trying to catch you.</div></div>
+  </div>
+  <p class="sgt-warning">⚠️ Most business owners rate themselves too high. Compare yourself to the <strong>best</strong> in your market — not the worst.</p>
 </div>
 
 <div class="wheel-layout">
@@ -208,18 +234,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   </div>
 </div>
 
-<!-- SCORE GUIDE -->
-<div class="score-guide">
-  <div class="sg-title">What each score actually means</div>
-  <p class="sg-sub">Most business owners rate themselves too high because they compare themselves to businesses with <em>no</em> marketing — not to the top performers in their market. <strong>Be honest. The gaps you find here are the gaps your competitors are already exploiting.</strong></p>
-  <div class="sg-grid">
-    <div class="sg-card"><div class="sg-score" style="color:var(--red)">1–2</div><div class="sg-name">Doesn't exist</div><div class="sg-desc">No presence, no strategy, no activity. You're invisible in this area and losing business to anyone who shows up.</div></div>
-    <div class="sg-card"><div class="sg-score" style="color:#ff8c5a">3–4</div><div class="sg-name">Broken</div><div class="sg-desc">Something exists but it's actively hurting you — an outdated website, no reviews, sporadic social posts. Doing something wrong is often worse than doing nothing.</div></div>
-    <div class="sg-card"><div class="sg-score" style="color:var(--yellow)">5–6</div><div class="sg-name">Functional</div><div class="sg-desc">You're in the game but not winning it. You have the basics covered but nothing is optimized. You're getting some results but leaving most on the table.</div></div>
-    <div class="sg-card"><div class="sg-score" style="color:#a0f090">7–8</div><div class="sg-name">Competitive</div><div class="sg-desc">You're doing well in this area. It's working, it's consistent, and you're ahead of most competitors. The goal now is to protect it and push for the top tier.</div></div>
-    <div class="sg-card"><div class="sg-score" style="color:var(--green)">9–10</div><div class="sg-name">Market leader</div><div class="sg-desc">You dominate this pillar in your market. Competitors are trying to catch you here. This is a real competitive advantage — protect it and leverage it.</div></div>
-  </div>
-</div>
+
 
 <footer>
   <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
@@ -597,6 +612,7 @@ function updateSummary() {
     sub.textContent = `A ${rounded}/10 score is impressive. In a free call, Zoek can identify where you\'re most vulnerable and help you protect what\'s working.`;
   }
 }
+
 
 // =====================
 // NAV
