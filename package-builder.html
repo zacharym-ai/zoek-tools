@@ -11,8 +11,6 @@
 :root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
 html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
 .nav-links{display:flex;align-items:center;gap:0.15rem;list-style:none;}
@@ -33,114 +31,116 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
 @media(max-width:700px){.nav-links{display:none;}}
 
-/* HERO */
-.hero{margin-top:60px;padding:4.5rem 2rem 3.5rem;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,0.14) 0%,transparent 65%);border-bottom:1px solid var(--border);}
+.hero{margin-top:60px;padding:4rem 2rem 3rem;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,0.14) 0%,transparent 65%);border-bottom:1px solid var(--border);}
 .hero-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
-.hero-title{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem;}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem;}
 .hero-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:520px;margin:0 auto;}
+.hero-sub{font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:540px;margin:0 auto;}
 .hero-sub strong{color:var(--white);}
 
-/* BUILDER LAYOUT */
-.builder-wrap{display:grid;grid-template-columns:1fr 360px;min-height:85vh;border-bottom:1px solid var(--border);}
+/* LAYOUT */
+.builder-wrap{display:grid;grid-template-columns:1fr 380px;min-height:85vh;border-bottom:1px solid var(--border);}
+.services-col{padding:2.5rem 2rem;display:flex;flex-direction:column;gap:2.5rem;}
 
-/* LEFT — SERVICES */
-.services-col{padding:2.5rem 2rem;display:flex;flex-direction:column;gap:2rem;}
+/* CATEGORY */
+.cat-block{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.cat-header{padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;border-bottom:1px solid var(--border);}
+.cat-icon{font-size:1.4rem;}
+.cat-title{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;}
+.cat-subtitle{font-size:0.72rem;color:var(--muted);margin-top:0.1rem;}
+.cat-billing{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:3px;margin-left:auto;flex-shrink:0;}
+.billing-one{background:rgba(108,99,255,0.15);color:var(--purple);}
+.billing-monthly{background:rgba(0,168,255,0.12);color:var(--blue);}
 
-.service-category{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
-.sc-header{padding:1rem 1.25rem;background:rgba(108,99,255,0.08);display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid var(--border);}
-.sc-icon{font-size:1.3rem;}
-.sc-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;}
-.sc-desc{font-size:0.75rem;color:var(--muted);margin-top:0.1rem;}
-.sc-items{padding:0.75rem;}
+/* TIER GRID — radio-style selector */
+.tier-grid{display:grid;gap:0;border-top:none;}
+.tier-grid.cols-2{grid-template-columns:1fr 1fr;}
+.tier-grid.cols-3{grid-template-columns:1fr 1fr 1fr;}
+.tier-grid.cols-4{grid-template-columns:1fr 1fr 1fr 1fr;}
+.tier-card{padding:1.1rem 1.15rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);cursor:pointer;transition:all 0.15s;position:relative;user-select:none;}
+.tier-card:last-child{border-right:none;}
+.tier-card:hover{background:rgba(108,99,255,0.05);}
+.tier-card.selected{background:rgba(108,99,255,0.1);border-color:var(--purple)!important;z-index:1;}
+.tier-card.selected::after{content:'✓';position:absolute;top:0.6rem;right:0.65rem;width:20px;height:20px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;color:white;line-height:20px;text-align:center;}
+.tier-badge{font-size:0.58rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2px;display:inline-block;margin-bottom:0.45rem;}
+.badge-popular{background:rgba(255,209,102,0.2);color:var(--yellow);}
+.badge-starter{background:rgba(108,99,255,0.15);color:var(--purple);}
+.badge-growth{background:rgba(0,168,255,0.15);color:var(--blue);}
+.badge-enterprise{background:rgba(255,92,124,0.15);color:var(--red);}
+.badge-fast{background:rgba(79,255,176,0.15);color:var(--green);}
+.tier-name{font-family:'Syne',sans-serif;font-size:0.92rem;font-weight:800;margin-bottom:0.2rem;line-height:1.2;}
+.tier-desc{font-size:0.72rem;color:var(--muted);line-height:1.5;margin-bottom:0.6rem;}
+.tier-includes{display:flex;flex-direction:column;gap:0.18rem;}
+.ti-row{font-size:0.68rem;color:var(--muted);display:flex;gap:0.35rem;line-height:1.4;}
+.ti-row::before{content:'·';color:var(--purple);flex-shrink:0;}
+/* standalone items (checkboxes, not tiers) */
+.standalone-items{display:flex;flex-direction:column;}
+.standalone-item{display:flex;align-items:flex-start;gap:0.85rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border-light);cursor:pointer;transition:all 0.15s;user-select:none;}
+.standalone-item:last-child{border-bottom:none;}
+.standalone-item:hover{background:rgba(255,255,255,0.02);}
+.standalone-item.selected{background:rgba(108,99,255,0.07);}
+.si-check{width:22px;height:22px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:0.72rem;transition:all 0.15s;}
+.standalone-item.selected .si-check{background:var(--purple);border-color:var(--purple);color:white;}
+.si-text{flex:1;}
+.si-name{font-weight:700;font-size:0.88rem;margin-bottom:0.18rem;}
+.si-desc{font-size:0.73rem;color:var(--muted);line-height:1.55;}
 
-.service-item{display:flex;align-items:flex-start;gap:0.85rem;padding:0.85rem 0.9rem;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all 0.15s;margin-bottom:0.4rem;user-select:none;}
-.service-item:last-child{margin-bottom:0;}
-.service-item:hover{border-color:var(--border);background:rgba(255,255,255,0.03);}
-.service-item.selected{border-color:var(--purple);background:rgba(108,99,255,0.08);}
-.si-check{width:22px;height:22px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;font-size:0.75rem;}
-.service-item.selected .si-check{background:var(--purple);border-color:var(--purple);color:white;}
-.si-body{flex:1;}
-.si-name{font-weight:700;font-size:0.9rem;margin-bottom:0.2rem;}
-.si-desc{font-size:0.75rem;color:var(--muted);line-height:1.55;}
-.si-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.45rem;}
-.si-tag{font-size:0.6rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.15rem 0.45rem;border-radius:3px;background:rgba(255,255,255,0.06);color:var(--muted);}
-
-/* RIGHT — SUMMARY */
+/* SUMMARY PANEL */
 .summary-col{background:var(--sidebar);border-left:1px solid var(--border);position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;display:flex;flex-direction:column;}
-.summary-top{padding:1.5rem;}
+.sum-header{padding:1.25rem 1.5rem 0;}
 .sum-label{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.85rem;}
-.sum-empty{text-align:center;padding:2rem 1rem;color:var(--muted);}
-.sum-empty-icon{font-size:2.5rem;opacity:0.3;margin-bottom:0.5rem;}
-.sum-empty-text{font-size:0.82rem;line-height:1.6;}
-.sum-items{display:flex;flex-direction:column;gap:0.4rem;}
-.sum-item{display:flex;align-items:flex-start;justify-content:space-between;gap:0.75rem;padding:0.7rem 0.85rem;background:rgba(255,255,255,0.03);border:1px solid var(--border-light);border-radius:5px;}
-.sum-item-left{flex:1;}
-.sum-item-name{font-size:0.82rem;font-weight:700;}
-.sum-item-cat{font-size:0.65rem;color:var(--muted);}
-.sum-remove{background:transparent;border:none;color:rgba(255,255,255,0.2);cursor:pointer;font-size:0.9rem;padding:0.1rem 0.25rem;border-radius:3px;transition:all 0.15s;flex-shrink:0;}
-.sum-remove:hover{color:var(--red);background:rgba(255,92,124,0.1);}
+.sum-empty{text-align:center;padding:2.5rem 1rem;}
+.sum-empty-icon{font-size:2.5rem;opacity:0.25;margin-bottom:0.6rem;}
+.sum-empty-text{font-size:0.8rem;color:var(--muted);line-height:1.65;}
+.sum-items{display:flex;flex-direction:column;gap:0.4rem;padding:0 1.5rem;}
+.sum-item{display:flex;align-items:flex-start;justify-content:space-between;gap:0.65rem;padding:0.65rem 0.8rem;background:rgba(255,255,255,0.03);border:1px solid var(--border-light);border-radius:5px;}
+.sim-left{flex:1;}
+.sim-name{font-size:0.8rem;font-weight:700;line-height:1.3;}
+.sim-cat{font-size:0.62rem;color:var(--muted);margin-top:0.1rem;}
+.sim-remove{background:transparent;border:none;color:rgba(255,255,255,0.2);cursor:pointer;padding:0.1rem 0.3rem;border-radius:3px;transition:all 0.15s;font-size:0.85rem;flex-shrink:0;}
+.sim-remove:hover{color:var(--red);background:rgba(255,92,124,0.1);}
 
-/* TIMELINE */
-.sum-timeline{padding:0 1.5rem 1rem;}
-.tl-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.65rem;display:flex;align-items:center;gap:0.5rem;}
-.tl-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
-.tl-item{display:flex;align-items:center;gap:0.6rem;padding:0.35rem 0;font-size:0.78rem;color:var(--muted);}
-.tl-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.sum-section{padding:0.85rem 1.5rem 0;}
+.ss-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem;}
+.ss-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
+.ss-row{display:flex;align-items:flex-start;gap:0.5rem;padding:0.25rem 0;font-size:0.75rem;color:var(--muted);line-height:1.5;}
+.ss-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.ss-check::before{content:'✓';color:var(--green);font-weight:700;font-size:0.68rem;flex-shrink:0;}
 
-/* WHAT YOU GET */
-.sum-features{padding:0 1.5rem 1rem;}
-.feat-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.65rem;display:flex;align-items:center;gap:0.5rem;}
-.feat-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
-.feat-item{display:flex;gap:0.5rem;align-items:flex-start;padding:0.2rem 0;font-size:0.75rem;color:var(--muted);line-height:1.5;}
-.feat-item::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;font-size:0.7rem;margin-top:2px;}
-
-/* CTA BOTTOM */
 .sum-cta{padding:1rem 1.5rem 1.5rem;margin-top:auto;}
-.sum-cta-box{background:var(--gradient);border-radius:8px;padding:1.25rem;}
+.scta-box{background:var(--gradient);border-radius:8px;padding:1.25rem;text-align:center;}
 .scta-eyebrow{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.3rem;}
-.scta-title{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;margin-bottom:0.3rem;line-height:1.2;}
-.scta-sub{font-size:0.72rem;color:rgba(255,255,255,0.75);line-height:1.55;margin-bottom:0.85rem;}
-.scta-btn{display:block;background:white;color:var(--purple);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:800;text-align:center;padding:0.65rem;border-radius:4px;border:none;cursor:pointer;transition:all 0.15s;width:100%;}
+.scta-title{font-family:'Syne',sans-serif;font-size:0.92rem;font-weight:800;margin-bottom:0.3rem;line-height:1.2;}
+.scta-sub{font-size:0.7rem;color:rgba(255,255,255,0.72);line-height:1.55;margin-bottom:0.85rem;}
+.scta-btn{display:block;width:100%;background:white;color:var(--purple);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:800;text-align:center;padding:0.65rem;border-radius:4px;border:none;cursor:pointer;transition:all 0.15s;}
 .scta-btn:hover{transform:translateY(-1px);}
-.scta-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.scta-btn:disabled{opacity:0.45;cursor:not-allowed;transform:none;}
 
-/* SUBMISSION MODAL */
+/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:300;display:none;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px);}
 .modal-overlay.open{display:flex;}
-.modal-box{background:var(--sidebar);border:1px solid rgba(108,99,255,0.35);border-radius:10px;max-width:500px;width:100%;padding:2rem;}
+.modal-box{background:var(--sidebar);border:1px solid rgba(108,99,255,0.35);border-radius:10px;max-width:500px;width:100%;padding:2rem;max-height:90vh;overflow-y:auto;}
 .modal-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;}
-.modal-title{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;margin-bottom:0.4rem;line-height:1.2;}
-.modal-sub{font-size:0.82rem;color:var(--muted);line-height:1.65;margin-bottom:0.75rem;}
+.modal-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:0.4rem;line-height:1.2;}
+.modal-sub{font-size:0.82rem;color:var(--muted);line-height:1.65;margin-bottom:0.85rem;}
 .modal-sub strong{color:var(--white);}
-.modal-package-preview{background:rgba(108,99,255,0.07);border:1px solid var(--border);border-radius:6px;padding:0.75rem 1rem;margin-bottom:1.25rem;font-size:0.75rem;color:var(--muted);line-height:1.75;}
-.modal-package-preview strong{color:var(--white);display:block;margin-bottom:0.3rem;font-size:0.78rem;}
+.modal-preview{background:rgba(108,99,255,0.07);border:1px solid var(--border);border-radius:6px;padding:0.85rem 1rem;margin-bottom:1.25rem;font-size:0.75rem;color:var(--muted);line-height:1.8;}
+.modal-preview strong{color:var(--white);display:block;font-size:0.78rem;margin-bottom:0.3rem;}
 .modal-fields{display:flex;flex-direction:column;gap:0.65rem;margin-bottom:1.25rem;}
-.modal-input{width:100%;padding:0.65rem 0.85rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;}
+.modal-input{width:100%;padding:0.65rem 0.85rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
 .modal-input:focus{border-color:var(--purple);}
 .modal-input::placeholder{color:rgba(255,255,255,0.25);}
-.modal-submit{width:100%;padding:0.85rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.95rem;font-weight:800;border:none;border-radius:4px;cursor:pointer;box-shadow:0 4px 14px rgba(108,99,255,0.35);transition:all 0.2s;}
-.modal-submit:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);}
-.modal-cancel{width:100%;margin-top:0.5rem;padding:0.5rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;border:none;cursor:pointer;transition:color 0.15s;}
+.modal-submit{width:100%;padding:0.85rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.92rem;font-weight:800;border:none;border-radius:4px;cursor:pointer;box-shadow:0 4px 14px rgba(108,99,255,0.35);}
+.modal-cancel{width:100%;margin-top:0.5rem;padding:0.5rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;border:none;cursor:pointer;}
 .modal-cancel:hover{color:var(--white);}
 .modal-error{color:var(--red);font-size:0.75rem;text-align:center;margin-top:0.4rem;display:none;}
-
-/* SUCCESS STATE */
-.success-screen{display:none;text-align:center;padding:3rem 2rem;}
-.success-screen.show{display:block;}
-.success-icon{font-size:3rem;margin-bottom:1rem;}
-.success-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.5rem;}
-.success-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;max-width:380px;margin:0 auto 1.5rem;}
-.success-sub strong{color:var(--white);}
-.success-cal{display:inline-block;background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.75rem;border-radius:4px;font-size:0.88rem;font-weight:700;box-shadow:0 4px 14px rgba(108,99,255,0.35);}
-
-@media(max-width:960px){.builder-wrap{grid-template-columns:1fr;}.summary-col{position:static;height:auto;border-left:none;border-top:1px solid var(--border);}.services-col{padding:1.5rem 1.25rem;}}
-@media(max-width:600px){.hero{padding:3rem 1.25rem 2.5rem;}.services-col{padding:1.25rem 1rem;gap:1.25rem;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
 
 footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
 .footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
 .footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
 .footer-link:hover{color:var(--white);}
+@media(max-width:960px){.builder-wrap{grid-template-columns:1fr;}.summary-col{position:static;height:auto;border-left:none;border-top:1px solid var(--border);}.tier-grid.cols-4{grid-template-columns:1fr 1fr;}.tier-grid.cols-3{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.hero{padding:3rem 1.25rem 2rem;}.services-col{padding:1.25rem 1rem;gap:1.5rem;}.tier-grid.cols-2,.tier-grid.cols-3,.tier-grid.cols-4{grid-template-columns:1fr;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
 </style>
 </head>
 <body>
@@ -160,6 +160,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           <a href="roi.html">Marketing ROI</a>
           <a href="budget.html">Ad Budget Planner</a>
           <a href="revenue-loss.html">Revenue Loss</a>
+          <a href="package-builder.html">Package Builder</a>
         </div>
         <div class="ndm-col">
           <div class="ndm-label">Audits &amp; Quizzes</div>
@@ -179,52 +180,47 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <div class="hero">
   <div class="hero-tag">Tool 12 · Package Builder</div>
   <h1 class="hero-title">Build your perfect<br><span class="accent">marketing package</span></h1>
-  <p class="hero-sub">Select the services that match your goals and see exactly what's included. <strong>No prices — just scope, timelines, and deliverables.</strong> A Zoek strategist will reach out with a custom quote.</p>
+  <p class="hero-sub">Pick the services that match where your business is headed. <strong>No pricing shown here</strong> — every package is scoped to your budget. A real Zoek strategist will follow up with a custom proposal.</p>
 </div>
 
 <div class="builder-wrap">
-  <!-- SERVICES -->
   <div class="services-col" id="services-col"></div>
 
-  <!-- SUMMARY -->
   <div class="summary-col">
-    <div class="summary-top">
-      <div class="sum-label">Your package so far</div>
+    <div class="sum-header">
+      <div class="sum-label">Your package</div>
       <div id="sum-empty" class="sum-empty">
         <div class="sum-empty-icon">📦</div>
-        <p class="sum-empty-text">Select services on the left to build your package.</p>
+        <p class="sum-empty-text">Select services on the left to build your package. Your choices will appear here.</p>
       </div>
-      <div id="sum-items" class="sum-items" style="display:none"></div>
+      <div id="sum-items" style="display:none"></div>
     </div>
-
-    <div id="sum-timeline" class="sum-timeline" style="display:none">
-      <div class="tl-label">Timeline</div>
-      <div id="tl-items"></div>
+    <div id="sum-timeline" style="display:none" class="sum-section">
+      <div class="ss-label">Estimated timeline</div>
+      <div id="tl-rows"></div>
     </div>
-
-    <div id="sum-features" class="sum-features" style="display:none">
-      <div class="feat-label">What's included</div>
-      <div id="feat-items"></div>
+    <div id="sum-features" style="display:none" class="sum-section">
+      <div class="ss-label">What's included</div>
+      <div id="feat-rows"></div>
     </div>
-
     <div class="sum-cta">
-      <div class="sum-cta-box">
-        <div class="scta-eyebrow">Ready to move forward?</div>
-        <div class="scta-title" id="scta-title">Build your package above</div>
-        <div class="scta-sub" id="scta-sub">Select services to see what's possible for your business, then get a custom quote from Zoek.</div>
+      <div class="scta-box">
+        <div class="scta-eyebrow">No commitment required</div>
+        <div class="scta-title" id="scta-title">Select services to get started</div>
+        <div class="scta-sub" id="scta-sub">A Zoek strategist will review your selections and reach out with a custom proposal built around your budget and goals.</div>
         <button class="scta-btn" id="scta-btn" onclick="openModal()" disabled>Get My Custom Quote →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SUBMISSION MODAL -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal-box">
     <div class="modal-tag">Almost there</div>
-    <div class="modal-title">Tell us a little about your business</div>
-    <div class="modal-sub">A Zoek strategist will review your package and reach out within one business day. <strong>No automated emails. A real person.</strong></div>
-    <div class="modal-package-preview" id="modal-preview"></div>
+    <div class="modal-title">Tell us about your business</div>
+    <div class="modal-sub">A Zoek strategist — <strong>not an autoresponder</strong> — will review your package and reach out within one business day.</div>
+    <div class="modal-preview" id="modal-preview"></div>
     <div class="modal-fields">
       <input class="modal-input" id="m-name" type="text" placeholder="Your name *">
       <input class="modal-input" id="m-biz" type="text" placeholder="Business name *">
@@ -234,7 +230,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       <textarea class="modal-input" id="m-notes" rows="2" placeholder="Anything else we should know? (optional)" style="resize:none;"></textarea>
     </div>
     <button class="modal-submit" id="modal-submit-btn" onclick="submitPackage()">Send My Package to Zoek →</button>
-    <button class="modal-cancel" onclick="closeModal()">Cancel — go back</button>
+    <button class="modal-cancel" onclick="closeModal()">← Go back</button>
     <div class="modal-error" id="modal-error">Please fill in your name, business, email, and phone.</div>
   </div>
 </div>
@@ -245,246 +241,459 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 </footer>
 
 <script>
-// ============================
-// SERVICE DATA
-// ============================
-const CATEGORIES = [
+// ============================================================
+// SERVICE DATA — built from Zoek's actual pricing sheet
+// ============================================================
+
+// State: one selection per "tier" category, multiple for standalone
+const selections = {}; // catId -> itemId (for tier groups)
+const addons = new Set(); // itemId (for standalone checkboxes)
+
+const CATS = [
+
+  // ── WEBSITE DESIGN ─────────────────────────────────────
   {
     id: 'website',
     icon: '🌐',
-    title: 'Website',
-    desc: 'Your digital home base — the foundation everything else is built on',
-    color: '#6c63ff',
+    title: 'Website Design',
+    subtitle: 'Your 24/7 salesperson — built by Zoek, optimized to convert',
+    billing: 'one-time',
+    type: 'tiers', // radio-style
+    cols: 4,
     items: [
       {
+        id: 'web-express',
+        badge: 'badge-fast', badgeLabel: 'Fastest',
+        name: 'Express Website',
+        desc: 'High-converting 1-page site delivered in 3 business days. No calls needed — conducted entirely over email.',
+        includes: ['1 focused landing page','3 rounds of edits','Mobile-ready','Lead capture form','Delivered in 3 days'],
+        timeline: '3 business days',
+      },
+      {
         id: 'web-small',
+        badge: 'badge-starter', badgeLabel: 'Starter',
         name: 'Small Website',
-        desc: '1–2 pages. Perfect for a clean, professional online presence — a digital handshake for new customers.',
-        tags: ['1–2 Pages','2 Rounds of Edits','Mobile Ready','Analytics'],
+        desc: 'A clean, professional 1–2 page site. Your digital handshake — perfect for new businesses or simple service providers.',
+        includes: ['1–2 pages','Mobile-optimized','Click-to-call & contact form','Google Analytics setup','Social media links'],
         timeline: '2–4 weeks',
-        features: ['Mobile-optimized design','Click-to-call & contact form','Google Analytics setup','Social media links','1 Wix App integration']
       },
       {
         id: 'web-classic',
+        badge: 'badge-popular', badgeLabel: 'Most Popular',
         name: 'Classic Website',
-        desc: '3–5 pages. A full business site with service pages, about, contact, and an SEO-smart foundation.',
-        tags: ['3–5 Pages','SEO-Smart','3 Rounds of Edits','App Integrations'],
+        desc: '3–5 pages with dedicated service pages, about, contact, and an SEO-smart site structure built for local search.',
+        includes: ['3–5 pages','SEO-smart structure','Service & about pages','3 rounds of edits','Sitemap submission','App integrations'],
         timeline: '5 weeks',
-        features: ['Everything in Small, plus','Dedicated service pages','SEO-smart page structure','XML sitemap submission','3 Wix App integrations','Social media integrations']
       },
       {
         id: 'web-advanced',
+        badge: 'badge-growth', badgeLabel: 'Full Solution',
         name: 'Advanced Website',
-        desc: 'Up to 8 pages with eCommerce, booking, payments, and full app integrations.',
-        tags: ['Up to 8 Pages','eCommerce Ready','Booking & Payments','Drop-shipping'],
+        desc: 'Up to 8 pages with eCommerce, booking, payments, product pages, and full app integrations. Built to sell.',
+        includes: ['Up to 8 pages','eCommerce & checkout','Booking & payments','Drop-shipping setup','Product pages','5+ app integrations'],
         timeline: '8 weeks',
-        features: ['Everything in Classic, plus','Dedicated product pages','Checkout & shopping cart','Shipping calculator','Drop-shipping setup','5 Wix App integrations','Client list builder']
-      },
-      {
-        id: 'web-redesign',
-        name: 'Website Redesign',
-        desc: 'Already have a site? A targeted redesign that fixes what\'s not working without starting from scratch.',
-        tags: ['Existing Site','Fresh Design','Custom Quote'],
-        timeline: 'Custom',
-        features: ['Full design refresh','Mobile optimization','CTA & conversion review','Speed improvements','Analytics setup']
-      },
-      {
-        id: 'web-express',
-        name: 'Express Website',
-        desc: 'A high-converting 1-page site delivered in days. Great for landing pages, campaigns, or fast launches.',
-        tags: ['1 Page','3 Days','3 Edits','No Call Needed'],
-        timeline: '3 business days',
-        features: ['Single high-impact page','Mobile ready','3 rounds of edits','Conducted entirely via email','Lead capture or contact form']
       }
     ]
   },
+
+  // ── WEBSITE BUNDLES ─────────────────────────────────────
+  {
+    id: 'bundle',
+    icon: '📦',
+    title: 'Website Bundle',
+    subtitle: 'Website + ongoing management — all-in-one monthly plans',
+    billing: 'monthly',
+    type: 'tiers',
+    cols: 3,
+    note: 'Includes a professionally built website combined with continuous support and management. Best value for businesses that want everything handled.',
+    items: [
+      {
+        id: 'bundle-express',
+        badge: 'badge-starter', badgeLabel: 'Base Plan',
+        name: 'Express Bundle',
+        desc: 'Express website included plus ongoing core management. Entry-level plan for businesses wanting a managed presence.',
+        includes: ['Express website included','Core monthly management','Performance monitoring','Priority support'],
+        timeline: 'Ongoing monthly',
+      },
+      {
+        id: 'bundle-classic',
+        badge: 'badge-popular', badgeLabel: 'Enhanced Plan',
+        name: 'Classic Bundle',
+        desc: 'Classic website included plus enhanced monthly management. The most popular all-in-one option for local businesses.',
+        includes: ['Classic website included','Enhanced monthly management','Regular design updates','Analytics reporting','Priority support'],
+        timeline: 'Ongoing monthly',
+      },
+      {
+        id: 'bundle-advanced',
+        badge: 'badge-growth', badgeLabel: 'Premier Plan',
+        name: 'Advanced Bundle',
+        desc: 'Advanced website included with premier-level management. Full-service monthly plan for businesses ready to grow.',
+        includes: ['Advanced website included','Premier monthly management','Speed & SEO optimization','Monthly strategy review','Dedicated account manager'],
+        timeline: 'Ongoing monthly',
+      }
+    ]
+  },
+
+  // ── SEO ─────────────────────────────────────────────────
   {
     id: 'seo',
     icon: '🔍',
-    title: 'Search & Visibility',
-    desc: 'Get found on Google by people actively searching for what you do',
-    color: '#4fffb0',
+    title: 'SEO & Search Visibility',
+    subtitle: 'Get found on Google by people actively searching for what you do',
+    billing: 'monthly',
+    type: 'tiers',
+    cols: 4,
+    note: 'The right plan is determined through a quick discovery + scoping process. Packages are scoped to your location, competitiveness, keyword targets, and growth goals.',
     items: [
       {
-        id: 'seo-base',
-        name: 'Local SEO',
-        desc: 'Rank higher in local search results for your most valuable keywords. Includes Google Business Profile optimization and citation building.',
-        tags: ['Local Rankings','Google Business','Content','Monthly Reports'],
-        timeline: 'Results in 60–90 days',
-        features: ['Keyword research & strategy','On-page SEO optimization','Google Business Profile management','Local citation building','Monthly rank tracking & reporting','Content creation for target keywords']
-      },
-      {
-        id: 'seo-getlisted',
+        id: 'seo-listed',
+        badge: 'badge-starter', badgeLabel: 'Foundation',
         name: 'Get Listed',
-        desc: 'Your business name, address, and phone number — consistent and accurate across 50+ online directories.',
-        tags: ['50+ Directories','NAP Consistency','Maps','Citations'],
-        timeline: '2–3 weeks',
-        features: ['Audit of existing listings','Correction of inconsistencies','Submission to 50+ directories','Google, Yelp, Apple Maps, Bing','Ongoing monitoring']
+        desc: 'Your business name, address, and phone — consistent and accurate across 50+ online directories and maps.',
+        includes: ['50+ directory submissions','NAP consistency audit','Google, Yelp, Bing, Apple Maps','Citation monitoring','Map pack visibility'],
+        timeline: '2–3 weeks setup',
       },
       {
-        id: 'seo-ai',
-        name: 'AI Command Center',
-        desc: 'Get found in ChatGPT, Gemini, and Perplexity — where your next customers are already searching.',
-        tags: ['AI Search','ChatGPT','Gemini','Future-Proof'],
-        timeline: '3–4 weeks setup',
-        features: ['AI search optimization (llms.txt)','Schema markup implementation','AI engine indexing readiness','Monthly AI visibility reporting','Voice search optimization']
+        id: 'seo-local',
+        badge: 'badge-popular', badgeLabel: 'Most Popular',
+        name: 'Local SEO',
+        desc: 'Rank higher in your city for high-intent searches. Includes GBP optimization, content, and monthly rank tracking.',
+        includes: ['Keyword research & strategy','On-page optimization','Google Business Profile mgmt','Content creation','Monthly rank reporting'],
+        timeline: 'Results in 60–90 days',
+      },
+      {
+        id: 'seo-competitive',
+        badge: 'badge-growth', badgeLabel: 'Growth',
+        name: 'Competitive SEO',
+        desc: 'For businesses in competitive markets or multi-location campaigns that need deeper strategy and more content velocity.',
+        includes: ['Everything in Local SEO','Multi-location targeting','Expanded content strategy','Competitor analysis','Authority link building'],
+        timeline: 'Results in 60–90 days',
+      },
+      {
+        id: 'seo-enterprise',
+        badge: 'badge-enterprise', badgeLabel: 'Enterprise',
+        name: 'Enterprise SEO',
+        desc: 'Full-scale SEO for high-volume, multi-location, or highly competitive industries. Custom strategy, maximum output.',
+        includes: ['Custom keyword strategy','Full technical SEO audit','High-volume content creation','Premium link acquisition','Dedicated SEO manager'],
+        timeline: 'Custom scoping call',
       }
     ]
   },
+
+  // ── AI SEARCH ───────────────────────────────────────────
+  {
+    id: 'ai',
+    icon: '🤖',
+    title: 'AI Command Center',
+    subtitle: 'Get found in ChatGPT, Gemini & Perplexity — where your next customers are already searching',
+    billing: 'monthly',
+    type: 'standalone',
+    items: [
+      {
+        id: 'ai-standard',
+        name: 'AI Command Center w/ ADA',
+        desc: 'Future-proof your visibility across AI-powered search engines. Includes llms.txt setup, schema optimization, AI engine indexing, ADA compliance widget, and monthly AI visibility reporting.',
+        features: ['AI search optimization (llms.txt)','Schema markup','AI engine indexing readiness','ADA compliance widget','Monthly AI visibility score']
+      },
+      {
+        id: 'ai-sms',
+        name: 'AI Command Center + SMS w/ ADA',
+        desc: 'Everything in AI Command Center plus SMS marketing integration — automated text campaigns, lead nurturing, and appointment reminders tied to your AI search presence.',
+        features: ['Everything in AI Command Center','SMS campaign setup','Automated lead nurturing texts','Appointment reminder sequences','Two-way SMS inbox']
+      }
+    ]
+  },
+
+  // ── PAID ADS ─────────────────────────────────────────────
   {
     id: 'ads',
     icon: '📣',
     title: 'Paid Advertising',
-    desc: 'Consistent, measurable leads from Google and Meta — managed by Zoek',
-    color: '#00a8ff',
+    subtitle: 'Consistent, measurable leads from Google and Meta — managed by Zoek',
+    billing: 'monthly',
+    type: 'tiers',
+    cols: 3,
+    note: 'Pricing is highly customized based on monthly budget, location, industry competitiveness, keyword competition, and platform strategy.',
     items: [
       {
-        id: 'ads-google',
-        name: 'Google Ads Management',
-        desc: 'Managed Google search campaigns that put you in front of people actively searching for your services right now.',
-        tags: ['Google Search','Call Tracking','Monthly Reports','Optimized Bids'],
+        id: 'ads-search',
+        badge: 'badge-starter', badgeLabel: 'Search',
+        name: 'Search & Shopping',
+        desc: 'Google Search, Shopping, and PPC campaigns targeting people actively looking for your services right now.',
+        includes: ['Google Search campaigns','Shopping ads (if applicable)','Keyword research & targeting','Automated bid management','Call tracking','Monthly reporting'],
         timeline: 'Live in 1–2 weeks',
-        features: ['Campaign strategy & setup','Keyword research & targeting','Ad copy creation','Automated bid management','Call tracking','Monthly performance reporting','Ongoing optimization']
       },
       {
-        id: 'ads-meta',
-        name: 'Facebook & Instagram Ads',
-        desc: 'Awareness and lead generation campaigns on Meta — reaching your ideal customers where they spend their time.',
-        tags: ['Facebook','Instagram','Lead Forms','Retargeting'],
+        id: 'ads-social',
+        badge: 'badge-popular', badgeLabel: 'Social',
+        name: 'Social Advertising',
+        desc: 'Facebook, Instagram, YouTube, LinkedIn, and TikTok ads tailored to your audience and goals.',
+        includes: ['Facebook & Instagram ads','YouTube / LinkedIn / TikTok (if applicable)','Audience research & targeting','Creative direction','Lead form setup','Monthly reporting'],
         timeline: 'Live in 1–2 weeks',
-        features: ['Campaign strategy & setup','Audience research & targeting','Creative direction & copy','Lead form setup','Real-time lead dashboard','Monthly performance reporting','A/B testing']
       },
       {
-        id: 'ads-both',
-        name: 'Full Paid Ads Package',
-        desc: 'Google + Meta managed together for maximum coverage — search intent and social awareness working in tandem.',
-        tags: ['Google + Meta','Full Coverage','Best Value'],
+        id: 'ads-omni',
+        badge: 'badge-growth', badgeLabel: 'Full Coverage',
+        name: 'Omnichannel & Display',
+        desc: 'Amazon, Display, Retargeting, and full omnichannel strategies for maximum reach and ROI across every platform.',
+        includes: ['Search + social + display','Amazon advertising','Retargeting campaigns','Cross-platform attribution','Unified dashboard reporting','Omnichannel strategy'],
         timeline: 'Live in 2 weeks',
-        features: ['Everything in Google Ads, plus','Facebook & Instagram campaigns','Cross-platform attribution','Unified monthly reporting','Retargeting across both platforms']
       }
     ]
   },
+
+  // ── SOCIAL MEDIA ─────────────────────────────────────────
   {
     id: 'social',
     icon: '📱',
-    title: 'Social Media',
-    desc: 'Consistent, on-brand social content — without it eating your time',
-    color: '#ff5ca8',
+    title: 'Social Media Management',
+    subtitle: 'Done-for-you social content — consistent, on-brand, and always active',
+    billing: 'monthly',
+    type: 'tiers',
+    cols: 4,
     items: [
       {
-        id: 'social-mgmt',
-        name: 'Social Media Management',
-        desc: 'Done-for-you social content that keeps your brand active, professional, and top-of-mind across your key platforms.',
-        tags: ['Content Creation','Scheduling','Engagement','Monthly Reporting'],
+        id: 'smm-starter',
+        badge: 'badge-starter', badgeLabel: 'Starter',
+        name: 'SMM Starter',
+        desc: 'Foundational social presence. Consistent branded content to keep your business visible and professional.',
+        includes: ['Content strategy','Custom post creation','Posting & scheduling','Monthly analytics'],
         timeline: 'Starts within 2 weeks',
-        features: ['Content strategy & calendar','Custom branded post creation','Posting & scheduling','Comment & message monitoring','Monthly analytics reporting','Platform optimization']
-      }
-    ]
-  },
-  {
-    id: 'brand',
-    icon: '🎨',
-    title: 'Branding & Design',
-    desc: 'Make every touchpoint look intentional — online and off',
-    color: '#a78bfa',
-    items: [
-      {
-        id: 'brand-identity',
-        name: 'Graphic Design & Branding',
-        desc: 'A cohesive visual identity — logo, colors, typography, and brand guidelines — that makes your business look like the leader it is.',
-        tags: ['Logo Design','Brand Guide','Colors & Fonts','Print Ready'],
-        timeline: '3–4 weeks',
-        features: ['Logo design (primary + variations)','Color palette & typography system','Brand style guide','Business card design','Social media profile graphics','Print-ready files']
-      }
-    ]
-  },
-  {
-    id: 'maintenance',
-    icon: '🔧',
-    title: 'Ongoing Support',
-    desc: 'Keep your digital presence protected, fast, and up to date',
-    color: '#ffd166',
-    items: [
-      {
-        id: 'maint-plan',
-        name: 'Web Maintenance & Management',
-        desc: 'Regular updates, speed optimization, security monitoring, and backups — so your site is always performing at its best.',
-        tags: ['Monthly Plan','Updates','Security','Backups'],
-        timeline: 'Ongoing monthly',
-        features: ['Regular design updates & edits','Speed & performance optimization','Security monitoring','Automated backups','Monthly analytics reporting','Priority support']
       },
       {
-        id: 'access-ada',
-        name: 'Website Accessibility (ADA)',
-        desc: 'Make your site compliant with ADA guidelines — protecting your business legally and opening your site to every potential customer.',
-        tags: ['ADA Compliant','Legal Protection','Better SEO','All Users'],
-        timeline: '1–2 weeks',
-        features: ['Accessibility audit','Compliance widget installation','ADA certification','Screen reader optimization','Keyboard navigation support','Ongoing compliance monitoring']
+        id: 'smm-premium',
+        badge: 'badge-popular', badgeLabel: 'Most Popular',
+        name: 'SMM Premium',
+        desc: 'Full social management with engagement monitoring, stories, and a higher content volume across platforms.',
+        includes: ['Everything in Starter','Stories & reels','Engagement monitoring','Comment responses','Platform optimization'],
+        timeline: 'Starts within 2 weeks',
+      },
+      {
+        id: 'smm-enterprise',
+        badge: 'badge-growth', badgeLabel: 'Enterprise',
+        name: 'SMM Enterprise',
+        desc: 'High-volume, multi-platform social management for businesses that need a full agency-level presence.',
+        includes: ['Everything in Premium','Multi-platform management','Influencer outreach','Monthly strategy review','Dedicated content team'],
+        timeline: 'Starts within 2 weeks',
+      },
+      {
+        id: 'smm-agency',
+        badge: 'badge-enterprise', badgeLabel: 'Agency',
+        name: 'SMM Agency',
+        desc: 'Full-scale agency-level social management. Maximum content output, platform diversity, and brand authority.',
+        includes: ['Everything in Enterprise','Maximum content output','Full platform suite','Weekly reporting','Senior strategist assigned'],
+        timeline: 'Starts within 2 weeks',
+      }
+    ]
+  },
+
+  // ── GRAPHIC DESIGN ───────────────────────────────────────
+  {
+    id: 'design',
+    icon: '🎨',
+    title: 'Graphic Design & Branding',
+    subtitle: 'Make every touchpoint look intentional — online and off',
+    billing: 'one-time',
+    type: 'tiers',
+    cols: 3,
+    items: [
+      {
+        id: 'design-branding',
+        badge: 'badge-starter', badgeLabel: 'Branding Kit',
+        name: 'Business Branding Kit',
+        desc: 'A complete visual identity — logo, color palette, typography, and brand guide so every touchpoint looks cohesive.',
+        includes: ['Primary logo + variations','Color palette & typography','Brand style guide','Business card design','Print-ready files'],
+        timeline: '3–4 weeks',
+      },
+      {
+        id: 'design-social',
+        badge: 'badge-popular', badgeLabel: 'Social Kit',
+        name: 'Social Standout Kit',
+        desc: 'Custom branded social templates, profile graphics, and cover images designed to stop the scroll.',
+        includes: ['Social profile graphics','Branded post templates','Cover images','Story templates','Reusable Canva/Adobe files'],
+        timeline: '2–3 weeks',
+      },
+      {
+        id: 'design-site',
+        badge: 'badge-growth', badgeLabel: 'Site Kit',
+        name: 'Site Enhance Kit',
+        desc: 'Custom imagery, banners, and design assets that elevate your website beyond generic stock photos.',
+        includes: ['Custom site banners','Section background graphics','Icon sets','Custom CTA graphics','Brand-matched imagery'],
+        timeline: '2–3 weeks',
+      }
+    ]
+  },
+
+  // ── ADD-ONS ──────────────────────────────────────────────
+  {
+    id: 'addons',
+    icon: '➕',
+    title: 'Add-Ons & Extras',
+    subtitle: 'Enhance any package with these standalone services',
+    billing: 'varies',
+    type: 'standalone',
+    items: [
+      {
+        id: 'addon-ada',
+        name: 'Website Accessibility (ADA Compliance)',
+        desc: 'Protect your business legally and open your site to every potential customer. Monthly compliance widget, audit, and certification.',
+        features: ['ADA compliance widget','Accessibility audit','Screen reader optimization','Keyboard navigation support','Compliance monitoring']
+      },
+      {
+        id: 'addon-chatbot',
+        name: 'Website AI Chatbot',
+        desc: 'An AI-powered chatbot that answers visitor questions, captures leads, and books appointments 24/7 — even when you\'re not there.',
+        features: ['Custom AI chatbot setup','Lead capture flows','FAQ training','Appointment booking integration','Monthly conversation reporting']
+      },
+      {
+        id: 'addon-logo',
+        name: 'Custom Logo Design',
+        desc: 'A professionally designed logo built around your brand vision. Delivered in all formats — web, print, social, and transparent.',
+        features: ['2 initial concepts','2 rounds of revisions','Full file package (SVG, PNG, PDF)','Light & dark versions','Social-ready variants']
+      },
+      {
+        id: 'addon-video',
+        name: 'Intro / Product Video',
+        desc: 'A short-form video (under 30 seconds) for your homepage, social media, or paid ads — designed to grab attention fast.',
+        features: ['Up to 30-second video','Script consultation','Brand-matched graphics','Social & web formats delivered','One round of revisions']
       }
     ]
   }
 ];
 
-// ============================
-// STATE
-// ============================
-const selected = new Set();
-
-// ============================
+// ============================================================
 // RENDER SERVICES
-// ============================
-function buildServices() {
+// ============================================================
+function buildUI() {
   const col = document.getElementById('services-col');
-  col.innerHTML = CATEGORIES.map(cat => `
-    <div class="service-category">
-      <div class="sc-header">
-        <div class="sc-icon">${cat.icon}</div>
-        <div>
-          <div class="sc-title" style="color:${cat.color}">${cat.title}</div>
-          <div class="sc-desc">${cat.desc}</div>
-        </div>
-      </div>
-      <div class="sc-items">
-        ${cat.items.map(item => `
-          <div class="service-item ${selected.has(item.id)?'selected':''}" id="si-${item.id}" onclick="toggleItem('${item.id}')">
-            <div class="si-check">${selected.has(item.id)?'✓':''}</div>
-            <div class="si-body">
+  col.innerHTML = CATS.map(cat => {
+    const billingLabel = cat.billing === 'monthly' ? 'Monthly plan' : cat.billing === 'one-time' ? 'One-time' : 'Varies';
+    const billingCls = cat.billing === 'monthly' ? 'billing-monthly' : 'billing-one';
+
+    let body = '';
+    if (cat.type === 'tiers') {
+      const sel = selections[cat.id];
+      body = `<div class="tier-grid cols-${cat.cols}">` +
+        cat.items.map(item => `
+          <div class="tier-card ${sel===item.id?'selected':''}" id="tc-${item.id}" onclick="selectTier('${cat.id}','${item.id}')">
+            <div class="tier-badge ${item.badge}">${item.badgeLabel}</div>
+            <div class="tier-name">${item.name}</div>
+            <div class="tier-desc">${item.desc}</div>
+            <div class="tier-includes">${item.includes.map(i=>`<div class="ti-row">${i}</div>`).join('')}</div>
+          </div>`).join('') + '</div>';
+      if (cat.note) body += `<div style="padding:0.75rem 1.1rem;font-size:0.72rem;color:var(--muted);border-top:1px solid var(--border-light);line-height:1.6">${cat.note}</div>`;
+    } else {
+      body = `<div class="standalone-items">` +
+        cat.items.map(item => `
+          <div class="standalone-item ${addons.has(item.id)?'selected':''}" id="sa-${item.id}" onclick="toggleAddon('${item.id}')">
+            <div class="si-check">${addons.has(item.id)?'✓':''}</div>
+            <div class="si-text">
               <div class="si-name">${item.name}</div>
               <div class="si-desc">${item.desc}</div>
-              <div class="si-tags">${item.tags.map(t=>`<span class="si-tag">${t}</span>`).join('')}</div>
             </div>
-          </div>`).join('')}
+          </div>`).join('') + '</div>';
+    }
+
+    return `<div class="cat-block">
+      <div class="cat-header" style="background:rgba(${hexToRgb(catColor(cat.id))},0.06)">
+        <div class="cat-icon">${cat.icon}</div>
+        <div>
+          <div class="cat-title" style="color:${catColor(cat.id)}">${cat.title}</div>
+          <div class="cat-subtitle">${cat.subtitle}</div>
+        </div>
+        <div class="cat-billing ${billingCls}">${billingLabel}</div>
       </div>
-    </div>`).join('');
+      ${body}
+    </div>`;
+  }).join('');
 }
 
-function toggleItem(id) {
-  if (selected.has(id)) {
-    selected.delete(id);
+function catColor(id) {
+  const map = {website:'#6c63ff',bundle:'#a78bfa',seo:'#4fffb0',ai:'#00a8ff',ads:'#ff5ca8',social:'#ffd166',design:'#f97316',addons:'#a0a0c0'};
+  return map[id] || '#6c63ff';
+}
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+function selectTier(catId, itemId) {
+  if (selections[catId] === itemId) {
+    delete selections[catId]; // deselect
   } else {
-    selected.add(id);
+    // Deselect old
+    if (selections[catId]) {
+      const old = document.getElementById('tc-' + selections[catId]);
+      if (old) old.classList.remove('selected');
+    }
+    selections[catId] = itemId;
   }
-  // Update the clicked item without full rebuild
-  const el = document.getElementById('si-' + id);
-  const isNow = selected.has(id);
-  el.classList.toggle('selected', isNow);
-  el.querySelector('.si-check').textContent = isNow ? '✓' : '';
+  const el = document.getElementById('tc-' + itemId);
+  if (el) el.classList.toggle('selected', !!selections[catId]);
   updateSummary();
 }
 
-// ============================
-// SUMMARY PANEL
-// ============================
-function getItemData(id) {
-  for (const cat of CATEGORIES) {
-    for (const item of cat.items) {
-      if (item.id === id) return { ...item, catTitle: cat.title, catColor: cat.color };
+function toggleAddon(itemId) {
+  if (addons.has(itemId)) addons.delete(itemId);
+  else addons.add(itemId);
+  const el = document.getElementById('sa-' + itemId);
+  if (el) {
+    el.classList.toggle('selected', addons.has(itemId));
+    el.querySelector('.si-check').textContent = addons.has(itemId) ? '✓' : '';
+  }
+  updateSummary();
+}
+
+// ============================================================
+// SUMMARY
+// ============================================================
+function getAllSelected() {
+  const items = [];
+  // Tier selections
+  Object.entries(selections).forEach(([catId, itemId]) => {
+    const cat = CATS.find(c => c.id === catId);
+    if (!cat) return;
+    const item = cat.items.find(i => i.id === itemId);
+    if (!item) return;
+    items.push({ ...item, catTitle: cat.title, catColor: catColor(catId), billing: cat.billing, timeline: item.timeline || 'Custom' });
+  });
+  // Addon selections
+  addons.forEach(itemId => {
+    for (const cat of CATS) {
+      const item = cat.items.find(i => i.id === itemId);
+      if (item) {
+        items.push({ ...item, catTitle: cat.title, catColor: catColor(cat.id), billing: cat.billing, timeline: 'As needed', includes: item.features || [] });
+      }
     }
+  });
+  return items;
+}
+
+function removeItem(itemId) {
+  // Check if it's a tier
+  for (const [catId, selId] of Object.entries(selections)) {
+    if (selId === itemId) {
+      delete selections[catId];
+      const el = document.getElementById('tc-' + itemId);
+      if (el) el.classList.remove('selected');
+      updateSummary();
+      return;
+    }
+  }
+  // Check addons
+  if (addons.has(itemId)) {
+    addons.delete(itemId);
+    const el = document.getElementById('sa-' + itemId);
+    if (el) {
+      el.classList.remove('selected');
+      el.querySelector('.si-check').textContent = '';
+    }
+    updateSummary();
   }
 }
 
 function updateSummary() {
-  const ids = [...selected];
+  const items = getAllSelected();
   const emptyEl = document.getElementById('sum-empty');
   const itemsEl = document.getElementById('sum-items');
   const tlEl = document.getElementById('sum-timeline');
@@ -493,76 +702,74 @@ function updateSummary() {
   const ctaTitle = document.getElementById('scta-title');
   const ctaSub = document.getElementById('scta-sub');
 
-  if (ids.length === 0) {
+  if (items.length === 0) {
     emptyEl.style.display = 'block';
     itemsEl.style.display = 'none';
     tlEl.style.display = 'none';
     featEl.style.display = 'none';
     btn.disabled = true;
-    ctaTitle.textContent = 'Build your package above';
-    ctaSub.textContent = 'Select services to see what\'s possible for your business, then get a custom quote from Zoek.';
+    ctaTitle.textContent = 'Select services to get started';
+    ctaSub.textContent = 'A Zoek strategist will review your selections and reach out with a custom proposal built around your budget and goals.';
     return;
   }
 
   emptyEl.style.display = 'none';
   itemsEl.style.display = 'flex';
+  itemsEl.style.flexDirection = 'column';
+  itemsEl.style.gap = '0.4rem';
+  itemsEl.style.padding = '0 1.5rem';
   tlEl.style.display = 'block';
   featEl.style.display = 'block';
   btn.disabled = false;
 
-  // Items list
-  const items = ids.map(getItemData);
+  // Items
   itemsEl.innerHTML = items.map(item => `
     <div class="sum-item">
-      <div class="sum-item-left">
-        <div class="sum-item-name">${item.name}</div>
-        <div class="sum-item-cat" style="color:${item.catColor}">${item.catTitle}</div>
+      <div class="sim-left">
+        <div class="sim-name">${item.name}</div>
+        <div class="sim-cat" style="color:${item.catColor}">${item.catTitle} · ${item.billing === 'monthly' ? 'Monthly' : item.billing === 'one-time' ? 'One-time' : 'Varies'}</div>
       </div>
-      <button class="sum-remove" onclick="toggleItem('${item.id}')" title="Remove">✕</button>
+      <button class="sim-remove" onclick="removeItem('${item.id}')" title="Remove">✕</button>
     </div>`).join('');
 
   // Timeline
-  const tlItems = document.getElementById('tl-items');
-  tlItems.innerHTML = items.map(item => `
-    <div class="tl-item">
-      <div class="tl-dot" style="background:${item.catColor}"></div>
-      <span style="color:var(--white);font-weight:600">${item.name}</span>
-      <span style="margin-left:auto;font-size:0.7rem">${item.timeline}</span>
+  document.getElementById('tl-rows').innerHTML = items.map(item => `
+    <div class="ss-row">
+      <div class="ss-dot" style="background:${item.catColor}"></div>
+      <span style="color:var(--white);font-weight:600;margin-right:0.35rem">${item.name}</span>
+      <span style="margin-left:auto;font-size:0.7rem;white-space:nowrap">${item.timeline}</span>
     </div>`).join('');
 
-  // Features (deduplicated)
-  const allFeatures = [];
+  // Features (deduped)
+  const allFeats = [];
   items.forEach(item => {
-    item.features.forEach(f => {
-      if (!allFeatures.includes(f) && !f.startsWith('Everything in')) allFeatures.push(f);
+    (item.includes || []).forEach(f => {
+      if (!allFeats.includes(f) && !f.toLowerCase().startsWith('everything')) allFeats.push(f);
     });
   });
-  const featItems = document.getElementById('feat-items');
-  featItems.innerHTML = allFeatures.map(f => `<div class="feat-item">${f}</div>`).join('');
+  document.getElementById('feat-rows').innerHTML = allFeats.slice(0, 12).map(f =>
+    `<div class="ss-row"><span class="ss-check" style="color:var(--green);font-weight:700;font-size:0.68rem;flex-shrink:0;margin-top:2px">✓</span><span style="margin-left:0.35rem">${f}</span></div>`
+  ).join('') + (allFeats.length > 12 ? `<div style="font-size:0.7rem;color:var(--muted);margin-top:0.25rem">+ ${allFeats.length-12} more included</div>` : '');
 
-  // CTA copy
-  const n = ids.length;
-  ctaTitle.textContent = n === 1
-    ? 'Ready to get started with ' + items[0].name + '?'
-    : `Your ${n}-service package is ready`;
-  ctaSub.textContent = n === 1
-    ? 'Tell us about your business and a Zoek strategist will reach out with a custom quote — no commitment required.'
-    : `You've selected ${n} services. A Zoek strategist will review your package and build a custom proposal tailored to your business and budget.`;
+  // CTA
+  const n = items.length;
+  const hasMonthly = items.some(i => i.billing === 'monthly');
+  ctaTitle.textContent = n === 1 ? `Ready to get started with ${items[0].name}?` : `Your ${n}-service package is ready`;
+  ctaSub.textContent = `You've selected ${n} service${n!==1?'s':''}${hasMonthly?' including monthly plans':''}. A Zoek strategist will reach out within one business day with a custom proposal for your budget and market.`;
 }
 
-// ============================
-// MODAL
-// ============================
+// ============================================================
+// MODAL + SUBMIT
+// ============================================================
 function openModal() {
-  if (selected.size === 0) return;
-  // Build preview for modal
-  const items = [...selected].map(getItemData);
+  const items = getAllSelected();
+  if (items.length === 0) return;
   const preview = document.getElementById('modal-preview');
   preview.innerHTML = `<strong>Your selected package (${items.length} service${items.length!==1?'s':''}):</strong>` +
     items.map(i => `${i.name} — ${i.catTitle}`).join('<br>');
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  document.getElementById('m-name').focus();
+  setTimeout(() => document.getElementById('m-name').focus(), 100);
 }
 
 function closeModal() {
@@ -580,52 +787,42 @@ function submitPackage() {
   const errEl = document.getElementById('modal-error');
   const btn   = document.getElementById('modal-submit-btn');
 
-  if (!name || !biz || !email || !phone) {
-    errEl.style.display = 'block';
-    return;
-  }
+  if (!name || !biz || !email || !phone) { errEl.style.display = 'block'; return; }
   errEl.style.display = 'none';
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  const items = [...selected].map(getItemData);
-  const packageList = items.map(i => `• ${i.name} (${i.catTitle}) — ${i.timeline}`).join('\n');
-  const featList = [];
-  items.forEach(i => i.features.forEach(f => { if (!featList.includes(f) && !f.startsWith('Everything')) featList.push(f); }));
+  const items = getAllSelected();
+  const packageList = items.map(i => `• ${i.name} (${i.catTitle}) — ${i.billing === 'monthly' ? 'Monthly plan' : 'One-time'} — ${i.timeline}`).join('\n');
 
-  // Send to chada@gozoek.com via Formspree
-  // Replace the form ID below with your actual Formspree form ID
-  const FORMSPREE = 'https://formspree.io/f/xpwzgkqr'; // ← Replace with real Formspree ID pointed to chada@gozoek.com
-
-  fetch(FORMSPREE, {
+  // Replace with real Formspree form ID pointed to chada@gozoek.com
+  fetch('https://formspree.io/f/xpwzgkqr', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    headers: {'Content-Type':'application/json', Accept:'application/json'},
     body: JSON.stringify({
       _subject: `🚀 Package Builder Lead: ${biz} (${items.length} services)`,
-      name, business: biz, email, phone, city: city || 'Not provided',
+      _replyto: email,
+      name, business: biz, email, phone,
+      city: city || 'Not provided',
       notes: notes || 'None',
-      package_summary: packageList,
-      included_features: featList.join(', '),
       services_count: items.length,
-      _replyto: email
+      package_summary: packageList
     })
   }).finally(() => {
     closeModal();
-    showSuccess(name, biz, items);
+    showSuccess(name, items);
   });
 }
 
-function showSuccess(name, biz, items) {
-  // Replace builder with success state
+function showSuccess(name, items) {
   document.querySelector('.builder-wrap').innerHTML = `
-    <div style="padding:5rem 2rem;text-align:center;width:100%">
+    <div style="padding:5rem 2rem;text-align:center;width:100%;grid-column:1/-1">
       <div style="font-size:3.5rem;margin-bottom:1.25rem">🎉</div>
       <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:0.75rem">You're all set, ${name.split(' ')[0]}!</div>
-      <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:440px;margin:0 auto 0.75rem">Your package has been sent to the Zoek team. <strong style="color:var(--white)">A real strategist — not an autoresponder — will review your ${items.length} selected service${items.length!==1?'s':''} and reach out within one business day.</strong></p>
-      <p style="font-size:0.82rem;color:var(--muted);margin-bottom:2.5rem">We'll be in touch at the email and phone number you provided.</p>
-      <div style="background:var(--sidebar);border:1px solid var(--border);border-radius:8px;padding:1.25rem;max-width:400px;margin:0 auto 2rem;text-align:left;">
-        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.65rem">What you selected</div>
-        ${items.map(i=>`<div style="display:flex;align-items:center;gap:0.5rem;padding:0.35rem 0;border-bottom:1px solid var(--border-light);font-size:0.82rem;"><span style="color:${i.catColor}">✓</span> ${i.name}</div>`).join('')}
+      <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:440px;margin:0 auto 0.75rem">Your package has been sent to Zoek. <strong style="color:var(--white)">A real strategist will review your ${items.length} selected service${items.length!==1?'s':''} and reach out within one business day</strong> with a custom proposal.</p>
+      <div style="background:var(--sidebar);border:1px solid var(--border);border-radius:8px;padding:1.25rem;max-width:400px;margin:1.5rem auto;text-align:left;">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.65rem">Your package</div>
+        ${items.map(i=>`<div style="display:flex;align-items:center;gap:0.5rem;padding:0.35rem 0;border-bottom:1px solid var(--border-light);font-size:0.82rem;"><span style="color:${i.catColor}">✓</span> <span style="font-weight:600">${i.name}</span></div>`).join('')}
       </div>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
         <a href="https://calendly.com/expert-sales" target="_blank" style="background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.75rem;border-radius:4px;font-size:0.88rem;font-weight:700;box-shadow:0 4px 14px rgba(108,99,255,0.35);">Book a Call Now →</a>
@@ -634,9 +831,7 @@ function showSuccess(name, biz, items) {
     </div>`;
 }
 
-// ============================
 // NAV
-// ============================
 function toggleNav(btn) {
   const menu = document.getElementById('nl-tools-menu');
   const isOpen = menu.classList.contains('open');
@@ -654,10 +849,8 @@ document.addEventListener('click', function(e) {
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-// ============================
 // INIT
-// ============================
-buildServices();
+buildUI();
 updateSummary();
 </script>
 <script src="cta.js"></script>
