@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Snapshot Report | Zoek Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#1E1044;--sidebar:#27215C;--purple:#692C8E;--pink:#ED0875;--blue:#1EBFDC;
+  --amber:#FAA31C;--white:#fff;--muted:#a0a0c0;--green:#4fffb0;--red:#ff5c7c;
+  --border:rgba(105,44,142,0.25);--border-light:rgba(255,255,255,0.07);
+  --gradient:linear-gradient(135deg,#692C8E 0%,#ED0875 100%);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(30,16,68,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-links{display:flex;align-items:center;gap:0.15rem;list-style:none;}
+.nav-links>li>a{font-size:0.82rem;font-weight:600;letter-spacing:0.03em;color:var(--muted);text-decoration:none;padding:0.45rem 0.9rem;border-radius:4px;transition:all 0.15s;display:block;}
+.nav-links>li>a:hover{color:var(--white);background:rgba(255,255,255,0.07);}
+.nav-dropdown{position:relative;}
+.nav-drop-btn{background:transparent;border:none;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;padding:0.45rem 0.9rem;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:0.3rem;transition:all 0.15s;}
+.nav-drop-btn:hover{background:rgba(255,255,255,0.07);}
+.nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
+.nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1E1044;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu.open{display:flex;}
+.ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
+.ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
+.nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(105,44,142,0.15);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(237,8,117,0.4);transform:translateY(-1px);}
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* ── LANDING (step 0) ── */
+.landing{margin-top:60px;min-height:calc(100vh - 60px);display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;background:radial-gradient(ellipse at 50% 30%,rgba(237,8,117,0.12) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(105,44,142,0.1) 0%,transparent 50%);}
+.landing-inner{max-width:560px;width:100%;text-align:center;}
+.landing-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(237,8,117,0.12);color:var(--pink);border:1px solid rgba(237,8,117,0.3);padding:0.3rem 0.85rem;border-radius:3px;margin-bottom:1.5rem;}
+.landing-title{font-family:'Poppins',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem;}
+.landing-title .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.landing-sub{font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2.5rem;}
+.landing-sub strong{color:var(--white);}
+
+/* SEARCH BOX */
+.search-box{background:var(--sidebar);border:1px solid var(--border);border-radius:12px;padding:2rem;text-align:left;position:relative;}
+.sb-label{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.65rem;}
+.sb-input-wrap{position:relative;margin-bottom:1rem;}
+.sb-input{width:100%;padding:0.9rem 1rem 0.9rem 3rem;background:rgba(255,255,255,0.06);border:1.5px solid var(--border);border-radius:6px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;outline:none;transition:border-color 0.2s;}
+.sb-input:focus{border-color:var(--pink);}
+.sb-input::placeholder{color:rgba(255,255,255,0.25);}
+.sb-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);font-size:1.1rem;pointer-events:none;}
+.sb-autocomplete{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#27215C;border:1px solid var(--border);border-radius:6px;overflow:hidden;z-index:50;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.sb-autocomplete.open{display:block;}
+.sb-option{padding:0.85rem 1rem;cursor:pointer;border-bottom:1px solid var(--border-light);transition:background 0.12s;}
+.sb-option:last-child{border-bottom:none;}
+.sb-option:hover{background:rgba(105,44,142,0.15);}
+.sb-opt-name{font-size:0.88rem;font-weight:600;}
+.sb-opt-addr{font-size:0.72rem;color:var(--muted);margin-top:0.1rem;}
+.sb-fields{display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin-bottom:1.25rem;}
+.sb-field{display:flex;flex-direction:column;gap:0.3rem;}
+.sb-field-label{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+.sb-field-input{padding:0.6rem 0.8rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;width:100%;}
+.sb-field-input:focus{border-color:var(--purple);}
+.sb-field-input::placeholder{color:rgba(255,255,255,0.2);}
+.sb-field-input.filled{border-color:rgba(79,255,176,0.3);background:rgba(79,255,176,0.04);}
+.sb-cta{width:100%;padding:1rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;border:none;border-radius:6px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 18px rgba(237,8,117,0.3);display:flex;align-items:center;justify-content:center;gap:0.5rem;}
+.sb-cta:hover{box-shadow:0 6px 26px rgba(237,8,117,0.5);transform:translateY(-1px);}
+.sb-cta:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+.sb-disclaimer{font-size:0.68rem;color:var(--muted);text-align:center;margin-top:0.75rem;line-height:1.5;}
+
+/* ── SCANNING STATE ── */
+.scanning{display:none;margin-top:60px;min-height:calc(100vh - 60px);align-items:center;justify-content:center;flex-direction:column;padding:3rem;text-align:center;}
+.scan-title{font-family:'Poppins',sans-serif;font-size:1.75rem;font-weight:800;margin-bottom:0.5rem;}
+.scan-sub{color:var(--muted);font-size:0.9rem;margin-bottom:2.5rem;}
+.scan-steps{display:flex;flex-direction:column;gap:0.6rem;max-width:380px;width:100%;}
+.scan-step{display:flex;align-items:center;gap:0.85rem;padding:0.75rem 1rem;background:var(--sidebar);border:1px solid var(--border);border-radius:6px;font-size:0.85rem;font-weight:600;transition:all 0.3s;}
+.scan-step.active{border-color:var(--pink);background:rgba(237,8,117,0.07);}
+.scan-step.done{border-color:rgba(79,255,176,0.3);background:rgba(79,255,176,0.05);color:var(--green);}
+.step-icon{font-size:1.1rem;width:24px;text-align:center;flex-shrink:0;}
+.spin{display:inline-block;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.scan-bar-wrap{width:100%;max-width:380px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:1.5rem;overflow:hidden;}
+.scan-bar{height:100%;background:var(--gradient);border-radius:2px;width:0;transition:width 0.6s ease;}
+
+/* ── REPORT ── */
+.report{display:none;margin-top:60px;max-width:900px;margin-left:auto;margin-right:auto;padding:2.5rem 2rem 5rem;}
+
+/* Report header */
+.report-header{background:var(--gradient);border-radius:10px;padding:2rem;margin-bottom:2rem;position:relative;overflow:hidden;}
+.rh-biz{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.2rem;}
+.rh-addr{font-size:0.82rem;color:rgba(255,255,255,0.75);margin-bottom:1.25rem;}
+.rh-stats{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.rh-stat{text-align:center;}
+.rh-stat-val{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;line-height:1;}
+.rh-stat-label{font-size:0.65rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.1rem;}
+.rh-overall{position:absolute;right:2rem;top:50%;transform:translateY(-50%);text-align:center;}
+.rh-score-ring{width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,0.4);}
+.rh-score-num{font-family:'Poppins',sans-serif;font-size:1.8rem;font-weight:800;line-height:1;}
+.rh-score-label{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.7);}
+
+/* Overall grade bar */
+.grade-bar-wrap{background:var(--sidebar);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.grade-letter{font-family:'Poppins',sans-serif;font-size:3rem;font-weight:800;line-height:1;min-width:50px;}
+.grade-bar-inner{flex:1;}
+.grade-bar-label{font-size:0.72rem;color:var(--muted);margin-bottom:0.4rem;font-weight:600;}
+.grade-track{height:8px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;}
+.grade-fill{height:100%;border-radius:4px;transition:width 1s ease;}
+.grade-verdict{font-size:0.82rem;color:var(--muted);line-height:1.6;flex:2;min-width:200px;}
+.grade-verdict strong{color:var(--white);}
+
+/* Section cards */
+.report-sections{display:flex;flex-direction:column;gap:1.25rem;}
+.rsec{background:var(--sidebar);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.rsec-header{padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1rem;cursor:pointer;user-select:none;transition:background 0.15s;}
+.rsec-header:hover{background:rgba(255,255,255,0.02);}
+.rsec-icon{font-size:1.2rem;}
+.rsec-title{font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:800;flex:1;}
+.rsec-score{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;}
+.rsec-grade{font-size:0.72rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:3px;margin-left:0.5rem;}
+.grade-a{background:rgba(79,255,176,0.15);color:var(--green);}
+.grade-b{background:rgba(30,191,220,0.15);color:var(--blue);}
+.grade-c{background:rgba(250,163,28,0.15);color:var(--amber);}
+.grade-d{background:rgba(237,8,117,0.15);color:var(--pink);}
+.grade-f{background:rgba(255,92,124,0.15);color:var(--red);}
+.rsec-chevron{font-size:0.6rem;color:var(--muted);transition:transform 0.2s;}
+.rsec.open .rsec-chevron{transform:rotate(180deg);}
+.rsec-body{display:none;padding:0 1.4rem 1.4rem;border-top:1px solid var(--border-light);}
+.rsec.open .rsec-body{display:block;}
+
+/* Score bar inside section */
+.sec-score-bar{display:flex;align-items:center;gap:0.75rem;margin:1rem 0 1.25rem;}
+.ssb-track{flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.ssb-fill{height:100%;border-radius:3px;}
+.ssb-pct{font-size:0.75rem;font-weight:700;min-width:35px;text-align:right;}
+
+/* Findings */
+.findings{display:flex;flex-direction:column;gap:0.5rem;}
+.finding{display:flex;gap:0.75rem;align-items:flex-start;padding:0.75rem 0.85rem;border-radius:5px;}
+.finding.pass{background:rgba(79,255,176,0.05);border:1px solid rgba(79,255,176,0.15);}
+.finding.warn{background:rgba(250,163,28,0.05);border:1px solid rgba(250,163,28,0.15);}
+.finding.fail{background:rgba(237,8,117,0.05);border:1px solid rgba(237,8,117,0.15);}
+.finding-icon{font-size:0.85rem;flex-shrink:0;margin-top:2px;}
+.finding-text{font-size:0.8rem;line-height:1.55;color:var(--muted);}
+.finding-text strong{color:var(--white);display:block;margin-bottom:0.1rem;}
+.finding-fix{font-size:0.7rem;margin-top:0.35rem;padding:0.2rem 0.55rem;border-radius:3px;display:inline-block;font-weight:600;}
+
+/* CTA inside report */
+.report-cta{background:var(--gradient);border-radius:10px;padding:2rem;text-align:center;margin-top:2rem;}
+.rcta-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.4rem;}
+.rcta-title{font-family:'Poppins',sans-serif;font-size:1.35rem;font-weight:800;margin-bottom:0.4rem;line-height:1.2;}
+.rcta-sub{font-size:0.82rem;color:rgba(255,255,255,0.75);line-height:1.65;margin-bottom:1rem;max-width:480px;margin-left:auto;margin-right:auto;}
+.rcta-btn{display:inline-block;background:white;color:var(--purple);text-decoration:none;padding:0.8rem 2rem;border-radius:5px;font-size:0.92rem;font-weight:800;transition:all 0.15s;}
+.rcta-btn:hover{transform:translateY(-1px);}
+.rcta-phone{font-size:0.72rem;color:rgba(255,255,255,0.55);margin-top:0.65rem;}
+.rcta-phone a{color:rgba(255,255,255,0.8);text-decoration:none;font-weight:600;}
+
+/* restart btn */
+.restart-btn{display:inline-flex;align-items:center;gap:0.4rem;background:transparent;border:1px solid var(--border);color:var(--muted);padding:0.45rem 1rem;border-radius:4px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;cursor:pointer;margin-bottom:1.5rem;transition:all 0.15s;}
+.restart-btn:hover{color:var(--white);border-color:rgba(255,255,255,0.3);}
+
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);max-width:900px;margin:0 auto;}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+
+@media(max-width:600px){.sb-fields{grid-template-columns:1fr;}.rh-overall{position:static;transform:none;margin-top:1rem;}.grade-bar-wrap{flex-direction:column;align-items:flex-start;}.report{padding:1.5rem 1rem 4rem;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="results.html">Results</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-drop-btn" onclick="toggleNav(this)" id="nl-tools-btn">Tools <span class="nav-chevron">&#9660;</span></button>
+      <div class="nav-drop-menu" id="nl-tools-menu">
+        <div class="ndm-col">
+          <div class="ndm-label">Calculators</div>
+          <a href="funnel.html">Lead Funnel Visualizer</a>
+          <a href="calculator.html">Cost Per Lead</a>
+          <a href="roi.html">Marketing ROI</a>
+          <a href="budget.html">Ad Budget Planner</a>
+          <a href="revenue-loss.html">Revenue Loss</a>
+          <a href="package-builder.html">Package Builder</a>
+        </div>
+        <div class="ndm-col">
+          <div class="ndm-label">Audits &amp; Quizzes</div>
+          <a href="business-snapshot.html">Business Snapshot</a>
+          <a href="marketing-wheel.html">Marketing Wheel</a>
+          <a href="grader.html">Website Grader</a>
+          <a href="website-quiz.html">Website Quiz</a>
+          <a href="local-seo.html">Local SEO Check</a>
+          <a href="positioning.html">Positioning Worksheet</a>
+          <a href="reviews.html">Reputation Toolkit</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<!-- ── STEP 0: LANDING ── -->
+<div class="landing" id="step-landing">
+  <div class="landing-inner">
+    <div class="landing-tag">Free Business Snapshot</div>
+    <h1 class="landing-title">How does your business<br><span class="grad">look online?</span></h1>
+    <p class="landing-sub">Type your business name below. We'll pull your real data from Google — reviews, listings, website health, and local visibility — and give you an <strong>instant scored report</strong>.</p>
+
+    <div class="search-box">
+      <div class="sb-label">Search your business</div>
+      <div class="sb-input-wrap">
+        <span class="sb-icon">🔍</span>
+        <input type="text" class="sb-input" id="biz-search" placeholder="Start typing your business name..." autocomplete="off" oninput="onSearch(this.value)">
+        <div class="sb-autocomplete" id="autocomplete-list"></div>
+      </div>
+
+      <div class="sb-fields">
+        <div class="sb-field" style="grid-column:1/-1">
+          <label class="sb-field-label">Business name</label>
+          <input type="text" class="sb-field-input" id="f-name" placeholder="Auto-filled from search">
+        </div>
+        <div class="sb-field">
+          <label class="sb-field-label">Your name</label>
+          <input type="text" class="sb-field-input" id="f-contact" placeholder="Jane Smith">
+        </div>
+        <div class="sb-field">
+          <label class="sb-field-label">Email address</label>
+          <input type="email" class="sb-field-input" id="f-email" placeholder="jane@business.com">
+        </div>
+        <div class="sb-field">
+          <label class="sb-field-label">Website URL</label>
+          <input type="text" class="sb-field-input" id="f-website" placeholder="Auto-filled or enter manually">
+        </div>
+        <div class="sb-field">
+          <label class="sb-field-label">Phone number</label>
+          <input type="text" class="sb-field-input" id="f-phone" placeholder="Auto-filled from Google">
+        </div>
+      </div>
+
+      <button class="sb-cta" id="run-btn" onclick="runReport()" disabled>
+        <span>🚀</span> Run My Free Snapshot Report
+      </button>
+      <div class="sb-disclaimer">Free report · No credit card · Takes about 30 seconds</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── STEP 1: SCANNING ── -->
+<div class="scanning" id="step-scanning">
+  <div class="scan-title" id="scan-biz-name">Scanning your business...</div>
+  <div class="scan-sub">Pulling real data from Google, checking your website, analyzing your local presence</div>
+  <div class="scan-steps">
+    <div class="scan-step" id="ss-1"><span class="step-icon">📍</span> Pulling Google Business Profile data</div>
+    <div class="scan-step" id="ss-2"><span class="step-icon">⭐</span> Analyzing reviews & reputation</div>
+    <div class="scan-step" id="ss-3"><span class="step-icon">🌐</span> Checking website & SEO health</div>
+    <div class="scan-step" id="ss-4"><span class="step-icon">📱</span> Evaluating local listings & visibility</div>
+    <div class="scan-step" id="ss-5"><span class="step-icon">📊</span> Generating your personalized report</div>
+  </div>
+  <div class="scan-bar-wrap"><div class="scan-bar" id="scan-bar"></div></div>
+</div>
+
+<!-- ── STEP 2: REPORT ── -->
+<div class="report" id="step-report">
+  <button class="restart-btn" onclick="restart()">← Run another report</button>
+  <div class="report-header" id="report-header"></div>
+  <div class="grade-bar-wrap" id="grade-bar-wrap"></div>
+  <div class="report-sections" id="report-sections"></div>
+  <div class="report-cta" id="report-cta"></div>
+</div>
+
+<footer>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a></span>
+</footer>
+
+<!-- Google Places API — replace YOUR_API_KEY with actual key -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_PLACES_API_KEY&libraries=places" async defer onload="initPlaces()"></script>
+
+<script>
+// ============================================================
+// CONFIG — replace with real keys
+// ============================================================
+const DATAFORSEO_LOGIN    = 'zacharym@gozoek.com';
+const DATAFORSEO_PASSWORD = '39c3676937317577';
+
+// ============================================================
+// STATE
+// ============================================================
+let placesService, autocompleteService;
+let selectedPlace = null;
+let bizData = {};
+
+// ============================================================
+// GOOGLE PLACES AUTOCOMPLETE
+// ============================================================
+function initPlaces() {
+  const map = new google.maps.Map(document.createElement('div'));
+  placesService   = new google.maps.places.PlacesService(map);
+  autocompleteService = new google.maps.places.AutocompleteService();
+}
+
+let searchTimeout;
+function onSearch(val) {
+  clearTimeout(searchTimeout);
+  document.getElementById('run-btn').disabled = true;
+  if (val.length < 2) { closeAutocomplete(); return; }
+  searchTimeout = setTimeout(() => {
+    autocompleteService.getPlacePredictions(
+      { input: val, types: ['establishment'] },
+      (predictions, status) => {
+        if (status !== google.maps.places.PlacesServiceStatus.OK || !predictions) {
+          closeAutocomplete(); return;
+        }
+        showAutocomplete(predictions.slice(0, 6));
+      }
+    );
+  }, 300);
+}
+
+function showAutocomplete(predictions) {
+  const list = document.getElementById('autocomplete-list');
+  list.innerHTML = predictions.map(p => `
+    <div class="sb-option" onclick="selectPlace('${p.place_id}','${escHtml(p.structured_formatting.main_text)}','${escHtml(p.description)}')">
+      <div class="sb-opt-name">${p.structured_formatting.main_text}</div>
+      <div class="sb-opt-addr">${p.description}</div>
+    </div>`).join('');
+  list.classList.add('open');
+}
+
+function closeAutocomplete() {
+  document.getElementById('autocomplete-list').classList.remove('open');
+}
+
+function selectPlace(placeId, name, desc) {
+  document.getElementById('biz-search').value = name;
+  document.getElementById('f-name').value = name;
+  closeAutocomplete();
+
+  // Fetch full place details
+  placesService.getDetails(
+    { placeId, fields: ['name','formatted_address','formatted_phone_number','website','rating','user_ratings_total','opening_hours','types','photos','url','reviews'] },
+    (place, status) => {
+      if (status !== google.maps.places.PlacesServiceStatus.OK) return;
+      selectedPlace = place;
+
+      // Auto-fill fields
+      if (place.formatted_phone_number) {
+        const ph = document.getElementById('f-phone');
+        ph.value = place.formatted_phone_number;
+        ph.classList.add('filled');
+      }
+      if (place.website) {
+        const ws = document.getElementById('f-website');
+        ws.value = place.website;
+        ws.classList.add('filled');
+      }
+      document.getElementById('f-name').classList.add('filled');
+      checkReady();
+    }
+  );
+}
+
+function checkReady() {
+  const name  = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const contact = document.getElementById('f-contact').value.trim();
+  document.getElementById('run-btn').disabled = !(name && email && contact && selectedPlace);
+}
+
+['f-name','f-email','f-contact','f-website','f-phone'].forEach(id => {
+  document.getElementById(id).addEventListener('input', checkReady);
+});
+
+// ============================================================
+// SCAN ANIMATION
+// ============================================================
+function animateScan() {
+  const steps = ['ss-1','ss-2','ss-3','ss-4','ss-5'];
+  const bar = document.getElementById('scan-bar');
+  let i = 0;
+  const STEP_MS = 1200;
+
+  return new Promise(resolve => {
+    const tick = () => {
+      if (i > 0) {
+        document.getElementById(steps[i-1]).classList.remove('active');
+        document.getElementById(steps[i-1]).classList.add('done');
+        document.getElementById(steps[i-1]).querySelector('.step-icon').textContent = '✅';
+      }
+      if (i < steps.length) {
+        document.getElementById(steps[i]).classList.add('active');
+        document.getElementById(steps[i]).querySelector('.step-icon').innerHTML = '<span class="spin">⟳</span>';
+        bar.style.width = ((i+1)/steps.length * 100) + '%';
+        i++;
+        setTimeout(tick, STEP_MS);
+      } else {
+        bar.style.width = '100%';
+        setTimeout(resolve, 400);
+      }
+    };
+    tick();
+  });
+}
+
+// ============================================================
+// RUN REPORT
+// ============================================================
+async function runReport() {
+  const name    = document.getElementById('f-name').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const contact = document.getElementById('f-contact').value.trim();
+  const website = document.getElementById('f-website').value.trim();
+  const phone   = document.getElementById('f-phone').value.trim();
+  const place   = selectedPlace;
+
+  // Show scanning
+  document.getElementById('step-landing').style.display = 'none';
+  const scanEl = document.getElementById('step-scanning');
+  scanEl.style.display = 'flex';
+  document.getElementById('scan-biz-name').textContent = `Scanning ${name}...`;
+
+  bizData = { name, email, contact, website, phone, place };
+
+  // Run scan animation + data fetching in parallel
+  const [_, reportData] = await Promise.all([
+    animateScan(),
+    fetchAllData(place, website)
+  ]);
+
+  // Show report
+  scanEl.style.display = 'none';
+  buildReport(reportData, bizData);
+  document.getElementById('step-report').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+// ============================================================
+// DATA FETCHING
+// ============================================================
+async function fetchAllData(place, website) {
+  const results = {};
+
+  // ── 1. GOOGLE PLACES DATA (already have it) ──────────────
+  results.google = {
+    rating:      place.rating || null,
+    reviewCount: place.user_ratings_total || 0,
+    hasWebsite:  !!place.website,
+    hasPhone:    !!place.formatted_phone_number,
+    hasHours:    !!(place.opening_hours),
+    address:     place.formatted_address || '',
+    types:       place.types || [],
+    photos:      (place.photos || []).length,
+    reviews:     place.reviews || [],
+    mapsUrl:     place.url || ''
+  };
+
+  // ── 2. DATAFORSEO ON-PAGE (if website provided) ───────────
+  if (website && DATAFORSEO_LOGIN !== 'YOUR_DATAFORSEO_LOGIN') {
+    try {
+      results.onpage = await fetchDataForSEO(website);
+    } catch(e) {
+      results.onpage = null;
+    }
+  } else {
+    results.onpage = null;
+  }
+
+  return results;
+}
+
+async function fetchDataForSEO(url) {
+  // Clean the URL
+  const cleanUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  const domain = cleanUrl.split('/')[0];
+
+  const creds = btoa(`${DATAFORSEO_LOGIN}:${DATAFORSEO_PASSWORD}`);
+
+  // Task post
+  const postResp = await fetch('https://api.dataforseo.com/v3/on_page/task_post', {
+    method: 'POST',
+    headers: { 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify([{ target: domain, max_crawl_pages: 1, load_resources: false }])
+  });
+  const postData = await postResp.json();
+  const taskId = postData?.tasks?.[0]?.id;
+  if (!taskId) return null;
+
+  // Poll for results (max 20s)
+  for (let attempt = 0; attempt < 8; attempt++) {
+    await sleep(2500);
+    const res = await fetch(`https://api.dataforseo.com/v3/on_page/summary/${taskId}`, {
+      headers: { 'Authorization': `Basic ${creds}` }
+    });
+    const data = await res.json();
+    const item = data?.tasks?.[0]?.result?.[0];
+    if (item?.crawl_progress === 'finished' || item?.pages_count > 0) {
+      return item;
+    }
+  }
+  return null;
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// ============================================================
+// SCORE ENGINE
+// ============================================================
+function scoreGoogle(g) {
+  let score = 0; const findings = [];
+
+  // Rating
+  if (g.rating >= 4.5) { score += 25; findings.push({type:'pass',text:'Excellent Google rating',detail:`${g.rating}★ — top tier. Customers trust you.`}); }
+  else if (g.rating >= 4.0) { score += 18; findings.push({type:'warn',text:'Good Google rating, room to grow',detail:`${g.rating}★ — solid, but pushing toward 4.5+ unlocks more clicks.`}); }
+  else if (g.rating >= 3.0) { score += 8; findings.push({type:'fail',text:'Rating needs improvement',detail:`${g.rating}★ — most customers filter under 4 stars. This is actively costing you leads.`}); }
+  else { score += 0; findings.push({type:'fail',text:'No rating or very low rating',detail:'No rating data found. Your profile may be incomplete or unverified.'}); }
+
+  // Review count
+  if (g.reviewCount >= 100) { score += 25; findings.push({type:'pass',text:`${g.reviewCount} reviews — strong volume`,detail:'High review count builds trust and boosts local rankings.'}); }
+  else if (g.reviewCount >= 25) { score += 15; findings.push({type:'warn',text:`${g.reviewCount} reviews — growing`,detail:'More reviews = more trust. Aim for 100+ to compete in most markets.'}); }
+  else if (g.reviewCount >= 5) { score += 8; findings.push({type:'fail',text:`Only ${g.reviewCount} reviews`,detail:'88% of consumers need 10+ reviews before trusting a business. You\'re below that threshold.'}); }
+  else { score += 0; findings.push({type:'fail',text:'Critically low review count',detail:'Less than 5 reviews makes your business nearly invisible in competitive local search.'}); }
+
+  // Profile completeness
+  if (g.hasPhone) { score += 10; findings.push({type:'pass',text:'Phone number listed',detail:'Click-to-call is a top conversion driver on Google Business Profiles.'}); }
+  else { findings.push({type:'fail',text:'No phone number found',detail:'Missing phone number reduces profile completeness and call-based leads.'}); }
+
+  if (g.hasHours) { score += 10; findings.push({type:'pass',text:'Business hours listed',detail:'Hours signal an active, trustworthy profile to both Google and customers.'}); }
+  else { findings.push({type:'fail',text:'Business hours missing',detail:'Profiles without hours get significantly fewer actions. Customers want to know if you\'re open.'}); }
+
+  if (g.hasWebsite) { score += 15; findings.push({type:'pass',text:'Website linked to profile',detail:'Linked websites get 25-35% more profile clicks.'}); }
+  else { findings.push({type:'fail',text:'No website linked',detail:'Without a website link, you\'re losing leads who want to learn more before calling.'}); }
+
+  if (g.photos >= 10) { score += 15; findings.push({type:'pass',text:`${g.photos} photos on profile`,detail:'Profiles with 10+ photos receive 35% more website clicks.'}); }
+  else if (g.photos >= 3) { score += 8; findings.push({type:'warn',text:`Only ${g.photos} photos`,detail:'Add more photos — businesses with 10+ see significantly higher engagement.'}); }
+  else { findings.push({type:'fail',text:'Few or no photos',detail:'Photos are one of the highest-impact changes you can make to your Google profile.'}); }
+
+  return { score: Math.min(score, 100), findings };
+}
+
+function scoreWebsite(onpage, hasWebsite) {
+  if (!hasWebsite) {
+    return {
+      score: 0,
+      findings: [{ type:'fail', text:'No website detected', detail:'Without a website, you\'re invisible to the majority of potential customers. This is your biggest opportunity.' }]
+    };
+  }
+  if (!onpage) {
+    // Estimate based on having a website
+    return {
+      score: 40,
+      findings: [
+        { type:'warn', text:'Website found but not fully audited', detail:'Connect DataforSEO credentials for a full technical audit of your website.' },
+        { type:'warn', text:'SEO health unknown', detail:'We couldn\'t fully crawl your site. A Zoek audit will identify all technical issues.' }
+      ]
+    };
+  }
+
+  let score = 0; const findings = [];
+  const p = onpage;
+
+  if (p.meta_title_length > 0 && p.meta_title_length <= 60) { score += 20; findings.push({type:'pass',text:'Meta title properly set',detail:`${p.meta_title_length} characters — within the 50–60 character sweet spot.`}); }
+  else if (p.meta_title_length > 60) { score += 10; findings.push({type:'warn',text:'Meta title too long',detail:`${p.meta_title_length} chars — Google truncates above 60. Shorten it to show the full title in search results.`}); }
+  else { findings.push({type:'fail',text:'Missing or empty meta title',detail:'Your page title is one of the most important on-page SEO factors. Missing titles hurt rankings.'}); }
+
+  if (p.meta_description_length > 0) { score += 15; findings.push({type:'pass',text:'Meta description present',detail:'Good — this is your search result preview text.'}); }
+  else { findings.push({type:'fail',text:'Missing meta description',detail:'Without a meta description, Google writes one for you — usually badly. You\'re missing free ad space in search results.'}); }
+
+  if (p.h1_count === 1) { score += 20; findings.push({type:'pass',text:'Single H1 tag found',detail:'Correct structure. One clear H1 helps Google understand your page topic.'}); }
+  else if (p.h1_count > 1) { score += 8; findings.push({type:'warn',text:`${p.h1_count} H1 tags found`,detail:'Multiple H1s confuse search engines. Only one H1 per page is recommended.'}); }
+  else { findings.push({type:'fail',text:'No H1 tag found',detail:'Missing H1 is a significant SEO issue. Google uses it to understand your page topic.'}); }
+
+  if (p.broken_links === 0) { score += 20; findings.push({type:'pass',text:'No broken links detected',detail:'Clean link profile — no dead ends for users or search engines.'}); }
+  else { score += 5; findings.push({type:'fail',text:`${p.broken_links} broken links found`,detail:`Broken links hurt user experience and signal poor site maintenance to Google.`}); }
+
+  if (p.https_redirect) { score += 15; findings.push({type:'pass',text:'HTTPS / SSL secured',detail:'Your site uses HTTPS — required for trust signals and Google ranking.'}); }
+  else { findings.push({type:'fail',text:'No HTTPS / SSL detected',detail:'Non-HTTPS sites are flagged as "Not Secure" by browsers. This kills trust and conversions.'}); }
+
+  if (p.page_size < 1000000) { score += 10; findings.push({type:'pass',text:'Page size within normal range',detail:'Good — lightweight pages load faster and rank better.'}); }
+  else { findings.push({type:'warn',text:'Large page size detected',detail:'Heavy pages load slowly. Speed is a direct Google ranking factor.'}); }
+
+  return { score: Math.min(score, 100), findings };
+}
+
+function scoreListings(g) {
+  let score = 0; const findings = [];
+
+  if (g.hasWebsite && g.hasPhone) { score += 40; findings.push({type:'pass',text:'Core NAP data present on Google',detail:'Name, phone, and website are all on your Google profile — the foundation of local SEO.'}); }
+  else { score += 10; findings.push({type:'fail',text:'Incomplete NAP data',detail:'Name, Address, Phone (NAP) must be consistent and complete across all directories.'}); }
+
+  if (g.hasHours) { score += 20; findings.push({type:'pass',text:'Business hours are listed',detail:'Hours on your Google profile signal an active business.'}); }
+  else { findings.push({type:'fail',text:'Hours missing from profile',detail:'Add your hours to Google Business Profile immediately — it\'s free and directly impacts clicks.'}); }
+
+  // Estimate listing health based on profile completeness
+  const completeness = [g.hasWebsite, g.hasPhone, g.hasHours, g.photos > 0, g.rating > 0].filter(Boolean).length;
+  if (completeness >= 4) { score += 40; findings.push({type:'pass',text:'Google profile is well-optimized',detail:'High profile completeness — you\'re showing up stronger in local map results.'}); }
+  else if (completeness >= 2) { score += 20; findings.push({type:'warn',text:'Profile partially complete',detail:'Complete your Google Business Profile to unlock better placement in local search.'}); }
+  else { findings.push({type:'fail',text:'Profile critically incomplete',detail:'An incomplete profile severely limits your local visibility. Zoek can fully optimize this in days.'}); }
+
+  return { score: Math.min(score, 100), findings };
+}
+
+function scoreReviews(g) {
+  let score = 0; const findings = [];
+
+  if (g.rating >= 4.5 && g.reviewCount >= 50) { score = 90; findings.push({type:'pass',text:'Strong review presence',detail:`${g.rating}★ across ${g.reviewCount} reviews — you\'re building real trust with potential customers.`}); }
+  else if (g.rating >= 4.0 && g.reviewCount >= 20) { score = 70; findings.push({type:'warn',text:'Decent reviews, room to grow',detail:`${g.rating}★ with ${g.reviewCount} reviews. Keep generating new reviews consistently.`}); }
+  else if (g.rating >= 3.5) { score = 40; findings.push({type:'fail',text:'Rating is below competitive threshold',detail:`${g.rating}★ — most searchers filter at 4.0+. Actively responding to and generating reviews is critical.`}); }
+  else { score = 10; findings.push({type:'fail',text:'Review presence is hurting you',detail:'Low rating or very few reviews is one of the most common reasons businesses lose leads they never knew they had.'}); }
+
+  // Check if they respond to reviews
+  const hasResponses = g.reviews.some(r => r.author_name);
+  if (g.reviewCount > 0 && !hasResponses) {
+    findings.push({type:'warn',text:'Review responses missing',detail:'Responding to reviews — good and bad — improves rankings and shows you care. Google rewards engagement.'});
+  }
+
+  if (g.reviewCount < 10) {
+    findings.push({type:'fail',text:'Under 10 reviews — critical gap',detail:'You need a system for consistently generating reviews. Zoek\'s Reputation Toolkit automates this.',fix:'Reputation Management'});
+  }
+
+  return { score: Math.min(score, 100), findings };
+}
+
+// ============================================================
+// GRADE HELPERS
+// ============================================================
+function getGrade(score) {
+  if (score >= 85) return { letter:'A', cls:'grade-a', color:'#4fffb0' };
+  if (score >= 70) return { letter:'B', cls:'grade-b', color:'#1EBFDC' };
+  if (score >= 55) return { letter:'C', cls:'grade-c', color:'#FAA31C' };
+  if (score >= 40) return { letter:'D', cls:'grade-d', color:'#ED0875' };
+  return { letter:'F', cls:'grade-f', color:'#ff5c7c' };
+}
+
+function getVerdict(score, name) {
+  if (score >= 85) return `<strong>${name}</strong> has a strong online presence. The foundation is solid — now it's about staying ahead of competitors and finding the gaps.`;
+  if (score >= 70) return `<strong>${name}</strong> is doing well online but leaving leads on the table. A few targeted fixes could move the needle significantly.`;
+  if (score >= 55) return `<strong>${name}</strong> has the basics but is not competitive in local search. Competitors with stronger profiles are taking leads that should be yours.`;
+  if (score >= 40) return `<strong>${name}</strong> has significant gaps in its online presence. These aren't small issues — they're actively costing you customers every day.`;
+  return `<strong>${name}</strong> has critical gaps across multiple areas. The good news: every one of these is fixable, and the upside is significant.`;
+}
+
+// ============================================================
+// BUILD REPORT
+// ============================================================
+function buildReport(data, biz) {
+  const g = data.google;
+  const name = biz.name;
+  const address = g.address;
+
+  const sections = [
+    { id:'google',   icon:'📍', title:'Google Business Profile', ...scoreGoogle(g),    fix:'Local SEO + GBP Optimization' },
+    { id:'reviews',  icon:'⭐', title:'Reviews & Reputation',     ...scoreReviews(g),   fix:'Reputation Management' },
+    { id:'website',  icon:'🌐', title:'Website Health & SEO',     ...scoreWebsite(data.onpage, g.hasWebsite), fix:'Website Design + SEO' },
+    { id:'listings', icon:'📋', title:'Local Listings & Visibility',...scoreListings(g), fix:'Get Listed + Local SEO' },
+  ];
+
+  const overall = Math.round(sections.reduce((s,x) => s + x.score, 0) / sections.length);
+  const overallGrade = getGrade(overall);
+
+  // ── Header ──
+  document.getElementById('report-header').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem">
+      <div>
+        <div class="rh-biz">${name}</div>
+        <div class="rh-addr">📍 ${address}</div>
+        <div class="rh-stats">
+          ${g.rating ? `<div class="rh-stat"><div class="rh-stat-val">${g.rating}★</div><div class="rh-stat-label">Rating</div></div>` : ''}
+          ${g.reviewCount ? `<div class="rh-stat"><div class="rh-stat-val">${g.reviewCount}</div><div class="rh-stat-label">Reviews</div></div>` : ''}
+          ${g.photos ? `<div class="rh-stat"><div class="rh-stat-val">${g.photos}</div><div class="rh-stat-label">Photos</div></div>` : ''}
+          <div class="rh-stat"><div class="rh-stat-val">${g.hasWebsite ? 'Yes' : 'No'}</div><div class="rh-stat-label">Website</div></div>
+        </div>
+      </div>
+      <div class="rh-score-ring">
+        <div class="rh-score-num">${overall}</div>
+        <div class="rh-score-label">/ 100</div>
+      </div>
+    </div>`;
+
+  // ── Overall grade bar ──
+  document.getElementById('grade-bar-wrap').innerHTML = `
+    <div class="grade-letter" style="color:${overallGrade.color}">${overallGrade.letter}</div>
+    <div class="grade-bar-inner">
+      <div class="grade-bar-label">Overall Online Presence Score — ${overall}/100</div>
+      <div class="grade-track"><div class="grade-fill" style="width:${overall}%;background:${overallGrade.color}"></div></div>
+    </div>
+    <div class="grade-verdict">${getVerdict(overall, name)}</div>`;
+
+  // ── Sections ──
+  document.getElementById('report-sections').innerHTML = sections.map(sec => {
+    const g = getGrade(sec.score);
+    const findingsHtml = sec.findings.map(f => `
+      <div class="finding ${f.type}">
+        <div class="finding-icon">${f.type==='pass'?'✅':f.type==='warn'?'⚠️':'❌'}</div>
+        <div class="finding-text">
+          <strong>${f.text}</strong>${f.detail}
+          ${f.fix?`<span class="finding-fix" style="background:rgba(237,8,117,0.1);color:var(--pink)">Zoek fix: ${f.fix}</span>`:''}
+        </div>
+      </div>`).join('');
+
+    return `
+      <div class="rsec" id="rsec-${sec.id}">
+        <div class="rsec-header" onclick="toggleSection('${sec.id}')">
+          <span class="rsec-icon">${sec.icon}</span>
+          <span class="rsec-title">${sec.title}</span>
+          <span class="rsec-score" style="color:${g.color}">${sec.score}</span>
+          <span class="rsec-grade ${g.cls}">${g.letter}</span>
+          <span class="rsec-chevron">▾</span>
+        </div>
+        <div class="rsec-body">
+          <div class="sec-score-bar">
+            <div class="ssb-track"><div class="ssb-fill" style="width:${sec.score}%;background:${g.color}"></div></div>
+            <div class="ssb-pct" style="color:${g.color}">${sec.score}%</div>
+          </div>
+          <div class="findings">${findingsHtml}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Auto-open the lowest scoring section
+  const worst = sections.reduce((a,b) => a.score < b.score ? a : b);
+  toggleSection(worst.id);
+
+  // ── CTA ──
+  const weakAreas = sections.filter(s => s.score < 70).map(s => s.fix).filter(Boolean);
+  document.getElementById('report-cta').innerHTML = `
+    <div class="rcta-eyebrow">Free 30-minute strategy call</div>
+    <div class="rcta-title">${overall < 60 ? `${name} has ${100 - overall} points of untapped growth` : `Let's protect what's working and fix what's not`}</div>
+    <div class="rcta-sub">${weakAreas.length > 0 ? `Your biggest opportunities: ${weakAreas.join(', ')}. A Zoek strategist will show you exactly what fixing these means in new leads and revenue.` : `Your online presence is strong. Zoek can help you stay ahead of competitors and push into that top-tier.`}</div>
+    <a href="https://calendly.com/expert-sales" target="_blank" class="rcta-btn">Book a Free Strategy Call →</a>
+    <div class="rcta-phone">Or call us: <a href="tel:18887379635">1-888-737-9635</a></div>`;
+}
+
+function toggleSection(id) {
+  document.getElementById('rsec-' + id).classList.toggle('open');
+}
+
+function restart() {
+  selectedPlace = null;
+  bizData = {};
+  document.getElementById('biz-search').value = '';
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-email').value = '';
+  document.getElementById('f-contact').value = '';
+  document.getElementById('f-website').value = '';
+  document.getElementById('f-phone').value = '';
+  document.querySelectorAll('.sb-field-input').forEach(i => i.classList.remove('filled'));
+  document.getElementById('run-btn').disabled = true;
+  document.getElementById('step-report').style.display = 'none';
+  document.getElementById('step-landing').style.display = 'flex';
+  window.scrollTo(0,0);
+}
+
+function escHtml(str) {
+  return str.replace(/'/g,"&#39;").replace(/"/g,'&quot;');
+}
+
+// NAV
+function toggleNav(btn) {
+  const menu = document.getElementById('nl-tools-menu');
+  const isOpen = menu.classList.contains('open');
+  menu.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+document.addEventListener('click', function(e) {
+  const dd = document.querySelector('.nav-dropdown');
+  if (dd && !dd.contains(e.target)) {
+    document.getElementById('nl-tools-menu')?.classList.remove('open');
+    document.getElementById('nl-tools-btn')?.classList.remove('open');
+  }
+  if (!e.target.closest('.sb-input-wrap')) closeAutocomplete();
+});
+</script>
+<script src="cta.js"></script>
+</body>
+</html>
