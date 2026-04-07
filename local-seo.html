@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Local SEO Health Check | Zoek Marketing Tools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 <style>
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
@@ -17,17 +17,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-drop-btn:hover,.nav-drop-btn.open{color:var(--white);background:rgba(255,255,255,0.07);}
 .nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
 .nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
-.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1a1630;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1E1044;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
 .nav-drop-menu.open{display:flex;}
 .ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
 .ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
 .nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
-.nav-drop-menu a:hover{color:var(--white);background:rgba(108,99,255,0.1);}
-.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
-.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(105,44,142,0.1);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
 @media(max-width:700px){.nav-links{display:none;}}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+:root{--navy:#1E1044;--sidebar:#27215C;--purple:#692C8E;--blue:#1EBFDC;--white:#ffffff;--muted:#a0a0c0;--border:rgba(105,44,142,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#FAA31C;--gradient:linear-gradient(135deg,#692C8E 0%,#ED0875 100%);}
 html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
 
@@ -40,14 +40,14 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 
 .page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
 .header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
-.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
-.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(105,44,142,0.15);color:var(--purple);border:1px solid rgba(105,44,142,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Poppins',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
 .page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
 .page-intro strong{color:var(--white);font-weight:600;}
 .header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1.1rem;}
 .stat-row{display:flex;align-items:center;gap:1rem;}
-.stat-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple);min-width:55px;}
+.stat-num{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple);min-width:55px;}
 .stat-text{font-size:0.82rem;color:var(--muted);line-height:1.5;}
 .stat-text strong{color:var(--white);}
 
@@ -78,8 +78,8 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .tog.partial.active{background:rgba(255,209,102,0.15);color:var(--yellow);}
 .tog.no.active{background:rgba(255,92,124,0.12);color:var(--red);}
 
-.btn-run{width:100%;padding:0.8rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:800;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);margin-top:0.5rem;}
-.btn-run:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.btn-run{width:100%;padding:0.8rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:800;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);margin-top:0.5rem;}
+.btn-run:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
 .btn-reset-seo{width:100%;padding:0.5rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.75rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;margin-top:0.4rem;}
 .btn-reset-seo:hover{color:var(--red);border-color:var(--red);}
 
@@ -90,14 +90,14 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .empty-text{font-size:0.9rem;line-height:1.65;max-width:300px;}
 
 /* SCORE HERO */
-.score-hero{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:8px;padding:2rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;}
+.score-hero{background:var(--sidebar);border:1px solid rgba(105,44,142,0.3);border-radius:8px;padding:2rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;}
 .score-ring-wrap{position:relative;width:130px;height:130px;flex-shrink:0;}
 .score-ring-svg{transform:rotate(-90deg);}
 .score-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
-.score-num{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;line-height:1;}
+.score-num{font-family:'Poppins',sans-serif;font-size:2.2rem;font-weight:800;line-height:1;}
 .score-denom{font-size:0.7rem;color:var(--muted);}
 .score-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
-.score-grade{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;line-height:1.1;margin-bottom:0.5rem;}
+.score-grade{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;line-height:1.1;margin-bottom:0.5rem;}
 .score-desc{font-size:0.83rem;color:var(--muted);line-height:1.65;}
 .score-desc strong{color:var(--white);}
 
@@ -107,7 +107,7 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .cat-bar-name{font-size:0.78rem;font-weight:600;}
 .cat-bar-track{height:7px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
 .cat-bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease;}
-.cat-bar-pct{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:800;text-align:right;}
+.cat-bar-pct{font-family:'Poppins',sans-serif;font-size:0.85rem;font-weight:800;text-align:right;}
 
 /* FINDINGS */
 .section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.6rem;}
@@ -126,7 +126,7 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .finding-card.open .finding-body{display:block;}
 .finding-why{font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.85rem;}
 .finding-why strong{color:var(--white);}
-.finding-fix-box{background:rgba(108,99,255,0.07);border:1px solid rgba(108,99,255,0.2);border-radius:4px;padding:0.75rem 1rem;}
+.finding-fix-box{background:rgba(105,44,142,0.07);border:1px solid rgba(105,44,142,0.2);border-radius:4px;padding:0.75rem 1rem;}
 .ffb-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.25rem;}
 .ffb-text{font-size:0.8rem;color:var(--muted);line-height:1.6;}
 .ffb-text strong{color:var(--white);}
@@ -138,17 +138,17 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .results-sidebar{display:flex;flex-direction:column;gap:1.25rem;}
 .sidebar-box{background:var(--sidebar);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
 .sb-head{padding:0.85rem 1.1rem;border-bottom:1px solid var(--border-light);}
-.sb-title{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:800;}
+.sb-title{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:800;}
 .sb-body{padding:1rem 1.1rem;}
 .priority-row{display:flex;gap:0.65rem;align-items:flex-start;padding:0.55rem 0;border-bottom:1px solid var(--border-light);}
 .priority-row:last-child{border-bottom:none;padding-bottom:0;}
-.pr-num{width:22px;height:22px;border-radius:3px;background:var(--gradient);color:white;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:800;flex-shrink:0;margin-top:1px;}
+.pr-num{width:22px;height:22px;border-radius:3px;background:var(--gradient);color:white;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:0.7rem;font-weight:800;flex-shrink:0;margin-top:1px;}
 .pr-title{font-size:0.8rem;font-weight:600;line-height:1.35;}
 .pr-svc{font-size:0.68rem;color:var(--purple);margin-top:0.1rem;}
 
 .cta-gradient-box{background:var(--gradient);border-radius:6px;padding:1.5rem;text-align:center;}
 .cgb-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.35rem;}
-.cgb-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.35rem;line-height:1.2;}
+.cgb-title{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.35rem;line-height:1.2;}
 .cgb-sub{font-size:0.75rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:1rem;}
 .cgb-btn{display:block;background:white;color:var(--purple);text-decoration:none;padding:0.65rem 1rem;border-radius:4px;font-size:0.82rem;font-weight:800;transition:all 0.15s;box-shadow:0 4px 14px rgba(0,0,0,0.2);}
 .cgb-btn:hover{transform:translateY(-1px);}
@@ -157,12 +157,12 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 
 /* BENCHMARKS */
 .benchmarks-section{background:var(--sidebar);padding:3.5rem 2.5rem;border-top:1px solid var(--border);}
-.bench-intro{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.5rem;}
+.bench-intro{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.5rem;}
 .bench-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;max-width:560px;margin-bottom:2rem;}
 .bench-sub strong{color:var(--white);}
 .bench-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
 .bench-card{background:var(--navy);padding:1.25rem;}
-.bc-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--purple);line-height:1;margin-bottom:0.25rem;}
+.bc-num{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;color:var(--purple);line-height:1;margin-bottom:0.25rem;}
 .bc-title{font-weight:700;font-size:0.88rem;margin-bottom:0.35rem;}
 .bc-desc{font-size:0.75rem;color:var(--muted);line-height:1.6;}
 
@@ -397,7 +397,7 @@ function runCheck(){
   let grade,gradeColor,gradeSub;
   if(pct>=80){grade='Strong';gradeColor='#4fffb0';gradeSub=`${biz} has solid local SEO fundamentals. You\'re showing up for the searches that matter most. The gaps below are refinements, not emergencies — closing them will push you further ahead of competitors.`;}
   else if(pct>=60){grade='Decent';gradeColor='#7df5c5';gradeSub=`${biz} has some of the right pieces in place but real gaps that are costing you local visibility. The good news: most local SEO wins are within your control and don\'t require a huge budget.`;}
-  else if(pct>=40){grade='Needs Work';gradeColor='#ffd166';gradeSub=`${biz} is missing several key local signals that Google uses to decide who shows up in local search results. Your competitors who\'ve fixed these are ranking above you every day.`;}
+  else if(pct>=40){grade='Needs Work';gradeColor='#FAA31C';gradeSub=`${biz} is missing several key local signals that Google uses to decide who shows up in local search results. Your competitors who\'ve fixed these are ranking above you every day.`;}
   else if(pct>=20){grade='At Risk';gradeColor='#ff9a5c';gradeSub=`${biz}\'s local SEO has serious gaps across multiple areas. People searching for ${service} in ${city} are finding competitors instead of you — and this is fixable.`;}
   else{grade='Critical';gradeColor='#ff5c7c';gradeSub=`${biz} has major local SEO problems that are making you effectively invisible in local search. Every day without fixing these is business going to your competitors.`;}
 
@@ -444,7 +444,7 @@ function runCheck(){
     <div class="cat-bars">
       ${CATEGORIES.map(cat=>{
         const s=getCatScore(cat);
-        const col=s.pct>=75?'#4fffb0':s.pct>=50?'#ffd166':'#ff5c7c';
+        const col=s.pct>=75?'#4fffb0':s.pct>=50?'#FAA31C':'#ff5c7c';
         return`<div class="cat-bar-row">
           <span class="cat-bar-name">${cat.icon} ${cat.label.split(' ')[0]}</span>
           <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${s.pct}%;background:${col}"></div></div>
@@ -512,10 +512,10 @@ function runCheck(){
       <div class="sb-head"><div class="sb-title">📊 Quick summary</div></div>
       <div class="sb-body">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
-          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Score</div><div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:${gradeColor}">${pct}/100</div></div>
-          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Issues</div><div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--red)">${failures.length}</div></div>
-          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Passing</div><div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--green)">${passed.length}</div></div>
-          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Grade</div><div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:${gradeColor}">${grade}</div></div>
+          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Score</div><div style="font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;color:${gradeColor}">${pct}/100</div></div>
+          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Issues</div><div style="font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;color:var(--red)">${failures.length}</div></div>
+          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Passing</div><div style="font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;color:var(--green)">${passed.length}</div></div>
+          <div><div style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem">Grade</div><div style="font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;color:${gradeColor}">${grade}</div></div>
         </div>
       </div>
     </div>`;

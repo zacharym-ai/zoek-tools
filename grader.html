@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Website Grader | Zoek Marketing Tools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 <style>
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
@@ -17,17 +17,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-drop-btn:hover,.nav-drop-btn.open{color:var(--white);background:rgba(255,255,255,0.07);}
 .nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
 .nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
-.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1a1630;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1E1044;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
 .nav-drop-menu.open{display:flex;}
 .ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
 .ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
 .nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
-.nav-drop-menu a:hover{color:var(--white);background:rgba(108,99,255,0.1);}
-.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
-.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(105,44,142,0.1);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
 @media(max-width:700px){.nav-links{display:none;}}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+:root{--navy:#1E1044;--sidebar:#27215C;--purple:#692C8E;--blue:#1EBFDC;--white:#ffffff;--muted:#a0a0c0;--border:rgba(105,44,142,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#FAA31C;--gradient:linear-gradient(135deg,#692C8E 0%,#ED0875 100%);}
 html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
 
@@ -41,20 +41,20 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 /* PAGE HEADER */
 .page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
 .header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
-.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
-.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(105,44,142,0.15);color:var(--purple);border:1px solid rgba(105,44,142,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Poppins',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
 .page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
 .page-intro strong{color:var(--white);font-weight:600;}
 .header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1rem;}
 .stat-row{display:flex;align-items:center;gap:1rem;}
-.stat-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple);min-width:55px;}
+.stat-num{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple);min-width:55px;}
 .stat-text{font-size:0.82rem;color:var(--muted);line-height:1.5;}
 .stat-text strong{color:var(--white);}
 
 /* INTAKE FORM */
 .intake-section{max-width:700px;margin:0 auto;padding:3rem 2rem;}
-.intake-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.4rem;}
+.intake-title{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.4rem;}
 .intake-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;}
 .intake-sub strong{color:var(--white);}
 .intake-field{margin-bottom:1.25rem;}
@@ -66,8 +66,8 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .ind-pill{padding:0.4rem 0.85rem;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
 .ind-pill:hover{border-color:var(--purple);color:var(--white);}
 .ind-pill.active{background:var(--purple);border-color:var(--purple);color:white;}
-.btn-start-audit{width:100%;margin-top:1.5rem;padding:0.95rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;border:none;border-radius:5px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 18px rgba(108,99,255,0.35);letter-spacing:0.02em;}
-.btn-start-audit:hover{box-shadow:0 6px 26px rgba(108,99,255,0.55);transform:translateY(-1px);}
+.btn-start-audit{width:100%;margin-top:1.5rem;padding:0.95rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;border:none;border-radius:5px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 18px rgba(105,44,142,0.35);letter-spacing:0.02em;}
+.btn-start-audit:hover{box-shadow:0 6px 26px rgba(105,44,142,0.55);transform:translateY(-1px);}
 .intake-note{font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;line-height:1.5;}
 
 /* QUESTIONS */
@@ -81,18 +81,18 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .q-layout{display:grid;grid-template-columns:240px 1fr;}
 .q-sidebar{background:var(--sidebar);border-right:1px solid var(--border);padding:1.5rem 1rem;position:sticky;top:105px;height:calc(100vh - 105px);overflow-y:auto;}
 .q-category-item{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.7rem;border-radius:4px;cursor:pointer;transition:all 0.15s;margin-bottom:0.2rem;font-size:0.8rem;font-weight:600;color:var(--muted);}
-.q-category-item.active{background:rgba(108,99,255,0.12);color:var(--white);}
+.q-category-item.active{background:rgba(105,44,142,0.12);color:var(--white);}
 .q-category-item.done{color:var(--green);}
 .q-category-item.done .cat-dot{background:var(--green);}
 .cat-dot{width:7px;height:7px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.2s;}
 .q-category-item.active .cat-dot{background:var(--purple);}
 .cat-score{margin-left:auto;font-size:0.65rem;font-weight:700;color:var(--muted);}
 .q-main{padding:2.5rem 2.5rem 4rem;}
-.cat-heading{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:0.3rem;}
+.cat-heading{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:0.3rem;}
 .cat-desc{font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:2rem;max-width:520px;}
 .cat-desc strong{color:var(--white);}
 .question-block{margin-bottom:1.75rem;padding:1.25rem;border:1px solid var(--border-light);border-radius:6px;background:rgba(255,255,255,0.02);transition:border-color 0.15s;}
-.question-block.answered{border-color:rgba(108,99,255,0.25);background:rgba(108,99,255,0.04);}
+.question-block.answered{border-color:rgba(105,44,142,0.25);background:rgba(105,44,142,0.04);}
 .q-text{font-size:0.9rem;font-weight:700;margin-bottom:0.3rem;line-height:1.45;}
 .q-why{font-size:0.75rem;color:var(--muted);line-height:1.55;margin-bottom:0.85rem;}
 .q-why strong{color:rgba(255,255,255,0.6);}
@@ -105,8 +105,8 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .q-nav-btns{display:flex;justify-content:space-between;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border-light);}
 .btn-q-prev{padding:0.6rem 1.4rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
 .btn-q-prev:hover{color:var(--white);border-color:rgba(255,255,255,0.3);}
-.btn-q-next{padding:0.6rem 1.75rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);}
-.btn-q-next:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.btn-q-next{padding:0.6rem 1.75rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);}
+.btn-q-next:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
 
 /* RESULTS */
 .results-section{display:none;}
@@ -117,10 +117,10 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .score-ring-bg{fill:none;stroke:rgba(255,255,255,0.07);stroke-width:10;}
 .score-ring-fill{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1.2s ease;}
 .score-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
-.score-num{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;line-height:1;}
+.score-num{font-family:'Poppins',sans-serif;font-size:2.6rem;font-weight:800;line-height:1;}
 .score-denom{font-size:0.75rem;color:var(--muted);font-weight:600;}
 .score-right-eyebrow{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
-.score-right-title{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1.15;margin-bottom:0.75rem;}
+.score-right-title{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;line-height:1.15;margin-bottom:0.75rem;}
 .score-right-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;max-width:500px;}
 .score-right-sub strong{color:var(--white);}
 .score-right-biz{font-size:0.78rem;color:var(--muted);margin-top:0.75rem;}
@@ -134,7 +134,7 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .cat-score-name{font-size:0.82rem;font-weight:600;}
 .cat-score-track{height:7px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
 .cat-score-fill{height:100%;border-radius:4px;transition:width 0.8s ease;}
-.cat-score-pct{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:800;text-align:right;}
+.cat-score-pct{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:800;text-align:right;}
 
 .section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
@@ -154,7 +154,7 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .finding-card.open .finding-body{display:block;}
 .finding-impact{font-size:0.82rem;line-height:1.7;color:var(--muted);margin-bottom:0.85rem;}
 .finding-impact strong{color:var(--white);}
-.finding-fix{background:rgba(108,99,255,0.07);border:1px solid rgba(108,99,255,0.2);border-radius:4px;padding:0.75rem 1rem;}
+.finding-fix{background:rgba(105,44,142,0.07);border:1px solid rgba(105,44,142,0.2);border-radius:4px;padding:0.75rem 1rem;}
 .finding-fix-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.3rem;}
 .finding-fix-text{font-size:0.8rem;color:var(--muted);line-height:1.6;}
 .finding-fix-text strong{color:var(--white);}
@@ -164,17 +164,17 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .results-sidebar{display:flex;flex-direction:column;gap:1.25rem;}
 .sidebar-card{background:var(--sidebar);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
 .sidebar-card-head{padding:0.85rem 1.1rem;border-bottom:1px solid var(--border-light);}
-.sidebar-card-title{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:800;}
+.sidebar-card-title{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:800;}
 .sidebar-card-body{padding:1.1rem;}
 .priority-item{display:flex;gap:0.65rem;align-items:flex-start;padding:0.65rem 0;border-bottom:1px solid var(--border-light);}
 .priority-item:last-child{border-bottom:none;padding-bottom:0;}
-.priority-num{width:22px;height:22px;border-radius:3px;background:var(--gradient);color:white;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:800;flex-shrink:0;margin-top:1px;}
+.priority-num{width:22px;height:22px;border-radius:3px;background:var(--gradient);color:white;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:0.72rem;font-weight:800;flex-shrink:0;margin-top:1px;}
 .priority-text{font-size:0.8rem;font-weight:600;line-height:1.4;}
 .priority-sub{font-size:0.72rem;color:var(--muted);line-height:1.5;margin-top:0.15rem;}
 
 .zoek-cta-results{background:var(--gradient);border-radius:6px;padding:1.5rem;text-align:center;}
 .zc-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.4rem;}
-.zc-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.4rem;line-height:1.2;}
+.zc-title{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.4rem;line-height:1.2;}
 .zc-sub{font-size:0.75rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:1rem;}
 .zc-btn{display:block;background:white;color:var(--purple);text-decoration:none;padding:0.7rem 1rem;border-radius:4px;font-size:0.82rem;font-weight:800;transition:all 0.15s;box-shadow:0 4px 14px rgba(0,0,0,0.2);}
 .zc-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.25);}
@@ -519,7 +519,7 @@ function showResults(){
   let grade,gradeColor,gradeSub;
   if(overallPct>=85){grade='Excellent';gradeColor='#4fffb0';gradeSub=`${bizName} is in strong shape. There are still a few opportunities to optimize — use the findings below to close the remaining gaps and stay ahead of competitors.`;}
   else if(overallPct>=70){grade='Good';gradeColor='#7df5c5';gradeSub=`${bizName} has a solid foundation but real gaps that are costing leads. The issues below are fixable — and fixing them will directly impact how many customers find and trust you.`;}
-  else if(overallPct>=50){grade='Needs Work';gradeColor='#ffd166';gradeSub=`${bizName} has some things working but significant gaps that are actively hurting your ability to attract and convert customers online. These are solvable problems.`;}
+  else if(overallPct>=50){grade='Needs Work';gradeColor='#FAA31C';gradeSub=`${bizName} has some things working but significant gaps that are actively hurting your ability to attract and convert customers online. These are solvable problems.`;}
   else if(overallPct>=30){grade='At Risk';gradeColor='#ff9a5c';gradeSub=`${bizName}'s website has serious issues that are costing real leads every single day. The good news: most of these are fixable. Start with the top priorities below.`;}
   else{grade='Critical';gradeColor='#ff5c7c';gradeSub=`${bizName}'s website has major problems across multiple areas. Every day without fixing these is business you're leaving on the table. Let's talk about where to start.`;}
 
@@ -566,7 +566,7 @@ function showResults(){
     <div class="category-scores">
       ${CATEGORIES.map(cat=>{
         const sc=getCatScore(CATEGORIES.indexOf(cat));
-        const col=sc>=80?'#4fffb0':sc>=60?'#ffd166':'#ff5c7c';
+        const col=sc>=80?'#4fffb0':sc>=60?'#FAA31C':'#ff5c7c';
         return`<div class="cat-score-row">
           <span class="cat-score-name">${cat.icon} ${cat.label.split(' ')[0]}</span>
           <div class="cat-score-track"><div class="cat-score-fill" style="width:${sc}%;background:${col}"></div></div>
@@ -581,7 +581,7 @@ function showResults(){
     :`<div class="section-label" style="margin-top:1.5rem">What needs fixing (${findings.length} issue${findings.length!==1?'s':''})</div>
     ${findings.slice(0,12).map((f,i)=>{
       const isNeg=f.answer==='no';
-      const dotColor=isNeg?'#ff5c7c':'#ffd166';
+      const dotColor=isNeg?'#ff5c7c':'#FAA31C';
       const catLabel=isNeg?'Needs Fix':'Partial';
       const catClass=isNeg?'f-bad':'f-warn';
       const svc=SERVICE_MAP[f.service]||SERVICE_MAP.design;
@@ -666,10 +666,10 @@ function showResults(){
       <div class="sidebar-card-head"><div class="sidebar-card-title">📊 Your audit summary</div></div>
       <div class="sidebar-card-body">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
-          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Score</div><div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:${gradeColor}">${overallPct}/100</div></div>
-          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Grade</div><div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:${gradeColor}">${grade}</div></div>
-          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Issues found</div><div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--red)">${findings.length}</div></div>
-          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Passing</div><div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--green)">${passed.length}</div></div>
+          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Score</div><div style="font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:${gradeColor}">${overallPct}/100</div></div>
+          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Grade</div><div style="font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:${gradeColor}">${grade}</div></div>
+          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Issues found</div><div style="font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--red)">${findings.length}</div></div>
+          <div><div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem">Passing</div><div style="font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--green)">${passed.length}</div></div>
         </div>
         ${bizAge?`<div style="margin-top:0.85rem;padding-top:0.85rem;border-top:1px solid var(--border-light);font-size:0.75rem;color:var(--muted)">Site age: <strong style="color:var(--white)">${bizAge}</strong>${bizAge==='3–5 years'||bizAge==='5+ years'?` — <span style="color:var(--yellow)">consider a redesign</span>`:''}${bizAge==='No website yet'?` — <span style="color:var(--red)">getting online is your #1 priority</span>`:''}</div>`:''}
       </div>

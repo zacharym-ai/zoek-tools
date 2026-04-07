@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ad Budget Planner | Zoek Marketing Tools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 <style>
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
@@ -17,17 +17,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-drop-btn:hover,.nav-drop-btn.open{color:var(--white);background:rgba(255,255,255,0.07);}
 .nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
 .nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
-.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1a1630;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1E1044;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
 .nav-drop-menu.open{display:flex;}
 .ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
 .ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
 .nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
-.nav-drop-menu a:hover{color:var(--white);background:rgba(108,99,255,0.1);}
-.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
-.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(105,44,142,0.1);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
 @media(max-width:700px){.nav-links{display:none;}}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+:root{--navy:#1E1044;--sidebar:#27215C;--purple:#692C8E;--blue:#1EBFDC;--white:#ffffff;--muted:#a0a0c0;--border:rgba(105,44,142,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#FAA31C;--gradient:linear-gradient(135deg,#692C8E 0%,#ED0875 100%);}
 html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
 
@@ -42,15 +42,15 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 
 .page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
 .header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
-.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
-.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(105,44,142,0.15);color:var(--purple);border:1px solid rgba(105,44,142,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Poppins',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
 .page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
 .page-intro strong{color:var(--white);font-weight:600;}
 .header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1.25rem;}
 .how-title{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.2rem;}
 .how-step{display:flex;gap:1rem;align-items:flex-start;}
-.how-num{width:26px;height:26px;border-radius:4px;background:var(--gradient);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;color:white;}
+.how-num{width:26px;height:26px;border-radius:4px;background:var(--gradient);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:800;color:white;}
 .how-text{font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.6;padding-top:3px;}
 .how-text strong{color:var(--white);font-weight:600;}
 .tool-layout{display:grid;grid-template-columns:300px 1fr;border-bottom:1px solid var(--border);min-height:80vh;}
@@ -61,18 +61,18 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .input-group label{display:block;font-size:0.72rem;font-weight:600;color:var(--muted);margin-bottom:0.35rem;letter-spacing:0.04em;}
 .input-wrap{position:relative;}
 .input-prefix{position:absolute;left:0.65rem;top:50%;transform:translateY(-50%);font-size:0.85rem;color:var(--muted);pointer-events:none;font-weight:600;}
-.tool-input{width:100%;padding:0.55rem 0.65rem 0.55rem 1.5rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;outline:none;transition:border-color 0.2s;-moz-appearance:textfield;}
+.tool-input{width:100%;padding:0.55rem 0.65rem 0.55rem 1.5rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:800;outline:none;transition:border-color 0.2s;-moz-appearance:textfield;}
 .tool-input::-webkit-outer-spin-button,.tool-input::-webkit-inner-spin-button{-webkit-appearance:none;}
 .tool-input:focus{border-color:var(--purple);}
 .tool-input::placeholder{color:rgba(255,255,255,0.15);}
-.budget-pct-note{display:none;font-size:0.75rem;color:var(--muted);line-height:1.55;padding:0.5rem 0.65rem;background:rgba(108,99,255,0.08);border:1px solid var(--border);border-radius:4px;margin-top:0.4rem;}
+.budget-pct-note{display:none;font-size:0.75rem;color:var(--muted);line-height:1.55;padding:0.5rem 0.65rem;background:rgba(105,44,142,0.08);border:1px solid var(--border);border-radius:4px;margin-top:0.4rem;}
 .budget-pct-note strong{color:var(--white);}
 .stage-pills{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem;}
 .stage-pill{padding:0.5rem 0.85rem;border:1px solid var(--border);border-radius:4px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.15s;text-align:left;}
 .stage-pill:hover{border-color:var(--purple);color:var(--white);}
-.stage-pill.active{background:rgba(108,99,255,0.15);border-color:var(--purple);color:var(--white);}
+.stage-pill.active{background:rgba(105,44,142,0.15);border-color:var(--purple);color:var(--white);}
 .channel-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.7rem;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;margin-bottom:0.35rem;user-select:none;}
-.channel-row.active{border-color:rgba(108,99,255,0.4);background:rgba(108,99,255,0.06);}
+.channel-row.active{border-color:rgba(105,44,142,0.4);background:rgba(105,44,142,0.06);}
 .channel-row:not(.active){opacity:0.45;}
 .ch-left{display:flex;align-items:center;gap:0.65rem;}
 .ch-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
@@ -81,28 +81,28 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .channel-row.active .ch-check{background:var(--purple);border-color:var(--purple);}
 .results-panel{padding:2rem;display:flex;flex-direction:column;gap:1.5rem;overflow-y:auto;}
 .empty-result{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;color:var(--muted);text-align:center;gap:1rem;}
-.empty-big{font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;color:rgba(108,99,255,0.15);line-height:1;}
-.budget-hero{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:8px;padding:1.75rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.empty-big{font-family:'Poppins',sans-serif;font-size:5rem;font-weight:800;color:rgba(105,44,142,0.15);line-height:1;}
+.budget-hero{background:var(--sidebar);border:1px solid rgba(105,44,142,0.3);border-radius:8px;padding:1.75rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
 .bh-stat{background:var(--sidebar);padding:1.25rem;border-radius:4px;}
 .bh-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
-.bh-val{font-family:'Syne',sans-serif;font-size:1.75rem;font-weight:800;line-height:1;margin-bottom:0.25rem;color:var(--purple);}
+.bh-val{font-family:'Poppins',sans-serif;font-size:1.75rem;font-weight:800;line-height:1;margin-bottom:0.25rem;color:var(--purple);}
 .bh-sub{font-size:0.72rem;color:var(--muted);}
 .stage-callout{padding:1rem 1.25rem;border-radius:4px;font-size:0.85rem;line-height:1.7;border-left:3px solid var(--purple);}
-.stage-callout.starting{background:rgba(108,99,255,0.07);border-color:var(--purple);}
+.stage-callout.starting{background:rgba(105,44,142,0.07);border-color:var(--purple);}
 .stage-callout.growing{background:rgba(79,255,176,0.07);border-color:var(--green);}
 .stage-callout.scaling{background:rgba(255,209,102,0.07);border-color:var(--yellow);}
 .stage-callout strong{font-weight:700;}
 .channel-breakdown{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
-.cb-header{display:grid;grid-template-columns:1fr 100px 70px 130px;padding:0.6rem 1.1rem;background:rgba(108,99,255,0.1);font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);gap:0.5rem;}
+.cb-header{display:grid;grid-template-columns:1fr 100px 70px 130px;padding:0.6rem 1.1rem;background:rgba(105,44,142,0.1);font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);gap:0.5rem;}
 .ch-result-row{display:grid;grid-template-columns:1fr 100px 70px 130px;padding:1rem 1.1rem;border-top:1px solid var(--border-light);align-items:start;gap:0.5rem;transition:background 0.15s;}
-.ch-result-row:hover{background:rgba(108,99,255,0.04);}
+.ch-result-row:hover{background:rgba(105,44,142,0.04);}
 .ch-result-name{display:flex;align-items:flex-start;gap:0.65rem;}
 .ch-result-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px;}
 .ch-result-label{font-weight:700;font-size:0.85rem;}
 .ch-result-sub{font-size:0.72rem;color:var(--muted);line-height:1.5;margin-top:0.2rem;}
 .pct-bar-wrap{height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;margin-top:0.5rem;}
 .pct-bar{height:100%;border-radius:2px;transition:width 0.5s ease;}
-.ch-result-cell{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;}
+.ch-result-cell{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;}
 .cell-sub{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.65rem;font-weight:400;color:var(--muted);margin-top:0.15rem;}
 .timeline-section{border:1px solid var(--border);border-radius:6px;padding:1.25rem;}
 .timeline-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
@@ -116,31 +116,31 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .testing-section{border:1px solid var(--border);border-radius:6px;padding:1.25rem;}
 .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:0.85rem 0;}
 .test-card{background:var(--sidebar);padding:1.1rem;}
-.test-num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--purple);line-height:1;margin-bottom:0.3rem;}
+.test-num{font-family:'Poppins',sans-serif;font-size:1.8rem;font-weight:800;color:var(--purple);line-height:1;margin-bottom:0.3rem;}
 .test-title{font-weight:700;font-size:0.82rem;margin-bottom:0.4rem;}
 .test-desc{font-size:0.75rem;color:var(--muted);line-height:1.6;}
 .test-desc strong{color:var(--white);}
-.hormozi-callout{background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.2);border-radius:4px;padding:1rem 1.25rem;font-size:0.82rem;line-height:1.7;color:var(--muted);}
+.hormozi-callout{background:rgba(105,44,142,0.06);border:1px solid rgba(105,44,142,0.2);border-radius:4px;padding:1rem 1.25rem;font-size:0.82rem;line-height:1.7;color:var(--muted);}
 .hormozi-callout strong{color:var(--white);font-weight:700;}
 .ns-wrap{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
-.ns-head{background:var(--gradient);padding:0.9rem 1.4rem;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:white;}
+.ns-head{background:var(--gradient);padding:0.9rem 1.4rem;font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:700;color:white;}
 .ns-body{display:grid;grid-template-columns:repeat(3,1fr);}
 .ns-item{padding:1.1rem 1.25rem;border-right:1px solid var(--border-light);display:flex;flex-direction:column;gap:0.4rem;background:var(--sidebar);}
 .ns-item:last-child{border-right:none;}
-.ns-n{width:24px;height:24px;border-radius:4px;background:rgba(108,99,255,0.2);color:var(--purple);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;}
+.ns-n{width:24px;height:24px;border-radius:4px;background:rgba(105,44,142,0.2);color:var(--purple);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:800;}
 .ns-t{font-weight:700;font-size:0.82rem;line-height:1.35;}
 .ns-d{font-size:0.75rem;color:var(--muted);line-height:1.6;}
-.zoek-cta-embed{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+.zoek-cta-embed{background:var(--sidebar);border:1px solid rgba(105,44,142,0.3);border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
 .zce-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.3rem;}
-.zce-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
+.zce-title{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
 .zce-sub{font-size:0.78rem;color:var(--muted);line-height:1.6;}
 .zce-sub strong{color:var(--white);}
-.zce-btn{background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.4rem;border-radius:4px;font-size:0.85rem;font-weight:700;white-space:nowrap;transition:all 0.2s;box-shadow:0 4px 16px rgba(108,99,255,0.3);display:inline-block;}
-.zce-btn:hover{box-shadow:0 6px 24px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.zce-btn{background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.4rem;border-radius:4px;font-size:0.85rem;font-weight:700;white-space:nowrap;transition:all 0.2s;box-shadow:0 4px 16px rgba(105,44,142,0.3);display:inline-block;}
+.zce-btn:hover{box-shadow:0 6px 24px rgba(105,44,142,0.5);transform:translateY(-1px);}
 footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
 .footer-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
-.footer-logo-mark{width:24px;height:24px;border-radius:3px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:800;color:white;}
-.footer-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.82rem;}
+.footer-logo-mark{width:24px;height:24px;border-radius:3px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:0.7rem;font-weight:800;color:white;}
+.footer-logo-text{font-family:'Poppins',sans-serif;font-weight:800;font-size:0.82rem;}
 .footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
 .footer-link{color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.15s;}
 .footer-link:hover{color:var(--white);}
@@ -229,7 +229,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 </footer>
 
 <script>
-const CHANNELS=[{id:'google',name:'Google Ads',color:'#4285F4',on:true,desc:'High intent. People searching for what you sell right now.',splits:{starting:30,growing:35,scaling:30},timeline:{weeks:2,label:'Results in 2–4 weeks',bar:15},tips:'Start with exact match keywords only. 5–10 tight keywords beats 100 broad ones every time.'},{id:'facebook',name:'Facebook / Meta',color:'#1877F2',on:true,desc:'Best for awareness and retargeting. Lower intent than Google.',splits:{starting:25,growing:25,scaling:20},timeline:{weeks:4,label:'Results in 4–8 weeks',bar:30},tips:'Facebook needs volume to learn. Give it at least 50 conversions before judging the campaign.'},{id:'instagram',name:'Instagram',color:'#E1306C',on:false,desc:'Visual businesses. Awareness play. Pairs well with Meta.',splits:{starting:10,growing:15,scaling:15},timeline:{weeks:6,label:'Results in 6–10 weeks',bar:45},tips:'Video outperforms static 3:1. Reels over everything else right now.'},{id:'seo',name:'SEO / Content',color:'#4fffb0',on:false,desc:'Long game. Compounds over time. Eventually your cheapest lead.',splits:{starting:20,growing:15,scaling:20},timeline:{weeks:24,label:'Results in 6–12 months',bar:100},tips:'Publish one genuinely useful piece per week. Answer real questions people search. Zoek specializes in this.'},{id:'email',name:'Email Marketing',color:'#ffd166',on:false,desc:'Highest ROI channel for most businesses. Works on existing leads.',splits:{starting:10,growing:10,scaling:10},timeline:{weeks:3,label:'Results in 3–6 weeks',bar:20},tips:'One email per week. Useful content, not just promotions. Subject lines matter more than anything.'},{id:'referral',name:'Referral Program',color:'#a78bfa',on:false,desc:'Lowest cost, highest quality leads. Most businesses ignore this.',splits:{starting:15,growing:10,scaling:10},timeline:{weeks:8,label:'Results in 8–12 weeks',bar:55},tips:'Ask every happy client at the peak of their satisfaction. Not months later. Right when they\'re happiest.'}];
+const CHANNELS=[{id:'google',name:'Google Ads',color:'#4285F4',on:true,desc:'High intent. People searching for what you sell right now.',splits:{starting:30,growing:35,scaling:30},timeline:{weeks:2,label:'Results in 2–4 weeks',bar:15},tips:'Start with exact match keywords only. 5–10 tight keywords beats 100 broad ones every time.'},{id:'facebook',name:'Facebook / Meta',color:'#1877F2',on:true,desc:'Best for awareness and retargeting. Lower intent than Google.',splits:{starting:25,growing:25,scaling:20},timeline:{weeks:4,label:'Results in 4–8 weeks',bar:30},tips:'Facebook needs volume to learn. Give it at least 50 conversions before judging the campaign.'},{id:'instagram',name:'Instagram',color:'#E1306C',on:false,desc:'Visual businesses. Awareness play. Pairs well with Meta.',splits:{starting:10,growing:15,scaling:15},timeline:{weeks:6,label:'Results in 6–10 weeks',bar:45},tips:'Video outperforms static 3:1. Reels over everything else right now.'},{id:'seo',name:'SEO / Content',color:'#4fffb0',on:false,desc:'Long game. Compounds over time. Eventually your cheapest lead.',splits:{starting:20,growing:15,scaling:20},timeline:{weeks:24,label:'Results in 6–12 months',bar:100},tips:'Publish one genuinely useful piece per week. Answer real questions people search. Zoek specializes in this.'},{id:'email',name:'Email Marketing',color:'#FAA31C',on:false,desc:'Highest ROI channel for most businesses. Works on existing leads.',splits:{starting:10,growing:10,scaling:10},timeline:{weeks:3,label:'Results in 3–6 weeks',bar:20},tips:'One email per week. Useful content, not just promotions. Subject lines matter more than anything.'},{id:'referral',name:'Referral Program',color:'#a78bfa',on:false,desc:'Lowest cost, highest quality leads. Most businesses ignore this.',splits:{starting:15,growing:10,scaling:10},timeline:{weeks:8,label:'Results in 8–12 weeks',bar:55},tips:'Ask every happy client at the peak of their satisfaction. Not months later. Right when they\'re happiest.'}];
 const STAGE_DATA={starting:{label:'Just starting out',callout:'<strong>When you\'re just starting, your job is to find out what works — not to scale.</strong> Keep budget tight, run 2–3 channels max, and track everything. Every dollar right now is research. You\'re buying information, not just leads.',cls:'starting'},growing:{label:'Actively growing',callout:'<strong>You know what works.</strong> Now put more behind it. At this stage, double down on your best channel while keeping 20–30% aside to test one new thing at a time. Never stop testing.',cls:'growing'},scaling:{label:'Scaling what works',callout:'<strong>Scaling is not just spending more.</strong> It\'s keeping your unit economics intact as you grow. Watch your CAC closely. The moment cost per lead starts climbing, stop increasing spend and fix the funnel first.',cls:'scaling'}};
 let activeStage='starting';
 function setStage(s,el){activeStage=s;document.querySelectorAll('.stage-pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');recalc();}
@@ -255,7 +255,7 @@ function recalc(){
     <div class="budget-hero"><div class="bh-stat"><div class="bh-label">Total monthly budget</div><div class="bh-val">$${budget.toLocaleString()}</div><div class="bh-sub">Across ${active.length} channel${active.length!==1?'s':''}</div></div><div class="bh-stat"><div class="bh-label">Stage</div><div class="bh-val" style="font-size:1.3rem;color:var(--white)">${sd.label}</div><div class="bh-sub">Allocation optimized for this stage</div></div><div class="bh-stat"><div class="bh-label">Fastest return</div><div class="bh-val" style="font-size:1.3rem;color:var(--white)">${sorted[0].name}</div><div class="bh-sub">${sorted[0].timeline.label}</div></div></div>
     <div class="stage-callout ${sd.cls}">${sd.callout}</div>
     <div class="channel-breakdown"><div class="cb-header"><span>Channel</span><span>Monthly $</span><span>Split</span><span>Timeline</span></div>${[...channels].sort((a,b)=>b.amount-a.amount).map(c=>`<div class="ch-result-row"><div class="ch-result-name"><div class="ch-result-dot" style="background:${c.color}"></div><div><div class="ch-result-label">${c.name}</div><div class="ch-result-sub">${c.tips}</div><div class="pct-bar-wrap"><div class="pct-bar" style="width:${c.pct}%;background:${c.color}"></div></div></div></div><div class="ch-result-cell">$${c.amount.toLocaleString()}<span class="cell-sub">per month</span></div><div class="ch-result-cell">${c.pct}%<span class="cell-sub">of budget</span></div><div class="ch-result-cell" style="font-size:0.75rem;font-weight:400;color:var(--muted)">${c.timeline.label}</div></div>`).join('')}</div>
-    <div class="timeline-section"><div class="timeline-label">When to expect results by channel</div><div class="timeline-grid">${sorted.map(c=>`<div class="tl-row"><div class="tl-channel"><div style="width:8px;height:8px;border-radius:50%;background:${c.color};flex-shrink:0"></div>${c.name}</div><div class="tl-bar-wrap"><div class="tl-bar" style="width:${Math.min(c.timeline.bar,100)}%;background:${c.color}"><span class="tl-bar-label">${c.timeline.label.replace('Results in ','')}</span></div></div><div class="tl-time">${c.timeline.label.replace('Results in ','')}</div></div>`).join('')}<div style="display:flex;justify-content:space-between;font-size:0.62rem;color:var(--muted);padding-top:0.5rem;border-top:1px solid var(--border-light);margin-top:0.5rem"><span>Week 1</span><span>Month 3</span><span>Month 6</span><span>Month 12+</span></div></div><div style="margin-top:1rem;padding:0.85rem 1rem;background:rgba(108,99,255,0.06);border-radius:4px;font-size:0.8rem;color:var(--muted);line-height:1.65"><strong style="color:var(--white)">Most common mistake:</strong> turning off a channel before it's had enough time to work. Give every channel at least 3x its timeline before making a verdict.</div></div>
+    <div class="timeline-section"><div class="timeline-label">When to expect results by channel</div><div class="timeline-grid">${sorted.map(c=>`<div class="tl-row"><div class="tl-channel"><div style="width:8px;height:8px;border-radius:50%;background:${c.color};flex-shrink:0"></div>${c.name}</div><div class="tl-bar-wrap"><div class="tl-bar" style="width:${Math.min(c.timeline.bar,100)}%;background:${c.color}"><span class="tl-bar-label">${c.timeline.label.replace('Results in ','')}</span></div></div><div class="tl-time">${c.timeline.label.replace('Results in ','')}</div></div>`).join('')}<div style="display:flex;justify-content:space-between;font-size:0.62rem;color:var(--muted);padding-top:0.5rem;border-top:1px solid var(--border-light);margin-top:0.5rem"><span>Week 1</span><span>Month 3</span><span>Month 6</span><span>Month 12+</span></div></div><div style="margin-top:1rem;padding:0.85rem 1rem;background:rgba(105,44,142,0.06);border-radius:4px;font-size:0.8rem;color:var(--muted);line-height:1.65"><strong style="color:var(--white)">Most common mistake:</strong> turning off a channel before it's had enough time to work. Give every channel at least 3x its timeline before making a verdict.</div></div>
     <div class="testing-section"><div class="timeline-label">The testing framework that works</div><div class="test-grid"><div class="test-card"><div class="test-num">3–5</div><div class="test-title">Ads running at once</div><div class="test-desc">Never run one ad. Run 3–5 variations. <strong>Change only one thing between each</strong>: headline, image, CTA, or first line of copy. One variable at a time.</div></div><div class="test-card"><div class="test-num">2x</div><div class="test-title">Minimum timeline</div><div class="test-desc">Wait <strong>2x the expected result timeline</strong> before drawing conclusions. If Google typically shows results in 2 weeks, give it 4. Impatience is the most expensive marketing mistake.</div></div><div class="test-card"><div class="test-num">1</div><div class="test-title">Cut the worst, replace it</div><div class="test-desc">After minimum timeline, <strong>cut the single worst performer</strong>. Replace with a new variation changing one thing from the current winner. You\'re always competing against your best.</div></div></div><div class="hormozi-callout">Run 20–100 ads for the same offer. Change one variable per ad. After enough data, cut the bottom half. Replace with new variations. Scale the winner. Repeat. <strong>The winner is always the person still testing.</strong></div></div>
     <div class="ns-wrap"><div class="ns-head">What to do with this</div><div class="ns-body">${steps.map((s,i)=>`<div class="ns-item"><div class="ns-n">${i+1}</div><div class="ns-t">${s.t}</div><div class="ns-d">${s.d}</div></div>`).join('')}</div></div>
     <div class="zoek-cta-embed"><div><div class="zce-label">Ready to put this to work?</div><div class="zce-title">Let Zoek manage your campaigns</div><div class="zce-sub">We build, manage, and optimize paid campaigns across Google and Meta for <strong>50,000+ active clients</strong>. Book a call and we'll show you exactly what we'd do with your budget.</div></div><a href="https://calendly.com/expert-sales" target="_blank" class="zce-btn">Book a Free Strategy Call →</a></div>`;

@@ -14,7 +14,7 @@
       font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
     }
     #zoek-cta-btn {
-      background: linear-gradient(135deg, #6c63ff 0%, #00a8ff 100%);
+      background: linear-gradient(135deg, #692C8E 0%, #ED0875 100%);
       color: #ffffff;
       border: none;
       padding: 0.7rem 1.3rem;
@@ -81,12 +81,12 @@
     .zcp-badge {
       font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em;
       text-transform: uppercase; padding: 0.2rem 0.55rem;
-      background: rgba(108,99,255,0.15); color: #6c63ff;
+      background: rgba(108,99,255,0.15); color: #692C8E;
       border-radius: 3px; border: 1px solid rgba(108,99,255,0.25);
     }
     .zcp-cta-main {
       display: block; width: 100%; padding: 0.9rem 1rem;
-      background: linear-gradient(135deg, #6c63ff 0%, #00a8ff 100%);
+      background: linear-gradient(135deg, #692C8E 0%, #ED0875 100%);
       color: #ffffff; text-decoration: none;
       text-align: center; font-weight: 700; font-size: 0.9rem;
       border-radius: 4px; letter-spacing: 0.02em;

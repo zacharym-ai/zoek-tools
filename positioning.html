@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Positioning Worksheet | Zoek Marketing Tools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 <style>
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
@@ -17,17 +17,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-drop-btn:hover,.nav-drop-btn.open{color:var(--white);background:rgba(255,255,255,0.07);}
 .nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
 .nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
-.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1a1630;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1E1044;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
 .nav-drop-menu.open{display:flex;}
 .ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
 .ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
 .nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
-.nav-drop-menu a:hover{color:var(--white);background:rgba(108,99,255,0.1);}
-.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
-.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(105,44,142,0.1);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
 @media(max-width:700px){.nav-links{display:none;}}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--navy:#1a1a2e;--sidebar:#1f1b3a;--purple:#6c63ff;--blue:#00a8ff;--white:#ffffff;--muted:#a0a0c0;--border:rgba(108,99,255,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#ffd166;--gradient:linear-gradient(135deg,#6c63ff 0%,#00a8ff 100%);}
+:root{--navy:#1E1044;--sidebar:#27215C;--purple:#692C8E;--blue:#1EBFDC;--white:#ffffff;--muted:#a0a0c0;--border:rgba(105,44,142,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#FAA31C;--gradient:linear-gradient(135deg,#692C8E 0%,#ED0875 100%);}
 html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
 
@@ -42,14 +42,14 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 
 .page-header{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
 .header-left{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
-.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
-.page-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.page-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(105,44,142,0.15);color:var(--purple);border:1px solid rgba(105,44,142,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.page-title{font-family:'Poppins',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
 .page-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .page-intro{font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:440px;}
 .page-intro strong{color:var(--white);font-weight:600;}
 .header-right{background:var(--sidebar);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1rem;}
 .step-nav-item{padding:0.5rem 0.75rem;border:1px solid var(--border);border-radius:4px;font-size:0.78rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:0.6rem;}
-.step-nav-item.active{border-color:var(--purple);color:var(--white);background:rgba(108,99,255,0.1);}
+.step-nav-item.active{border-color:var(--purple);color:var(--white);background:rgba(105,44,142,0.1);}
 .step-nav-item.done{border-color:rgba(79,255,176,0.3);color:var(--green);}
 .step-nav-item.done::before{content:'✓';font-size:0.75rem;}
 .progress-bar{margin-top:60px;padding:0.75rem 2rem;background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;}
@@ -61,7 +61,7 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .step-block{display:none;}
 .step-block.active{display:block;}
 .step-tag{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;}
-.step-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.4rem;}
+.step-title{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.4rem;}
 .step-sub{font-size:0.88rem;color:var(--muted);line-height:1.65;margin-bottom:2rem;}
 .step-sub strong{color:var(--white);}
 .q-block{margin-bottom:1.75rem;}
@@ -77,14 +77,14 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .step-nav-btns{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
 .btn-prev{padding:0.65rem 1.4rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
 .btn-prev:hover{border-color:var(--white);color:var(--white);}
-.btn-next{padding:0.65rem 1.75rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);}
-.btn-next:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.btn-next{padding:0.65rem 1.75rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:700;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);}
+.btn-next:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
 .results-section{display:none;padding:2.5rem 2rem;max-width:900px;margin:0 auto;}
 .results-section.active{display:block;}
-.ps-block{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:8px;overflow:hidden;margin-bottom:1.5rem;}
+.ps-block{background:var(--sidebar);border:1px solid rgba(105,44,142,0.3);border-radius:8px;overflow:hidden;margin-bottom:1.5rem;}
 .ps-header{background:var(--gradient);padding:1.5rem 2rem;}
 .ps-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.4rem;}
-.ps-headline{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;line-height:1.2;}
+.ps-headline{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;line-height:1.2;}
 .ps-body{padding:1.5rem 2rem;}
 .ps-copy{font-size:0.9rem;line-height:1.8;color:var(--muted);}
 .ps-copy strong{color:var(--white);}
@@ -95,23 +95,23 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .warnings-box{padding:1rem 1.25rem;border-left:3px solid var(--red);background:rgba(255,92,124,0.07);border-radius:0 4px 4px 0;font-size:0.83rem;line-height:1.75;margin-bottom:1.5rem;}
 .usage-items{display:flex;flex-direction:column;gap:0.85rem;}
 .usage-item{display:flex;gap:0.85rem;align-items:flex-start;}
-.usage-item-num{width:26px;height:26px;border-radius:4px;background:var(--gradient);color:white;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;flex-shrink:0;}
+.usage-item-num{width:26px;height:26px;border-radius:4px;background:var(--gradient);color:white;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:800;flex-shrink:0;}
 .usage-item-text strong{display:block;font-weight:700;font-size:0.85rem;margin-bottom:0.2rem;}
 .usage-item-text span{font-size:0.78rem;color:var(--muted);line-height:1.6;}
 .result-actions{display:flex;gap:0.75rem;margin-top:2rem;flex-wrap:wrap;}
 .btn-restart{padding:0.65rem 1.4rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
 .btn-restart:hover{border-color:var(--white);color:var(--white);}
-.zoek-cta-embed{background:var(--sidebar);border:1px solid rgba(108,99,255,0.3);border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem;}
+.zoek-cta-embed{background:var(--sidebar);border:1px solid rgba(105,44,142,0.3);border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem;}
 .zce-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.3rem;}
-.zce-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
+.zce-title{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.25rem;}
 .zce-sub{font-size:0.78rem;color:var(--muted);line-height:1.6;}
 .zce-sub strong{color:var(--white);}
-.zce-btn{background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.4rem;border-radius:4px;font-size:0.85rem;font-weight:700;white-space:nowrap;transition:all 0.2s;box-shadow:0 4px 16px rgba(108,99,255,0.3);display:inline-block;}
-.zce-btn:hover{box-shadow:0 6px 24px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.zce-btn{background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.4rem;border-radius:4px;font-size:0.85rem;font-weight:700;white-space:nowrap;transition:all 0.2s;box-shadow:0 4px 16px rgba(105,44,142,0.3);display:inline-block;}
+.zce-btn:hover{box-shadow:0 6px 24px rgba(105,44,142,0.5);transform:translateY(-1px);}
 footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
 .footer-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
-.footer-logo-mark{width:24px;height:24px;border-radius:3px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:800;color:white;}
-.footer-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.82rem;}
+.footer-logo-mark{width:24px;height:24px;border-radius:3px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:0.7rem;font-weight:800;color:white;}
+.footer-logo-text{font-family:'Poppins',sans-serif;font-weight:800;font-size:0.82rem;}
 .footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
 .footer-link{color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.15s;}
 .footer-link:hover{color:var(--white);}
@@ -322,13 +322,13 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <div class="results-section" id="step-results">
   <div style="margin-bottom:2rem">
     <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:0.5rem">✓ Complete</div>
-    <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:0.5rem">Your positioning is ready.</div>
+    <div style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin-bottom:0.5rem">Your positioning is ready.</div>
     <p style="font-size:0.9rem;color:var(--muted);line-height:1.7">This is a starting point — not a final draft. Refine it until it sounds exactly like you, then put it everywhere: your homepage headline, your Google Business profile, your ads.</p>
   </div>
   <div class="ps-block"><div class="ps-header" id="ps-output"></div><div class="ps-body" id="ps-body-output"></div></div>
   <div class="result-grid" id="result-grid-output"></div>
   <div class="warnings-box" id="warnings-output"></div>
-  <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:1rem">Put it to work — 3 places to use this today</div>
+  <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:1rem">Put it to work — 3 places to use this today</div>
   <div id="next-steps-output"></div>
   <div class="zoek-cta-embed">
     <div>

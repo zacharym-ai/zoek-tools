@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Growth Marketing Tools | Zoek Marketing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 <style>
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
@@ -17,33 +17,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-drop-btn:hover,.nav-drop-btn.open{color:var(--white);background:rgba(255,255,255,0.07);}
 .nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
 .nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
-.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1a1630;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1E1044;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
 .nav-drop-menu.open{display:flex;}
 .ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
 .ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
 .nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
-.nav-drop-menu a:hover{color:var(--white);background:rgba(108,99,255,0.1);}
-.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(108,99,255,0.3);white-space:nowrap;}
-.nav-cta:hover{box-shadow:0 6px 20px rgba(108,99,255,0.5);transform:translateY(-1px);}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(105,44,142,0.1);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
 @media(max-width:700px){.nav-links{display:none;}}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy: #1a1a2e;
-  --navy-mid: #16213e;
-  --sidebar: #1f1b3a;
-  --purple: #6c63ff;
-  --purple-dark: #5a52d5;
-  --blue: #00a8ff;
+  --navy: #1E1044;
+  --navy-mid: #27215C;
+  --sidebar: #27215C;
+  --purple: #692C8E;
+  --purple-dark: #692C8E;
+  --blue: #1EBFDC;
   --blue-light: #4fc3f7;
-  --highlight: #4a4080;
+  --highlight: #3D1A6E;
   --white: #ffffff;
   --muted: #a0a0c0;
-  --border: rgba(108,99,255,0.2);
+  --border: rgba(105,44,142,0.2);
   --card-bg: rgba(255,255,255,0.04);
   --card-hover: rgba(255,255,255,0.07);
   --green: #4fffb0;
-  --gradient: linear-gradient(135deg, #6c63ff 0%, #00a8ff 100%);
+  --gradient: linear-gradient(135deg, #692C8E 0%, #ED0875 100%);
 }
 
 html { scroll-behavior: smooth; }
@@ -77,14 +77,14 @@ body {
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(108,99,255,0.12) 0%, transparent 70%),
-              radial-gradient(ellipse 40% 40% at 85% 75%, rgba(0,168,255,0.08) 0%, transparent 60%);
+  background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(105,44,142,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 85% 75%, rgba(30,191,220,0.08) 0%, transparent 60%);
 }
 .hero-grid {
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(108,99,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(108,99,255,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(105,44,142,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(105,44,142,0.06) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 .hero-content {
@@ -94,8 +94,8 @@ body {
 }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 0.6rem;
-  background: rgba(108,99,255,0.1);
-  border: 1px solid rgba(108,99,255,0.25);
+  background: rgba(105,44,142,0.1);
+  border: 1px solid rgba(105,44,142,0.25);
   border-radius: 100px;
   padding: 0.3rem 0.9rem 0.3rem 0.5rem;
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
@@ -104,7 +104,7 @@ body {
 }
 .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
 .hero-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(2.8rem, 4.5vw, 4.2rem);
   font-weight: 800; line-height: 1.05;
   letter-spacing: -0.02em; margin-bottom: 1.5rem;
@@ -126,10 +126,10 @@ body {
   padding: 0.85rem 1.8rem; border-radius: 4px;
   font-size: 0.9rem; font-weight: 700; letter-spacing: 0.03em;
   transition: all 0.2s;
-  box-shadow: 0 6px 24px rgba(108,99,255,0.35);
+  box-shadow: 0 6px 24px rgba(105,44,142,0.35);
 }
 .btn-primary:hover {
-  box-shadow: 0 8px 32px rgba(108,99,255,0.5);
+  box-shadow: 0 8px 32px rgba(105,44,142,0.5);
   transform: translateY(-2px);
 }
 .btn-ghost {
@@ -140,19 +140,11 @@ body {
   transition: all 0.2s;
 }
 .btn-ghost:hover { color: white; border-color: rgba(255,255,255,0.25); }
-.hero-stats {
-  display: flex; flex-direction: column; gap: 1.25rem;
-}
-.hero-stat-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px; padding: 1.5rem 1.75rem;
-  display: flex; align-items: center; gap: 1.25rem;
-  transition: all 0.2s;
-}
+.hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+.hero-stat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(105,44,142,0.25); border-radius: 8px; padding: 1rem 1.1rem; display: flex; align-items: center; gap: 0.75rem; transition: all 0.2s; }
 .hero-stat-card:hover {
   background: var(--card-hover);
-  border-color: rgba(108,99,255,0.4);
+  border-color: rgba(105,44,142,0.4);
   transform: translateX(4px);
 }
 .stat-icon {
@@ -161,7 +153,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-size: 1.3rem; flex-shrink: 0;
 }
-.stat-num { font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1; }
+.stat-num { font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1; }
 .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
 .stat-badge {
   margin-left: auto; font-size: 0.65rem; font-weight: 700;
@@ -184,7 +176,7 @@ body {
   margin-bottom: 1rem;
 }
 .section-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(1.8rem, 3vw, 2.8rem);
   font-weight: 800; letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
@@ -222,7 +214,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-size: 1.5rem;
   border: 1px solid var(--border);
-  background: rgba(108,99,255,0.08);
+  background: rgba(105,44,142,0.08);
   transition: all 0.2s;
 }
 .tool-card:hover .tool-icon {
@@ -230,7 +222,7 @@ body {
   border-color: transparent;
 }
 .tool-name {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.05rem; font-weight: 700;
   color: var(--white);
 }
@@ -253,7 +245,7 @@ body {
 .ind-pill.active{background:var(--purple);border-color:var(--purple);color:white;}
 .tool-card{transition:all 0.3s;}
 .tool-card.dimmed{opacity:0.35;}
-.tool-card.highlighted{border-color:rgba(108,99,255,0.4);box-shadow:0 0 0 1px rgba(108,99,255,0.15);}
+.tool-card.highlighted{border-color:rgba(105,44,142,0.4);box-shadow:0 0 0 1px rgba(105,44,142,0.15);}
 .ind-tip{display:none;font-size:0.75rem;color:var(--muted);padding:0 2.5rem 1.5rem;line-height:1.6;}
 .ind-tip.show{display:block;}
 .ind-tip strong{color:var(--white);}
@@ -274,7 +266,7 @@ body {
   text-transform: uppercase; color: var(--purple); margin-bottom: 0.75rem;
 }
 .cta-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(1.5rem, 2.5vw, 2.2rem);
   font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem;
 }
@@ -316,9 +308,9 @@ footer {
   width: 26px; height: 26px; border-radius: 4px;
   background: var(--gradient);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 800; color: white;
+  font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 800; color: white;
 }
-.footer-logo-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.85rem; color: var(--white); }
+.footer-logo-text { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 0.85rem; color: var(--white); }
 .footer-note { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
 .footer-link { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.15s; }
 .footer-link:hover { color: var(--white); }
@@ -389,7 +381,7 @@ footer {
         Know exactly where your <span class="grad">marketing money</span> is going
       </h1>
       <p class="hero-subtitle">
-        Six professional-grade tools built by the team that's helped <strong>50,000+ businesses</strong> scale. No signup. No fluff. Just clarity.
+        Professional-grade tools built by the team behind <strong>500K+ top-ranking keywords</strong> and <strong>55K+</strong> businesses with more leads. No signup. No fluff. Just results.
       </p>
       <div class="hero-actions">
         <a href="#tools" class="btn-primary">Explore the Tools</a>
@@ -400,26 +392,44 @@ footer {
       <div class="hero-stat-card">
         <div class="stat-icon">🌐</div>
         <div>
-          <div class="stat-num">132K+</div>
-          <div class="stat-label">Websites Designed</div>
+          <div class="stat-num">12K+</div>
+          <div class="stat-label">Websites Hosted, Secured &amp; Managed</div>
         </div>
-        <div class="stat-badge">Worldwide</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-icon">🔍</div>
+        <div>
+          <div class="stat-num">500K+</div>
+          <div class="stat-label">Top Ranking Keywords</div>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-icon">✍️</div>
+        <div>
+          <div class="stat-num">183K+</div>
+          <div class="stat-label">Content Pieces Written</div>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-icon">🎨</div>
+        <div>
+          <div class="stat-num">15K+</div>
+          <div class="stat-label">Graphic Design Projects</div>
+        </div>
       </div>
       <div class="hero-stat-card">
         <div class="stat-icon">📈</div>
         <div>
-          <div class="stat-num">50K+</div>
-          <div class="stat-label">Active Clients</div>
+          <div class="stat-num">55K+</div>
+          <div class="stat-label">Avg. Increase in Customer Leads</div>
         </div>
-        <div class="stat-badge">Active</div>
       </div>
       <div class="hero-stat-card">
-        <div class="stat-icon">🥇</div>
+        <div class="stat-icon">🤝</div>
         <div>
-          <div class="stat-num">#1</div>
-          <div class="stat-label">Wix Partner Agency Globally</div>
+          <div class="stat-num">120+</div>
+          <div class="stat-label">Global Partnerships</div>
         </div>
-        <div class="stat-badge">Certified</div>
       </div>
     </div>
   </div>
