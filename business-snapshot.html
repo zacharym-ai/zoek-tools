@@ -217,7 +217,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       <div class="sb-label">Search your business</div>
       <div class="sb-input-wrap">
         <span class="sb-icon">🔍</span>
-        <input type="text" class="sb-input" id="biz-search" placeholder="Start typing your business name..." autocomplete="off" oninput="onSearch(this.value)">
+        <input type="text" class="sb-input" id="biz-search" placeholder="Loading Google Places..." disabled autocomplete="off" oninput="onSearch(this.value)">
         <div class="sb-autocomplete" id="autocomplete-list"></div>
       </div>
 
@@ -280,8 +280,30 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a></span>
 </footer>
 
-<!-- Google Places API — replace YOUR_API_KEY with actual key -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW43fw_DaDroP2-4wyzEbZTHAHfp5BiEA&libraries=places" async defer onload="initPlaces()"></script>
+<!-- Google Places API -->
+<script>
+function loadGooglePlaces() {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
+    const inp = document.getElementById('biz-search');
+    inp.placeholder = '⚠️ API key not configured — see setup instructions';
+    inp.style.borderColor = 'var(--pink)';
+    console.error('Google Places API key not set in business-snapshot.html');
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places&callback=initPlaces';
+  script.async = true;
+  script.onerror = function() {
+    const inp = document.getElementById('biz-search');
+    inp.placeholder = '⚠️ Google API failed — check Console for details';
+    inp.style.borderColor = 'var(--pink)';
+    console.error('Google Places API failed. Check: 1) Key is valid 2) Places API enabled in Cloud Console 3) Domain is whitelisted under key restrictions');
+  };
+  document.head.appendChild(script);
+}
+window.addEventListener('DOMContentLoaded', loadGooglePlaces);
+</script>
 
 <script>
 // ============================================================
@@ -301,9 +323,21 @@ let bizData = {};
 // GOOGLE PLACES AUTOCOMPLETE
 // ============================================================
 function initPlaces() {
-  const map = new google.maps.Map(document.createElement('div'));
-  placesService   = new google.maps.places.PlacesService(map);
-  autocompleteService = new google.maps.places.AutocompleteService();
+  try {
+    const map = new google.maps.Map(document.createElement('div'));
+    placesService       = new google.maps.places.PlacesService(map);
+    autocompleteService = new google.maps.places.AutocompleteService();
+    // Signal ready
+    const inp = document.getElementById('biz-search');
+    inp.placeholder = 'Start typing your business name...';
+    inp.disabled = false;
+    console.log('Google Places API loaded successfully');
+  } catch(e) {
+    console.error('initPlaces failed:', e);
+    const inp = document.getElementById('biz-search');
+    inp.placeholder = '⚠️ Google Places failed to initialize — check Console';
+    inp.style.borderColor = 'var(--pink)';
+  }
 }
 
 let searchTimeout;
