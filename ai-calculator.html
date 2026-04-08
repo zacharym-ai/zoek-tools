@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Receptionist ROI Calculator | Zoek Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1E1044;--sidebar:#27215C;--purple:#692C8E;--pink:#ED0875;--blue:#1EBFDC;--amber:#FAA31C;--white:#fff;--muted:#a0a0c0;--green:#4fffb0;--red:#ff5c7c;--border:rgba(105,44,142,0.25);--border-light:rgba(255,255,255,0.07);--gradient:linear-gradient(135deg,#692C8E 0%,#ED0875 100%);}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(30,16,68,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-links{display:flex;align-items:center;gap:0.15rem;list-style:none;}
+.nav-links>li>a{font-size:0.82rem;font-weight:600;letter-spacing:0.03em;color:var(--muted);text-decoration:none;padding:0.45rem 0.9rem;border-radius:4px;transition:all 0.15s;display:block;}
+.nav-links>li>a:hover,.nav-links>li>a.active{color:var(--white);background:rgba(255,255,255,0.07);}
+.nav-dropdown{position:relative;}
+.nav-drop-btn{background:transparent;border:none;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;padding:0.45rem 0.9rem;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:0.3rem;transition:all 0.15s;}
+.nav-drop-btn:hover{background:rgba(255,255,255,0.07);}
+.nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
+.nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1E1044;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu.open{display:flex;}
+.ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
+.ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
+.nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(105,44,142,0.15);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(237,8,117,0.4);transform:translateY(-1px);}
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{margin-top:60px;padding:4rem 2rem 3rem;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(237,8,117,0.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(105,44,142,0.1) 0%,transparent 50%);border-bottom:1px solid var(--border);}
+.hero-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(237,8,117,0.12);color:var(--pink);border:1px solid rgba(237,8,117,0.3);padding:0.3rem 0.85rem;border-radius:3px;margin-bottom:1.25rem;}
+.hero-title{font-family:'Poppins',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem;}
+.hero-title .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:560px;margin:0 auto;}
+.hero-sub strong{color:var(--white);}
+
+/* MAIN LAYOUT */
+.calc-layout{display:grid;grid-template-columns:1fr 400px;min-height:80vh;border-bottom:1px solid var(--border);max-width:1300px;margin:0 auto;padding:2.5rem 2rem;gap:2.5rem;align-items:start;}
+
+/* INPUTS */
+.inputs-col{}
+.inputs-title{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.35rem;}
+.inputs-sub{font-size:0.8rem;color:var(--muted);margin-bottom:2rem;line-height:1.6;}
+.inputs-sub strong{color:var(--white);}
+
+.input-group{margin-bottom:1.75rem;}
+.ig-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;}
+.ig-name{font-size:0.82rem;font-weight:700;}
+.ig-value{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;color:var(--pink);min-width:80px;text-align:right;}
+.ig-hint{font-size:0.7rem;color:var(--muted);margin-bottom:0.6rem;line-height:1.5;}
+
+/* Custom slider */
+.custom-slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;outline:none;cursor:pointer;background:rgba(255,255,255,0.08);}
+.custom-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--white);box-shadow:0 2px 8px rgba(0,0,0,0.3),0 0 0 3px var(--pink);cursor:pointer;transition:transform 0.15s;}
+.custom-slider::-webkit-slider-thumb:hover{transform:scale(1.2);}
+.custom-slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--white);border:none;box-shadow:0 2px 8px rgba(0,0,0,0.3);}
+.slider-range{display:flex;justify-content:space-between;margin-top:0.3rem;}
+.slider-range span{font-size:0.6rem;color:rgba(255,255,255,0.2);}
+
+/* Number input option */
+.num-input{width:100%;padding:0.65rem 0.85rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:5px;color:var(--white);font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;outline:none;transition:border-color 0.2s;-moz-appearance:textfield;}
+.num-input::-webkit-inner-spin-button,.num-input::-webkit-outer-spin-button{-webkit-appearance:none;}
+.num-input:focus{border-color:var(--pink);}
+
+.efficiency-pills{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.eff-pill{padding:0.4rem 0.85rem;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.eff-pill:hover{border-color:var(--pink);color:var(--white);}
+.eff-pill.active{background:var(--pink);border-color:var(--pink);color:white;}
+
+/* RESULTS PANEL */
+.results-col{position:sticky;top:80px;}
+.results-card{background:var(--sidebar);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.rc-header{background:var(--gradient);padding:1.5rem;text-align:center;}
+.rc-header-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;}
+.rc-big-number{font-family:'Poppins',sans-serif;font-size:3rem;font-weight:800;line-height:1;margin-bottom:0.2rem;transition:all 0.4s;}
+.rc-big-label{font-size:0.75rem;color:rgba(255,255,255,0.75);}
+
+.rc-metrics{padding:1.25rem;}
+.rc-metric{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 0;border-bottom:1px solid var(--border-light);}
+.rc-metric:last-child{border-bottom:none;}
+.rcm-left{display:flex;align-items:center;gap:0.6rem;}
+.rcm-icon{font-size:1rem;width:28px;text-align:center;}
+.rcm-label{font-size:0.78rem;color:var(--muted);font-weight:500;}
+.rcm-value{font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:800;transition:all 0.3s;}
+
+/* Payoff badge */
+.rc-payoff{margin:0 1.25rem 1.25rem;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);border-radius:6px;padding:0.85rem 1rem;display:flex;align-items:center;gap:0.75rem;}
+.rc-payoff-icon{font-size:1.3rem;flex-shrink:0;}
+.rc-payoff-text{font-size:0.78rem;color:var(--muted);line-height:1.55;}
+.rc-payoff-text strong{color:var(--green);display:block;font-size:0.85rem;margin-bottom:0.1rem;}
+
+/* CTA in card */
+.rc-cta{padding:0 1.25rem 1.25rem;}
+.rc-cta-box{background:var(--gradient);border-radius:6px;padding:1.25rem;text-align:center;}
+.rc-cta-title{font-family:'Poppins',sans-serif;font-size:0.92rem;font-weight:800;margin-bottom:0.3rem;line-height:1.2;}
+.rc-cta-sub{font-size:0.72rem;color:rgba(255,255,255,0.75);line-height:1.55;margin-bottom:0.85rem;}
+.rc-cta-btn{display:block;background:white;color:var(--purple);text-decoration:none;padding:0.65rem;border-radius:4px;font-size:0.85rem;font-weight:800;transition:all 0.15s;text-align:center;}
+.rc-cta-btn:hover{transform:translateY(-1px);}
+
+/* PROOF STRIP */
+.proof-strip{padding:3rem 2rem;border-top:1px solid var(--border);background:var(--sidebar);}
+.proof-inner{max-width:1100px;margin:0 auto;}
+.proof-title{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.5rem;}
+.proof-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;max-width:560px;margin-bottom:2rem;}
+.proof-sub strong{color:var(--white);}
+.proof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.proof-stat{background:var(--navy);padding:1.5rem;}
+.ps-num{font-family:'Poppins',sans-serif;font-size:1.75rem;font-weight:800;color:var(--pink);line-height:1;margin-bottom:0.25rem;}
+.ps-label{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+.ps-label strong{color:var(--white);}
+
+/* QUOTE */
+.quote-section{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center;}
+.quote-inner{max-width:680px;margin:0 auto;}
+.quote-mark{font-size:3rem;color:var(--pink);opacity:0.4;font-family:serif;line-height:1;margin-bottom:0.5rem;}
+.quote-text{font-size:1.05rem;color:var(--white);line-height:1.75;font-style:italic;margin-bottom:1rem;}
+.quote-text strong{color:var(--pink);font-style:normal;}
+.quote-attr{font-size:0.78rem;color:var(--muted);}
+
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+
+@media(max-width:960px){.calc-layout{grid-template-columns:1fr;padding:1.5rem 1.25rem;}.results-col{position:static;}}
+@media(max-width:600px){.hero{padding:3rem 1.25rem 2.5rem;}.proof-strip,.quote-section{padding:2rem 1.25rem;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="results.html">Results</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-drop-btn" onclick="toggleNav(this)" id="nl-tools-btn" style="color:var(--white)">Tools <span class="nav-chevron">&#9660;</span></button>
+      <div class="nav-drop-menu" id="nl-tools-menu">
+        <div class="ndm-col">
+          <div class="ndm-label">Calculators</div>
+          <a href="funnel.html">Lead Funnel Visualizer</a>
+          <a href="calculator.html">Cost Per Lead</a>
+          <a href="roi.html">Marketing ROI</a>
+          <a href="budget.html">Ad Budget Planner</a>
+          <a href="revenue-loss.html">Revenue Loss</a>
+          <a href="ai-calculator.html">AI Receptionist ROI</a>
+          <a href="package-builder.html">Package Builder</a>
+        </div>
+        <div class="ndm-col">
+          <div class="ndm-label">Audits &amp; Quizzes</div>
+          <a href="business-snapshot.html">Business Snapshot ✨</a>
+          <a href="marketing-wheel.html">Marketing Wheel</a>
+          <a href="grader.html">Website Grader</a>
+          <a href="website-quiz.html">Website Quiz</a>
+          <a href="local-seo.html">Local SEO Check</a>
+          <a href="positioning.html">Positioning Worksheet</a>
+          <a href="reviews.html">Reputation Toolkit</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">AI Command Center · ROI Calculator</div>
+  <h1 class="hero-title">How much is your business<br><span class="grad">losing after hours?</span></h1>
+  <p class="hero-sub">Every unanswered inquiry is a lost opportunity. <strong>Adjust the sliders below</strong> and see exactly how much revenue the AI Command Center would add to your bottom line — every single month.</p>
+</div>
+
+<!-- CALCULATOR -->
+<div class="calc-layout">
+
+  <!-- INPUTS -->
+  <div class="inputs-col">
+    <div class="inputs-title">Tell us about your business</div>
+    <p class="inputs-sub">These are <strong>your numbers</strong> — the more accurate they are, the more precise your ROI will be. All values can be adjusted with the sliders.</p>
+
+    <!-- Leads per week -->
+    <div class="input-group">
+      <div class="ig-label">
+        <span class="ig-name">Total leads per week</span>
+        <span class="ig-value" id="v-leads">500</span>
+      </div>
+      <p class="ig-hint">All inbound inquiries — calls, form fills, chat messages, emails. Include every channel.</p>
+      <input type="range" class="custom-slider" id="s-leads" min="10" max="2000" step="10" value="500" oninput="update()">
+      <div class="slider-range"><span>10</span><span>2,000</span></div>
+    </div>
+
+    <!-- After-hours % -->
+    <div class="input-group">
+      <div class="ig-label">
+        <span class="ig-name">Leads that come in after hours</span>
+        <span class="ig-value" id="v-afterhours">20%</span>
+      </div>
+      <p class="ig-hint">Industry average is 20–35%. Think about evenings, weekends, and holidays when your team isn't available.</p>
+      <input type="range" class="custom-slider" id="s-afterhours" min="5" max="60" step="1" value="20" oninput="update()">
+      <div class="slider-range"><span>5%</span><span>60%</span></div>
+    </div>
+
+    <!-- Revenue per customer -->
+    <div class="input-group">
+      <div class="ig-label">
+        <span class="ig-name">Average revenue per customer</span>
+        <span class="ig-value" id="v-revenue">$200</span>
+      </div>
+      <p class="ig-hint">Your average transaction or contract value. For recurring services, use the first-month value.</p>
+      <input type="range" class="custom-slider" id="s-revenue" min="50" max="10000" step="50" value="200" oninput="update()">
+      <div class="slider-range"><span>$50</span><span>$10,000</span></div>
+    </div>
+
+    <!-- Current conversion rate -->
+    <div class="input-group">
+      <div class="ig-label">
+        <span class="ig-name">Current lead conversion rate</span>
+        <span class="ig-value" id="v-conv">10%</span>
+      </div>
+      <p class="ig-hint">Of all leads that come in, what % actually become paying customers? National SMB average is 8–12%.</p>
+      <input type="range" class="custom-slider" id="s-conv" min="1" max="50" step="1" value="10" oninput="update()">
+      <div class="slider-range"><span>1%</span><span>50%</span></div>
+    </div>
+
+    <!-- Hourly wage -->
+    <div class="input-group">
+      <div class="ig-label">
+        <span class="ig-name">Hourly wage of staff handling leads</span>
+        <span class="ig-value" id="v-wage">$20</span>
+      </div>
+      <p class="ig-hint">Include your receptionist, front desk, or anyone who currently handles inbound inquiries manually.</p>
+      <input type="range" class="custom-slider" id="s-wage" min="10" max="75" step="1" value="20" oninput="update()">
+      <div class="slider-range"><span>$10</span><span>$75</span></div>
+    </div>
+
+    <!-- Lead handling efficiency -->
+    <div class="input-group">
+      <div class="ig-label">
+        <span class="ig-name">Lead handling efficiency</span>
+        <span class="ig-value" id="v-eff">Reasonable</span>
+      </div>
+      <p class="ig-hint">How well does your team currently handle inbound leads? This affects how much time AI saves.</p>
+      <div class="efficiency-pills">
+        <button class="eff-pill" onclick="setEff('Poor',0.6,this)">Poor</button>
+        <button class="eff-pill active" onclick="setEff('Reasonable',1.0,this)">Reasonable</button>
+        <button class="eff-pill" onclick="setEff('Good',1.4,this)">Good</button>
+        <button class="eff-pill" onclick="setEff('Excellent',1.8,this)">Excellent</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-col">
+    <div class="results-card">
+      <div class="rc-header">
+        <div class="rc-header-label">Total Monthly Impact</div>
+        <div class="rc-big-number" id="r-total">$4,829</div>
+        <div class="rc-big-label">in additional revenue + cost savings per month</div>
+      </div>
+
+      <div class="rc-metrics">
+        <div class="rc-metric">
+          <div class="rcm-left">
+            <span class="rcm-icon">🌙</span>
+            <span class="rcm-label">After-hours leads currently lost</span>
+          </div>
+          <span class="rcm-value" id="r-lost" style="color:var(--red)">20/wk</span>
+        </div>
+        <div class="rc-metric">
+          <div class="rcm-left">
+            <span class="rcm-icon">📈</span>
+            <span class="rcm-label">New conversion rate with AI</span>
+          </div>
+          <span class="rcm-value" id="r-newconv" style="color:var(--green)">12%</span>
+        </div>
+        <div class="rc-metric">
+          <div class="rcm-left">
+            <span class="rcm-icon">💰</span>
+            <span class="rcm-label">Additional monthly revenue</span>
+          </div>
+          <span class="rcm-value" id="r-newrev" style="color:var(--green)">$2,880</span>
+        </div>
+        <div class="rc-metric">
+          <div class="rcm-left">
+            <span class="rcm-icon">👥</span>
+            <span class="rcm-label">Staff hours AI replaces / month</span>
+          </div>
+          <span class="rcm-value" id="r-hours" style="color:var(--blue)">25 hrs</span>
+        </div>
+        <div class="rc-metric">
+          <div class="rcm-left">
+            <span class="rcm-icon">💼</span>
+            <span class="rcm-label">Monthly staff cost savings</span>
+          </div>
+          <span class="rcm-value" id="r-savings" style="color:var(--green)">$1,949</span>
+        </div>
+        <div class="rc-metric">
+          <div class="rcm-left">
+            <span class="rcm-icon">🔄</span>
+            <span class="rcm-label">Manual cost replaced by AI</span>
+          </div>
+          <span class="rcm-value" id="r-manual" style="color:var(--amber)">$2,165</span>
+        </div>
+      </div>
+
+      <div class="rc-payoff" id="r-payoff">
+        <div class="rc-payoff-icon">🚀</div>
+        <div class="rc-payoff-text">
+          <strong id="r-payoff-title">$4,829/month sitting on the table</strong>
+          <span id="r-payoff-sub">The AI Command Center captures leads 24/7, responds instantly, and pays for itself many times over.</span>
+        </div>
+      </div>
+
+      <div class="rc-cta">
+        <div class="rc-cta-box">
+          <div class="rc-cta-title" id="r-cta-title">See the AI Command Center in action</div>
+          <div class="rc-cta-sub">Talk to a Zoek strategist about getting this set up for your business. Most clients are live within days.</div>
+          <a href="https://calendly.com/expert-sales" target="_blank" class="rc-cta-btn">Book a Free Strategy Call →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip">
+  <div class="proof-inner">
+    <div class="proof-title">Proven ROI. Real numbers.</div>
+    <p class="proof-sub">These aren't estimates — they're the actual results Zoek clients see when the AI Command Center goes live. <strong>Based on real SMB data.</strong></p>
+    <div class="proof-grid">
+      <div class="proof-stat">
+        <div class="ps-num">372%</div>
+        <div class="ps-label"><strong>Increase in lead-to-revenue conversion</strong> with AI-powered communication</div>
+      </div>
+      <div class="proof-stat">
+        <div class="ps-num">24/7</div>
+        <div class="ps-label"><strong>Receptionist coverage</strong> at a fraction of the cost of human staffing</div>
+      </div>
+      <div class="proof-stat">
+        <div class="ps-num">$4,828+</div>
+        <div class="ps-label"><strong>Total monthly impact</strong> based on SMB staff cost savings and new conversions</div>
+      </div>
+      <div class="proof-stat">
+        <div class="ps-num">12%</div>
+        <div class="ps-label"><strong>New conversion rate</strong> vs. 10% industry average — AI responds faster, converts more</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-inner">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">The AI receptionist had a conversation for an hour and a half with a potential client at 4:00 a.m. about a sensitive subject, and at the end, <strong>they signed up for services. That blew my mind.</strong></p>
+    <div class="quote-attr">— Mark H., Zoek AI Command Center client</div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · 1-888-737-9635</span>
+</footer>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────
+let effMultiplier = 1.0;
+let effLabel = 'Reasonable';
+
+function setEff(label, mult, btn) {
+  effMultiplier = mult;
+  effLabel = label;
+  document.querySelectorAll('.eff-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('v-eff').textContent = label;
+  update();
+}
+
+// ── FORMAT HELPERS ─────────────────────────────────────────
+function fmt$(n) {
+  if (n >= 10000) return '$' + (n/1000).toFixed(1).replace(/\.0$/,'') + 'K';
+  return '$' + Math.round(n).toLocaleString();
+}
+function fmtN(n) { return Math.round(n).toLocaleString(); }
+
+// ── CORE CALCULATION (matches the spreadsheet exactly) ─────
+function calculate() {
+  const leadsPerWeek  = parseFloat(document.getElementById('s-leads').value);
+  const afterHoursPct = parseFloat(document.getElementById('s-afterhours').value) / 100;
+  const avgRevenue    = parseFloat(document.getElementById('s-revenue').value);
+  const convRate      = parseFloat(document.getElementById('s-conv').value) / 100;
+  const hourlyWage    = parseFloat(document.getElementById('s-wage').value);
+
+  // AI improves conversion by 2 percentage points (12% vs 10% base case, scaled)
+  const aiConvBoost   = 0.02;
+  const newConvRate   = Math.min(convRate + aiConvBoost, 0.95);
+
+  // After-hours leads per week → per month
+  const afterHoursWeekly  = leadsPerWeek * afterHoursPct;
+  const afterHoursMonthly = afterHoursWeekly * 4.33;
+
+  // Currently lost after-hours leads (those that don't convert without AI)
+  const lostLeadsWeekly  = afterHoursWeekly * (1 - convRate);
+  const lostLeadsMonthly = lostLeadsWeekly * 4.33;
+
+  // Additional conversions AI captures from after-hours
+  const additionalConversions = afterHoursMonthly * aiConvBoost;
+  const additionalRevenue     = additionalConversions * avgRevenue;
+
+  // Staff hours saved — AI handles after-hours + improves efficiency
+  // Base: 3 mins per lead handled manually, efficiency multiplier
+  const minsPerLead   = 3 / effMultiplier;
+  const staffHoursMonthly = (afterHoursMonthly * minsPerLead) / 60;
+  const staffCostSavings  = staffHoursMonthly * hourlyWage;
+
+  // Manual cost replaced (all leads AI touches, not just after-hours)
+  const totalLeadsMonthly = leadsPerWeek * 4.33;
+  const aiTouchLeads      = totalLeadsMonthly * afterHoursPct * 0.7;
+  const manualCostReplaced = (aiTouchLeads * minsPerLead / 60) * hourlyWage;
+
+  // Total impact
+  const totalMonthlyImpact = additionalRevenue + staffCostSavings;
+
+  return {
+    leadsPerWeek,
+    lostWeekly:       Math.round(lostLeadsWeekly),
+    newConvRate:      (newConvRate * 100).toFixed(1),
+    additionalRevenue,
+    staffHours:       staffHoursMonthly,
+    staffCostSavings,
+    manualCostReplaced,
+    totalMonthlyImpact
+  };
+}
+
+// ── UPDATE UI ──────────────────────────────────────────────
+function update() {
+  // Update slider display values
+  const leads = document.getElementById('s-leads').value;
+  const ah    = document.getElementById('s-afterhours').value;
+  const rev   = document.getElementById('s-revenue').value;
+  const conv  = document.getElementById('s-conv').value;
+  const wage  = document.getElementById('s-wage').value;
+
+  document.getElementById('v-leads').textContent      = parseInt(leads).toLocaleString();
+  document.getElementById('v-afterhours').textContent = ah + '%';
+  document.getElementById('v-revenue').textContent    = '$' + parseInt(rev).toLocaleString();
+  document.getElementById('v-conv').textContent       = conv + '%';
+  document.getElementById('v-wage').textContent       = '$' + wage;
+
+  // Update slider fill color
+  ['leads','afterhours','revenue','conv','wage'].forEach(id => {
+    const sl = document.getElementById('s-' + id);
+    const pct = ((sl.value - sl.min) / (sl.max - sl.min)) * 100;
+    sl.style.background = 'linear-gradient(to right, #ED0875 0%, #ED0875 ' + pct + '%, rgba(255,255,255,0.08) ' + pct + '%, rgba(255,255,255,0.08) 100%)';
+  });
+
+  // Calculate
+  const r = calculate();
+
+  // Update results
+  document.getElementById('r-total').textContent   = fmt$(r.totalMonthlyImpact);
+  document.getElementById('r-lost').textContent    = r.lostWeekly + '/wk';
+  document.getElementById('r-newconv').textContent = r.newConvRate + '%';
+  document.getElementById('r-newrev').textContent  = fmt$(r.additionalRevenue);
+  document.getElementById('r-hours').textContent   = Math.round(r.staffHours) + ' hrs';
+  document.getElementById('r-savings').textContent = fmt$(r.staffCostSavings);
+  document.getElementById('r-manual').textContent  = fmt$(r.manualCostReplaced);
+
+  // Dynamic payoff message
+  const monthly = r.totalMonthlyImpact;
+  const annual  = monthly * 12;
+  document.getElementById('r-payoff-title').textContent =
+    fmt$(monthly) + '/month sitting on the table';
+  document.getElementById('r-payoff-sub').textContent =
+    'That\'s ' + fmt$(annual) + ' per year. The AI Command Center captures leads 24/7, responds instantly, and pays for itself many times over.';
+
+  // Dynamic CTA title
+  document.getElementById('r-cta-title').textContent =
+    monthly > 3000
+      ? 'You\'re leaving ' + fmt$(monthly) + '/mo on the table'
+      : 'See how the AI Command Center fits your business';
+}
+
+// ── NAV ───────────────────────────────────────────────────
+function toggleNav(btn) {
+  const menu = document.getElementById('nl-tools-menu');
+  const isOpen = menu.classList.contains('open');
+  menu.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+document.addEventListener('click', function(e) {
+  const dd = document.querySelector('.nav-dropdown');
+  if (dd && !dd.contains(e.target)) {
+    document.getElementById('nl-tools-menu').classList.remove('open');
+    document.getElementById('nl-tools-btn').classList.remove('open');
+  }
+});
+
+// ── INIT ──────────────────────────────────────────────────
+update();
+</script>
+<script src="cta.js"></script>
+</body>
+</html>
