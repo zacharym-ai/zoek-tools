@@ -251,6 +251,61 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   </div>
 </div>
 
+
+<div style="border-top:1px solid rgba(105,44,142,0.25);background:#1E1044;">
+  <div style="max-width:1100px;margin:0 auto;padding:2rem 2rem 3rem;">
+    <div id="bm-container"></div>
+  </div>
+</div>
+
+<script>
+var style = document.createElement('style');
+style.textContent = BENCHMARK_CSS;
+document.head.appendChild(style);
+buildIndustrySelector('bm-container', 'showROIBenchmarks');
+
+function showROIBenchmarks(industryKey) {
+  if (!industryKey) return;
+  var bm = getBenchmark(industryKey);
+  document.getElementById('bm-industry-select').style.borderColor = '#ED0875';
+
+  // Try to read user's current ROI from page
+  var userROI = 0;
+  var roiEl = document.getElementById('roi-result') || document.getElementById('total-roi') || document.querySelector('.roi-number');
+  if (roiEl) {
+    var parsed = parseFloat(roiEl.textContent.replace(/[^0-9.-]/g,''));
+    if (!isNaN(parsed)) userROI = parsed;
+  }
+
+  var cards = [
+    { label:'Target ROI',         avg: bm.roiTarget + '%',       youNum: userROI,    avgNum: bm.roiTarget,   higherBetter:true },
+    { label:'Marketing Budget',   avg: bm.marketingBudgetPct + '% of revenue', youNum:0, avgNum:0, note:true },
+    { label:'Avg Order Value',    avg: '$' + bm.avgOrderValue.toLocaleString(), youNum:0, avgNum:0, note:true },
+    { label:'Lead-to-Close Rate', avg: bm.closeRate + '%',        youNum:0,           avgNum:0,               note:true }
+  ];
+
+  var cardsHtml = cards.map(function(c) {
+    var delta = '';
+    if (c.youNum > 0 && !c.note) {
+      var diff = ((c.youNum - c.avgNum) / c.avgNum * 100).toFixed(0);
+      var cls = c.youNum >= c.avgNum ? 'bm-delta-good' : 'bm-delta-bad';
+      var sign = diff > 0 ? '+' : '';
+      delta = '<span class="bm-card-delta ' + cls + '">' + sign + diff + '% vs industry</span>';
+    }
+    return '<div class="bm-card">' +
+      '<div class="bm-card-label">' + c.label + '</div>' +
+      '<div class="bm-card-avg">Industry avg: ' + c.avg + '</div>' +
+      delta + '</div>';
+  }).join('');
+
+  var resultsEl = document.getElementById('bm-results');
+  resultsEl.innerHTML = cardsHtml +
+    '<div class="bm-card" style="grid-column:1/-1">' +
+      '<div class="bm-insight"><strong>' + bm.label + ' Industry Insight</strong>' + bm.notes + '</div>' +
+    '</div>';
+  resultsEl.style.display = 'grid';
+}
+</script>
 <footer>
   <a href="index.html" class="footer-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
   <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · Irvine, CA</span>
@@ -367,55 +422,5 @@ document.addEventListener('click',function(e){
 });
 </script>
 
-<div class="benchmark-wrap"><div id="bm-container"></div></div>
-
-<script>
-var style = document.createElement('style');
-style.textContent = BENCHMARK_CSS;
-document.head.appendChild(style);
-buildIndustrySelector('bm-container', 'showROIBenchmarks');
-
-function showROIBenchmarks(industryKey) {
-  if (!industryKey) return;
-  var bm = getBenchmark(industryKey);
-  document.getElementById('bm-industry-select').style.borderColor = '#ED0875';
-
-  // Try to read user's current ROI from page
-  var userROI = 0;
-  var roiEl = document.getElementById('roi-result') || document.getElementById('total-roi') || document.querySelector('.roi-number');
-  if (roiEl) {
-    var parsed = parseFloat(roiEl.textContent.replace(/[^0-9.-]/g,''));
-    if (!isNaN(parsed)) userROI = parsed;
-  }
-
-  var cards = [
-    { label:'Target ROI',         avg: bm.roiTarget + '%',       youNum: userROI,    avgNum: bm.roiTarget,   higherBetter:true },
-    { label:'Marketing Budget',   avg: bm.marketingBudgetPct + '% of revenue', youNum:0, avgNum:0, note:true },
-    { label:'Avg Order Value',    avg: '$' + bm.avgOrderValue.toLocaleString(), youNum:0, avgNum:0, note:true },
-    { label:'Lead-to-Close Rate', avg: bm.closeRate + '%',        youNum:0,           avgNum:0,               note:true }
-  ];
-
-  var cardsHtml = cards.map(function(c) {
-    var delta = '';
-    if (c.youNum > 0 && !c.note) {
-      var diff = ((c.youNum - c.avgNum) / c.avgNum * 100).toFixed(0);
-      var cls = c.youNum >= c.avgNum ? 'bm-delta-good' : 'bm-delta-bad';
-      var sign = diff > 0 ? '+' : '';
-      delta = '<span class="bm-card-delta ' + cls + '">' + sign + diff + '% vs industry</span>';
-    }
-    return '<div class="bm-card">' +
-      '<div class="bm-card-label">' + c.label + '</div>' +
-      '<div class="bm-card-avg">Industry avg: ' + c.avg + '</div>' +
-      delta + '</div>';
-  }).join('');
-
-  var resultsEl = document.getElementById('bm-results');
-  resultsEl.innerHTML = cardsHtml +
-    '<div class="bm-card" style="grid-column:1/-1">' +
-      '<div class="bm-insight"><strong>' + bm.label + ' Industry Insight</strong>' + bm.notes + '</div>' +
-    '</div>';
-  resultsEl.style.display = 'grid';
-}
-</script>
 </body>
 </html>
