@@ -38,35 +38,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-cta:hover{box-shadow:0 6px 20px rgba(237,8,117,0.4);transform:translateY(-1px);}
 @media(max-width:700px){.nav-links{display:none;}}
 
-
-/* COMPETITOR COMPARISON */
-.comp-section{background:var(--sidebar);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:1.25rem;}
-.comp-header{padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.85rem;border-bottom:1px solid var(--border-light);}
-.comp-title{font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:800;flex:1;}
-.comp-body{padding:1.25rem 1.4rem;}
-.comp-intro{font-size:0.82rem;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;}
-.comp-intro strong{color:var(--white);}
-.comp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1.25rem;}
-.comp-col{background:var(--navy);padding:1rem;}
-.comp-col.you{background:rgba(105,44,142,0.08);}
-.comp-col-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.85rem;}
-.comp-col.you .comp-col-label{color:var(--pink);}
-.comp-metric{margin-bottom:0.75rem;}
-.comp-metric-label{font-size:0.7rem;color:var(--muted);margin-bottom:0.2rem;}
-.comp-metric-val{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;line-height:1;}
-.comp-metric-val.better{color:var(--green);}
-.comp-metric-val.worse{color:var(--pink);}
-.comp-metric-val.neutral{color:var(--amber);}
-.comp-metric-val.you-val{color:var(--white);}
-.comp-gap-items{display:flex;flex-direction:column;gap:0.5rem;}
-.comp-gap{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;border-radius:4px;font-size:0.78rem;}
-.comp-gap.behind{background:rgba(237,8,117,0.06);border:1px solid rgba(237,8,117,0.15);}
-.comp-gap.ahead{background:rgba(79,255,176,0.05);border:1px solid rgba(79,255,176,0.12);}
-.comp-gap-label{font-weight:600;}
-.comp-gap-delta{font-weight:800;font-size:0.82rem;}
-.comp-gap.behind .comp-gap-delta{color:var(--pink);}
-.comp-gap.ahead .comp-gap-delta{color:var(--green);}
-
 /* ── LANDING (step 0) ── */
 .landing{margin-top:60px;min-height:calc(100vh - 60px);display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;background:radial-gradient(ellipse at 50% 30%,rgba(237,8,117,0.12) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(105,44,142,0.1) 0%,transparent 50%);}
 .landing-inner{max-width:560px;width:100%;text-align:center;}
@@ -217,14 +188,15 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           <a href="roi.html">Marketing ROI</a>
           <a href="budget.html">Ad Budget Planner</a>
           <a href="revenue-loss.html">Revenue Loss</a>
-          <a href="ai-calculator.html">AI Receptionist ROI</a>
           <a href="package-builder.html">Package Builder</a>
         </div>
         <div class="ndm-col">
           <div class="ndm-label">Audits &amp; Quizzes</div>
           <a href="business-snapshot.html">Business Snapshot</a>
           <a href="marketing-wheel.html">Marketing Wheel</a>
+          <a href="grader.html">Website Grader</a>
           <a href="website-quiz.html">Website Quiz</a>
+          <a href="local-seo.html">Local SEO Check</a>
           <a href="positioning.html">Positioning Worksheet</a>
           <a href="reviews.html">Reputation Toolkit</a>
         </div>
@@ -287,9 +259,11 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <div class="scan-steps">
     <div class="scan-step" id="ss-1"><span class="step-icon">📍</span> Pulling Google Business Profile data</div>
     <div class="scan-step" id="ss-2"><span class="step-icon">⭐</span> Analyzing reviews & reputation</div>
-    <div class="scan-step" id="ss-3"><span class="step-icon">🌐</span> Checking website & SEO health</div>
-    <div class="scan-step" id="ss-4"><span class="step-icon">📱</span> Evaluating local listings & visibility</div>
-    <div class="scan-step" id="ss-5"><span class="step-icon">📊</span> Generating your personalized report</div>
+    <div class="scan-step" id="ss-3"><span class="step-icon">🚀</span> Running PageSpeed performance test</div>
+    <div class="scan-step" id="ss-4"><span class="step-icon">🔍</span> Auditing website SEO health</div>
+    <div class="scan-step" id="ss-5"><span class="step-icon">🔗</span> Checking backlinks & domain authority</div>
+    <div class="scan-step" id="ss-6"><span class="step-icon">🛠️</span> Detecting website technology</div>
+    <div class="scan-step" id="ss-7"><span class="step-icon">📊</span> Generating your personalized report</div>
   </div>
   <div class="scan-bar-wrap"><div class="scan-bar" id="scan-bar"></div></div>
 </div>
@@ -300,7 +274,6 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <div class="report-header" id="report-header"></div>
   <div class="grade-bar-wrap" id="grade-bar-wrap"></div>
   <div class="report-sections" id="report-sections"></div>
-  <div id="comp-section"></div>
   <div class="report-cta" id="report-cta"></div>
 </div>
 
@@ -312,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -340,6 +313,8 @@ window.addEventListener('DOMContentLoaded', loadGooglePlaces);
 // ============================================================
 const DATAFORSEO_LOGIN    = 'zacharym@gozoek.com';
 const DATAFORSEO_PASSWORD = '39c3676937317577';
+const PAGESPEED_API_KEY   = 'YOUR_GOOGLE_PLACES_API_KEY'; // ← same key, just enable PageSpeed Insights API in Cloud Console
+const BUILTWITH_API_KEY   = 'YOUR_BUILTWITH_API_KEY';      // ← free at api.builtwith.com
 
 // ============================================================
 // STATE
@@ -445,7 +420,7 @@ function checkReady() {
 // SCAN ANIMATION
 // ============================================================
 function animateScan() {
-  const steps = ['ss-1','ss-2','ss-3','ss-4','ss-5'];
+  const steps = ['ss-1','ss-2','ss-3','ss-4','ss-5','ss-6','ss-7'];
   const bar = document.getElementById('scan-bar');
   let i = 0;
   const STEP_MS = 1200;
@@ -510,7 +485,7 @@ async function runReport() {
 async function fetchAllData(place, website) {
   const results = {};
 
-  // ── 1. GOOGLE PLACES DATA (already have it) ──────────────
+  // ── 1. GOOGLE PLACES DATA ────────────────────────────────
   results.google = {
     rating:      place.rating || null,
     reviewCount: place.user_ratings_total || 0,
@@ -524,18 +499,141 @@ async function fetchAllData(place, website) {
     mapsUrl:     place.url || ''
   };
 
-  // ── 2. DATAFORSEO ON-PAGE (if website provided) ───────────
-  if (website && DATAFORSEO_LOGIN !== 'YOUR_DATAFORSEO_LOGIN') {
-    try {
-      results.onpage = await fetchDataForSEO(website);
-    } catch(e) {
-      results.onpage = null;
-    }
+  // Run all website-based checks in parallel for speed
+  const siteUrl = website || place.website || null;
+  if (siteUrl) {
+    const [onpage, pagespeed, backlinks, builtwith] = await Promise.allSettled([
+      fetchDataForSEOOnPage(siteUrl),
+      fetchPageSpeed(siteUrl),
+      fetchBacklinks(siteUrl),
+      fetchBuiltWith(siteUrl)
+    ]);
+    results.onpage    = onpage.status    === 'fulfilled' ? onpage.value    : null;
+    results.pagespeed = pagespeed.status === 'fulfilled' ? pagespeed.value : null;
+    results.backlinks = backlinks.status === 'fulfilled' ? backlinks.value : null;
+    results.builtwith = builtwith.status === 'fulfilled' ? builtwith.value : null;
   } else {
-    results.onpage = null;
+    results.onpage = results.pagespeed = results.backlinks = results.builtwith = null;
   }
 
   return results;
+}
+
+// ── PAGESPEED INSIGHTS ────────────────────────────────────
+async function fetchPageSpeed(url) {
+  try {
+    const cleanUrl = url.startsWith('http') ? url : 'https://' + url;
+    // Run mobile and desktop in parallel
+    const [mobile, desktop] = await Promise.all([
+      fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' + encodeURIComponent(cleanUrl) + '&strategy=mobile&key=' + PAGESPEED_API_KEY),
+      fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' + encodeURIComponent(cleanUrl) + '&strategy=desktop&key=' + PAGESPEED_API_KEY)
+    ]);
+    const [mData, dData] = await Promise.all([mobile.json(), desktop.json()]);
+
+    const extract = (data) => {
+      const cats = data?.lighthouseResult?.categories;
+      const audits = data?.lighthouseResult?.audits;
+      return {
+        performance:    Math.round((cats?.performance?.score || 0) * 100),
+        accessibility:  Math.round((cats?.accessibility?.score || 0) * 100),
+        seo:            Math.round((cats?.seo?.score || 0) * 100),
+        bestPractices:  Math.round((cats?.['best-practices']?.score || 0) * 100),
+        fcp:            audits?.['first-contentful-paint']?.displayValue || null,
+        lcp:            audits?.['largest-contentful-paint']?.displayValue || null,
+        cls:            audits?.['cumulative-layout-shift']?.displayValue || null,
+        tbt:            audits?.['total-blocking-time']?.displayValue || null,
+        hasViewport:    audits?.viewport?.score === 1,
+        hasMetaDesc:    audits?.['meta-description']?.score === 1,
+        hasHreflang:    audits?.hreflang?.score === 1,
+        titleTag:       audits?.['document-title']?.score === 1,
+        imgAlt:         audits?.['image-alt']?.score === 1,
+        httpsRedirect:  data?.lighthouseResult?.finalUrl?.startsWith('https') || false,
+      };
+    };
+
+    return { mobile: extract(mData), desktop: extract(dData) };
+  } catch(e) {
+    console.error('PageSpeed error:', e);
+    return null;
+  }
+}
+
+// ── DATAFORSEO ON-PAGE ────────────────────────────────────
+async function fetchDataForSEOOnPage(url) {
+  if (!DATAFORSEO_LOGIN || DATAFORSEO_LOGIN === 'YOUR_DATAFORSEO_LOGIN') return null;
+  try {
+    const cleanUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
+    const creds = btoa(DATAFORSEO_LOGIN + ':' + DATAFORSEO_PASSWORD);
+    const postResp = await fetch('https://api.dataforseo.com/v3/on_page/task_post', {
+      method: 'POST',
+      headers: { 'Authorization': 'Basic ' + creds, 'Content-Type': 'application/json' },
+      body: JSON.stringify([{ target: cleanUrl, max_crawl_pages: 1, load_resources: false }])
+    });
+    const postData = await postResp.json();
+    const taskId = postData?.tasks?.[0]?.id;
+    if (!taskId) return null;
+    for (let i = 0; i < 8; i++) {
+      await sleep(2500);
+      const res = await fetch('https://api.dataforseo.com/v3/on_page/summary/' + taskId, {
+        headers: { 'Authorization': 'Basic ' + creds }
+      });
+      const data = await res.json();
+      const item = data?.tasks?.[0]?.result?.[0];
+      if (item?.crawl_progress === 'finished' || item?.pages_count > 0) return item;
+    }
+    return null;
+  } catch(e) { return null; }
+}
+
+// ── DATAFORSEO BACKLINKS ──────────────────────────────────
+async function fetchBacklinks(url) {
+  if (!DATAFORSEO_LOGIN || DATAFORSEO_LOGIN === 'YOUR_DATAFORSEO_LOGIN') return null;
+  try {
+    const domain = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
+    const creds = btoa(DATAFORSEO_LOGIN + ':' + DATAFORSEO_PASSWORD);
+    const resp = await fetch('https://api.dataforseo.com/v3/backlinks/summary/live', {
+      method: 'POST',
+      headers: { 'Authorization': 'Basic ' + creds, 'Content-Type': 'application/json' },
+      body: JSON.stringify([{ target: domain, limit: 1 }])
+    });
+    const data = await resp.json();
+    const item = data?.tasks?.[0]?.result?.[0];
+    if (!item) return null;
+    return {
+      domainRank:       item.rank || 0,
+      backlinks:        item.backlinks || 0,
+      referringDomains: item.referring_domains || 0,
+      brokenBacklinks:  item.broken_backlinks || 0,
+      spamScore:        item.spam_score || 0,
+    };
+  } catch(e) { return null; }
+}
+
+// ── BUILTWITH ─────────────────────────────────────────────
+async function fetchBuiltWith(url) {
+  if (!BUILTWITH_API_KEY || BUILTWITH_API_KEY === 'YOUR_BUILTWITH_API_KEY') return null;
+  try {
+    const domain = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
+    const resp = await fetch('https://api.builtwith.com/v21/api.json?KEY=' + BUILTWITH_API_KEY + '&LOOKUP=' + domain);
+    const data = await resp.json();
+    const techs = [];
+    const groups = data?.Results?.[0]?.Result?.Paths?.[0]?.Technologies || [];
+    groups.forEach(function(t) {
+      if (t.Name) techs.push({ name: t.Name, category: t.Categories?.[0] || 'Other' });
+    });
+    // Check for key platforms
+    const names = techs.map(t => t.name.toLowerCase());
+    return {
+      technologies: techs.slice(0, 20),
+      platform: names.find(n => ['wix','wordpress','shopify','squarespace','webflow','weebly','godaddy'].some(p => n.includes(p))) || null,
+      hasAnalytics: names.some(n => n.includes('google analytics') || n.includes('gtag') || n.includes('gtm')),
+      hasCRM: names.some(n => n.includes('hubspot') || n.includes('salesforce') || n.includes('zoho')),
+      hasChatbot: names.some(n => n.includes('chat') || n.includes('intercom') || n.includes('drift')),
+      hasPixel: names.some(n => n.includes('facebook pixel') || n.includes('meta pixel')),
+      hasCDN: names.some(n => n.includes('cloudflare') || n.includes('fastly') || n.includes('cloudfront')),
+      hasSSL: names.some(n => n.includes('ssl') || n.includes('lets encrypt')),
+    };
+  } catch(e) { return null; }
 }
 
 async function fetchDataForSEO(url) {
@@ -607,46 +705,170 @@ function scoreGoogle(g) {
   return { score: Math.min(score, 100), findings };
 }
 
-function scoreWebsite(onpage, hasWebsite) {
+function scoreWebsite(data) {
+  const onpage    = data.onpage;
+  const ps        = data.pagespeed;
+  const hasWebsite = data.google.hasWebsite;
+
   if (!hasWebsite) {
-    return {
-      score: 0,
-      findings: [{ type:'fail', text:'No website detected', detail:'Without a website, you\'re invisible to the majority of potential customers. This is your biggest opportunity.' }]
-    };
-  }
-  if (!onpage) {
-    // Estimate based on having a website
-    return {
-      score: 40,
-      findings: [
-        { type:'warn', text:'Website found but not fully audited', detail:'Connect DataforSEO credentials for a full technical audit of your website.' },
-        { type:'warn', text:'SEO health unknown', detail:'We couldn\'t fully crawl your site. A Zoek audit will identify all technical issues.' }
-      ]
-    };
+    return { score: 0, findings: [{ type:'fail', text:'No website detected', detail:'Without a website you are invisible to the majority of potential customers. This is your single biggest growth opportunity.' }] };
   }
 
-  let score = 0; const findings = [];
-  const p = onpage;
+  let score = 0;
+  const findings = [];
 
-  if (p.meta_title_length > 0 && p.meta_title_length <= 60) { score += 20; findings.push({type:'pass',text:'Meta title properly set',detail:`${p.meta_title_length} characters — within the 50–60 character sweet spot.`}); }
-  else if (p.meta_title_length > 60) { score += 10; findings.push({type:'warn',text:'Meta title too long',detail:`${p.meta_title_length} chars — Google truncates above 60. Shorten it to show the full title in search results.`}); }
-  else { findings.push({type:'fail',text:'Missing or empty meta title',detail:'Your page title is one of the most important on-page SEO factors. Missing titles hurt rankings.'}); }
+  // ── PAGESPEED (real data) ──────────────────────────────
+  if (ps) {
+    const mob = ps.mobile;
+    const des = ps.desktop;
 
-  if (p.meta_description_length > 0) { score += 15; findings.push({type:'pass',text:'Meta description present',detail:'Good — this is your search result preview text.'}); }
-  else { findings.push({type:'fail',text:'Missing meta description',detail:'Without a meta description, Google writes one for you — usually badly. You\'re missing free ad space in search results.'}); }
+    // Mobile performance — most important
+    if (mob.performance >= 90) { score += 20; findings.push({type:'pass', text:'Mobile performance score: ' + mob.performance + '/100', detail:'Excellent mobile speed. Fast sites rank higher and convert better — you are ahead of most small businesses.'}); }
+    else if (mob.performance >= 50) { score += 10; findings.push({type:'warn', text:'Mobile performance score: ' + mob.performance + '/100', detail:'Room to improve. Over 60% of local searches happen on mobile. Slow load times directly lose you customers.'}); }
+    else { score += 0; findings.push({type:'fail', text:'Mobile performance score: ' + mob.performance + '/100', detail:'Critical — your site loads slowly on mobile. Google penalises slow sites in rankings and users abandon them within 3 seconds.'}); }
 
-  if (p.h1_count === 1) { score += 20; findings.push({type:'pass',text:'Single H1 tag found',detail:'Correct structure. One clear H1 helps Google understand your page topic.'}); }
-  else if (p.h1_count > 1) { score += 8; findings.push({type:'warn',text:`${p.h1_count} H1 tags found`,detail:'Multiple H1s confuse search engines. Only one H1 per page is recommended.'}); }
-  else { findings.push({type:'fail',text:'No H1 tag found',detail:'Missing H1 is a significant SEO issue. Google uses it to understand your page topic.'}); }
+    // Desktop performance
+    if (des.performance >= 90) { score += 10; findings.push({type:'pass', text:'Desktop performance: ' + des.performance + '/100', detail:'Fast desktop load — great for users on computers and Google indexing.'}); }
+    else if (des.performance >= 60) { score += 5; findings.push({type:'warn', text:'Desktop performance: ' + des.performance + '/100', detail:'Decent but room to improve. Core Web Vitals affect your Google search ranking.'}); }
+    else { findings.push({type:'fail', text:'Desktop performance: ' + des.performance + '/100', detail:'Slow desktop load is hurting your SEO. Google uses Core Web Vitals as a direct ranking signal.'}); }
 
-  if (p.broken_links === 0) { score += 20; findings.push({type:'pass',text:'No broken links detected',detail:'Clean link profile — no dead ends for users or search engines.'}); }
-  else { score += 5; findings.push({type:'fail',text:`${p.broken_links} broken links found`,detail:`Broken links hurt user experience and signal poor site maintenance to Google.`}); }
+    // Core vitals
+    if (mob.lcp) findings.push({type: mob.performance >= 50 ? 'pass' : 'warn', text:'Largest Contentful Paint: ' + mob.lcp, detail:'LCP measures how fast your main content loads. Under 2.5s is good — over 4s is a problem.'});
+    if (mob.cls) findings.push({type:'pass', text:'Layout Shift (CLS): ' + mob.cls, detail:'Measures visual stability. Low CLS means your page does not jump around as it loads.'});
 
-  if (p.https_redirect) { score += 15; findings.push({type:'pass',text:'HTTPS / SSL secured',detail:'Your site uses HTTPS — required for trust signals and Google ranking.'}); }
-  else { findings.push({type:'fail',text:'No HTTPS / SSL detected',detail:'Non-HTTPS sites are flagged as "Not Secure" by browsers. This kills trust and conversions.'}); }
+    // HTTPS
+    if (mob.httpsRedirect) { score += 10; findings.push({type:'pass', text:'HTTPS / SSL secured', detail:'Your site is secured with HTTPS — required for trust and Google ranking.'}); }
+    else { findings.push({type:'fail', text:'No HTTPS detected', detail:'Non-HTTPS sites are flagged as Not Secure by browsers. This kills trust and conversions immediately.'}); }
 
-  if (p.page_size < 1000000) { score += 10; findings.push({type:'pass',text:'Page size within normal range',detail:'Good — lightweight pages load faster and rank better.'}); }
-  else { findings.push({type:'warn',text:'Large page size detected',detail:'Heavy pages load slowly. Speed is a direct Google ranking factor.'}); }
+    // SEO score from PageSpeed
+    if (mob.seo >= 90) { score += 15; findings.push({type:'pass', text:'SEO score: ' + mob.seo + '/100', detail:'Strong technical SEO foundation — good meta tags, structure, and crawlability.'}); }
+    else if (mob.seo >= 70) { score += 8; findings.push({type:'warn', text:'SEO score: ' + mob.seo + '/100', detail:'Some SEO issues detected. These are likely costing you rankings in local search.'}); }
+    else { findings.push({type:'fail', text:'SEO score: ' + mob.seo + '/100', detail:'Significant SEO issues. Your site may not be appearing in searches where it should.'}); }
+
+    // Mobile viewport
+    if (mob.hasViewport) { score += 5; findings.push({type:'pass', text:'Mobile viewport configured', detail:'Your site is properly configured for mobile devices.'}); }
+    else { findings.push({type:'fail', text:'Missing mobile viewport tag', detail:'Without a viewport tag your site may display incorrectly on phones — this is a critical mobile SEO issue.'}); }
+
+    // Meta description
+    if (mob.hasMetaDesc) { score += 5; findings.push({type:'pass', text:'Meta description present', detail:'Good — this is your search result preview text that drives click-through rates.'}); }
+    else { findings.push({type:'fail', text:'Missing meta description', detail:'Without a meta description Google writes one for you — usually poorly. You are missing free ad space in search results.'}); }
+
+    // Image alt tags
+    if (mob.imgAlt) { score += 5; findings.push({type:'pass', text:'Image alt tags present', detail:'Images are properly labelled for accessibility and SEO.'}); }
+    else { findings.push({type:'warn', text:'Missing image alt tags', detail:'Alt tags help Google understand your images and improve accessibility and SEO rankings.'}); }
+
+  } else if (onpage) {
+    // Fall back to DataForSEO onpage data
+    if (onpage.meta_title_length > 0 && onpage.meta_title_length <= 60) { score += 20; findings.push({type:'pass', text:'Meta title properly set', detail:onpage.meta_title_length + ' characters — within the 50-60 character sweet spot.'}); }
+    else if (onpage.meta_title_length > 60) { score += 10; findings.push({type:'warn', text:'Meta title too long', detail:onpage.meta_title_length + ' chars — Google truncates above 60.'}); }
+    else { findings.push({type:'fail', text:'Missing meta title', detail:'Your page title is one of the most important on-page SEO factors.'}); }
+    if (onpage.meta_description_length > 0) { score += 15; findings.push({type:'pass', text:'Meta description present', detail:'Good — this is your search result preview text.'}); }
+    else { findings.push({type:'fail', text:'Missing meta description', detail:'You are missing free ad space in search results.'}); }
+    if (onpage.broken_links === 0) { score += 20; findings.push({type:'pass', text:'No broken links', detail:'Clean link profile — no dead ends for users or search engines.'}); }
+    else { score += 5; findings.push({type:'fail', text:onpage.broken_links + ' broken links found', detail:'Broken links hurt user experience and signal poor maintenance to Google.'}); }
+    if (onpage.https_redirect) { score += 15; findings.push({type:'pass', text:'HTTPS secured', detail:'Your site uses HTTPS.'}); }
+    else { findings.push({type:'fail', text:'No HTTPS detected', detail:'Non-HTTPS sites are flagged as Not Secure by browsers.'}); }
+  } else {
+    score = 35;
+    findings.push({type:'warn', text:'Website found but not fully audited', detail:'We found your website but could not complete a full technical audit. A Zoek strategist can run a full audit in minutes.'});
+  }
+
+  return { score: Math.min(score, 100), findings };
+}
+
+// ── SEO & BACKLINKS SECTION (new) ─────────────────────────
+function scoreSEO(data) {
+  const bl = data.backlinks;
+  const onpage = data.onpage;
+  const ps = data.pagespeed;
+  let score = 0;
+  const findings = [];
+
+  if (bl) {
+    // Domain Rank
+    if (bl.domainRank >= 50) { score += 30; findings.push({type:'pass', text:'Domain Authority: ' + bl.domainRank + '/100', detail:'Strong domain authority — your site has earned real credibility with search engines.'}); }
+    else if (bl.domainRank >= 25) { score += 18; findings.push({type:'warn', text:'Domain Authority: ' + bl.domainRank + '/100', detail:'Moderate authority. Building more quality backlinks will improve your search rankings significantly.'}); }
+    else if (bl.domainRank >= 10) { score += 8; findings.push({type:'fail', text:'Domain Authority: ' + bl.domainRank + '/100', detail:'Low domain authority. Your site struggles to rank for competitive keywords. Link building is a priority.'}); }
+    else { findings.push({type:'fail', text:'Domain Authority: ' + bl.domainRank + '/100', detail:'Very low authority — your site is essentially invisible to search engines for competitive terms.'}); }
+
+    // Backlinks
+    if (bl.backlinks >= 500) { score += 25; findings.push({type:'pass', text:bl.backlinks.toLocaleString() + ' total backlinks', detail:'Strong backlink profile. Other websites are actively linking to your content.'}); }
+    else if (bl.backlinks >= 100) { score += 15; findings.push({type:'warn', text:bl.backlinks.toLocaleString() + ' backlinks', detail:'Growing backlink profile. More quality links from local directories, partners, and press will boost rankings.'}); }
+    else if (bl.backlinks >= 20) { score += 8; findings.push({type:'fail', text:'Only ' + bl.backlinks + ' backlinks', detail:'Very few sites link to you. This is one of the strongest signals Google uses to rank local businesses.'}); }
+    else { findings.push({type:'fail', text:'Critically low backlinks (' + bl.backlinks + ')', detail:'Almost no sites link to yours. Competitors with more backlinks will consistently outrank you.'}); }
+
+    // Referring domains
+    if (bl.referringDomains >= 50) { score += 20; findings.push({type:'pass', text:bl.referringDomains + ' referring domains', detail:'Great diversity of sites linking to you — this is what search engines really reward.'}); }
+    else if (bl.referringDomains >= 15) { score += 12; findings.push({type:'warn', text:bl.referringDomains + ' referring domains', detail:'Some diversity but room to grow. Aim for links from local news, directories, and industry associations.'}); }
+    else { score += 3; findings.push({type:'fail', text:'Only ' + bl.referringDomains + ' referring domains', detail:'Links from just a few sites. A Zoek local SEO campaign can build quality links from dozens of relevant sources.'}); }
+
+    // Spam score
+    if (bl.spamScore < 10) { score += 15; findings.push({type:'pass', text:'Low spam score (' + bl.spamScore + '%)', detail:'Your backlink profile is clean — no toxic links dragging down your rankings.'}); }
+    else if (bl.spamScore < 30) { score += 8; findings.push({type:'warn', text:'Moderate spam score (' + bl.spamScore + '%)', detail:'Some questionable links in your profile. A link audit could clean these up before they hurt rankings.'}); }
+    else { findings.push({type:'fail', text:'High spam score (' + bl.spamScore + '%)', detail:'Too many low-quality or spammy links. Google may be penalising your site because of these.'}); }
+
+  } else if (ps && ps.mobile.seo) {
+    score = ps.mobile.seo;
+    findings.push({type: ps.mobile.seo >= 80 ? 'pass' : 'warn', text:'PageSpeed SEO score: ' + ps.mobile.seo + '/100', detail:'Based on technical SEO signals from your live website.'});
+    findings.push({type:'warn', text:'Backlink data unavailable', detail:'Full backlink and domain authority data requires DataForSEO credentials.'});
+  } else {
+    score = 30;
+    findings.push({type:'warn', text:'SEO data unavailable', detail:'We could not pull full SEO data for this domain. A Zoek audit will give you the complete picture.'});
+  }
+
+  return { score: Math.min(score, 100), findings };
+}
+
+// ── TECH STACK SECTION (BuiltWith) ────────────────────────
+function scoreTechStack(data) {
+  const bw = data.builtwith;
+  let score = 0;
+  const findings = [];
+
+  if (!bw) {
+    score = 40;
+    findings.push({type:'warn', text:'Tech stack data unavailable', detail:'BuiltWith API key needed for full technology detection.'});
+    return { score, findings };
+  }
+
+  // Platform
+  if (bw.platform) {
+    const p = bw.platform.charAt(0).toUpperCase() + bw.platform.slice(1);
+    const goodPlatforms = ['wordpress','shopify','webflow'];
+    const limitedPlatforms = ['wix','squarespace','weebly','godaddy'];
+    if (goodPlatforms.some(x => bw.platform.includes(x))) {
+      score += 25;
+      findings.push({type:'pass', text:'Built on ' + p, detail:'Good platform choice — ' + p + ' gives you strong SEO flexibility and growth potential.'});
+    } else if (limitedPlatforms.some(x => bw.platform.includes(x))) {
+      score += 12;
+      findings.push({type:'warn', text:'Built on ' + p, detail:p + ' is easy to use but has significant SEO limitations compared to custom or WordPress sites. This may be capping your rankings.'});
+    } else {
+      score += 18;
+      findings.push({type:'pass', text:'Built on ' + p, detail:'Custom or professional platform detected.'});
+    }
+  } else {
+    score += 15;
+    findings.push({type:'warn', text:'Platform not detected', detail:'Could not identify your website platform. This may indicate a custom build.'});
+  }
+
+  // Analytics
+  if (bw.hasAnalytics) { score += 20; findings.push({type:'pass', text:'Google Analytics installed', detail:'You are tracking website visitors — essential for understanding your marketing performance.'}); }
+  else { findings.push({type:'fail', text:'No analytics detected', detail:'Without tracking you have no idea how many people visit your site or where they come from. This is a critical blind spot.'}); }
+
+  // Facebook Pixel
+  if (bw.hasPixel) { score += 15; findings.push({type:'pass', text:'Facebook/Meta Pixel installed', detail:'You can run retargeting ads to website visitors — a major conversion advantage.'}); }
+  else { findings.push({type:'warn', text:'No Meta Pixel detected', detail:'Installing the Meta Pixel unlocks powerful retargeting — showing ads specifically to people who already visited your site.'}); }
+
+  // Chatbot
+  if (bw.hasChatbot) { score += 15; findings.push({type:'pass', text:'Chat widget detected', detail:'Live chat or chatbot on your site — great for capturing leads instantly.'}); }
+  else { findings.push({type:'warn', text:'No chat widget detected', detail:"Zoek's AI Command Center adds a 24/7 AI receptionist to your site — capturing leads even while you sleep.", fix:'AI Command Center'}); }
+
+  // CDN
+  if (bw.hasCDN) { score += 15; findings.push({type:'pass', text:'CDN detected (Cloudflare or similar)', detail:'Your site uses a content delivery network — this significantly improves load speed globally.'}); }
+  else { score += 5; findings.push({type:'warn', text:'No CDN detected', detail:'A CDN speeds up your site for visitors anywhere in the world and adds security protection.'}); }
+
+  // CRM
+  if (bw.hasCRM) { score += 10; findings.push({type:'pass', text:'CRM integration detected', detail:'You are capturing and managing leads systematically — a strong sign of a mature marketing operation.'}); }
 
   return { score: Math.min(score, 100), findings };
 }
@@ -709,164 +931,6 @@ function getVerdict(score, name) {
   return `<strong>${name}</strong> has critical gaps across multiple areas. The good news: every one of these is fixable, and the upside is significant.`;
 }
 
-
-// ============================================================
-// SEND REPORT TO SALES (Formspree → kesley@gozoek.com)
-// ============================================================
-async function sendToSales(biz, sections, overall) {
-  const weakAreas = sections.filter(s => s.score < 70).map(s => s.title + ' (' + s.score + '/100)');
-  const scoreBreakdown = sections.map(s => s.title + ': ' + s.score + '/100').join(' | ');
-  const g = biz.place;
-
-  const payload = {
-    _subject: '📊 Snapshot Report: ' + biz.name + ' scored ' + overall + '/100',
-    _replyto: biz.email,
-    contact_name: biz.contact,
-    contact_email: biz.email,
-    business_name: biz.name,
-    business_address: g.formatted_address || 'N/A',
-    business_phone: g.formatted_phone_number || 'N/A',
-    business_website: biz.website || 'None',
-    google_rating: g.rating ? g.rating + '★ (' + (g.user_ratings_total || 0) + ' reviews)' : 'No rating',
-    overall_score: overall + '/100',
-    score_breakdown: scoreBreakdown,
-    weak_areas: weakAreas.length > 0 ? weakAreas.join(', ') : 'None — strong overall',
-    submitted_at: new Date().toLocaleString()
-  };
-
-  try {
-    await fetch('https://formspree.io/f/xpwzgkqr', { // ← Replace this form ID with one pointed to kesley@gozoek.com
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    console.log('Report sent to Kesley');
-  } catch(e) {
-    console.error('Failed to send report to sales:', e);
-  }
-}
-
-// ============================================================
-// INDUSTRY BENCHMARKS FOR COMPETITOR COMPARISON
-// ============================================================
-const BENCHMARKS = {
-  default:       { label:'Average local business',    rating:3.9, reviews:28,  photos:8,  profileScore:55, websiteScore:45 },
-  restaurant:    { label:'Average restaurant',         rating:4.1, reviews:142, photos:22, profileScore:62, websiteScore:40 },
-  health:        { label:'Average healthcare provider',rating:4.2, reviews:54,  photos:12, profileScore:60, websiteScore:50 },
-  beauty:        { label:'Average salon/spa',          rating:4.3, reviews:87,  photos:18, profileScore:65, websiteScore:42 },
-  home_services: { label:'Average home service co.',  rating:4.0, reviews:38,  photos:10, profileScore:52, websiteScore:38 },
-  retail:        { label:'Average retailer',           rating:4.0, reviews:62,  photos:15, profileScore:58, websiteScore:48 },
-  fitness:       { label:'Average gym/studio',         rating:4.2, reviews:76,  photos:20, profileScore:63, websiteScore:45 },
-  professional:  { label:'Average professional service',rating:4.1, reviews:31, photos:8,  profileScore:54, websiteScore:52 },
-};
-
-// Top performers
-const TOP_PERFORMERS = {
-  default:       { label:'Top local businesses',       rating:4.7, reviews:150, photos:35, profileScore:88, websiteScore:82 },
-  restaurant:    { label:'Top restaurants',             rating:4.7, reviews:400, photos:60, profileScore:90, websiteScore:72 },
-  health:        { label:'Top healthcare providers',    rating:4.8, reviews:180, photos:30, profileScore:88, websiteScore:80 },
-  beauty:        { label:'Top salons/spas',             rating:4.8, reviews:250, photos:45, profileScore:90, websiteScore:75 },
-  home_services: { label:'Top home service companies', rating:4.7, reviews:120, photos:28, profileScore:85, websiteScore:72 },
-  retail:        { label:'Top retailers',               rating:4.7, reviews:200, photos:40, profileScore:86, websiteScore:80 },
-  fitness:       { label:'Top gyms/studios',            rating:4.8, reviews:220, photos:50, profileScore:88, websiteScore:78 },
-  professional:  { label:'Top professional services',   rating:4.8, reviews:100, photos:22, profileScore:84, websiteScore:82 },
-};
-
-function detectCategory(types) {
-  if (!types) return 'default';
-  const t = types.join(',').toLowerCase();
-  if (t.includes('restaurant') || t.includes('food') || t.includes('cafe') || t.includes('bar')) return 'restaurant';
-  if (t.includes('doctor') || t.includes('dentist') || t.includes('hospital') || t.includes('health') || t.includes('medical') || t.includes('physiotherapist')) return 'health';
-  if (t.includes('beauty') || t.includes('hair') || t.includes('salon') || t.includes('spa') || t.includes('nail')) return 'beauty';
-  if (t.includes('plumber') || t.includes('electrician') || t.includes('contractor') || t.includes('roofing') || t.includes('hvac') || t.includes('cleaning')) return 'home_services';
-  if (t.includes('store') || t.includes('shop') || t.includes('retail') || t.includes('clothing') || t.includes('furniture')) return 'retail';
-  if (t.includes('gym') || t.includes('fitness') || t.includes('yoga') || t.includes('personal_trainer')) return 'fitness';
-  if (t.includes('lawyer') || t.includes('accounting') || t.includes('insurance') || t.includes('real_estate') || t.includes('consultant')) return 'professional';
-  return 'default';
-}
-
-function buildComparisonSection(g, sections, overall) {
-  var cat = detectCategory(g.types);
-  var avg = BENCHMARKS[cat] || BENCHMARKS.default;
-  var top = TOP_PERFORMERS[cat] || TOP_PERFORMERS.default;
-
-  var youRating  = g.rating || 0;
-  var youReviews = g.reviewCount || 0;
-  var youPhotos  = g.photos || 0;
-  var youScore   = overall;
-
-  var gaps = [];
-  if (youRating < avg.rating)
-    gaps.push({ label:'Google Rating',  you:youRating+'★',  avg:avg.rating+'★',  top:top.rating+'★',  delta:(avg.rating-youRating).toFixed(1)+' stars below average', behind:true });
-  else
-    gaps.push({ label:'Google Rating',  you:youRating+'★',  avg:avg.rating+'★',  top:top.rating+'★',  delta:youRating>=top.rating?'🏆 Top performer':'+'+(youRating-avg.rating).toFixed(1)+' above average', behind:false });
-
-  if (youReviews < avg.reviews)
-    gaps.push({ label:'Review Count',   you:youReviews,     avg:avg.reviews,     top:top.reviews,     delta:(avg.reviews-youReviews)+' reviews behind average', behind:true });
-  else
-    gaps.push({ label:'Review Count',   you:youReviews,     avg:avg.reviews,     top:top.reviews,     delta:youReviews>=top.reviews?'🏆 Top performer':'+'+(youReviews-avg.reviews)+' above average', behind:false });
-
-  if (youPhotos < avg.photos)
-    gaps.push({ label:'Profile Photos', you:youPhotos,      avg:avg.photos,      top:top.photos,      delta:(avg.photos-youPhotos)+' photos below average', behind:true });
-  else
-    gaps.push({ label:'Profile Photos', you:youPhotos,      avg:avg.photos,      top:top.photos,      delta:'+'+(youPhotos-avg.photos)+' above average', behind:false });
-
-  if (youScore < avg.profileScore)
-    gaps.push({ label:'Overall Score',  you:youScore+'/100',avg:avg.profileScore+'/100',top:top.profileScore+'/100',delta:(avg.profileScore-youScore)+' points below average', behind:true });
-  else
-    gaps.push({ label:'Overall Score',  you:youScore+'/100',avg:avg.profileScore+'/100',top:top.profileScore+'/100',delta:'+'+(youScore-avg.profileScore)+' above average', behind:false });
-
-  var behindCount = gaps.filter(function(x){return x.behind;}).length;
-  var introText = behindCount > 0
-    ? "Based on your business category, <strong>you're behind the average in " + behindCount + ' key area' + (behindCount>1?'s':'') + '</strong>. Every gap below represents leads going to competitors who score higher.'
-    : "<strong>You're ahead of the average in most areas</strong> — but top performers set the real bar. Here's how you stack up.";
-
-  var gapsHtml = gaps.map(function(gap) {
-    return '<div class="comp-gap ' + (gap.behind?'behind':'ahead') + '">' +
-      '<span class="comp-gap-label">' + gap.label + '</span>' +
-      '<span class="comp-gap-delta">' + gap.delta + '</span>' +
-      '</div>';
-  }).join('');
-
-  var firstLine = g.address ? g.address.split(',')[0] : 'Your Business';
-
-  document.getElementById('comp-section').innerHTML =
-    '<div class="comp-section">' +
-      '<div class="comp-header">' +
-        '<span style="font-size:1.2rem">📊</span>' +
-        '<span class="comp-title">How you compare to competitors</span>' +
-        '<span style="font-size:0.72rem;color:var(--muted);font-weight:600">' + avg.label + 's in your area</span>' +
-      '</div>' +
-      '<div class="comp-body">' +
-        '<p class="comp-intro">' + introText + '</p>' +
-        '<div class="comp-grid">' +
-          '<div class="comp-col">' +
-            '<div class="comp-col-label">📊 Average</div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Rating</div><div class="comp-metric-val neutral">' + avg.rating + '★</div></div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Reviews</div><div class="comp-metric-val neutral">' + avg.reviews + '</div></div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Photos</div><div class="comp-metric-val neutral">' + avg.photos + '</div></div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Score</div><div class="comp-metric-val neutral">' + avg.profileScore + '/100</div></div>' +
-          '</div>' +
-          '<div class="comp-col you">' +
-            '<div class="comp-col-label">⚡ You</div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Rating</div><div class="comp-metric-val you-val">' + (youRating||'N/A') + '★</div></div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Reviews</div><div class="comp-metric-val you-val">' + youReviews + '</div></div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Photos</div><div class="comp-metric-val you-val">' + youPhotos + '</div></div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Score</div><div class="comp-metric-val you-val">' + youScore + '/100</div></div>' +
-          '</div>' +
-          '<div class="comp-col">' +
-            '<div class="comp-col-label">🏆 Top Performers</div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Rating</div><div class="comp-metric-val better">' + top.rating + '★</div></div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Reviews</div><div class="comp-metric-val better">' + top.reviews + '+</div></div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Photos</div><div class="comp-metric-val better">' + top.photos + '+</div></div>' +
-            '<div class="comp-metric"><div class="comp-metric-label">Score</div><div class="comp-metric-val better">' + top.profileScore + '/100</div></div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="comp-gap-items">' + gapsHtml + '</div>' +
-      '</div>' +
-    '</div>';
-}
-
 // ============================================================
 // BUILD REPORT
 // ============================================================
@@ -874,12 +938,15 @@ function buildReport(data, biz) {
   const g = data.google;
   const name = biz.name;
   const address = g.address;
+  // full data object available for all score functions
 
   const sections = [
-    { id:'google',   icon:'📍', title:'Google Business Profile', ...scoreGoogle(g),    fix:'Local SEO + GBP Optimization' },
-    { id:'reviews',  icon:'⭐', title:'Reviews & Reputation',     ...scoreReviews(g),   fix:'Reputation Management' },
-    { id:'website',  icon:'🌐', title:'Website Health & SEO',     ...scoreWebsite(data.onpage, g.hasWebsite), fix:'Website Design + SEO' },
-    { id:'listings', icon:'📋', title:'Local Listings & Visibility',...scoreListings(g), fix:'Get Listed + Local SEO' },
+    { id:'google',   icon:'📍', title:'Google Business Profile',   ...scoreGoogle(g),       fix:'Local SEO + GBP Optimization' },
+    { id:'reviews',  icon:'⭐', title:'Reviews & Reputation',       ...scoreReviews(g),      fix:'Reputation Management' },
+    { id:'website',  icon:'🚀', title:'Website Speed & Performance',...scoreWebsite(data),   fix:'Website Design + Performance' },
+    { id:'seo',      icon:'🔍', title:'SEO & Backlink Authority',   ...scoreSEO(data),       fix:'SEO + Link Building' },
+    { id:'tech',     icon:'🛠️', title:'Website Technology',        ...scoreTechStack(data), fix:'Website Optimization' },
+    { id:'listings', icon:'📋', title:'Local Listings & Visibility',...scoreListings(g),     fix:'Get Listed + Local SEO' },
   ];
 
   const overall = Math.round(sections.reduce((s,x) => s + x.score, 0) / sections.length);
@@ -894,7 +961,9 @@ function buildReport(data, biz) {
         <div class="rh-stats">
           ${g.rating ? `<div class="rh-stat"><div class="rh-stat-val">${g.rating}★</div><div class="rh-stat-label">Rating</div></div>` : ''}
           ${g.reviewCount ? `<div class="rh-stat"><div class="rh-stat-val">${g.reviewCount}</div><div class="rh-stat-label">Reviews</div></div>` : ''}
-          ${g.photos ? `<div class="rh-stat"><div class="rh-stat-val">${g.photos}</div><div class="rh-stat-label">Photos</div></div>` : ''}
+          ${data.pagespeed ? `<div class="rh-stat"><div class="rh-stat-val">${data.pagespeed.mobile.performance}</div><div class="rh-stat-label">Mobile Speed</div></div>` : ''}
+          ${data.backlinks ? `<div class="rh-stat"><div class="rh-stat-val">${data.backlinks.domainRank}</div><div class="rh-stat-label">Domain Rank</div></div>` : ''}
+          ${data.builtwith?.platform ? `<div class="rh-stat"><div class="rh-stat-val">${data.builtwith.platform.charAt(0).toUpperCase()+data.builtwith.platform.slice(1)}</div><div class="rh-stat-label">Platform</div></div>` : ''}
           <div class="rh-stat"><div class="rh-stat-val">${g.hasWebsite ? 'Yes' : 'No'}</div><div class="rh-stat-label">Website</div></div>
         </div>
       </div>
@@ -947,12 +1016,6 @@ function buildReport(data, biz) {
   // Auto-open the lowest scoring section
   const worst = sections.reduce((a,b) => a.score < b.score ? a : b);
   toggleSection(worst.id);
-
-  // ── Competitor comparison ──
-  buildComparisonSection(g, sections, overall);
-
-  // ── Send to sales ──
-  sendToSales(biz, sections, overall);
 
   // ── CTA ──
   const weakAreas = sections.filter(s => s.score < 70).map(s => s.fix).filter(Boolean);
