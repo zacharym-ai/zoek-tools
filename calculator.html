@@ -180,6 +180,9 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 .footer-link:hover{color:var(--white);}
 @media(max-width:900px){.page-header{grid-template-columns:1fr;}.header-left{border-right:none;border-bottom:1px solid var(--border);padding:2.5rem 1.5rem;}.tool-layout{grid-template-columns:1fr;}.inputs-panel{border-right:none;border-bottom:1px solid var(--border);}.results-panel{padding:1.5rem;}.breakdown-head{grid-template-columns:1fr 70px 65px;}.breakdown-row{grid-template-columns:1fr 70px 65px;}.breakdown-head>*:nth-child(4),.breakdown-row>*:nth-child(4){display:none;}.ns-body{grid-template-columns:1fr;}.ns-item{border-right:none;border-bottom:1px solid var(--border-light);}.bar-row{grid-template-columns:80px 1fr 56px;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
 @media(max-width:480px){.takeaway-grid{grid-template-columns:1fr;}.zoek-cta-embed{flex-direction:column;}}
+
+/* BENCHMARK SECTION */
+.benchmark-wrap{max-width:1100px;margin:0 auto;padding:0 2rem 3rem;}
 </style>
 </head>
 <body>
@@ -205,9 +208,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           <div class="ndm-label">Audits &amp; Quizzes</div>
           <a href="business-snapshot.html">Business Snapshot ✨</a>
           <a href="marketing-wheel.html">Marketing Wheel</a>
-          <a href="grader.html">Website Grader</a>
           <a href="website-quiz.html">Website Quiz</a>
-          <a href="local-seo.html">Local SEO Check</a>
           <a href="positioning.html">Positioning Worksheet</a>
           <a href="reviews.html">Reputation Toolkit</a>
         </div>
@@ -335,6 +336,7 @@ function recalc(){
 function resetAll(){SOURCES.forEach(s=>{s.spend='';s.leads='';if(s.isWebsite)s.visitors='';});document.getElementById('client-value').value='';renderSources();recalc();}
 renderSources();recalc();
 </script>
+<script src="benchmarks.js"></script>
 <script src="cta.js"></script>
 <script>
 function toggleNav(btn){
@@ -352,6 +354,59 @@ document.addEventListener('click',function(e){
     if(b)b.classList.remove('open');
   }
 });
+</script>
+
+<div class="benchmark-wrap"><div id="bm-container"></div></div>
+
+<script>
+var style = document.createElement('style');
+style.textContent = BENCHMARK_CSS;
+document.head.appendChild(style);
+buildIndustrySelector('bm-container', 'showCPLBenchmarks');
+
+function showCPLBenchmarks(industryKey) {
+  if (!industryKey) return;
+  var bm = getBenchmark(industryKey);
+  document.getElementById('bm-industry-select').style.borderColor = '#ED0875';
+
+  // Try to read user CPL from page
+  var userCPL = 0;
+  var cplEl = document.getElementById('cpl-result') || document.getElementById('avg-cpl') || document.querySelector('.cpl-value');
+  if (cplEl) {
+    var parsed = parseFloat(cplEl.textContent.replace(/[^0-9.-]/g,''));
+    if (!isNaN(parsed)) userCPL = parsed;
+  }
+
+  var cards = [
+    { label:'Avg Cost Per Lead',    avg: '$' + bm.costPerLead,         youNum: userCPL,  avgNum: bm.costPerLead,   higherBetter:false },
+    { label:'Conversion Rate',      avg: bm.conversionRate + '%',       youNum:0,         avgNum:0,                 note:true },
+    { label:'Avg Order Value',      avg: '$' + bm.avgOrderValue.toLocaleString(), youNum:0, avgNum:0,              note:true },
+    { label:'Monthly Lead Volume',  avg: bm.leadVolume + ' leads/mo',   youNum:0,         avgNum:0,                 note:true }
+  ];
+
+  var cardsHtml = cards.map(function(c) {
+    var delta = '';
+    if (c.youNum > 0 && !c.note) {
+      var diff = ((c.youNum - c.avgNum) / c.avgNum * 100).toFixed(0);
+      // For CPL lower is better
+      var cls = (!c.higherBetter ? c.youNum <= c.avgNum : c.youNum >= c.avgNum) ? 'bm-delta-good' : 'bm-delta-bad';
+      var sign = diff > 0 ? '+' : '';
+      delta = '<span class="bm-card-delta ' + cls + '">' + sign + diff + '% vs industry</span>';
+    }
+    return '<div class="bm-card">' +
+      '<div class="bm-card-label">' + c.label + '</div>' +
+      '<div class="bm-card-avg">Industry avg: ' + c.avg + '</div>' +
+      (c.youNum > 0 ? '<div class="bm-card-you">You: $' + c.youNum.toFixed(0) + '</div>' : '') +
+      delta + '</div>';
+  }).join('');
+
+  var resultsEl = document.getElementById('bm-results');
+  resultsEl.innerHTML = cardsHtml +
+    '<div class="bm-card" style="grid-column:1/-1">' +
+      '<div class="bm-insight"><strong>' + bm.label + ' Industry Insight</strong>' + bm.notes + '</div>' +
+    '</div>';
+  resultsEl.style.display = 'grid';
+}
 </script>
 </body>
 </html>

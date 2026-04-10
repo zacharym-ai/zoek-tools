@@ -180,6 +180,9 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 @media(max-width:1050px){.tool-wrap{grid-template-columns:1fr;}.inputs-col{border-right:none;border-bottom:1px solid var(--border);}.metrics-row{grid-template-columns:1fr 1fr;}.wi-grid{grid-template-columns:1fr;}}
 @media(max-width:860px){.hero{padding:3rem 1.5rem 2.5rem;}.results-col{padding:1.5rem;}.cta-block{flex-direction:column;}.cta-actions{align-items:flex-start;}.truth-section{padding:2.5rem 1.5rem;}.comp-head,.comp-row{grid-template-columns:1fr 1fr;}.comp-head-cell:last-child,.comp-cell:last-child{display:none;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
 @media(max-width:500px){.metrics-row{grid-template-columns:1fr;}.ind-grid{grid-template-columns:1fr;}}
+
+/* BENCHMARK SECTION */
+.benchmark-wrap{max-width:1100px;margin:0 auto;padding:0 2rem 3rem;}
 </style>
 </head>
 <body>
@@ -206,9 +209,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           <div class="ndm-label">Audits &amp; Quizzes</div>
           <a href="business-snapshot.html">Business Snapshot ✨</a>
           <a href="marketing-wheel.html">Marketing Wheel</a>
-          <a href="grader.html">Website Grader</a>
           <a href="website-quiz.html">Website Quiz</a>
-          <a href="local-seo.html">Local SEO Check</a>
           <a href="positioning.html">Positioning Worksheet</a>
           <a href="reviews.html">Reputation Toolkit</a>
         </div>
@@ -547,6 +548,7 @@ function resetCalc(){
   document.getElementById('results-col').innerHTML=`<div class="empty-results"><div class="empty-icon">💸</div><p class="empty-hint">Enter your monthly visitors and average client value to see your revenue loss calculation.</p></div>`;
 }
 </script>
+<script src="benchmarks.js"></script>
 <script src="cta.js"></script>
 <script>
 function toggleNav(btn){
@@ -564,6 +566,92 @@ document.addEventListener('click',function(e){
     if(b)b.classList.remove('open');
   }
 });
+</script>
+
+<div class="benchmark-wrap">
+  <div id="bm-container"></div>
+</div>
+
+<script>
+// Inject benchmark CSS
+var style = document.createElement('style');
+style.textContent = BENCHMARK_CSS;
+document.head.appendChild(style);
+
+// Build selector
+buildIndustrySelector('bm-container', 'showRevenueBenchmarks');
+
+function showRevenueBenchmarks(industryKey) {
+  if (!industryKey) { document.getElementById('bm-results').style.display='none'; return; }
+  var bm = getBenchmark(industryKey);
+  var select = document.getElementById('bm-industry-select');
+  select.style.borderColor = '#ED0875';
+
+  // Get current user values from the page
+  var userConv = parseFloat(document.getElementById && document.querySelector('[id*="conv"]') ? 
+    (document.getElementById('conv-rate') || document.getElementById('conversion-rate') || {value:0}).value : 0) || 0;
+  var userRevenue = parseFloat((document.getElementById('avg-revenue') || document.getElementById('revenue') || {value:0}).value) || 0;
+
+  var cards = [
+    {
+      label: 'Conversion Rate',
+      avg: bm.conversionRate + '%',
+      you: userConv > 0 ? userConv + '%' : 'Enter above',
+      youNum: userConv,
+      avgNum: bm.conversionRate,
+      higherBetter: true
+    },
+    {
+      label: 'Avg Order Value',
+      avg: '$' + bm.avgOrderValue.toLocaleString(),
+      you: userRevenue > 0 ? '$' + userRevenue.toLocaleString() : 'Enter above',
+      youNum: userRevenue,
+      avgNum: bm.avgOrderValue,
+      higherBetter: true
+    },
+    {
+      label: 'Close Rate',
+      avg: bm.closeRate + '%',
+      you: '—',
+      youNum: 0,
+      avgNum: bm.closeRate,
+      higherBetter: true,
+      note: true
+    },
+    {
+      label: 'Monthly Lead Volume',
+      avg: bm.leadVolume + ' leads',
+      you: '—',
+      youNum: 0,
+      avgNum: bm.leadVolume,
+      higherBetter: true,
+      note: true
+    }
+  ];
+
+  var cardsHtml = cards.map(function(c) {
+    var delta = '';
+    if (c.youNum > 0 && !c.note) {
+      var diff = ((c.youNum - c.avgNum) / c.avgNum * 100).toFixed(0);
+      var cls = (c.higherBetter ? c.youNum >= c.avgNum : c.youNum <= c.avgNum) ? 'bm-delta-good' : 'bm-delta-bad';
+      var sign = diff > 0 ? '+' : '';
+      delta = '<span class="bm-card-delta ' + cls + '">' + sign + diff + '% vs industry</span>';
+    }
+    return '<div class="bm-card">' +
+      '<div class="bm-card-label">' + c.label + '</div>' +
+      '<div class="bm-card-avg">Industry avg: ' + c.avg + '</div>' +
+      (c.youNum > 0 && !c.note ? '<div class="bm-card-you">You: ' + c.you + '</div>' : '') +
+      delta +
+      '</div>';
+  }).join('');
+
+  var resultsEl = document.getElementById('bm-results');
+  resultsEl.innerHTML = cardsHtml +
+    '<div class="bm-card" style="grid-column:1/-1">' +
+      '<div class="bm-insight"><strong>' + bm.label + ' Industry Insight</strong>' + bm.notes + '</div>' +
+    '</div>';
+  resultsEl.style.display = 'grid';
+}
 </script>
 </body>
 </html>
