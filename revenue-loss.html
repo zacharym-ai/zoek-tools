@@ -172,6 +172,18 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .tc-title{font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;}
 .tc-desc{font-size:0.78rem;color:var(--muted);line-height:1.6;}
 
+.benchmarks-section{background:var(--sidebar);padding:3rem 2.5rem;border-top:1px solid var(--border);}
+.bench-title{font-family:'Poppins',sans-serif;font-size:1.75rem;font-weight:800;margin-bottom:0.5rem;}
+.bench-sub{font-size:0.88rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.7;max-width:580px;}
+.bench-sub strong{color:var(--white);}
+.bench-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.bench-card{background:var(--navy);padding:1.4rem;}
+.bench-card-industry{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem;}
+.bench-card-name{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.85rem;}
+.bench-range{display:flex;align-items:baseline;gap:0.3rem;margin-bottom:0.3rem;}
+.bench-range-val{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;color:var(--purple);}
+.bench-range-label{font-size:0.72rem;color:var(--muted);}
+.bench-note{font-size:0.72rem;color:var(--muted);line-height:1.5;}
 footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
 .footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
 .footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
@@ -347,55 +359,41 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 </div>
 
 
-<div style="border-top:1px solid rgba(105,44,142,0.25);background:#1E1044;">
-  <div style="max-width:1100px;margin:0 auto;padding:2rem 2rem 3rem;">
-    <div id="bm-container"></div>
+<div class="benchmarks-section"><div class="bench-title">How do you compare to your industry?</div>
+  <p class="bench-sub">Select your industry to see real benchmarks. <strong>See where you stand against top performers.</strong></p>
+  <div style="margin-bottom:1.5rem;">
+    <select id="industry-select" onchange="showRevenueBenchmarks(this.value)" style="padding:0.75rem 1rem;background:var(--navy);border:1.5px solid var(--border);border-radius:6px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.92rem;outline:none;cursor:pointer;min-width:280px;transition:border-color 0.2s;">
+      <option value="">Select your industry...</option>
+      <option value="home_services">Home Services</option>
+      <option value="healthcare">Healthcare & Medical</option>
+      <option value="restaurant">Restaurant & Food Service</option>
+      <option value="retail">Retail</option>
+      <option value="professional">Professional Services</option>
+      <option value="fitness">Fitness & Wellness</option>
+      <option value="beauty">Beauty & Salon</option>
+      <option value="real_estate">Real Estate</option>
+      <option value="automotive">Automotive</option>
+      <option value="education">Education & Childcare</option>
+      <option value="construction">Construction & Remodeling</option>
+      <option value="nonprofit">Nonprofit & Faith-Based</option>
+    </select>
   </div>
-</div>
+  <div class="bench-grid" id="dynamic-bench-grid" style="display:none"></div></div>
+
 
 <script>
-var style = document.createElement('style');
-style.textContent = BENCHMARK_CSS;
-document.head.appendChild(style);
-buildIndustrySelector('bm-container', 'showRevenueBenchmarks');
-
 function showRevenueBenchmarks(industryKey) {
-  if (!industryKey) { document.getElementById('bm-results').style.display='none'; return; }
-  var bm = getBenchmark(industryKey);
-  document.getElementById('bm-industry-select').style.borderColor = '#ED0875';
-
-  var userConv = 0;
-  var inputs = document.querySelectorAll('input[type=number], input[type=range]');
-  inputs.forEach(function(inp) {
-    if (inp.id && (inp.id.includes('conv') || inp.id.includes('Conv'))) userConv = parseFloat(inp.value) || 0;
-  });
-
-  var cards = [
-    { label:'Conversion Rate',    avg: bm.conversionRate+'%', youNum:userConv,  avgNum:bm.conversionRate, higherBetter:true,  showYou:userConv>0 },
-    { label:'Avg Order Value',    avg: '$'+bm.avgOrderValue.toLocaleString(), youNum:0, avgNum:0, note:true },
-    { label:'Close Rate',         avg: bm.closeRate+'%',      youNum:0,         avgNum:0,                 note:true },
-    { label:'Monthly Lead Volume',avg: bm.leadVolume+' leads',youNum:0,         avgNum:0,                 note:true }
-  ];
-
-  var cardsHtml = cards.map(function(c) {
-    var delta = '';
-    if (c.youNum > 0 && !c.note && c.showYou) {
-      var diff = ((c.youNum - c.avgNum) / c.avgNum * 100).toFixed(0);
-      var cls = (c.higherBetter ? c.youNum >= c.avgNum : c.youNum <= c.avgNum) ? 'bm-delta-good' : 'bm-delta-bad';
-      delta = '<span class="bm-card-delta '+cls+'">'+(diff>0?'+':'')+diff+'% vs industry</span>';
-    }
-    return '<div class="bm-card">'+
-      '<div class="bm-card-label">'+c.label+'</div>'+
-      '<div class="bm-card-avg">Industry avg: '+c.avg+'</div>'+
-      delta+'</div>';
-  }).join('');
-
-  var resultsEl = document.getElementById('bm-results');
-  resultsEl.innerHTML = cardsHtml+
-    '<div class="bm-card" style="grid-column:1/-1">'+
-      '<div class="bm-insight"><strong>'+bm.label+' Industry Insight</strong>'+bm.notes+'</div>'+
-    '</div>';
-  resultsEl.style.display = 'grid';
+  if (!industryKey || typeof INDUSTRY_BENCHMARKS === 'undefined') return;
+  var bm = INDUSTRY_BENCHMARKS[industryKey];
+  if (!bm) return;
+  document.getElementById('industry-select').style.borderColor = '#ED0875';
+  var grid = document.getElementById('dynamic-bench-grid');
+  grid.style.display = 'grid';
+  grid.innerHTML =
+    '<div class="bench-card"><div class="bench-card-industry">' + bm.label + '</div><div class="bench-card-name">Conversion Rate</div><div class="bench-range"><span class="bench-range-val">' + bm.conversionRate + '%</span><span class="bench-range-label">industry avg</span></div><p class="bench-note">The average ' + bm.label + ' business converts ' + bm.conversionRate + '% of leads. How does yours compare?</p></div>' +
+    '<div class="bench-card"><div class="bench-card-industry">' + bm.label + '</div><div class="bench-card-name">Avg Order Value</div><div class="bench-range"><span class="bench-range-val">$' + bm.avgOrderValue.toLocaleString() + '</span><span class="bench-range-label">per customer</span></div><p class="bench-note">Each percentage point of conversion improvement adds $' + (bm.avgOrderValue).toLocaleString() + ' per extra customer closed.</p></div>' +
+    '<div class="bench-card"><div class="bench-card-industry">' + bm.label + '</div><div class="bench-card-name">Monthly Leads</div><div class="bench-range"><span class="bench-range-val">' + bm.leadVolume + '</span><span class="bench-range-label">avg leads/mo</span></div><p class="bench-note">Typical ' + bm.label + ' businesses generate around ' + bm.leadVolume + ' leads per month at full capacity.</p></div>' +
+    '<div class="bench-card"><div class="bench-card-industry">' + bm.label + '</div><div class="bench-card-name">Industry Insight</div><div class="bench-range"><span class="bench-range-val">' + bm.closeRate + '%</span><span class="bench-range-label">avg close rate</span></div><p class="bench-note">' + bm.notes + '</p></div>';
 }
 </script>
 <footer>
@@ -622,15 +620,13 @@ document.addEventListener('click',function(e){
 
 <script>
 // Inject benchmark CSS
-var style = document.createElement('style');
-style.textContent = BENCHMARK_CSS;
-document.head.appendChild(style);
+
 
 // Build selector
-buildIndustrySelector('bm-container', 'showRevenueBenchmarks');
+
 
 function showRevenueBenchmarks(industryKey) {
-  if (!industryKey) { document.getElementById('bm-results').style.display='none'; return; }
+  if (!industryKey) { document.getElementById('dynamic-bench-grid').style.display='none'; return; }
   var bm = getBenchmark(industryKey);
   var select = document.getElementById('bm-industry-select');
   select.style.borderColor = '#ED0875';
@@ -693,7 +689,7 @@ function showRevenueBenchmarks(industryKey) {
       '</div>';
   }).join('');
 
-  var resultsEl = document.getElementById('bm-results');
+  var resultsEl = document.getElementById('dynamic-bench-grid');
   resultsEl.innerHTML = cardsHtml +
     '<div class="bm-card" style="grid-column:1/-1">' +
       '<div class="bm-insight"><strong>' + bm.label + ' Industry Insight</strong>' + bm.notes + '</div>' +

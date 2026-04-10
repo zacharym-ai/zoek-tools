@@ -258,75 +258,92 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 </div>
 
 <div class="benchmarks-section">
-  <div class="bench-title">Industry CPL benchmarks</div>
-  <p class="bench-sub">What's a "good" cost per lead depends on your industry and client value. <strong>These are typical ranges Zoek sees across our 50,000+ active clients</strong> — use as a gut-check, not gospel.</p>
-  <div class="bench-grid">
-    <div class="bench-card"><div class="bench-card-industry">Home services</div><div class="bench-card-name">Plumbing / HVAC / Electrical</div><div class="bench-range"><span class="bench-range-val">$30–$80</span><span class="bench-range-label">per lead</span></div><p class="bench-note">High competition on Google. Reviews and referrals are critical differentiators.</p></div>
-    <div class="bench-card"><div class="bench-card-industry">Legal services</div><div class="bench-card-name">Law Firms</div><div class="bench-range"><span class="bench-range-val">$50–$300</span><span class="bench-range-label">per lead</span></div><p class="bench-note">Wide range by practice area. High client LTV justifies the premium.</p></div>
-    <div class="bench-card"><div class="bench-card-industry">Healthcare</div><div class="bench-card-name">Medical / Dental / Clinics</div><div class="bench-range"><span class="bench-range-val">$25–$100</span><span class="bench-range-label">per lead</span></div><p class="bench-note">Patient LTV makes higher CPLs sustainable. Local SEO is highest-ROI channel here.</p></div>
-    <div class="bench-card"><div class="bench-card-industry">Real estate</div><div class="bench-card-name">Agents &amp; Brokerages</div><div class="bench-range"><span class="bench-range-val">$20–$120</span><span class="bench-range-label">per lead</span></div><p class="bench-note">Close rate is the real variable. At 2–5% close, even $100/lead is profitable.</p></div>
-    <div class="bench-card"><div class="bench-card-industry">E-commerce</div><div class="bench-card-name">Online Retail / DTC</div><div class="bench-range"><span class="bench-range-val">$5–$30</span><span class="bench-range-label">per lead</span></div><p class="bench-note">Email capture costs are lower but conversion and retention matter most. Think ROAS.</p></div>
-    <div class="bench-card"><div class="bench-card-industry">B2B / SaaS</div><div class="bench-card-name">Software &amp; Services</div><div class="bench-range"><span class="bench-range-val">$40–$200</span><span class="bench-range-label">per lead</span></div><p class="bench-note">LinkedIn tends to be expensive but high-quality. High LTV contracts justify premium CPLs.</p></div>
-  </div>
-</div>
+  <div class="bench-title">How does your CPL compare?</div>
+  <p class="bench-sub">Select your industry to see real benchmarks from Zoek's 50,000+ active clients. <strong>See exactly where you stand — and what top performers look like.</strong></p>
 
-
-<div style="border-top:1px solid rgba(105,44,142,0.25);background:#1E1044;">
-  <div style="max-width:1100px;margin:0 auto;padding:2rem 2rem 3rem;">
-    <div id="bm-container"></div>
+  <div style="margin-bottom:1.5rem;">
+    <select id="industry-select" onchange="showCPLBenchmarks(this.value)" style="padding:0.75rem 1rem;background:var(--sidebar);border:1.5px solid var(--border);border-radius:6px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.92rem;outline:none;cursor:pointer;min-width:280px;transition:border-color 0.2s;">
+      <option value="">Select your industry...</option>
+      <option value="home_services">Home Services</option>
+      <option value="healthcare">Healthcare & Medical</option>
+      <option value="restaurant">Restaurant & Food Service</option>
+      <option value="retail">Retail</option>
+      <option value="professional">Professional Services</option>
+      <option value="fitness">Fitness & Wellness</option>
+      <option value="beauty">Beauty & Salon</option>
+      <option value="real_estate">Real Estate</option>
+      <option value="automotive">Automotive</option>
+      <option value="education">Education & Childcare</option>
+      <option value="construction">Construction & Remodeling</option>
+      <option value="nonprofit">Nonprofit & Faith-Based</option>
+    </select>
   </div>
+
+  <div class="bench-grid" id="dynamic-bench-grid" style="display:none"></div>
 </div>
 
 <script>
-var style = document.createElement('style');
-style.textContent = BENCHMARK_CSS;
-document.head.appendChild(style);
-buildIndustrySelector('bm-container', 'showCPLBenchmarks');
-
 function showCPLBenchmarks(industryKey) {
-  if (!industryKey) return;
-  var bm = getBenchmark(industryKey);
-  document.getElementById('bm-industry-select').style.borderColor = '#ED0875';
+  if (!industryKey || typeof INDUSTRY_BENCHMARKS === 'undefined') return;
+  var bm = INDUSTRY_BENCHMARKS[industryKey];
+  if (!bm) return;
 
-  // Try to read user CPL from page
+  document.getElementById('industry-select').style.borderColor = '#ED0875';
+
+  // Read user CPL from the results panel
   var userCPL = 0;
-  var cplEl = document.getElementById('cpl-result') || document.getElementById('avg-cpl') || document.querySelector('.cpl-value');
-  if (cplEl) {
-    var parsed = parseFloat(cplEl.textContent.replace(/[^0-9.-]/g,''));
-    if (!isNaN(parsed)) userCPL = parsed;
+  var allResults = document.querySelectorAll('.result-value, .cpl-value, [id*="cpl"], [id*="CPL"]');
+  allResults.forEach(function(el) {
+    var parsed = parseFloat(el.textContent.replace(/[^0-9.]/g,''));
+    if (!isNaN(parsed) && parsed > 0 && parsed < 10000) userCPL = parsed;
+  });
+  // Also check the breakdown rows
+  var rows = document.querySelectorAll('.breakdown-row');
+  if (rows.length > 0 && userCPL === 0) {
+    rows.forEach(function(row) {
+      var cells = row.querySelectorAll('.breakdown-cpl');
+      cells.forEach(function(c) {
+        var v = parseFloat(c.textContent.replace(/[^0-9.]/g,''));
+        if (!isNaN(v) && v > 0) userCPL = v;
+      });
+    });
   }
 
-  var cards = [
-    { label:'Avg Cost Per Lead',    avg: '$' + bm.costPerLead,         youNum: userCPL,  avgNum: bm.costPerLead,   higherBetter:false },
-    { label:'Conversion Rate',      avg: bm.conversionRate + '%',       youNum:0,         avgNum:0,                 note:true },
-    { label:'Avg Order Value',      avg: '$' + bm.avgOrderValue.toLocaleString(), youNum:0, avgNum:0,              note:true },
-    { label:'Monthly Lead Volume',  avg: bm.leadVolume + ' leads/mo',   youNum:0,         avgNum:0,                 note:true }
-  ];
+  var grid = document.getElementById('dynamic-bench-grid');
+  grid.style.display = 'grid';
 
-  var cardsHtml = cards.map(function(c) {
-    var delta = '';
-    if (c.youNum > 0 && !c.note) {
-      var diff = ((c.youNum - c.avgNum) / c.avgNum * 100).toFixed(0);
-      // For CPL lower is better
-      var cls = (!c.higherBetter ? c.youNum <= c.avgNum : c.youNum >= c.avgNum) ? 'bm-delta-good' : 'bm-delta-bad';
-      var sign = diff > 0 ? '+' : '';
-      delta = '<span class="bm-card-delta ' + cls + '">' + sign + diff + '% vs industry</span>';
-    }
-    return '<div class="bm-card">' +
-      '<div class="bm-card-label">' + c.label + '</div>' +
-      '<div class="bm-card-avg">Industry avg: ' + c.avg + '</div>' +
-      (c.youNum > 0 ? '<div class="bm-card-you">You: $' + c.youNum.toFixed(0) + '</div>' : '') +
-      delta + '</div>';
-  }).join('');
+  var youBetter = userCPL > 0 && userCPL <= bm.costPerLead;
+  var youWorse  = userCPL > 0 && userCPL > bm.costPerLead;
+  var diffPct   = userCPL > 0 ? Math.abs(((userCPL - bm.costPerLead) / bm.costPerLead) * 100).toFixed(0) : 0;
 
-  var resultsEl = document.getElementById('bm-results');
-  resultsEl.innerHTML = cardsHtml +
-    '<div class="bm-card" style="grid-column:1/-1">' +
-      '<div class="bm-insight"><strong>' + bm.label + ' Industry Insight</strong>' + bm.notes + '</div>' +
+  grid.innerHTML =
+    '<div class="bench-card">' +
+      '<div class="bench-card-industry">' + bm.label + '</div>' +
+      '<div class="bench-card-name">Avg Cost Per Lead</div>' +
+      '<div class="bench-range"><span class="bench-range-val">$' + bm.costPerLead + '</span><span class="bench-range-label">industry avg</span></div>' +
+      (userCPL > 0 ? '<p class="bench-note">Your CPL: <strong style="color:' + (youBetter?'#4fffb0':'#ED0875') + '">$' + userCPL.toFixed(0) + '</strong> — ' + (youBetter ? diffPct + '% below average ✅' : diffPct + '% above average ⚠️') + '</p>' : '<p class="bench-note">Enter your spend and leads above to compare your CPL.</p>') +
+    '</div>' +
+    '<div class="bench-card">' +
+      '<div class="bench-card-industry">' + bm.label + '</div>' +
+      '<div class="bench-card-name">Conversion Rate</div>' +
+      '<div class="bench-range"><span class="bench-range-val">' + bm.conversionRate + '%</span><span class="bench-range-label">avg close rate</span></div>' +
+      '<p class="bench-note">Businesses in this category convert ' + bm.conversionRate + '% of leads into paying customers on average.</p>' +
+    '</div>' +
+    '<div class="bench-card">' +
+      '<div class="bench-card-industry">' + bm.label + '</div>' +
+      '<div class="bench-card-name">Avg Order Value</div>' +
+      '<div class="bench-range"><span class="bench-range-val">$' + bm.avgOrderValue.toLocaleString() + '</span><span class="bench-range-label">per customer</span></div>' +
+      '<p class="bench-note">At this average, each lead is worth $' + (bm.avgOrderValue * bm.conversionRate / 100).toFixed(0) + ' in expected revenue.</p>' +
+    '</div>' +
+    '<div class="bench-card">' +
+      '<div class="bench-card-industry">' + bm.label + '</div>' +
+      '<div class="bench-card-name">Industry Insight</div>' +
+      '<div class="bench-range"><span class="bench-range-val">' + bm.leadVolume + '</span><span class="bench-range-label">avg leads/mo</span></div>' +
+      '<p class="bench-note">' + bm.notes + '</p>' +
     '</div>';
-  resultsEl.style.display = 'grid';
 }
 </script>
+
 <footer>
   <a href="index.html" class="footer-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
   <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · Irvine, CA</span>
