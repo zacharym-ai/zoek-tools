@@ -285,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -620,9 +620,12 @@ async function fetchDataForSEOOnPage(url) {
     const taskId = postData?.tasks?.[0]?.id;
     console.log('OnPage: task ID', taskId);
     if (!taskId) return null;
+    // Wait 5s before first poll — DataForSEO needs time to create the task
+    await sleep(5000);
+
     // Poll for results — up to 12 attempts x 3s = 36s max
     for (let i = 0; i < 12; i++) {
-      await sleep(3000);
+      await sleep(i === 0 ? 0 : 3000);
       console.log('OnPage: polling attempt', i + 1);
       const res = await fetch('/.netlify/functions/dataforseo', {
         method: 'POST',
