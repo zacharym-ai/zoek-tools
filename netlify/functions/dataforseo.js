@@ -35,6 +35,7 @@ exports.handler = async function(event, context) {
   const ALLOWED = [
     'on_page/task_post',
     'on_page/summary',
+    'on_page/instant_pages/live',
     'backlinks/summary/live',
     'serp/google/organic/live/advanced',
     'content_analysis/search/live',
