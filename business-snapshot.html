@@ -606,47 +606,44 @@ async function fetchDataForSEOOnPage(url) {
   try {
     const cleanUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
     console.log('OnPage: checking domain', cleanUrl);
-    // Post task
-    const postResp = await fetch('/.netlify/functions/dataforseo', {
+
+    const resp = await fetch('/.netlify/functions/dataforseo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        endpoint: 'on_page/task_post',
-        payload: [{ target: cleanUrl, max_crawl_pages: 1, load_resources: false }]
+        endpoint: 'on_page/instant_pages/live',
+        payload: [{
+          url: 'https://' + cleanUrl,
+          load_resources: false,
+          enable_javascript: false,
+        }]
       })
     });
-    const postData = await postResp.json();
-    console.log('OnPage: task post response', JSON.stringify(postData).slice(0, 200));
-    const taskId = postData?.tasks?.[0]?.id;
-    console.log('OnPage: task ID', taskId);
-    if (!taskId) return null;
-    // Wait 5s before first poll — DataForSEO needs time to create the task
-    await sleep(5000);
 
-    // Poll for results — up to 12 attempts x 3s = 36s max
-    for (let i = 0; i < 12; i++) {
-      await sleep(i === 0 ? 0 : 3000);
-      console.log('OnPage: polling attempt', i + 1);
-      const res = await fetch('/.netlify/functions/dataforseo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          endpoint: 'on_page/summary/' + taskId,
-          payload: [{ id: taskId }]
-        })
-      });
-      const data = await res.json();
-      if (i === 0) console.log('OnPage full poll response:', JSON.stringify(data).slice(0, 500));
-      const item = data?.tasks?.[0]?.result?.[0];
-      console.log('OnPage poll', i+1, '- crawl_progress:', item?.crawl_progress, 'pages:', item?.pages_count);
-      if (item?.crawl_progress === 'finished' || (item?.pages_count > 0)) {
-        console.log('OnPage: got result!', JSON.stringify(item).slice(0, 200));
-        return item;
-      }
+    const data = await resp.json();
+    console.log('OnPage live response:', JSON.stringify(data).slice(0, 400));
+
+    const item = data?.tasks?.[0]?.result?.[0]?.items?.[0];
+    if (!item) {
+      console.warn('OnPage: no item in response');
+      return null;
     }
-    console.warn('OnPage: timed out after 12 polls');
+
+    const meta = item.meta || {};
+    const result = {
+      meta_title_length:       (meta.title || '').length,
+      meta_description_length: (meta.description || '').length,
+      h1_count:                (meta.htags?.h1 || []).length,
+      broken_links:            item.broken_links || 0,
+      https_redirect:          (item.url || '').startsWith('https'),
+      page_size:               item.size || 0,
+    };
+    console.log('OnPage: parsed result', JSON.stringify(result));
+    return result;
+  } catch(e) {
+    console.error('OnPage error:', e);
     return null;
-  } catch(e) { return null; }
+  }
 }
 
 // ── DATAFORSEO BACKLINKS (via Netlify proxy) ────────────
