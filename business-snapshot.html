@@ -285,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -506,19 +506,28 @@ async function fetchAllData(place, website) {
   const bizAddr = place.formatted_address || '';
   const bizTypes = place.types || [];
 
-  // Run ALL checks in parallel for speed
-  const [onpage, pagespeed, backlinks, builtwith, aiVisibility] = await Promise.allSettled([
+  // Run fast checks first — skip PageSpeed (can take 30-55s)
+  const [onpage, backlinks, builtwith, aiVisibility] = await Promise.allSettled([
     siteUrl ? fetchDataForSEOOnPage(siteUrl) : Promise.resolve(null),
-    siteUrl ? fetchPageSpeed(siteUrl) : Promise.resolve(null),
     siteUrl ? fetchBacklinks(siteUrl) : Promise.resolve(null),
     siteUrl ? fetchBuiltWith(siteUrl) : Promise.resolve(null),
     fetchAIVisibility(bizName, bizAddr, bizTypes)
   ]);
   results.onpage       = onpage.status       === 'fulfilled' ? onpage.value       : null;
-  results.pagespeed    = pagespeed.status    === 'fulfilled' ? pagespeed.value    : null;
+  results.pagespeed    = null; // loaded async after report renders
   results.backlinks    = backlinks.status    === 'fulfilled' ? backlinks.value    : null;
   results.builtwith    = builtwith.status    === 'fulfilled' ? builtwith.value    : null;
   results.aiVisibility = aiVisibility.status === 'fulfilled' ? aiVisibility.value : null;
+  
+  // Kick off PageSpeed in background — will update report when ready
+  if (siteUrl) {
+    fetchPageSpeed(siteUrl).then(ps => {
+      if (ps) {
+        results.pagespeed = ps;
+        updateWebsiteSection(ps);
+      }
+    });
+  }
 
   return results;
 }
@@ -528,7 +537,7 @@ async function fetchPageSpeed(url) {
   try {
     const cleanUrl = url.startsWith('http') ? url : 'https://' + url;
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 28000);
+    const timer = setTimeout(() => controller.abort(), 55000); // 55s — PageSpeed can be slow
 
     // Call Google PageSpeed API directly — designed for client-side use
     const apiUrl = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed'
@@ -577,7 +586,7 @@ async function fetchPageSpeed(url) {
 
   } catch(e) {
     if (e.name === 'AbortError') {
-      console.warn('PageSpeed timed out after 25s');
+      console.warn('PageSpeed timed out — continuing without speed data');
     } else {
       console.error('PageSpeed error:', e);
     }
@@ -1168,10 +1177,51 @@ function scoreAIVisibility(data) {
   return { score: Math.min(score, 100), findings };
 }
 
+
+// ── UPDATE WEBSITE SECTION WHEN PAGESPEED LOADS ASYNC ────
+function updateWebsiteSection(ps) {
+  const sec = document.getElementById('rsec-website');
+  if (!sec) return;
+
+  // Re-score with real PageSpeed data
+  const updatedData = Object.assign({}, window._lastReportData, { pagespeed: ps });
+  const newScore = scoreWebsite(updatedData);
+  const g = getGrade(newScore.score);
+
+  // Update score display
+  sec.querySelector('.rsec-score').textContent = newScore.score;
+  sec.querySelector('.rsec-score').style.color = g.color;
+  sec.querySelector('.rsec-grade').className = 'rsec-grade ' + g.cls;
+  sec.querySelector('.rsec-grade').textContent = g.letter;
+
+  // Update bar
+  sec.querySelector('.ssb-fill').style.width = newScore.score + '%';
+  sec.querySelector('.ssb-fill').style.background = g.color;
+  sec.querySelector('.ssb-pct').textContent = newScore.score + '%';
+  sec.querySelector('.ssb-pct').style.color = g.color;
+
+  // Update findings
+  const findingsHtml = newScore.findings.map(f =>
+    '<div class="finding ' + f.type + '">' +
+    '<div class="finding-icon">' + (f.type==='pass'?'✅':f.type==='warn'?'⚠️':'❌') + '</div>' +
+    '<div class="finding-text"><strong>' + f.text + '</strong>' + f.detail +
+    (f.fix ? '<span class="finding-fix" style="background:rgba(237,8,117,0.1);color:var(--pink)">Zoek fix: ' + f.fix + '</span>' : '') +
+    '</div></div>'
+  ).join('');
+  sec.querySelector('.findings').innerHTML = findingsHtml;
+
+  // Add a subtle "updated" indicator
+  const header = sec.querySelector('.rsec-title');
+  if (header && !header.querySelector('.ps-badge')) {
+    header.innerHTML += ' <span class="ps-badge" style="font-size:0.6rem;background:rgba(79,255,176,0.15);color:#4fffb0;padding:0.1rem 0.4rem;border-radius:3px;font-weight:700;margin-left:0.4rem;">LIVE</span>';
+  }
+}
+
 // ============================================================
 // BUILD REPORT
 // ============================================================
 function buildReport(data, biz) {
+  window._lastReportData = data; // store for async updates
   const g = data.google;
   const name = biz.name;
   const address = g.address;
