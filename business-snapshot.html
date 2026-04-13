@@ -285,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -522,14 +522,22 @@ async function fetchAllData(place, website) {
   return results;
 }
 
-// ── PAGESPEED INSIGHTS ────────────────────────────────────
+// ── PAGESPEED INSIGHTS (via Netlify proxy) ───────────────
 async function fetchPageSpeed(url) {
   try {
     const cleanUrl = url.startsWith('http') ? url : 'https://' + url;
-    // Run mobile and desktop in parallel
+    // Run mobile and desktop in parallel via proxy
     const [mobile, desktop] = await Promise.all([
-      fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' + encodeURIComponent(cleanUrl) + '&strategy=mobile&key=' + PAGESPEED_API_KEY),
-      fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' + encodeURIComponent(cleanUrl) + '&strategy=desktop&key=' + PAGESPEED_API_KEY)
+      fetch('/.netlify/functions/pagespeed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: cleanUrl, strategy: 'mobile' })
+      }),
+      fetch('/.netlify/functions/pagespeed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: cleanUrl, strategy: 'desktop' })
+      })
     ]);
     const [mData, dData] = await Promise.all([mobile.json(), desktop.json()]);
 
@@ -561,24 +569,32 @@ async function fetchPageSpeed(url) {
   }
 }
 
-// ── DATAFORSEO ON-PAGE ────────────────────────────────────
+// ── DATAFORSEO ON-PAGE (via Netlify proxy) ───────────────
 async function fetchDataForSEOOnPage(url) {
-  if (!DATAFORSEO_LOGIN || DATAFORSEO_LOGIN === 'YOUR_DATAFORSEO_LOGIN') return null;
   try {
     const cleanUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
-    const creds = btoa(DATAFORSEO_LOGIN + ':' + DATAFORSEO_PASSWORD);
-    const postResp = await fetch('https://api.dataforseo.com/v3/on_page/task_post', {
+    // Post task
+    const postResp = await fetch('/.netlify/functions/dataforseo', {
       method: 'POST',
-      headers: { 'Authorization': 'Basic ' + creds, 'Content-Type': 'application/json' },
-      body: JSON.stringify([{ target: cleanUrl, max_crawl_pages: 1, load_resources: false }])
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        endpoint: 'on_page/task_post',
+        payload: [{ target: cleanUrl, max_crawl_pages: 1, load_resources: false }]
+      })
     });
     const postData = await postResp.json();
     const taskId = postData?.tasks?.[0]?.id;
     if (!taskId) return null;
+    // Poll for results
     for (let i = 0; i < 8; i++) {
       await sleep(2500);
-      const res = await fetch('https://api.dataforseo.com/v3/on_page/summary/' + taskId, {
-        headers: { 'Authorization': 'Basic ' + creds }
+      const res = await fetch('/.netlify/functions/dataforseo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          endpoint: 'on_page/summary/' + taskId,
+          payload: []
+        })
       });
       const data = await res.json();
       const item = data?.tasks?.[0]?.result?.[0];
@@ -588,16 +604,17 @@ async function fetchDataForSEOOnPage(url) {
   } catch(e) { return null; }
 }
 
-// ── DATAFORSEO BACKLINKS ──────────────────────────────────
+// ── DATAFORSEO BACKLINKS (via Netlify proxy) ────────────
 async function fetchBacklinks(url) {
-  if (!DATAFORSEO_LOGIN || DATAFORSEO_LOGIN === 'YOUR_DATAFORSEO_LOGIN') return null;
   try {
     const domain = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
-    const creds = btoa(DATAFORSEO_LOGIN + ':' + DATAFORSEO_PASSWORD);
-    const resp = await fetch('https://api.dataforseo.com/v3/backlinks/summary/live', {
+    const resp = await fetch('/.netlify/functions/dataforseo', {
       method: 'POST',
-      headers: { 'Authorization': 'Basic ' + creds, 'Content-Type': 'application/json' },
-      body: JSON.stringify([{ target: domain, limit: 1 }])
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        endpoint: 'backlinks/summary/live',
+        payload: [{ target: domain, limit: 1 }]
+      })
     });
     const data = await resp.json();
     const item = data?.tasks?.[0]?.result?.[0];
@@ -964,18 +981,21 @@ async function fetchAIVisibility(businessName, address, types) {
       businessName.toLowerCase() + ' reviews',
     ];
 
-    // Run SERP checks in parallel
+    // Run SERP checks in parallel via proxy
     const serpResults = await Promise.allSettled(queries.map(async (q) => {
-      const resp = await fetch('https://api.dataforseo.com/v3/serp/google/organic/live/advanced', {
+      const resp = await fetch('/.netlify/functions/dataforseo', {
         method: 'POST',
-        headers: { 'Authorization': 'Basic ' + creds, 'Content-Type': 'application/json' },
-        body: JSON.stringify([{
-          keyword: q,
-          location_code: 2840, // United States
-          language_code: 'en',
-          depth: 10,
-          se_domain: 'google.com'
-        }])
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          endpoint: 'serp/google/organic/live/advanced',
+          payload: [{
+            keyword: q,
+            location_code: 2840,
+            language_code: 'en',
+            depth: 10,
+            se_domain: 'google.com'
+          }]
+        })
       });
       const data = await resp.json();
       const items = data?.tasks?.[0]?.result?.[0]?.items || [];
