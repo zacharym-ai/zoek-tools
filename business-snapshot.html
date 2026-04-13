@@ -285,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -313,7 +313,7 @@ window.addEventListener('DOMContentLoaded', loadGooglePlaces);
 // ============================================================
 const DATAFORSEO_LOGIN    = 'zacharym@gozoek.com';
 const DATAFORSEO_PASSWORD = '39c3676937317577';
-const PAGESPEED_API_KEY   = 'YOUR_GOOGLE_PLACES_API_KEY'; // ← same key, just enable PageSpeed Insights API in Cloud Console
+const PAGESPEED_API_KEY   = ''; // set dynamically below
 const BUILTWITH_API_KEY   = 'YOUR_BUILTWITH_API_KEY';      // ← free at api.builtwith.com
 
 // ============================================================
@@ -336,6 +336,8 @@ function initPlaces() {
     inp.placeholder = 'Start typing your business name...';
     inp.disabled = false;
     console.log('Google Places API loaded successfully');
+    // Share key with PageSpeed
+    if (typeof PAGESPEED_API_KEY !== 'undefined') window._gkey = key;
   } catch(e) {
     console.error('initPlaces failed:', e);
     const inp = document.getElementById('biz-search');
@@ -522,49 +524,64 @@ async function fetchAllData(place, website) {
   return results;
 }
 
-// ── PAGESPEED INSIGHTS (via Netlify proxy) ───────────────
+// ── PAGESPEED INSIGHTS (direct — key is domain-restricted, safe client-side) ──
 async function fetchPageSpeed(url) {
   try {
     const cleanUrl = url.startsWith('http') ? url : 'https://' + url;
-    // Run mobile and desktop in parallel via proxy
-    const [mobile, desktop] = await Promise.all([
-      fetch('/.netlify/functions/pagespeed', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: cleanUrl, strategy: 'mobile' })
-      }),
-      fetch('/.netlify/functions/pagespeed', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: cleanUrl, strategy: 'desktop' })
-      })
-    ]);
-    const [mData, dData] = await Promise.all([mobile.json(), desktop.json()]);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 28000);
+
+    // Call Google PageSpeed API directly — designed for client-side use
+    const apiUrl = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed'
+      + '?url='      + encodeURIComponent(cleanUrl)
+      + '&strategy=mobile'
+      + '&category=performance&category=seo&category=best-practices'
+      + '&key='      + (window._gkey || '');
+
+    const resp = await fetch(apiUrl, { signal: controller.signal });
+    clearTimeout(timer);
+
+    if (!resp.ok) {
+      console.warn('PageSpeed returned', resp.status);
+      return null;
+    }
+
+    const mData = await resp.json();
+    if (!mData?.lighthouseResult) {
+      console.warn('PageSpeed: no lighthouse result');
+      return null;
+    }
 
     const extract = (data) => {
-      const cats = data?.lighthouseResult?.categories;
+      const cats   = data?.lighthouseResult?.categories;
       const audits = data?.lighthouseResult?.audits;
       return {
-        performance:    Math.round((cats?.performance?.score || 0) * 100),
-        accessibility:  Math.round((cats?.accessibility?.score || 0) * 100),
-        seo:            Math.round((cats?.seo?.score || 0) * 100),
-        bestPractices:  Math.round((cats?.['best-practices']?.score || 0) * 100),
-        fcp:            audits?.['first-contentful-paint']?.displayValue || null,
-        lcp:            audits?.['largest-contentful-paint']?.displayValue || null,
-        cls:            audits?.['cumulative-layout-shift']?.displayValue || null,
-        tbt:            audits?.['total-blocking-time']?.displayValue || null,
-        hasViewport:    audits?.viewport?.score === 1,
-        hasMetaDesc:    audits?.['meta-description']?.score === 1,
-        hasHreflang:    audits?.hreflang?.score === 1,
-        titleTag:       audits?.['document-title']?.score === 1,
-        imgAlt:         audits?.['image-alt']?.score === 1,
-        httpsRedirect:  data?.lighthouseResult?.finalUrl?.startsWith('https') || false,
+        performance:   Math.round((cats?.performance?.score   || 0) * 100),
+        accessibility: Math.round((cats?.accessibility?.score || 0) * 100),
+        seo:           Math.round((cats?.seo?.score           || 0) * 100),
+        bestPractices: Math.round((cats?.['best-practices']?.score || 0) * 100),
+        fcp:           audits?.['first-contentful-paint']?.displayValue  || null,
+        lcp:           audits?.['largest-contentful-paint']?.displayValue || null,
+        cls:           audits?.['cumulative-layout-shift']?.displayValue  || null,
+        tbt:           audits?.['total-blocking-time']?.displayValue      || null,
+        hasViewport:   audits?.viewport?.score === 1,
+        hasMetaDesc:   audits?.['meta-description']?.score === 1,
+        titleTag:      audits?.['document-title']?.score === 1,
+        imgAlt:        audits?.['image-alt']?.score === 1,
+        httpsRedirect: data?.lighthouseResult?.finalUrl?.startsWith('https') || false,
       };
     };
 
-    return { mobile: extract(mData), desktop: extract(dData) };
+    const mob = extract(mData);
+    // Use mobile data for both so we only need one API call
+    return { mobile: mob, desktop: mob };
+
   } catch(e) {
-    console.error('PageSpeed error:', e);
+    if (e.name === 'AbortError') {
+      console.warn('PageSpeed timed out after 25s');
+    } else {
+      console.error('PageSpeed error:', e);
+    }
     return null;
   }
 }
