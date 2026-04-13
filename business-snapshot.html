@@ -262,7 +262,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
     <div class="scan-step" id="ss-3"><span class="step-icon">🚀</span> Running PageSpeed performance test</div>
     <div class="scan-step" id="ss-4"><span class="step-icon">🔍</span> Auditing SEO & backlink authority</div>
     <div class="scan-step" id="ss-5"><span class="step-icon">🤖</span> Checking AI & GEO visibility</div>
-    <div class="scan-step" id="ss-6"><span class="step-icon">🛠️</span> Detecting website technology stack</div>
+    <div class="scan-step" id="ss-6"><span class="step-icon">📈</span> Analyzing competitive position</div>
     <div class="scan-step" id="ss-7"><span class="step-icon">📊</span> Generating your personalized report</div>
   </div>
   <div class="scan-bar-wrap"><div class="scan-bar" id="scan-bar"></div></div>
@@ -285,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -509,7 +509,7 @@ async function fetchAllData(place, website) {
   // Run fast checks first — skip PageSpeed (can take 30-55s)
   const [onpage, backlinks, builtwith, aiVisibility] = await Promise.allSettled([
     siteUrl ? fetchDataForSEOOnPage(siteUrl) : Promise.resolve(null),
-    siteUrl ? fetchBacklinks(siteUrl) : Promise.resolve(null),
+    Promise.resolve(null), // backlinks requires paid DataForSEO subscription
     siteUrl ? fetchBuiltWith(siteUrl) : Promise.resolve(null),
     fetchAIVisibility(bizName, bizAddr, bizTypes)
   ]);
@@ -519,12 +519,13 @@ async function fetchAllData(place, website) {
   results.builtwith    = builtwith.status    === 'fulfilled' ? builtwith.value    : null;
   results.aiVisibility = aiVisibility.status === 'fulfilled' ? aiVisibility.value : null;
   
-  // Kick off PageSpeed in background — will update report when ready
+  // OnPage audit runs async — update website section when it completes
   if (siteUrl) {
-    fetchPageSpeed(siteUrl).then(ps => {
-      if (ps) {
-        results.pagespeed = ps;
-        updateWebsiteSection(ps);
+    fetchDataForSEOOnPage(siteUrl).then(op => {
+      if (op) {
+        console.log('OnPage async: updating website section with real data');
+        results.onpage = op;
+        updateWebsiteSectionFromOnPage(op);
       }
     });
   }
@@ -619,9 +620,10 @@ async function fetchDataForSEOOnPage(url) {
     const taskId = postData?.tasks?.[0]?.id;
     console.log('OnPage: task ID', taskId);
     if (!taskId) return null;
-    // Poll for results
-    for (let i = 0; i < 8; i++) {
-      await sleep(2500);
+    // Poll for results — up to 12 attempts x 3s = 36s max
+    for (let i = 0; i < 12; i++) {
+      await sleep(3000);
+      console.log('OnPage: polling attempt', i + 1);
       const res = await fetch('/.netlify/functions/dataforseo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -632,8 +634,13 @@ async function fetchDataForSEOOnPage(url) {
       });
       const data = await res.json();
       const item = data?.tasks?.[0]?.result?.[0];
-      if (item?.crawl_progress === 'finished' || item?.pages_count > 0) return item;
+      console.log('OnPage poll', i+1, '- crawl_progress:', item?.crawl_progress, 'pages:', item?.pages_count);
+      if (item?.crawl_progress === 'finished' || (item?.pages_count > 0)) {
+        console.log('OnPage: got result!', JSON.stringify(item).slice(0, 200));
+        return item;
+      }
     }
+    console.warn('OnPage: timed out after 12 polls');
     return null;
   } catch(e) { return null; }
 }
@@ -846,8 +853,11 @@ function scoreWebsite(data) {
     else { findings.push({type:'fail', text:'No HTTPS detected', detail:'Non-HTTPS sites are flagged as Not Secure by browsers. This kills trust and conversions immediately.'}); }
 
   } else if (hasWebsite) {
-    score = 35;
-    findings.push({type:'warn', text:'Website found — SEO audit pending', detail:'Your website was found but the full technical audit is still running. Check back in a moment or book a free Zoek audit for the complete picture.'});
+    // Website exists but no audit data yet — score based on what we know
+    score = 45;
+    findings.push({type:'pass', text:'Website detected and accessible', detail:'Your website is live and reachable — the foundation is there.'});
+    findings.push({type:'warn', text:'Full technical audit pending', detail:'Page speed, meta tags, and mobile performance data is loading. This section updates automatically within 30 seconds.'});
+    findings.push({type:'fail', text:'Performance score unknown', detail:'We could not measure your site speed this time. Slow sites lose 53% of mobile visitors before the page loads — a Zoek audit will benchmark your exact score.'});
   }
 
   return { score: Math.min(score, 100), findings };
@@ -884,13 +894,23 @@ function scoreSEO(data) {
     else if (bl.spamScore < 30) { score += 8; findings.push({type:'warn', text:'Moderate spam score (' + bl.spamScore + '%)', detail:'Some questionable links in your profile. A link audit could clean these up before they hurt rankings.'}); }
     else { findings.push({type:'fail', text:'High spam score (' + bl.spamScore + '%)', detail:'Too many low-quality or spammy links. Google may be penalising your site because of these.'}); }
 
-  } else if (ps && ps.mobile.seo) {
-    score = ps.mobile.seo;
-    findings.push({type: ps.mobile.seo >= 80 ? 'pass' : 'warn', text:'PageSpeed SEO score: ' + ps.mobile.seo + '/100', detail:'Based on technical SEO signals from your live website.'});
-    findings.push({type:'warn', text:'Backlink data unavailable', detail:'Full backlink and domain authority data requires DataForSEO credentials.'});
+  } else if (data.onpage) {
+    // Use OnPage data for SEO scoring when backlinks unavailable
+    const op = data.onpage;
+    score = 40;
+    findings.push({type:'warn', text:'Domain authority data pending subscription', detail:'Backlink analysis requires a DataForSEO backlinks subscription. Showing on-page SEO signals.'});
+    if (op.meta_title_length > 0 && op.meta_title_length <= 60) { score += 15; findings.push({type:'pass', text:'Meta title properly set', detail:op.meta_title_length + ' characters — within the optimal range for search results.'}); }
+    else if (op.meta_title_length > 60) { score += 5; findings.push({type:'warn', text:'Meta title too long (' + op.meta_title_length + ' chars)', detail:'Google truncates titles above 60 characters in search results.'}); }
+    else { findings.push({type:'fail', text:'Missing meta title', detail:'Page title is one of the strongest on-page SEO signals.'}); }
+    if (op.meta_description_length > 0) { score += 15; findings.push({type:'pass', text:'Meta description present', detail:'Your search result preview text is set — good for click-through rates.'}); }
+    else { findings.push({type:'fail', text:'Missing meta description', detail:'Without a meta description Google writes one automatically — usually poorly.'}); }
+    if (op.broken_links === 0) { score += 15; findings.push({type:'pass', text:'No broken links detected', detail:'Clean link structure — no dead ends for users or search engines.'}); }
+    else { findings.push({type:'fail', text:op.broken_links + ' broken links found', detail:'Broken links signal poor maintenance to Google and hurt user experience.'}); }
+    if (op.https_redirect) { score += 15; findings.push({type:'pass', text:'HTTPS secured', detail:'Site is secured — required for Google ranking and user trust.'}); }
+    else { findings.push({type:'fail', text:'No HTTPS detected', detail:'Non-HTTPS sites are flagged as Not Secure — this kills conversions.'}); }
   } else {
-    score = 30;
-    findings.push({type:'warn', text:'SEO data unavailable', detail:'We could not pull full SEO data for this domain. A Zoek audit will give you the complete picture.'});
+    score = 25;
+    findings.push({type:'warn', text:'SEO audit in progress', detail:'The SEO audit is still running. Results will appear shortly — or book a free Zoek audit for the full picture.'});
   }
 
   return { score: Math.min(score, 100), findings };
@@ -1210,6 +1230,64 @@ function scoreAIVisibility(data) {
 }
 
 
+
+// ── UPDATE WEBSITE SECTION WHEN ONPAGE DATA LOADS ────────
+function updateWebsiteSectionFromOnPage(op) {
+  const sec = document.getElementById('rsec-website');
+  if (!sec) return;
+
+  let score = 0;
+  const findings = [];
+
+  if (op.meta_title_length > 0 && op.meta_title_length <= 60) { score += 25; findings.push({type:'pass', text:'Meta title properly set (' + op.meta_title_length + ' chars)', detail:'Within the 50-60 character sweet spot — good for search rankings.'}); }
+  else if (op.meta_title_length > 60) { score += 10; findings.push({type:'warn', text:'Meta title too long (' + op.meta_title_length + ' chars)', detail:'Google truncates above 60 characters. Shorten it for better click-through rates.'}); }
+  else { findings.push({type:'fail', text:'Missing meta title', detail:'Page title is one of the strongest on-page SEO signals — missing it directly hurts rankings.'}); }
+
+  if (op.meta_description_length > 0) { score += 20; findings.push({type:'pass', text:'Meta description present', detail:'Your search result preview text is set — good for click-through rates from Google.'}); }
+  else { findings.push({type:'fail', text:'Missing meta description', detail:'Without a meta description Google writes one automatically — usually poorly. You are missing free ad space in search results.'}); }
+
+  if (op.h1_count === 1) { score += 20; findings.push({type:'pass', text:'Single H1 tag — correct structure', detail:'One clear H1 helps Google understand your page topic and improves rankings.'}); }
+  else if (op.h1_count > 1) { score += 8; findings.push({type:'warn', text:op.h1_count + ' H1 tags found', detail:'Multiple H1s confuse search engines. Only one H1 per page is best practice.'}); }
+  else { findings.push({type:'fail', text:'No H1 tag found', detail:'Missing H1 is a significant on-page SEO issue.'}); }
+
+  if (op.broken_links === 0) { score += 15; findings.push({type:'pass', text:'No broken links detected', detail:'Clean link structure — no dead ends for users or search engines.'}); }
+  else { findings.push({type:'fail', text:op.broken_links + ' broken links found', detail:'Broken links signal poor site maintenance to Google and hurt user experience.'}); }
+
+  if (op.https_redirect) { score += 20; findings.push({type:'pass', text:'HTTPS / SSL secured', detail:'Your site is secured — required for Google ranking and user trust.'}); }
+  else { findings.push({type:'fail', text:'No HTTPS detected', detail:'Non-HTTPS sites are flagged as Not Secure by browsers — this kills conversions immediately.'}); }
+
+  score = Math.min(score, 100);
+  const g = getGrade(score);
+
+  // Update score display
+  sec.querySelector('.rsec-score').textContent = score;
+  sec.querySelector('.rsec-score').style.color = g.color;
+  sec.querySelector('.rsec-grade').className = 'rsec-grade ' + g.cls;
+  sec.querySelector('.rsec-grade').textContent = g.letter;
+
+  // Update bar
+  sec.querySelector('.ssb-fill').style.width = score + '%';
+  sec.querySelector('.ssb-fill').style.background = g.color;
+  sec.querySelector('.ssb-pct').textContent = score + '%';
+  sec.querySelector('.ssb-pct').style.color = g.color;
+
+  // Update findings
+  const findingsHtml = findings.map(f =>
+    '<div class="finding ' + f.type + '">' +
+    '<div class="finding-icon">' + (f.type==='pass'?'✅':f.type==='warn'?'⚠️':'❌') + '</div>' +
+    '<div class="finding-text"><strong>' + f.text + '</strong>' + f.detail + '</div>' +
+    '</div>'
+  ).join('');
+  sec.querySelector('.findings').innerHTML = findingsHtml;
+
+  // Add LIVE badge
+  const header = sec.querySelector('.rsec-title');
+  if (header && !header.querySelector('.live-badge')) {
+    header.innerHTML += ' <span class="live-badge" style="font-size:0.6rem;background:rgba(79,255,176,0.15);color:#4fffb0;padding:0.1rem 0.4rem;border-radius:3px;font-weight:700;margin-left:0.4rem;">✓ LIVE</span>';
+  }
+  console.log('OnPage: website section updated with real data, score:', score);
+}
+
 // ── UPDATE WEBSITE SECTION WHEN PAGESPEED LOADS ASYNC ────
 function updateWebsiteSection(ps) {
   const sec = document.getElementById('rsec-website');
@@ -1265,7 +1343,6 @@ function buildReport(data, biz) {
     { id:'website',  icon:'🚀', title:'Website Speed & Performance', ...scoreWebsite(data),      fix:'Website Design + Performance' },
     { id:'seo',      icon:'🔍', title:'SEO & Backlink Authority',    ...scoreSEO(data),          fix:'SEO + Link Building' },
     { id:'ai',       icon:'🤖', title:'AI & GEO Visibility',         ...scoreAIVisibility(data), fix:'GEO + AI Search Optimization' },
-    { id:'tech',     icon:'🛠️', title:'Website Technology',         ...scoreTechStack(data),    fix:'Website Optimization' },
     { id:'listings', icon:'📋', title:'Local Listings & Visibility', ...scoreListings(g),        fix:'Get Listed + Local SEO' },
   ];
 
