@@ -1,9 +1,10 @@
 // Netlify serverless function — DataForSEO proxy
-// Credentials stored in Netlify environment variables (Site settings → Environment)
 
 const BASE_URL = 'https://api.dataforseo.com/v3';
 
 exports.handler = async function(event, context) {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   const headers = {
     'Access-Control-Allow-Origin':  '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -14,12 +15,11 @@ exports.handler = async function(event, context) {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
   if (event.httpMethod !== 'POST')    return { statusCode: 405, headers, body: '' };
 
-  // Read from Netlify environment variables — never hardcoded
   const login    = process.env.DATAFORSEO_LOGIN;
   const password = process.env.DATAFORSEO_PASSWORD;
 
   if (!login || !password) {
-    return { statusCode: 500, headers, body: JSON.stringify({ error: 'DataForSEO credentials not configured in environment variables' }) };
+    return { statusCode: 500, headers, body: JSON.stringify({ error: 'DataForSEO credentials not set in environment variables' }) };
   }
 
   let body;
@@ -27,11 +27,10 @@ exports.handler = async function(event, context) {
   catch(e) { return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) }; }
 
   const { endpoint, payload } = body;
-  if (!endpoint || !payload) {
+  if (!endpoint || payload === undefined) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing endpoint or payload' }) };
   }
 
-  // Whitelist allowed endpoints
   const ALLOWED = [
     'on_page/task_post',
     'on_page/summary',
@@ -39,22 +38,34 @@ exports.handler = async function(event, context) {
     'serp/google/organic/live/advanced',
   ];
   if (!ALLOWED.some(e => endpoint.includes(e))) {
-    return { statusCode: 403, headers, body: JSON.stringify({ error: 'Endpoint not allowed' }) };
+    return { statusCode: 403, headers, body: JSON.stringify({ error: 'Endpoint not allowed: ' + endpoint }) };
   }
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+
     const creds = Buffer.from(login + ':' + password).toString('base64');
     const url   = BASE_URL + '/' + endpoint.replace(/^\//, '');
 
     const resp = await fetch(url, {
       method:  'POST',
       headers: { 'Authorization': 'Basic ' + creds, 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body:    JSON.stringify(payload),
+      signal:  controller.signal,
     });
+    clearTimeout(timeout);
+
+    if (!resp.ok) {
+      return { statusCode: resp.status, headers, body: JSON.stringify({ error: 'DataForSEO API error: ' + resp.status }) };
+    }
 
     const data = await resp.json();
     return { statusCode: 200, headers, body: JSON.stringify(data) };
   } catch(e) {
+    if (e.name === 'AbortError') {
+      return { statusCode: 504, headers, body: JSON.stringify({ error: 'DataForSEO request timed out' }) };
+    }
     return { statusCode: 500, headers, body: JSON.stringify({ error: e.message }) };
   }
 };
