@@ -285,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -537,26 +537,32 @@ async function fetchPageSpeed(url) {
   try {
     const cleanUrl = url.startsWith('http') ? url : 'https://' + url;
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 55000); // 55s — PageSpeed can be slow
+    const timer = setTimeout(() => controller.abort(), 55000);
 
-    // Call Google PageSpeed API directly — designed for client-side use
     const apiUrl = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed'
       + '?url='      + encodeURIComponent(cleanUrl)
       + '&strategy=mobile'
-      + '&category=performance&category=seo&category=best-practices'
+      + '&category=performance'
       + '&key='      + (window._gkey || '');
+
+    console.log('PageSpeed: testing', cleanUrl);
+    console.log('PageSpeed: using key', (window._gkey || '').slice(0,12) + '...');
+    const startTime = Date.now();
 
     const resp = await fetch(apiUrl, { signal: controller.signal });
     clearTimeout(timer);
+    console.log('PageSpeed: response in', Date.now() - startTime, 'ms, status:', resp.status);
 
     if (!resp.ok) {
-      console.warn('PageSpeed returned', resp.status);
+      const errText = await resp.text();
+      console.warn('PageSpeed error response:', errText.slice(0, 300));
       return null;
     }
 
     const mData = await resp.json();
+    console.log('PageSpeed: lighthouse result present:', !!mData?.lighthouseResult);
     if (!mData?.lighthouseResult) {
-      console.warn('PageSpeed: no lighthouse result');
+      console.warn('PageSpeed full response:', JSON.stringify(mData).slice(0, 300));
       return null;
     }
 
