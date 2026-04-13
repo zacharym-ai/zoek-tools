@@ -260,9 +260,9 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
     <div class="scan-step" id="ss-1"><span class="step-icon">📍</span> Pulling Google Business Profile data</div>
     <div class="scan-step" id="ss-2"><span class="step-icon">⭐</span> Analyzing reviews & reputation</div>
     <div class="scan-step" id="ss-3"><span class="step-icon">🚀</span> Running PageSpeed performance test</div>
-    <div class="scan-step" id="ss-4"><span class="step-icon">🔍</span> Auditing website SEO health</div>
-    <div class="scan-step" id="ss-5"><span class="step-icon">🔗</span> Checking backlinks & domain authority</div>
-    <div class="scan-step" id="ss-6"><span class="step-icon">🛠️</span> Detecting website technology</div>
+    <div class="scan-step" id="ss-4"><span class="step-icon">🔍</span> Auditing SEO & backlink authority</div>
+    <div class="scan-step" id="ss-5"><span class="step-icon">🤖</span> Checking AI & GEO visibility</div>
+    <div class="scan-step" id="ss-6"><span class="step-icon">🛠️</span> Detecting website technology stack</div>
     <div class="scan-step" id="ss-7"><span class="step-icon">📊</span> Generating your personalized report</div>
   </div>
   <div class="scan-bar-wrap"><div class="scan-bar" id="scan-bar"></div></div>
@@ -285,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -313,8 +313,8 @@ window.addEventListener('DOMContentLoaded', loadGooglePlaces);
 // ============================================================
 const DATAFORSEO_LOGIN    = 'zacharym@gozoek.com';
 const DATAFORSEO_PASSWORD = '39c3676937317577';
-const PAGESPEED_API_KEY   = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o'; // ← same key, just enable PageSpeed Insights API in Cloud Console
-const BUILTWITH_API_KEY   = 'babfd2df-79a6-4eaf-b15e-22e680a742d8';      // ← free at api.builtwith.com
+const PAGESPEED_API_KEY   = 'YOUR_GOOGLE_PLACES_API_KEY'; // ← same key, just enable PageSpeed Insights API in Cloud Console
+const BUILTWITH_API_KEY   = 'YOUR_BUILTWITH_API_KEY';      // ← free at api.builtwith.com
 
 // ============================================================
 // STATE
@@ -501,20 +501,23 @@ async function fetchAllData(place, website) {
 
   // Run all website-based checks in parallel for speed
   const siteUrl = website || place.website || null;
-  if (siteUrl) {
-    const [onpage, pagespeed, backlinks, builtwith] = await Promise.allSettled([
-      fetchDataForSEOOnPage(siteUrl),
-      fetchPageSpeed(siteUrl),
-      fetchBacklinks(siteUrl),
-      fetchBuiltWith(siteUrl)
-    ]);
-    results.onpage    = onpage.status    === 'fulfilled' ? onpage.value    : null;
-    results.pagespeed = pagespeed.status === 'fulfilled' ? pagespeed.value : null;
-    results.backlinks = backlinks.status === 'fulfilled' ? backlinks.value : null;
-    results.builtwith = builtwith.status === 'fulfilled' ? builtwith.value : null;
-  } else {
-    results.onpage = results.pagespeed = results.backlinks = results.builtwith = null;
-  }
+  const bizName = place.name || '';
+  const bizAddr = place.formatted_address || '';
+  const bizTypes = place.types || [];
+
+  // Run ALL checks in parallel for speed
+  const [onpage, pagespeed, backlinks, builtwith, aiVisibility] = await Promise.allSettled([
+    siteUrl ? fetchDataForSEOOnPage(siteUrl) : Promise.resolve(null),
+    siteUrl ? fetchPageSpeed(siteUrl) : Promise.resolve(null),
+    siteUrl ? fetchBacklinks(siteUrl) : Promise.resolve(null),
+    siteUrl ? fetchBuiltWith(siteUrl) : Promise.resolve(null),
+    fetchAIVisibility(bizName, bizAddr, bizTypes)
+  ]);
+  results.onpage       = onpage.status       === 'fulfilled' ? onpage.value       : null;
+  results.pagespeed    = pagespeed.status    === 'fulfilled' ? pagespeed.value    : null;
+  results.backlinks    = backlinks.status    === 'fulfilled' ? backlinks.value    : null;
+  results.builtwith    = builtwith.status    === 'fulfilled' ? builtwith.value    : null;
+  results.aiVisibility = aiVisibility.status === 'fulfilled' ? aiVisibility.value : null;
 
   return results;
 }
@@ -611,7 +614,7 @@ async function fetchBacklinks(url) {
 
 // ── BUILTWITH ─────────────────────────────────────────────
 async function fetchBuiltWith(url) {
-  if (!BUILTWITH_API_KEY || BUILTWITH_API_KEY === 'babfd2df-79a6-4eaf-b15e-22e680a742d8') return null;
+  if (!BUILTWITH_API_KEY || BUILTWITH_API_KEY === 'YOUR_BUILTWITH_API_KEY') return null;
   try {
     const domain = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
     const resp = await fetch('https://api.builtwith.com/v21/api.json?KEY=' + BUILTWITH_API_KEY + '&LOOKUP=' + domain);
@@ -931,6 +934,204 @@ function getVerdict(score, name) {
   return `<strong>${name}</strong> has critical gaps across multiple areas. The good news: every one of these is fixable, and the upside is significant.`;
 }
 
+
+// ── AI VISIBILITY (DataForSEO SERP API) ──────────────────
+async function fetchAIVisibility(businessName, address, types) {
+  if (!DATAFORSEO_LOGIN || DATAFORSEO_LOGIN === 'YOUR_DATAFORSEO_LOGIN') return null;
+  try {
+    const creds = btoa(DATAFORSEO_LOGIN + ':' + DATAFORSEO_PASSWORD);
+
+    // Detect category from Google Places types
+    const typeStr = (types || []).join(',').toLowerCase();
+    let category = 'business';
+    if (typeStr.includes('restaurant') || typeStr.includes('food')) category = 'restaurant';
+    else if (typeStr.includes('doctor') || typeStr.includes('dentist') || typeStr.includes('health')) category = 'healthcare provider';
+    else if (typeStr.includes('plumber') || typeStr.includes('electrician') || typeStr.includes('contractor')) category = 'home service company';
+    else if (typeStr.includes('lawyer') || typeStr.includes('attorney')) category = 'law firm';
+    else if (typeStr.includes('salon') || typeStr.includes('beauty') || typeStr.includes('hair')) category = 'salon';
+    else if (typeStr.includes('gym') || typeStr.includes('fitness')) category = 'gym';
+    else if (typeStr.includes('store') || typeStr.includes('shop')) category = 'retail store';
+    else if (typeStr.includes('real_estate')) category = 'real estate agent';
+
+    // Extract city from address
+    const addrParts = (address || '').split(',');
+    const city = addrParts.length >= 2 ? addrParts[addrParts.length - 3]?.trim() || '' : '';
+
+    // Build AI-style queries — these are what people ask ChatGPT/Perplexity
+    const queries = [
+      'best ' + category + (city ? ' in ' + city : ''),
+      'top rated ' + category + (city ? ' near ' + city : ''),
+      businessName.toLowerCase() + ' reviews',
+    ];
+
+    // Run SERP checks in parallel
+    const serpResults = await Promise.allSettled(queries.map(async (q) => {
+      const resp = await fetch('https://api.dataforseo.com/v3/serp/google/organic/live/advanced', {
+        method: 'POST',
+        headers: { 'Authorization': 'Basic ' + creds, 'Content-Type': 'application/json' },
+        body: JSON.stringify([{
+          keyword: q,
+          location_code: 2840, // United States
+          language_code: 'en',
+          depth: 10,
+          se_domain: 'google.com'
+        }])
+      });
+      const data = await resp.json();
+      const items = data?.tasks?.[0]?.result?.[0]?.items || [];
+      return { query: q, items };
+    }));
+
+    // Analyse results
+    let appearsInTop3 = false;
+    let appearsInTop10 = false;
+    let hasAIOverview = false;
+    let rankPosition = null;
+    let mentionCount = 0;
+    const bizNameLower = businessName.toLowerCase();
+
+    serpResults.forEach(r => {
+      if (r.status !== 'fulfilled') return;
+      const { items } = r.value;
+
+      items.forEach((item, idx) => {
+        // Check for AI Overview
+        if (item.type === 'ai_overview' || item.type === 'featured_snippet') {
+          hasAIOverview = true;
+          const snippetText = (item.description || item.text || '').toLowerCase();
+          if (snippetText.includes(bizNameLower)) mentionCount++;
+        }
+
+        // Check organic results for business name
+        if (item.type === 'organic') {
+          const text = ((item.title || '') + ' ' + (item.description || '') + ' ' + (item.url || '')).toLowerCase();
+          if (text.includes(bizNameLower)) {
+            mentionCount++;
+            if (idx < 3) appearsInTop3 = true;
+            if (idx < 10) {
+              appearsInTop10 = true;
+              if (!rankPosition) rankPosition = idx + 1;
+            }
+          }
+        }
+      });
+    });
+
+    return {
+      appearsInTop3,
+      appearsInTop10,
+      hasAIOverview,
+      rankPosition,
+      mentionCount,
+      category,
+      city,
+      queriesChecked: queries,
+    };
+  } catch(e) {
+    console.error('AI Visibility fetch error:', e);
+    return null;
+  }
+}
+
+// ── SCORE AI VISIBILITY ───────────────────────────────────
+function scoreAIVisibility(data) {
+  const ai  = data.aiVisibility;
+  const bl  = data.backlinks;
+  const ps  = data.pagespeed;
+  const bw  = data.builtwith;
+  const g   = data.google;
+
+  let score = 0;
+  const findings = [];
+
+  // ── Signal 1: Direct SERP/AI appearance (real data) ──
+  if (ai) {
+    if (ai.hasAIOverview) {
+      score += 25;
+      findings.push({type:'pass', text:'Appearing in Google AI Overviews', detail:'Your business was detected in AI-generated search summaries — one of the strongest GEO signals possible right now.'});
+    } else {
+      findings.push({type:'fail', text:'Not appearing in Google AI Overviews', detail:'AI Overviews now appear on 30%+ of searches. Businesses not cited here are losing top-of-funnel visibility to competitors who are.'});
+    }
+
+    if (ai.appearsInTop3) {
+      score += 25;
+      findings.push({type:'pass', text:'Ranking top 3 for category keywords', detail:'AI tools like ChatGPT and Perplexity primarily cite top 3 organic results. Your position ' + ai.rankPosition + ' ranking means AI is likely recommending you.'});
+    } else if (ai.appearsInTop10) {
+      score += 12;
+      findings.push({type:'warn', text:'Ranking top 10 — borderline AI visibility', detail:'Position ' + ai.rankPosition + ' puts you in reach of AI citations but top 3 is where most AI recommendations come from. Closing this gap is high priority.'});
+    } else {
+      findings.push({type:'fail', text:'Not ranking for key category searches', detail:'When someone asks ChatGPT "best ' + ai.category + ' in ' + ai.city + '" — your competitors are being recommended, not you.'});
+    }
+
+    if (ai.mentionCount >= 3) {
+      score += 15;
+      findings.push({type:'pass', text:'Business mentioned ' + ai.mentionCount + ' times across top results', detail:'Strong brand presence in search results signals to AI tools that your business is a credible, established entity.'});
+    } else if (ai.mentionCount >= 1) {
+      score += 8;
+      findings.push({type:'warn', text:'Limited brand mentions in search results', detail:'AI tools build answers from search results. More mentions = more citations. Building reviews, press, and directory listings increases this.'});
+    } else {
+      findings.push({type:'fail', text:'No brand mentions found in top results', detail:'AI tools have no reason to recommend a business they have never seen cited anywhere. This is the root cause of zero AI visibility.'});
+    }
+  }
+
+  // ── Signal 2: Domain Authority (proxy for AI trust) ──
+  if (bl) {
+    if (bl.domainRank >= 40) {
+      score += 15;
+      findings.push({type:'pass', text:'Domain authority supports AI visibility', detail:'Domain rank ' + bl.domainRank + '/100 — AI tools trust higher-authority sites more when generating recommendations.'});
+    } else if (bl.domainRank >= 20) {
+      score += 8;
+      findings.push({type:'warn', text:'Domain authority needs improvement', detail:'Domain rank ' + bl.domainRank + '/100. Stronger backlinks increase the likelihood AI tools cite your business as a credible source.'});
+    } else {
+      findings.push({type:'fail', text:'Low domain authority limits AI discoverability', detail:'AI models weight domain authority heavily. Building quality backlinks from local directories and press is the fastest path to AI visibility.'});
+    }
+  }
+
+  // ── Signal 3: Review volume (AI citation factor) ──
+  if (g.reviewCount >= 50) {
+    score += 10;
+    findings.push({type:'pass', text:g.reviewCount + ' reviews boost AI credibility', detail:'Review volume is a major factor in AI recommendations. Businesses with more reviews appear more credible to AI models.'});
+  } else if (g.reviewCount >= 15) {
+    score += 5;
+    findings.push({type:'warn', text:'More reviews needed for strong AI presence', detail:'AI tools weight review volume as a trust signal. Businesses with 50+ reviews are cited far more frequently.'});
+  } else {
+    findings.push({type:'fail', text:'Too few reviews for meaningful AI visibility', detail:'ChatGPT and Perplexity rarely recommend businesses with fewer than 15 reviews. Generating reviews is a direct GEO strategy.'});
+  }
+
+  // ── Signal 4: Structured data / Schema ──
+  if (ps && ps.mobile) {
+    if (ps.mobile.seo >= 90) {
+      score += 10;
+      findings.push({type:'pass', text:'Strong technical SEO supports AI indexing', detail:'Well-structured pages with good SEO scores are easier for AI crawlers to parse and cite accurately.'});
+    } else if (ps.mobile.seo >= 70) {
+      score += 5;
+      findings.push({type:'warn', text:'Technical SEO partially optimised for AI', detail:'Improving your PageSpeed SEO score above 90 makes your content more parseable by AI models.'});
+    } else {
+      findings.push({type:'fail', text:'Poor technical SEO limits AI discoverability', detail:'AI tools struggle to parse poorly structured pages. Technical SEO improvements directly impact GEO performance.'});
+    }
+  }
+
+  // ── Signal 5: Google profile completeness (entity recognition) ──
+  const profileScore = [g.hasWebsite, g.hasPhone, g.hasHours, g.photos >= 5, g.rating >= 4.0, g.reviewCount >= 10].filter(Boolean).length;
+  if (profileScore >= 5) {
+    score += 10;
+    findings.push({type:'pass', text:'Google recognises you as a verified entity', detail:'A complete, verified Google Business Profile is one of the strongest signals that AI tools use to confirm a business is real and trustworthy.'});
+  } else if (profileScore >= 3) {
+    score += 5;
+    findings.push({type:'warn', text:'Partial Google entity recognition', detail:'AI tools use Google Business Profile data extensively. A more complete profile increases your chances of being cited in AI answers.'});
+  } else {
+    findings.push({type:'fail', text:'Weak Google entity signal', detail:'Without strong Google Business Profile signals, AI tools treat your business as unverified. This directly suppresses AI recommendations.'});
+  }
+
+  // Insight based on overall score
+  if (!ai) {
+    findings.push({type:'warn', text:'Live AI query data unavailable', detail:'Connect DataForSEO credentials to check real-time AI Overview and SERP visibility for your business.'});
+    score = Math.max(score, 20);
+  }
+
+  return { score: Math.min(score, 100), findings };
+}
+
 // ============================================================
 // BUILD REPORT
 // ============================================================
@@ -941,12 +1142,13 @@ function buildReport(data, biz) {
   // full data object available for all score functions
 
   const sections = [
-    { id:'google',   icon:'📍', title:'Google Business Profile',   ...scoreGoogle(g),       fix:'Local SEO + GBP Optimization' },
-    { id:'reviews',  icon:'⭐', title:'Reviews & Reputation',       ...scoreReviews(g),      fix:'Reputation Management' },
-    { id:'website',  icon:'🚀', title:'Website Speed & Performance',...scoreWebsite(data),   fix:'Website Design + Performance' },
-    { id:'seo',      icon:'🔍', title:'SEO & Backlink Authority',   ...scoreSEO(data),       fix:'SEO + Link Building' },
-    { id:'tech',     icon:'🛠️', title:'Website Technology',        ...scoreTechStack(data), fix:'Website Optimization' },
-    { id:'listings', icon:'📋', title:'Local Listings & Visibility',...scoreListings(g),     fix:'Get Listed + Local SEO' },
+    { id:'google',   icon:'📍', title:'Google Business Profile',    ...scoreGoogle(g),          fix:'Local SEO + GBP Optimization' },
+    { id:'reviews',  icon:'⭐', title:'Reviews & Reputation',        ...scoreReviews(g),         fix:'Reputation Management' },
+    { id:'website',  icon:'🚀', title:'Website Speed & Performance', ...scoreWebsite(data),      fix:'Website Design + Performance' },
+    { id:'seo',      icon:'🔍', title:'SEO & Backlink Authority',    ...scoreSEO(data),          fix:'SEO + Link Building' },
+    { id:'ai',       icon:'🤖', title:'AI & GEO Visibility',         ...scoreAIVisibility(data), fix:'GEO + AI Search Optimization' },
+    { id:'tech',     icon:'🛠️', title:'Website Technology',         ...scoreTechStack(data),    fix:'Website Optimization' },
+    { id:'listings', icon:'📋', title:'Local Listings & Visibility', ...scoreListings(g),        fix:'Get Listed + Local SEO' },
   ];
 
   const overall = Math.round(sections.reduce((s,x) => s + x.score, 0) / sections.length);
