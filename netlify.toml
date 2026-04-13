@@ -2,6 +2,15 @@
   publish = "."
   functions = "netlify/functions"
 
+[functions]
+  node_bundler = "esbuild"
+
+[functions."dataforseo"]
+  timeout = 26
+
+[functions."pagespeed"]
+  timeout = 26
+
 [[headers]]
   for = "/*"
   [headers.values]
