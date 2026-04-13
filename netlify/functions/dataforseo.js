@@ -1,4 +1,5 @@
 // Netlify serverless function — DataForSEO proxy
+// Credentials stored in Netlify environment variables
 
 const BASE_URL = 'https://api.dataforseo.com/v3';
 
@@ -19,7 +20,7 @@ exports.handler = async function(event, context) {
   const password = process.env.DATAFORSEO_PASSWORD;
 
   if (!login || !password) {
-    return { statusCode: 500, headers, body: JSON.stringify({ error: 'DataForSEO credentials not set in environment variables' }) };
+    return { statusCode: 500, headers, body: JSON.stringify({ error: 'DataForSEO credentials not set' }) };
   }
 
   let body;
@@ -36,6 +37,7 @@ exports.handler = async function(event, context) {
     'on_page/summary',
     'backlinks/summary/live',
     'serp/google/organic/live/advanced',
+    'content_analysis/search/live',
   ];
   if (!ALLOWED.some(e => endpoint.includes(e))) {
     return { statusCode: 403, headers, body: JSON.stringify({ error: 'Endpoint not allowed: ' + endpoint }) };
@@ -43,7 +45,7 @@ exports.handler = async function(event, context) {
 
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 20000);
+    const timeout = setTimeout(() => controller.abort(), 24000);
 
     const creds = Buffer.from(login + ':' + password).toString('base64');
     const url   = BASE_URL + '/' + endpoint.replace(/^\//, '');
@@ -56,15 +58,11 @@ exports.handler = async function(event, context) {
     });
     clearTimeout(timeout);
 
-    if (!resp.ok) {
-      return { statusCode: resp.status, headers, body: JSON.stringify({ error: 'DataForSEO API error: ' + resp.status }) };
-    }
-
     const data = await resp.json();
     return { statusCode: 200, headers, body: JSON.stringify(data) };
   } catch(e) {
     if (e.name === 'AbortError') {
-      return { statusCode: 504, headers, body: JSON.stringify({ error: 'DataForSEO request timed out' }) };
+      return { statusCode: 504, headers, body: JSON.stringify({ error: 'Request timed out' }) };
     }
     return { statusCode: 500, headers, body: JSON.stringify({ error: e.message }) };
   }
