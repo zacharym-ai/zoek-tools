@@ -285,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -604,6 +604,7 @@ async function fetchPageSpeed(url) {
 async function fetchDataForSEOOnPage(url) {
   try {
     const cleanUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
+    console.log('OnPage: checking domain', cleanUrl);
     // Post task
     const postResp = await fetch('/.netlify/functions/dataforseo', {
       method: 'POST',
@@ -614,7 +615,9 @@ async function fetchDataForSEOOnPage(url) {
       })
     });
     const postData = await postResp.json();
+    console.log('OnPage: task post response', JSON.stringify(postData).slice(0, 200));
     const taskId = postData?.tasks?.[0]?.id;
+    console.log('OnPage: task ID', taskId);
     if (!taskId) return null;
     // Poll for results
     for (let i = 0; i < 8; i++) {
@@ -639,6 +642,7 @@ async function fetchDataForSEOOnPage(url) {
 async function fetchBacklinks(url) {
   try {
     const domain = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
+    console.log('Backlinks: checking domain', domain);
     const resp = await fetch('/.netlify/functions/dataforseo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -647,8 +651,11 @@ async function fetchBacklinks(url) {
         payload: [{ target: domain, limit: 1 }]
       })
     });
+    console.log('Backlinks: proxy status', resp.status);
     const data = await resp.json();
+    console.log('Backlinks: raw response', JSON.stringify(data).slice(0, 300));
     const item = data?.tasks?.[0]?.result?.[0];
+    console.log('Backlinks: item found:', !!item);
     if (!item) return null;
     return {
       domainRank:       item.rank || 0,
@@ -819,9 +826,28 @@ function scoreWebsite(data) {
     else { score += 5; findings.push({type:'fail', text:onpage.broken_links + ' broken links found', detail:'Broken links hurt user experience and signal poor maintenance to Google.'}); }
     if (onpage.https_redirect) { score += 15; findings.push({type:'pass', text:'HTTPS secured', detail:'Your site uses HTTPS.'}); }
     else { findings.push({type:'fail', text:'No HTTPS detected', detail:'Non-HTTPS sites are flagged as Not Secure by browsers.'}); }
-  } else {
+  } else if (onpage) {
+    // Score from DataForSEO on-page data
+    if (onpage.meta_title_length > 0 && onpage.meta_title_length <= 60) { score += 25; findings.push({type:'pass', text:'Meta title properly set (' + onpage.meta_title_length + ' chars)', detail:'Within the 50-60 character sweet spot — good for search rankings.'}); }
+    else if (onpage.meta_title_length > 60) { score += 12; findings.push({type:'warn', text:'Meta title too long (' + onpage.meta_title_length + ' chars)', detail:'Google truncates above 60 characters. Shorten it to show the full title in search results.'}); }
+    else { findings.push({type:'fail', text:'Missing meta title', detail:'Your page title is one of the most important on-page SEO factors. Missing titles directly hurt rankings.'}); }
+
+    if (onpage.meta_description_length > 0) { score += 20; findings.push({type:'pass', text:'Meta description present', detail:'Good — this is your search result preview text that drives click-through rates.'}); }
+    else { findings.push({type:'fail', text:'Missing meta description', detail:'Without a meta description Google writes one for you — usually poorly. You are missing free ad space in search results.'}); }
+
+    if (onpage.h1_count === 1) { score += 20; findings.push({type:'pass', text:'Single H1 tag — correct structure', detail:'One clear H1 helps Google understand your page topic and improves rankings.'}); }
+    else if (onpage.h1_count > 1) { score += 8; findings.push({type:'warn', text:onpage.h1_count + ' H1 tags found', detail:'Multiple H1s confuse search engines. Only one H1 per page is best practice.'}); }
+    else { findings.push({type:'fail', text:'No H1 tag found', detail:'Missing H1 is a significant SEO issue — Google uses it to understand your main page topic.'}); }
+
+    if (onpage.broken_links === 0) { score += 15; findings.push({type:'pass', text:'No broken links detected', detail:'Clean link profile — no dead ends for users or search engines.'}); }
+    else { score += 3; findings.push({type:'fail', text:onpage.broken_links + ' broken links found', detail:'Broken links hurt user experience and signal poor site maintenance to Google.'}); }
+
+    if (onpage.https_redirect) { score += 20; findings.push({type:'pass', text:'HTTPS / SSL secured', detail:'Your site uses HTTPS — required for trust signals and Google ranking.'}); }
+    else { findings.push({type:'fail', text:'No HTTPS detected', detail:'Non-HTTPS sites are flagged as Not Secure by browsers. This kills trust and conversions immediately.'}); }
+
+  } else if (hasWebsite) {
     score = 35;
-    findings.push({type:'warn', text:'Website found but not fully audited', detail:'We found your website but could not complete a full technical audit. A Zoek strategist can run a full audit in minutes.'});
+    findings.push({type:'warn', text:'Website found — SEO audit pending', detail:'Your website was found but the full technical audit is still running. Check back in a moment or book a free Zoek audit for the complete picture.'});
   }
 
   return { score: Math.min(score, 100), findings };
