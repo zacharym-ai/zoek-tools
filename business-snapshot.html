@@ -285,8 +285,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -603,48 +603,38 @@ async function fetchPageSpeed(url) {
 
 // ── DATAFORSEO ON-PAGE (via Netlify proxy) ───────────────
 async function fetchDataForSEOOnPage(url) {
+  // Fetch the actual page HTML and parse meta tags directly
+  // Simple, fast, no external API needed
   try {
-    const cleanUrl = url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0];
-    console.log('OnPage: checking domain', cleanUrl);
+    const cleanUrl = url.startsWith('http') ? url : 'https://' + url;
+    console.log('OnPage: fetching', cleanUrl);
 
-    const resp = await fetch('/.netlify/functions/dataforseo', {
+    const resp = await fetch('/.netlify/functions/webpage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        endpoint: 'on_page/instant_pages/live',
-        payload: [{
-          url: 'https://' + cleanUrl,
-          load_resources: false,
-          enable_javascript: false,
-        }]
-      })
+      body: JSON.stringify({ url: cleanUrl })
     });
 
     const data = await resp.json();
-    console.log('OnPage live response:', JSON.stringify(data).slice(0, 400));
+    console.log('OnPage webpage response:', JSON.stringify(data).slice(0, 300));
+    if (data.error || !data.statusCode) return null;
 
-    const item = data?.tasks?.[0]?.result?.[0]?.items?.[0];
-    if (!item) {
-      console.warn('OnPage: no item in response');
-      return null;
-    }
-
-    const meta = item.meta || {};
-    const result = {
-      meta_title_length:       (meta.title || '').length,
-      meta_description_length: (meta.description || '').length,
-      h1_count:                (meta.htags?.h1 || []).length,
-      broken_links:            item.broken_links || 0,
-      https_redirect:          (item.url || '').startsWith('https'),
-      page_size:               item.size || 0,
+    return {
+      meta_title_length:       data.titleLength || 0,
+      meta_description_length: data.descLength  || 0,
+      h1_count:                data.h1Count     || 0,
+      broken_links:            0,
+      https_redirect:          data.httpsRedirect || false,
+      has_viewport:            data.hasViewport   || false,
+      has_canonical:           data.hasCanonical  || false,
+      page_size:               data.pageSize      || 0,
     };
-    console.log('OnPage: parsed result', JSON.stringify(result));
-    return result;
   } catch(e) {
     console.error('OnPage error:', e);
     return null;
   }
 }
+
 
 // ── DATAFORSEO BACKLINKS (via Netlify proxy) ────────────
 async function fetchBacklinks(url) {
