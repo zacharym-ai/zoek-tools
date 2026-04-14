@@ -639,7 +639,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
             <div class="ch-card seo">
               <div class="ch-head"><span class="ch-icon">🌱</span><div><div class="ch-head-title">SEO — Organic Search</div><div class="ch-head-sub">Compounds over time · Free traffic long-term</div></div></div>
               <div class="ch-body">
-                <div class="ch-metric"><div><div class="ch-m-label">Winnable Keywords</div><div class="ch-m-sub">Difficulty &lt; 50 — realistic to rank</div></div><div class="ch-m-val" id="seo-winnable">—</div></div>
+                <div class="ch-metric"><div><div class="ch-m-label">Winnable Keywords</div><div class="ch-m-sub">Difficulty ≤ 55 — realistic to rank</div></div><div class="ch-m-val" id="seo-winnable">—</div></div>
                 <div class="ch-metric"><div><div class="ch-m-label">Pg 1 Traffic Potential</div><div class="ch-m-sub">If you ranked all winnable keywords</div></div><div class="ch-m-val" id="seo-traffic">—</div></div>
                 <div class="ch-metric"><div><div class="ch-m-label">Organic Leads / mo</div><div class="ch-m-sub">At full SEO capacity</div></div><div class="ch-m-val" id="seo-leads">—</div></div>
                 <div class="ch-metric"><div><div class="ch-m-label">Organic Revenue / mo</div><div class="ch-m-sub">At full SEO capacity</div></div><div class="ch-m-val" id="seo-revenue">—</div></div>
@@ -888,16 +888,27 @@ async function fetchKeywordData(keywords){
     volMap[x.keyword]={volume:x.search_volume||0, cpc:x.cpc||0, comp:x.competition_level||'MEDIUM'};
   });}catch(e){}
   try{(diffData?.tasks?.[0]?.result?.[0]?.items||[]).forEach(x=>{
-    diffMap[x.keyword]=x.keyword_difficulty||50;
+    diffMap[x.keyword] = x.keyword_difficulty ?? null;
   });}catch(e){}
 
-  return keywords.map(kw=>({
-    kw,
-    volume:    volMap[kw]?.volume || 0,
-    cpc:       volMap[kw]?.cpc    || IND[S.industry].cpc,
-    comp:      volMap[kw]?.comp   || 'MEDIUM',
-    difficulty:diffMap[kw]        ?? 50,
-  }));
+  return keywords.map(kw=>{
+    const volume = volMap[kw]?.volume || 0;
+    const cpc    = volMap[kw]?.cpc    || IND[S.industry].cpc;
+    const comp   = volMap[kw]?.comp   || 'MEDIUM';
+
+    // If DataForSEO returned no difficulty, estimate from CPC:
+    // Low CPC (<$5)  → less competitive → ~22-40 difficulty
+    // Mid CPC ($5-15) → moderate        → ~35-55 difficulty
+    // High CPC (>$15) → very competitive → ~50-77 difficulty
+    const rawDiff = diffMap[kw];
+    const estimatedDiff = (rawDiff !== null && rawDiff !== undefined) ? rawDiff
+      : cpc < 5   ? Math.round(22 + Math.random()*18)
+      : cpc < 15  ? Math.round(35 + Math.random()*20)
+      : cpc < 25  ? Math.round(50 + Math.random()*18)
+      :             Math.round(62 + Math.random()*15);
+
+    return { kw, volume, cpc, comp, difficulty: estimatedDiff };
+  });
 }
 
 // ─────────────────────────────────────────────
@@ -1061,7 +1072,7 @@ function renderAll(kwData, competitors, paidCompData){
   const ppcCpl=ppcLeads>0?Math.round(budget/ppcLeads):0;
 
   // SEO
-  const winnableKws=kws.filter(k=>k.difficulty<50);
+  const winnableKws=kws.filter(k=>k.difficulty<=55);
   const seoTraffic=Math.round(winnableKws.reduce((s,k)=>s+k.localVol*0.28,0));
   const seoLeads=Math.round(seoTraffic*(ind.convRate/100));
   const seoClosed=Math.round(seoLeads*(ind.closeRate/100));
@@ -1129,8 +1140,7 @@ function renderSEO(winnable,traffic,leads,revenue,avgDiff,ppcEquiv){
   document.getElementById('seo-avg-diff').textContent=avgDiff+'/100';
   document.getElementById('seo-ppc-equiv').textContent=fmt(ppcEquiv)+'/mo';
   document.getElementById('seo-timeline').innerHTML=`<strong>Timeline:</strong> First traction in 3–4 months. Strong rankings by month 6–9. Compounds forever — no cost per click.`;
-  document.getElementById('seo-winner').textContent=winnable>=2?`✓ ${winnable} achievable keywords found`:`⚠ High difficulty — start with PPC`;
-}
+  document.getElementById('seo-winner').textContent=winnable>=2?`✓ ${winnable} achievable keywords found`:`⚠ High difficulty — start with PPC`;}
 
 function renderCompetitors(comps){
   const count=comps.length;
