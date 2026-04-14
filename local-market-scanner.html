@@ -240,6 +240,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .cta-btn-main:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,0.25);}
 .cta-phone{font-size:0.78rem;color:rgba(255,255,255,0.65);text-align:right;}
 .cta-phone a{color:rgba(255,255,255,0.9);text-decoration:none;font-weight:700;}
+/* COMPETITOR DOMAIN INPUTS */
+.add-comp-btn{width:100%;padding:0.5rem;background:transparent;border:1.5px dashed rgba(255,92,124,0.3);border-radius:6px;color:rgba(255,92,124,0.7);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:0.4rem;margin-top:0.4rem;}
+.add-comp-btn:hover{border-color:var(--red);color:var(--red);background:rgba(255,92,124,0.05);}
+.comp-domain-row{display:flex;align-items:center;gap:0.4rem;}
+.comp-domain-row input{flex:1;padding:0.5rem 0.75rem 0.5rem 2rem;background:rgba(255,92,124,0.05);border:1.5px solid rgba(255,92,124,0.2);border-radius:6px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;outline:none;transition:border-color 0.2s;}
+.comp-domain-row input:focus{border-color:var(--red);}
+.comp-domain-row input::placeholder{color:rgba(255,255,255,0.18);}
+.comp-domain-icon{position:absolute;left:0.65rem;top:50%;transform:translateY(-50%);font-size:0.72rem;pointer-events:none;}
+.comp-domain-wrap{position:relative;flex:1;}
+.comp-remove-btn{background:none;border:none;color:rgba(255,92,124,0.35);cursor:pointer;font-size:1rem;line-height:1;padding:0.3rem;transition:color 0.15s;flex-shrink:0;}
+.comp-remove-btn:hover{color:var(--red);}
 /* BAR CHART SECTION */
 .chart-card{background:var(--sidebar);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
 .chart-card-head{padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;}
@@ -412,9 +423,22 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
         </div>
 
         <div>
-          <label class="field-label">🌐 Your Website Domain <span style="color:rgba(255,255,255,0.25);font-weight:500;text-transform:none;letter-spacing:0">(optional — unlocks competitor ad comparison)</span></label>
-          <input type="text" class="field-input" id="domain-input" placeholder="e.g. yourbusiness.com" autocomplete="off" style="font-size:0.88rem;">
-          <div style="font-size:0.68rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">If provided, we'll show how your paid search compares to real competitors in your space.</div>
+          <label class="field-label">🌐 Domains <span style="color:rgba(255,255,255,0.25);font-weight:500;text-transform:none;letter-spacing:0">(optional — unlocks real head-to-head comparison)</span></label>
+
+          <!-- YOUR DOMAIN -->
+          <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(79,255,176,0.6);margin-bottom:0.35rem;">Your domain</div>
+          <div style="position:relative;margin-bottom:0.75rem;">
+            <span style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);font-size:0.75rem;">🏠</span>
+            <input type="text" class="field-input" id="domain-input" placeholder="yourbusiness.com" autocomplete="off" style="font-size:0.85rem;padding-left:2rem;">
+          </div>
+
+          <!-- COMPETITOR DOMAINS -->
+          <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,92,124,0.6);margin-bottom:0.35rem;">Competitor domains</div>
+          <div id="comp-domain-list" style="display:flex;flex-direction:column;gap:0.4rem;"></div>
+          <button class="add-comp-btn" onclick="addCompDomain()" id="add-comp-btn">
+            <span>+</span> Add a competitor
+          </button>
+          <div style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem;line-height:1.5;">Add up to 5 competitors to see a real side-by-side paid search breakdown.</div>
         </div>
 
         <button class="scan-btn" id="scan-btn" onclick="runScan()">
@@ -860,13 +884,18 @@ async function runScan(){
 
   try{
     // All three API calls in parallel
-    const domain = document.getElementById('domain-input').value.trim().replace(/^https?:\/\//,'').replace(/\//,'').toLowerCase();
+    const domain = document.getElementById('domain-input').value.trim().replace(/^https?:\/\//,'').replace(/\//g,'').toLowerCase();
     S.domain = domain || null;
+
+    // Collect manually entered competitor domains
+    S.compDomains = Array.from(document.querySelectorAll('.comp-domain-input'))
+      .map(i => i.value.trim().replace(/^https?:\/\//,'').replace(/\//g,'').toLowerCase())
+      .filter(d => d.length > 2);
 
     const [kwData, competitors, paidCompData]=await Promise.all([
       fetchKeywordData(S.keywords),
       fetchCompetitors(S.location.lat,S.location.lng,S.radius,S.industry),
-      fetchPaidCompData(domain, S.keywords, S.industry),
+      fetchPaidCompData(domain, S.compDomains, S.keywords, S.industry),
     ]);
 
     steps.forEach(id=>document.getElementById(id).className='scan-step done');
@@ -1054,12 +1083,15 @@ document.addEventListener('click',e=>{
 // Uses DataForSEO serp_competitors if domain provided,
 // otherwise generates credible estimates.
 // ─────────────────────────────────────────────
-async function fetchPaidCompData(domain, keywords, industry){
+async function fetchPaidCompData(domain, compDomains, keywords, industry){
   const ind = IND[industry];
+  const hasManualComps = compDomains && compDomains.length > 0;
+  const hasYourDomain  = !!domain;
 
-  // If domain provided, try to pull real competitor paid data
-  if(domain){
+  // If we have any domains (yours or manual comps), try DataForSEO
+  if(hasYourDomain || hasManualComps){
     try{
+      // serp_competitors — returns paid data for domains competing on these keywords
       const res = await fetch(DFS, {
         method:'POST',
         headers:{'Content-Type':'application/json'},
@@ -1070,43 +1102,82 @@ async function fetchPaidCompData(domain, keywords, industry){
             language_name:'English',
             location_name:'United States',
             filters:['paid_count','>',0],
-            limit:8,
+            limit:20,
           }]
         })
       });
       const data = await res.json();
       const items = data?.tasks?.[0]?.result?.[0]?.items || [];
-      if(items.length){
-        // Mark source as live
+
+      // Build a lookup from API results
+      const apiMap = {};
+      items.forEach(item => { apiMap[item.domain.replace(/^www\./,'')] = item; });
+
+      // Assemble rows — your domain first, then manual comps, then top API domains to fill to 5
+      const rows = [];
+      const addedDomains = new Set();
+
+      // 1. Your domain
+      if(hasYourDomain){
+        const clean = domain.replace(/^www\./,'');
+        const apiRow = apiMap[clean];
+        rows.push({
+          domain:   clean,
+          isYou:    true,
+          keywords: apiRow?.paid_count   || 0,
+          clicks:   apiRow?.paid_traffic || 0,
+          cost:     apiRow?.paid_cost    || 0,
+          isReal:   !!apiRow,
+        });
+        addedDomains.add(clean);
+      }
+
+      // 2. Manual competitor domains — always include even if not in API results
+      compDomains.forEach(cd => {
+        const clean = cd.replace(/^www\./,'');
+        if(addedDomains.has(clean)) return;
+        const apiRow = apiMap[clean];
+        rows.push({
+          domain:   clean,
+          isYou:    false,
+          keywords: apiRow?.paid_count   || 0,
+          clicks:   apiRow?.paid_traffic || 0,
+          cost:     apiRow?.paid_cost    || 0,
+          isReal:   !!apiRow,
+          isManual: true,
+        });
+        addedDomains.add(clean);
+      });
+
+      // 3. Fill remaining slots from top API results (up to 5 total)
+      for(const item of items){
+        if(rows.length >= 6) break;
+        const clean = item.domain.replace(/^www\./,'');
+        if(addedDomains.has(clean)) continue;
+        rows.push({
+          domain:   clean,
+          isYou:    false,
+          keywords: item.paid_count   || 0,
+          clicks:   item.paid_traffic || 0,
+          cost:     item.paid_cost    || 0,
+          isReal:   true,
+        });
+        addedDomains.add(clean);
+      }
+
+      if(rows.length > 0){
         document.getElementById('paid-comp-source-tag').textContent = '● Live · DataForSEO';
         document.getElementById('paid-comp-source-tag').className = 'live-tag';
-
-        // Find if user's domain is in results or inject it
-        const domainClean = domain.replace(/^www\./,'');
-        let rows = items.slice(0,5).map(item => ({
-          domain:   item.domain,
-          isYou:    item.domain.includes(domainClean),
-          keywords: item.paid_count    || 0,
-          clicks:   item.paid_traffic  || 0,
-          cost:     item.paid_cost     || 0,
-        }));
-
-        // If user domain not in top results, add it with zeroed data
-        const youInList = rows.some(r=>r.isYou);
-        if(!youInList && domain){
-          rows.unshift({ domain:domainClean, isYou:true, keywords:0, clicks:0, cost:0 });
-        }
         return { rows, isReal:true };
       }
-    }catch(e){ console.warn('Paid comp fetch failed, using estimates',e); }
+    }catch(e){ console.warn('Paid comp fetch failed, using estimates', e); }
   }
 
-  // Fallback: generate realistic competitor estimates
-  return generatePaidCompEstimates(domain, industry);
+  // Fallback: generate realistic estimates, injecting any manual domains
+  return generatePaidCompEstimates(domain, compDomains, industry);
 }
 
-function generatePaidCompEstimates(domain, industry){
-  const ind = IND[industry];
+function generatePaidCompEstimates(domain, compDomains, industry){
   const COMP_NAMES = {
     home_services: ['homeadvisor.com','angi.com','thumbtack.com','servicemagic.com','networx.com'],
     healthcare:    ['zocdoc.com','healthgrades.com','vitals.com','webmd.com','practo.com'],
@@ -1120,24 +1191,32 @@ function generatePaidCompEstimates(domain, industry){
     education:     ['care.com','sittercity.com','winnie.com','brightwheel.com','tutor.com'],
     construction:  ['houzz.com','homeadvisor.com','angi.com','buildzoom.com','porch.com'],
   };
-  const competitors = (COMP_NAMES[industry]||COMP_NAMES.home_services).slice(0,4);
-  const rows = competitors.map((d,i) => ({
-    domain:   d,
+
+  // Start with manually entered competitor domains, fall back to industry defaults
+  const manualComps = (compDomains||[]).filter(d=>d.length>2);
+  const defaultComps = (COMP_NAMES[industry]||COMP_NAMES.home_services)
+    .filter(d => !manualComps.includes(d));
+  const allComps = [...manualComps, ...defaultComps].slice(0, 5);
+
+  const rows = allComps.map((d,i) => ({
+    domain:   d.replace(/^www\./,''),
     isYou:    false,
-    keywords: Math.round(8 + Math.random()*120 + (4-i)*15),
-    clicks:   Math.round(50 + Math.random()*800  + (4-i)*80),
-    cost:     Math.round(80 + Math.random()*3000 + (4-i)*200),
+    isManual: manualComps.includes(d),
+    keywords: Math.round(8  + Math.random()*120 + Math.max(0,(4-i))*15),
+    clicks:   Math.round(50 + Math.random()*800 + Math.max(0,(4-i))*80),
+    cost:     Math.round(80 + Math.random()*3000+ Math.max(0,(4-i))*200),
     est:      true,
   }));
 
-  // If domain provided add it first, otherwise add a generic "Your Business" placeholder
-  const youDomain = domain || 'yourbusiness.com';
+  // Your domain row — first
+  const youDomain = domain ? domain.replace(/^www\./,'') : null;
   const youRow = {
-    domain: youDomain, isYou:true,
-    keywords: domain ? Math.round(1+Math.random()*20) : 0,
-    clicks:   domain ? Math.round(0+Math.random()*200) : 0,
-    cost:     domain ? Math.round(0+Math.random()*800) : 0,
-    est:      !domain,
+    domain:   youDomain || 'Your Business',
+    isYou:    true,
+    keywords: youDomain ? Math.round(1+Math.random()*20)  : 0,
+    clicks:   youDomain ? Math.round(0+Math.random()*200) : 0,
+    cost:     youDomain ? Math.round(0+Math.random()*800) : 0,
+    est:      true,
   };
   return { rows:[youRow,...rows], isReal:false };
 }
@@ -1273,6 +1352,47 @@ function renderPaidComp(data, domain){
       requestAnimationFrame(()=>{ b.style.width=w; });
     });
   });
+}
+
+// ─────────────────────────────────────────────
+// COMPETITOR DOMAIN INPUTS
+// ─────────────────────────────────────────────
+let compDomainCount = 0;
+const MAX_COMP_DOMAINS = 5;
+
+function addCompDomain(){
+  if(compDomainCount >= MAX_COMP_DOMAINS) return;
+  compDomainCount++;
+  const id = 'comp-d-' + compDomainCount;
+  const row = document.createElement('div');
+  row.className = 'comp-domain-row';
+  row.id = 'comp-row-' + compDomainCount;
+  row.innerHTML = `
+    <div class="comp-domain-wrap">
+      <span class="comp-domain-icon">🏢</span>
+      <input type="text" class="comp-domain-input" id="${id}"
+        placeholder="competitor.com" autocomplete="off">
+    </div>
+    <button class="comp-remove-btn" onclick="removeCompDomain('comp-row-${compDomainCount}')" title="Remove">×</button>
+  `;
+  document.getElementById('comp-domain-list').appendChild(row);
+
+  // Hide add button at max
+  if(compDomainCount >= MAX_COMP_DOMAINS){
+    document.getElementById('add-comp-btn').style.display = 'none';
+  }
+
+  // Focus new input
+  document.getElementById(id).focus();
+}
+
+function removeCompDomain(rowId){
+  const row = document.getElementById(rowId);
+  if(row){ row.remove(); compDomainCount--; }
+  // Re-show add button if under limit
+  if(compDomainCount < MAX_COMP_DOMAINS){
+    document.getElementById('add-comp-btn').style.display = 'flex';
+  }
 }
 
 window.addEventListener('DOMContentLoaded',()=>{initMap();onIndustryChange();});
