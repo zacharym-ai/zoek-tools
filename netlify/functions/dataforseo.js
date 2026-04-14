@@ -33,13 +33,20 @@ exports.handler = async function(event, context) {
   }
 
   const ALLOWED = [
+    // existing
     'on_page/task_post',
     'on_page/summary',
     'on_page/instant_pages/live',
     'backlinks/summary/live',
     'serp/google/organic/live/advanced',
     'content_analysis/search/live',
+    // NEW — Local Market Scanner
+    'keywords_data/google_ads/search_volume/live',   // real volume + CPC per keyword
+    'keywords_data/google_ads/keywords_for_keywords/live', // keyword suggestions
+    'dataforseo_labs/google/keyword_difficulty/live', // SEO difficulty score
+    'dataforseo_labs/google/serp_competitors/live',   // who ranks for these keywords
   ];
+
   if (!ALLOWED.some(e => endpoint.includes(e))) {
     return { statusCode: 403, headers, body: JSON.stringify({ error: 'Endpoint not allowed: ' + endpoint }) };
   }
