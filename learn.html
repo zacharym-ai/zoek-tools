@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoek Academy | Marketing Education for Local Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#1E1044;--sidebar:#27215C;--purple:#692C8E;--pink:#ED0875;
+  --blue:#1EBFDC;--white:#ffffff;--muted:#a0a0c0;
+  --border:rgba(105,44,142,0.2);--border-light:rgba(255,255,255,0.07);
+  --green:#4fffb0;--red:#ff5c7c;--yellow:#FAA31C;
+  --gradient:linear-gradient(135deg,#692C8E 0%,#ED0875 100%);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-links{display:flex;align-items:center;gap:0.15rem;list-style:none;}
+.nav-links>li>a{font-size:0.82rem;font-weight:600;letter-spacing:0.03em;color:var(--muted);text-decoration:none;padding:0.45rem 0.9rem;border-radius:4px;transition:all 0.15s;display:block;}
+.nav-links>li>a:hover,.nav-links>li>a.active{color:var(--white);background:rgba(255,255,255,0.07);}
+.nav-dropdown{position:relative;}
+.nav-drop-btn{background:transparent;border:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;padding:0.45rem 0.9rem;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:0.3rem;transition:all 0.15s;}
+.nav-drop-btn:hover,.nav-drop-btn.open{color:var(--white);background:rgba(255,255,255,0.07);}
+.nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
+.nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
+.nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1E1044;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
+.nav-drop-menu.open{display:flex;}
+.ndm-col{display:flex;flex-direction:column;gap:0.1rem;flex:1;}
+.ndm-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;padding:0 0.4rem;}
+.nav-drop-menu a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.38rem 0.5rem;border-radius:4px;transition:all 0.15s;display:block;white-space:nowrap;}
+.nav-drop-menu a:hover{color:var(--white);background:rgba(105,44,142,0.1);}
+.nav-cta{background:var(--gradient);color:white;text-decoration:none;padding:0.5rem 1.15rem;border-radius:4px;font-size:0.82rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 14px rgba(105,44,142,0.3);white-space:nowrap;}
+.nav-cta:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.hero-left{padding:4rem 3rem;background:radial-gradient(ellipse at 0% 50%,rgba(105,44,142,0.15) 0%,transparent 65%);}
+.hero-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(105,44,142,0.2);color:rgba(200,160,255,0.9);border:1px solid rgba(105,44,142,0.35);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.hero-title{font-family:'Poppins',sans-serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1.25rem;}
+.hero-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:440px;}
+.hero-sub strong{color:var(--white);}
+.hero-right{background:var(--sidebar);border-left:1px solid var(--border);padding:3rem;display:flex;flex-direction:column;justify-content:center;gap:1rem;}
+.hero-right-title{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.module-preview-list{display:flex;flex-direction:column;gap:0.4rem;}
+.module-preview-item{display:flex;align-items:center;gap:0.75rem;padding:0.55rem 0.85rem;border:1px solid var(--border);border-radius:4px;background:rgba(255,255,255,0.02);transition:all 0.15s;cursor:pointer;}
+.module-preview-item:hover{border-color:rgba(105,44,142,0.4);background:rgba(105,44,142,0.08);}
+.mpi-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.mpi-name{font-size:0.82rem;font-weight:600;flex:1;}
+.mpi-badge{font-size:0.6rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:3px;}
+.badge-live{background:rgba(79,255,176,0.12);color:var(--green);}
+.badge-new{background:rgba(237,8,117,0.12);color:var(--pink);}
+.badge-soon{background:rgba(250,163,28,0.1);color:var(--yellow);}
+
+/* MAIN LAYOUT */
+.academy-wrap{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 60px);border-bottom:1px solid var(--border);}
+
+/* SIDEBAR */
+.academy-sidebar{border-right:1px solid var(--border);position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;display:flex;flex-direction:column;background:var(--sidebar);}
+.sb-section{padding:1.25rem 1rem;border-bottom:1px solid var(--border);}
+.sb-section:last-child{border-bottom:none;}
+.sb-label{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;padding:0 0.25rem;}
+.tab-btn{width:100%;display:flex;align-items:center;gap:0.65rem;padding:0.65rem 0.75rem;border:1.5px solid transparent;background:transparent;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--muted);text-align:left;transition:all 0.15s;border-radius:5px;margin-bottom:0.25rem;}
+.tab-btn:last-child{margin-bottom:0;}
+.tab-btn:hover{border-color:var(--border);color:var(--white);background:rgba(255,255,255,0.04);}
+.tab-btn.active{border-color:var(--purple);background:rgba(105,44,142,0.15);color:var(--white);}
+.tab-btn.coming{opacity:0.4;cursor:default;}
+.tab-btn.coming:hover{border-color:transparent;background:transparent;color:var(--muted);}
+.tab-icon{font-size:0.95rem;flex-shrink:0;}
+.tab-text{display:flex;flex-direction:column;gap:1px;flex:1;}
+.tab-name{font-size:0.82rem;font-weight:700;}
+.tab-sub{font-size:0.68rem;color:var(--muted);font-weight:400;}
+.tab-badge{font-size:0.58rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:0.12rem 0.45rem;border-radius:3px;flex-shrink:0;}
+.tb-live{background:rgba(79,255,176,0.12);color:var(--green);}
+.tb-new{background:rgba(237,8,117,0.12);color:var(--pink);}
+.tb-soon{background:rgba(250,163,28,0.1);color:var(--yellow);}
+.tab-btn.active .tab-sub{color:rgba(200,160,255,0.6);}
+
+/* CONTENT */
+.content-area{overflow:hidden;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* SECTION HEADER — reused across tabs */
+.sec-header{padding:3rem;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.sec-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.75rem;}
+.sec-title{font-family:'Poppins',sans-serif;font-size:clamp(1.6rem,3vw,2.8rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1rem;}
+.sec-title .acc-g{color:var(--green);}
+.sec-title .acc-b{color:var(--blue);}
+.sec-title .acc-p{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-body{font-size:0.9rem;color:var(--muted);line-height:1.8;}
+.sec-body strong{color:var(--white);font-weight:600;}
+.sec-body p+p{margin-top:0.85rem;}
+.sec-divider{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;}
+.sec-divider::after{content:'';flex:1;height:1px;background:var(--border-light);}
+
+/* STAT BLOCKS */
+.stat-blocks{display:flex;flex-direction:column;gap:0.65rem;}
+.stat-block{display:flex;align-items:flex-start;gap:0.85rem;padding:0.85rem 1rem;border:1px solid var(--border);border-radius:6px;background:rgba(255,255,255,0.02);}
+.stat-num{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;line-height:1;color:var(--pink);min-width:52px;}
+.stat-text{font-size:0.8rem;color:var(--muted);line-height:1.55;}
+.stat-text strong{color:var(--white);font-weight:600;}
+
+/* ──── TAB 1: FUNNEL ──────────────────────── */
+.funnel-stage-cards{display:flex;flex-direction:column;gap:0;}
+.fsc{padding:1rem 1.25rem;border:1px solid var(--border);margin-bottom:-1px;cursor:pointer;transition:all 0.15s;display:flex;align-items:flex-start;gap:1rem;border-radius:0;}
+.fsc:first-child{border-radius:6px 6px 0 0;}
+.fsc:last-child{border-radius:0 0 6px 6px;margin-bottom:0;}
+.fsc:hover{z-index:1;position:relative;border-color:rgba(105,44,142,0.5);}
+.fsc-letter{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;line-height:1;flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:4px;}
+.fsc.tofu .fsc-letter{background:rgba(79,255,176,0.15);color:var(--green);}
+.fsc.mofu .fsc-letter{background:rgba(250,163,28,0.15);color:var(--yellow);}
+.fsc.bofu .fsc-letter{background:rgba(255,92,124,0.12);color:var(--red);}
+.fsc.after .fsc-letter{background:rgba(105,44,142,0.2);color:rgba(200,160,255,0.9);}
+.fsc.active.tofu{background:rgba(79,255,176,0.06);border-color:var(--green);z-index:2;position:relative;}
+.fsc.active.tofu .fsc-letter{background:var(--green);color:#0a2e1c;}
+.fsc.active.mofu{background:rgba(250,163,28,0.06);border-color:var(--yellow);z-index:2;position:relative;}
+.fsc.active.mofu .fsc-letter{background:var(--yellow);color:#1E1044;}
+.fsc.active.bofu{background:rgba(255,92,124,0.06);border-color:var(--red);z-index:2;position:relative;}
+.fsc.active.bofu .fsc-letter{background:var(--red);color:white;}
+.fsc.active.after{background:rgba(105,44,142,0.1);border-color:var(--purple);z-index:2;position:relative;}
+.fsc.active.after .fsc-letter{background:var(--gradient);color:white;}
+.fsc-name{font-weight:700;font-size:0.88rem;margin-bottom:0.1rem;}
+.fsc-tagline{font-size:0.72rem;color:var(--muted);}
+
+.funnel-diagram{display:flex;flex-direction:column;align-items:center;gap:0;max-width:720px;margin:0 auto;}
+.funnel-tier{width:100%;cursor:pointer;transition:all 0.2s;}
+.funnel-tier-inner{display:flex;align-items:stretch;border:1px solid var(--border);transition:all 0.2s;margin-bottom:-1px;}
+.funnel-tier:hover .funnel-tier-inner{z-index:2;position:relative;border-color:rgba(105,44,142,0.5);}
+.funnel-tier-shape{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.3rem;padding:1.1rem 2rem;flex:1;transition:background 0.2s;}
+.tier-label{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:0.04em;line-height:1;}
+.tier-sublabel{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;opacity:0.65;}
+.funnel-tier-info{width:260px;padding:1rem 1.25rem;border-left:1px solid var(--border);display:flex;flex-direction:column;gap:0.4rem;justify-content:center;flex-shrink:0;}
+.tier-info-stage{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+.tier-info-title{font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:800;}
+.tier-info-desc{font-size:0.75rem;color:var(--muted);line-height:1.55;}
+.tier-tofu .funnel-tier-shape{background:rgba(79,255,176,0.06);}
+.tier-tofu .tier-label{color:var(--green);}
+.tier-tofu.active .funnel-tier-inner{border-color:var(--green);z-index:3;position:relative;}
+.tier-tofu.active .funnel-tier-shape{background:rgba(79,255,176,0.18);}
+.tier-tofu.active .tier-info-stage{color:var(--green);}
+.tier-mofu .funnel-tier-shape{background:rgba(250,163,28,0.06);}
+.tier-mofu .tier-label{color:var(--yellow);}
+.tier-mofu.active .funnel-tier-inner{border-color:var(--yellow);z-index:3;position:relative;}
+.tier-mofu.active .funnel-tier-shape{background:rgba(250,163,28,0.15);}
+.tier-mofu.active .tier-info-stage{color:var(--yellow);}
+.tier-bofu .funnel-tier-shape{background:rgba(255,92,124,0.05);}
+.tier-bofu .tier-label{color:var(--red);}
+.tier-bofu.active .funnel-tier-inner{border-color:var(--red);z-index:3;position:relative;}
+.tier-bofu.active .funnel-tier-shape{background:rgba(255,92,124,0.14);}
+.tier-bofu.active .tier-info-stage{color:var(--red);}
+.tier-after .funnel-tier-inner{background:rgba(105,44,142,0.08);}
+.tier-after .tier-label{color:rgba(200,160,255,0.9);font-size:1.1rem;}
+.tier-after.active .funnel-tier-inner{border-color:var(--purple);z-index:3;position:relative;}
+.tier-after.active .funnel-tier-shape{background:rgba(105,44,142,0.18);}
+.tier-after.active .tier-info-stage{color:rgba(200,160,255,0.9);}
+.funnel-connector{width:2px;height:14px;background:var(--border);margin:0 auto;position:relative;z-index:1;}
+.funnel-connector::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid rgba(105,44,142,0.4);}
+
+.stage-detail{padding:2.5rem 3rem;border-top:1px solid var(--border);}
+.stage-detail-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.sdc{background:var(--sidebar);padding:1.4rem;}
+.sdc-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;}
+.sdc-title{font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:800;margin-bottom:0.75rem;}
+.sdc-items{list-style:none;display:flex;flex-direction:column;gap:0.4rem;}
+.sdc-items li{font-size:0.8rem;color:var(--muted);line-height:1.5;padding-left:1.1rem;position:relative;}
+.sdc-items li::before{content:'→';position:absolute;left:0;color:var(--purple);font-size:0.7rem;top:2px;}
+.sdc-items li strong{color:var(--white);font-weight:600;}
+
+.examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.ex-col{background:var(--sidebar);padding:1.4rem;}
+.ex-biz{font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:800;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border-light);}
+.ex-stage{margin-bottom:0.85rem;}
+.ex-stage-name{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.ex-stage-name.t{color:var(--green);}
+.ex-stage-name.m{color:var(--yellow);}
+.ex-stage-name.b{color:var(--red);}
+.ex-stage-text{font-size:0.78rem;color:var(--muted);line-height:1.55;}
+.ex-stage-text strong{color:var(--white);font-weight:600;}
+
+/* ──── TAB 2: DICTIONARY ──────────────────── */
+.dict-search-bar{padding:1.25rem 2rem;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.15);position:sticky;top:60px;z-index:20;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;}
+.dict-search-wrap{position:relative;flex:1;min-width:200px;}
+.dict-search-input{width:100%;padding:0.65rem 2.5rem 0.65rem 2.25rem;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:6px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
+.dict-search-input:focus{border-color:var(--purple);}
+.dict-search-input::placeholder{color:rgba(255,255,255,0.25);}
+.dict-search-icon{position:absolute;left:0.8rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.82rem;pointer-events:none;}
+.dict-clear{position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;display:none;padding:0;line-height:1;}
+.dict-clear.show{display:block;}
+.dict-filter-pills{display:flex;gap:0.35rem;flex-wrap:wrap;}
+.dict-pill{padding:0.28rem 0.7rem;font-size:0.68rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--muted);transition:all 0.15s;font-family:'Plus Jakarta Sans',sans-serif;border-radius:20px;}
+.dict-pill:hover{border-color:var(--purple);color:var(--white);}
+.dict-pill.active{border-color:var(--purple);background:rgba(105,44,142,0.2);color:var(--white);}
+.dict-results-count{padding:0.6rem 2rem;border-bottom:1px solid var(--border-light);font-size:0.75rem;color:var(--muted);display:none;}
+.dict-results-count span{font-weight:700;color:var(--white);}
+.dict-category{border-bottom:1px solid var(--border);}
+.dict-category:last-child{border-bottom:none;}
+.dict-cat-header{padding:0.85rem 2rem;background:rgba(105,44,142,0.08);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;border-bottom:1px solid var(--border);}
+.dict-cat-name{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;color:var(--white);}
+.dict-cat-count{font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+.dict-terms-grid{display:grid;grid-template-columns:1fr 1fr;}
+.dict-category.collapsed .dict-terms-grid{display:none;}
+.dict-term{padding:1.5rem 2rem;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light);transition:background 0.15s;}
+.dict-term:nth-child(even){border-right:none;}
+.dict-term:hover{background:rgba(105,44,142,0.05);}
+.dict-term.hidden{display:none;}
+.dict-acronym{display:inline-block;font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:800;letter-spacing:0.06em;background:var(--gradient);color:white;padding:0.1rem 0.55rem;border-radius:3px;margin-bottom:0.4rem;}
+.dict-name{font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:800;line-height:1.1;margin-bottom:0.5rem;}
+.dict-plain{font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:0.75rem;}
+.dict-example{background:rgba(105,44,142,0.08);border:1px solid var(--border);border-left:3px solid var(--purple);padding:0.75rem 1rem;font-size:0.78rem;color:var(--muted);line-height:1.6;border-radius:0 4px 4px 0;}
+.dict-example::before{content:'Real world: ';font-weight:700;color:var(--purple);font-size:0.65rem;letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:0.2rem;}
+.dict-no-results{padding:4rem 2rem;text-align:center;color:var(--muted);display:none;}
+
+/* ──── TAB 3: EMAIL 101 ───────────────────── */
+.em-section{padding:2.5rem 3rem;border-bottom:1px solid var(--border);}
+.em-2col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.em-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:0.6rem;}
+.em-calc{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.em-calc-head{background:rgba(105,44,142,0.15);border-bottom:1px solid var(--border);padding:0.85rem 1.25rem;}
+.em-calc-title{font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:800;}
+.em-calc-body{padding:1.25rem;display:flex;flex-direction:column;gap:0.85rem;}
+.em-field-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.3rem;}
+.em-input{width:100%;padding:0.6rem 0.85rem;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:5px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.2s;}
+.em-input:focus{border-color:var(--purple);}
+.em-results{border-top:1px solid var(--border);padding-top:1rem;display:none;flex-direction:column;gap:0.5rem;}
+.em-results.show{display:flex;}
+.em-res-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
+.em-res-cell{padding:0.75rem;background:rgba(255,255,255,0.04);border-radius:5px;border:1px solid var(--border);}
+.em-res-label{font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.em-res-val{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;line-height:1;}
+.em-res-main{padding:1rem 1.25rem;background:var(--gradient);border-radius:6px;}
+.em-res-main-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.3rem;}
+.em-res-main-val{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;line-height:1;}
+.em-res-verdict{font-size:0.78rem;color:rgba(255,255,255,0.75);margin-top:0.4rem;line-height:1.55;}
+
+.seg-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.seg-card{background:var(--sidebar);padding:1.25rem;}
+.seg-card-name{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:800;margin-bottom:0.35rem;}
+.seg-card-type{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;}
+.seg-card-text{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+
+.platform-row{display:grid;grid-template-columns:160px 1fr 1fr 140px;gap:1rem;align-items:start;padding:1rem 1.5rem;border-bottom:1px solid var(--border-light);cursor:pointer;transition:background 0.15s;}
+.platform-row:last-child{border-bottom:none;}
+.platform-row:hover{background:rgba(105,44,142,0.04);}
+.plat-name{font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:800;}
+.plat-best{font-size:0.7rem;color:var(--green);font-weight:600;margin-top:0.15rem;}
+.plat-col-label{font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem;}
+.plat-item{font-size:0.78rem;color:var(--muted);line-height:1.5;padding-left:0.9rem;position:relative;margin-bottom:2px;}
+.plat-item::before{position:absolute;left:0;font-size:0.72rem;}
+.plat-item.pro::before{content:'+';color:var(--green);}
+.plat-item.con::before{content:'−';color:var(--red);}
+.plat-price{font-size:0.82rem;color:var(--white);font-weight:600;line-height:1.55;}
+
+/* ──── TAB 4: LOCAL SEO 101 ─────────────── */
+.lseo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.lseo-card{background:var(--sidebar);padding:1.4rem;}
+.lseo-card-icon{font-size:1.5rem;margin-bottom:0.75rem;}
+.lseo-card-title{font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:800;margin-bottom:0.5rem;}
+.lseo-card-text{font-size:0.78rem;color:var(--muted);line-height:1.65;}
+.lseo-card-text strong{color:var(--white);font-weight:600;}
+.signal-rows{display:flex;flex-direction:column;gap:0;}
+.signal-row{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;gap:1rem;padding:0.85rem 0;border-bottom:1px solid var(--border-light);}
+.signal-row:last-child{border-bottom:none;}
+.signal-name{font-size:0.85rem;font-weight:600;}
+.signal-weight-wrap{text-align:center;}
+.signal-weight{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;}
+.signal-bar-wrap{background:rgba(255,255,255,0.05);border-radius:3px;height:8px;overflow:hidden;}
+.signal-bar{height:100%;border-radius:3px;background:var(--gradient);}
+.signal-tip{font-size:0.75rem;color:var(--muted);line-height:1.5;}
+
+/* ──── TAB 5: HOW PPC WORKS ──────────────── */
+.ppc-flow{display:flex;align-items:center;gap:0;overflow-x:auto;padding:2rem 3rem;border-bottom:1px solid var(--border);}
+.ppc-step{display:flex;flex-direction:column;align-items:center;gap:0.5rem;min-width:120px;text-align:center;}
+.ppc-step-icon{font-size:1.5rem;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:2px solid var(--border);}
+.ppc-step-label{font-size:0.72rem;font-weight:700;color:var(--white);}
+.ppc-step-sub{font-size:0.62rem;color:var(--muted);}
+.ppc-arrow{font-size:1.2rem;color:var(--purple);flex-shrink:0;padding:0 0.25rem;margin-bottom:1.5rem;}
+.ppc-slider-section{padding:2.5rem 3rem;border-bottom:1px solid var(--border);}
+.ppc-slider-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+.ppc-slider-wrap{display:flex;flex-direction:column;gap:1.25rem;}
+.ppc-slider-row{display:flex;flex-direction:column;gap:0.4rem;}
+.ppc-slider-label{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;}
+.ppc-slider-label span{color:var(--white);font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:800;}
+.ppc-slider{width:100%;accent-color:var(--purple);cursor:pointer;}
+.ppc-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.ppc-res-cell{background:var(--sidebar);padding:1.1rem;}
+.ppc-res-label{font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.ppc-res-val{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;line-height:1;}
+.ppc-res-sub{font-size:0.65rem;color:var(--muted);margin-top:0.15rem;}
+.ppc-myth-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.myth-card{background:var(--sidebar);padding:1.25rem;}
+.myth-label{font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;}
+.myth-label.myth{color:var(--red);}
+.myth-label.truth{color:var(--green);}
+.myth-text{font-size:0.82rem;color:var(--muted);line-height:1.65;}
+.myth-text strong{color:var(--white);font-weight:600;}
+
+/* ──── TAB 6: AI & GEO ───────────────────── */
+.geo-cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.geo-card{background:var(--sidebar);padding:1.4rem;}
+.geo-card-head{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem;}
+.geo-card-icon{font-size:1.25rem;}
+.geo-card-title{font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:800;}
+.geo-card-text{font-size:0.8rem;color:var(--muted);line-height:1.65;}
+.geo-card-text strong{color:var(--white);font-weight:600;}
+.geo-compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.geo-compare-col{background:var(--sidebar);padding:1.25rem;}
+.geo-compare-head{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:800;margin-bottom:0.85rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border-light);}
+.geo-compare-item{display:flex;align-items:flex-start;gap:0.5rem;padding:0.45rem 0;border-bottom:1px solid var(--border-light);font-size:0.78rem;}
+.geo-compare-item:last-child{border-bottom:none;}
+.geo-compare-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+
+/* ──── TAB 7: WHY ZOEK ───────────────────── */
+.why-hero{padding:3rem;border-bottom:1px solid var(--border);background:radial-gradient(ellipse at 50% 0%,rgba(105,44,142,0.18) 0%,transparent 65%);}
+.why-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2rem;}
+.why-stat{background:var(--sidebar);padding:1.25rem;text-align:center;}
+.why-stat-val{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;line-height:1;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.why-stat-label{font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.service-card{background:var(--sidebar);padding:1.4rem;transition:background 0.15s;}
+.service-card:hover{background:rgba(105,44,142,0.12);}
+.service-icon{font-size:1.5rem;margin-bottom:0.75rem;}
+.service-name{font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:800;margin-bottom:0.4rem;}
+.service-text{font-size:0.78rem;color:var(--muted);line-height:1.6;margin-bottom:0.85rem;}
+.service-link{font-size:0.72rem;font-weight:700;color:var(--purple);text-decoration:none;display:flex;align-items:center;gap:0.3rem;}
+.service-link:hover{color:var(--pink);}
+.testimonial-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.tcard{background:var(--sidebar);padding:1.4rem;}
+.tcard-stars{color:var(--yellow);font-size:0.85rem;margin-bottom:0.75rem;letter-spacing:2px;}
+.tcard-text{font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:0.85rem;font-style:italic;}
+.tcard-text::before{content:'"';}
+.tcard-text::after{content:'"';}
+.tcard-name{font-size:0.75rem;font-weight:700;color:var(--white);}
+.tcard-biz{font-size:0.68rem;color:var(--muted);}
+.why-cta{background:var(--gradient);border-radius:12px;padding:3rem;text-align:center;margin:2.5rem 3rem;}
+.why-cta-title{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;line-height:1.1;margin-bottom:0.75rem;}
+.why-cta-sub{font-size:0.9rem;color:rgba(255,255,255,0.75);line-height:1.7;max-width:480px;margin:0 auto 1.75rem;}
+.why-cta-btn{display:inline-block;background:white;color:var(--purple);text-decoration:none;padding:0.95rem 2rem;border-radius:6px;font-size:0.95rem;font-weight:800;box-shadow:0 4px 18px rgba(0,0,0,0.2);transition:all 0.15s;}
+.why-cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,0.25);}
+
+/* FOOTER */
+footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
+.footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+.footer-link:hover{color:var(--white);}
+
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{border-left:none;border-top:1px solid var(--border);}
+  .academy-wrap{grid-template-columns:1fr;}
+  .academy-sidebar{position:static;height:auto;flex-direction:row;flex-wrap:wrap;padding:0.75rem;gap:0.3rem;border-right:none;border-bottom:1px solid var(--border);}
+  .sb-section{padding:0;border-bottom:none;}
+  .sb-label{display:none;}
+  .tab-btn{width:auto;margin-bottom:0;padding:0.4rem 0.75rem;}
+  .tab-text .tab-sub{display:none;}
+  .sec-header,.em-2col,.ppc-slider-grid{grid-template-columns:1fr;}
+  .stage-detail-grid,.examples-grid,.lseo-grid,.services-grid,.testimonial-grid{grid-template-columns:1fr;}
+  .dict-terms-grid,.geo-cards,.ppc-myth-grid,.seg-cards{grid-template-columns:1fr;}
+  .why-stats{grid-template-columns:1fr 1fr;}
+  .funnel-tier-info{display:none;}
+}
+@media(max-width:600px){
+  .hero-left{padding:2.5rem 1.5rem;}
+  .sec-header,.em-section,.stage-detail,.ppc-slider-section{padding:2rem 1.5rem;}
+  .platform-row{grid-template-columns:1fr 1fr;gap:0.75rem;}
+  .ppc-flow{padding:1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="learn.html" class="active">Academy</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-drop-btn" onclick="toggleNav(this)">Tools <span class="nav-chevron">&#9660;</span></button>
+      <div class="nav-drop-menu" id="nl-tools-menu">
+        <div class="ndm-col">
+          <div class="ndm-label">Calculators</div>
+          <a href="funnel.html">Lead Funnel Visualizer</a>
+          <a href="calculator.html">Cost Per Lead</a>
+          <a href="roi.html">Marketing ROI</a>
+          <a href="budget.html">Ad Budget Planner</a>
+          <a href="revenue-loss.html">Revenue Loss</a>
+          <a href="ai-calculator.html">AI Receptionist ROI</a>
+          <a href="package-builder.html">Package Builder</a>
+        </div>
+        <div class="ndm-col">
+          <div class="ndm-label">Audits &amp; Scanners</div>
+          <a href="business-snapshot.html">Business Snapshot ✨</a>
+          <a href="local-market-scanner.html">Local Market Scanner 🗺️</a>
+          <a href="marketing-wheel.html">Marketing Wheel</a>
+          <a href="website-quiz.html">Website Quiz</a>
+          <a href="positioning.html">Positioning Worksheet</a>
+          <a href="reviews.html">Reputation Toolkit</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Zoek Academy</div>
+    <h1 class="hero-title">Marketing explained.<br><span class="accent">No agency speak.</span></h1>
+    <p class="hero-sub">Everything you need to understand how marketing actually works — funnels, channels, SEO, PPC, email. <strong>Real explanations. Real examples. Built for real businesses.</strong></p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-title">What's inside</div>
+    <div class="module-preview-list">
+      <div class="module-preview-item" onclick="switchTab('funnel',null)">
+        <div class="mpi-dot" style="background:var(--green)"></div>
+        <span class="mpi-name">The Marketing Funnel</span>
+        <span class="mpi-badge badge-live">Live</span>
+      </div>
+      <div class="module-preview-item" onclick="switchTab('dictionary',null)">
+        <div class="mpi-dot" style="background:var(--yellow)"></div>
+        <span class="mpi-name">Marketing Dictionary</span>
+        <span class="mpi-badge badge-live">Live</span>
+      </div>
+      <div class="module-preview-item" onclick="switchTab('email101',null)">
+        <div class="mpi-dot" style="background:var(--blue)"></div>
+        <span class="mpi-name">Email Marketing 101</span>
+        <span class="mpi-badge badge-live">Live</span>
+      </div>
+      <div class="module-preview-item" onclick="switchTab('localseo',null)">
+        <div class="mpi-dot" style="background:var(--pink)"></div>
+        <span class="mpi-name">Local SEO 101</span>
+        <span class="mpi-badge badge-new">New</span>
+      </div>
+      <div class="module-preview-item" onclick="switchTab('ppc',null)">
+        <div class="mpi-dot" style="background:var(--purple)"></div>
+        <span class="mpi-name">How PPC Works</span>
+        <span class="mpi-badge badge-new">New</span>
+      </div>
+      <div class="module-preview-item" onclick="switchTab('geo',null)">
+        <div class="mpi-dot" style="background:rgba(200,160,255,0.9)"></div>
+        <span class="mpi-name">AI &amp; GEO Visibility</span>
+        <span class="mpi-badge badge-new">New</span>
+      </div>
+      <div class="module-preview-item" onclick="switchTab('whyzoek',null)">
+        <div class="mpi-dot" style="background:var(--gradient);background:linear-gradient(135deg,#692C8E,#ED0875)"></div>
+        <span class="mpi-name">Why Zoek</span>
+        <span class="mpi-badge badge-live">Live</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="academy-wrap">
+
+  <!-- SIDEBAR -->
+  <div class="academy-sidebar">
+    <div class="sb-section">
+      <div class="sb-label">Marketing fundamentals</div>
+      <button class="tab-btn active" onclick="switchTab('funnel',this)">
+        <span class="tab-icon">↓</span>
+        <span class="tab-text"><span class="tab-name">The Funnel</span><span class="tab-sub">TOFU · MOFU · BOFU</span></span>
+        <span class="tab-badge tb-live">Live</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('dictionary',this)">
+        <span class="tab-icon">📖</span>
+        <span class="tab-text"><span class="tab-name">Dictionary</span><span class="tab-sub">60+ terms explained</span></span>
+        <span class="tab-badge tb-live">Live</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('email101',this)">
+        <span class="tab-icon">✉</span>
+        <span class="tab-text"><span class="tab-name">Email Marketing 101</span><span class="tab-sub">Lists, automations, ROI</span></span>
+        <span class="tab-badge tb-live">Live</span>
+      </button>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Zoek specialties</div>
+      <button class="tab-btn" onclick="switchTab('localseo',this)">
+        <span class="tab-icon">📍</span>
+        <span class="tab-text"><span class="tab-name">Local SEO 101</span><span class="tab-sub">Get found in your city</span></span>
+        <span class="tab-badge tb-new">New</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('ppc',this)">
+        <span class="tab-icon">⚡</span>
+        <span class="tab-text"><span class="tab-name">How PPC Works</span><span class="tab-sub">Turn budget into leads</span></span>
+        <span class="tab-badge tb-new">New</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('geo',this)">
+        <span class="tab-icon">🤖</span>
+        <span class="tab-text"><span class="tab-name">AI &amp; GEO Visibility</span><span class="tab-sub">The next frontier</span></span>
+        <span class="tab-badge tb-new">New</span>
+      </button>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">About Zoek</div>
+      <button class="tab-btn" onclick="switchTab('whyzoek',this)">
+        <span class="tab-icon">🏆</span>
+        <span class="tab-text"><span class="tab-name">Why Zoek</span><span class="tab-sub">#1 Wix Partner · 50k+ clients</span></span>
+        <span class="tab-badge tb-live">Live</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content-area">
+
+    <!-- ═══════════ FUNNEL TAB ═══════════ -->
+    <div class="tab-content active" id="tab-funnel">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">The Marketing Funnel</div>
+          <h2 class="sec-title">TOFU, MOFU, BOFU.<br><span class="acc-g">Now you know what that means.</span></h2>
+          <div class="sec-body">
+            <p>Every marketing strategy has three jobs. Get people to know you exist. Get interested people to consider you. Get ready people to actually buy. Marketers gave these jobs fancy names and turned it into a diagram.</p>
+            <p><strong>Here's the plain English version.</strong> Click each stage to see what it means, what kind of content belongs there, and what a real small business should be doing at each step.</p>
+          </div>
+        </div>
+        <div class="funnel-stage-cards">
+          <div class="fsc tofu active" onclick="activateStage('tofu')">
+            <div class="fsc-letter">T</div>
+            <div><div class="fsc-name">TOFU — Top of Funnel</div><div class="fsc-tagline">They don't know you exist yet</div></div>
+          </div>
+          <div class="fsc mofu" onclick="activateStage('mofu')">
+            <div class="fsc-letter">M</div>
+            <div><div class="fsc-name">MOFU — Middle of Funnel</div><div class="fsc-tagline">They're interested but not ready</div></div>
+          </div>
+          <div class="fsc bofu" onclick="activateStage('bofu')">
+            <div class="fsc-letter">B</div>
+            <div><div class="fsc-name">BOFU — Bottom of Funnel</div><div class="fsc-tagline">They're ready to make a decision</div></div>
+          </div>
+          <div class="fsc after" onclick="activateStage('after')">
+            <div class="fsc-letter">★</div>
+            <div><div class="fsc-name">After Purchase</div><div class="fsc-tagline">The most overlooked stage</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">The funnel, visualized</div>
+        <div class="funnel-diagram">
+          <div class="funnel-tier tier-tofu active" id="tier-tofu" onclick="activateStage('tofu')">
+            <div class="funnel-tier-inner">
+              <div class="funnel-tier-shape" style="clip-path:polygon(5% 0%,95% 0%,88% 100%,12% 100%)">
+                <div class="tier-label">TOFU</div><div class="tier-sublabel">Awareness Stage</div>
+              </div>
+              <div class="funnel-tier-info">
+                <div class="tier-info-stage">Top of funnel</div>
+                <div class="tier-info-title">Get on their radar</div>
+                <div class="tier-info-desc">Blog posts, social content, videos, ads to cold audiences. Give before you ask.</div>
+              </div>
+            </div>
+          </div>
+          <div class="funnel-connector"></div>
+          <div class="funnel-tier tier-mofu" id="tier-mofu" onclick="activateStage('mofu')">
+            <div class="funnel-tier-inner">
+              <div class="funnel-tier-shape" style="clip-path:polygon(12% 0%,88% 0%,80% 100%,20% 100%)">
+                <div class="tier-label">MOFU</div><div class="tier-sublabel">Consideration Stage</div>
+              </div>
+              <div class="funnel-tier-info">
+                <div class="tier-info-stage">Middle of funnel</div>
+                <div class="tier-info-title">Stay in their mind</div>
+                <div class="tier-info-desc">Email nurture, retargeting, case studies, free resources. Build trust over time.</div>
+              </div>
+            </div>
+          </div>
+          <div class="funnel-connector"></div>
+          <div class="funnel-tier tier-bofu" id="tier-bofu" onclick="activateStage('bofu')">
+            <div class="funnel-tier-inner">
+              <div class="funnel-tier-shape" style="clip-path:polygon(20% 0%,80% 0%,70% 100%,30% 100%)">
+                <div class="tier-label">BOFU</div><div class="tier-sublabel">Decision Stage</div>
+              </div>
+              <div class="funnel-tier-info">
+                <div class="tier-info-stage">Bottom of funnel</div>
+                <div class="tier-info-title">Make it easy to say yes</div>
+                <div class="tier-info-desc">Free trials, consultations, demos, testimonials, strong offers. Remove all friction.</div>
+              </div>
+            </div>
+          </div>
+          <div class="funnel-connector"></div>
+          <div class="funnel-tier tier-after" id="tier-after" onclick="activateStage('after')">
+            <div class="funnel-tier-inner">
+              <div class="funnel-tier-shape" style="clip-path:polygon(30% 0%,70% 0%,65% 100%,35% 100%)">
+                <div class="tier-label">After</div><div class="tier-sublabel">Retention Stage</div>
+              </div>
+              <div class="funnel-tier-info">
+                <div class="tier-info-stage">After purchase</div>
+                <div class="tier-info-title">Keep them and get referrals</div>
+                <div class="tier-info-desc">Onboarding, check-ins, loyalty programs, referral asks. Cheapest leads you'll ever get.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-detail" id="stage-detail">
+        <div class="sec-divider" id="stage-detail-label">Top of Funnel — What to actually do</div>
+        <div class="stage-detail-grid" id="stage-detail-grid"></div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;">
+        <div class="sec-divider">What this looks like for real businesses</div>
+        <div class="examples-grid">
+          <div class="ex-col">
+            <div class="ex-biz">Martial Arts School</div>
+            <div class="ex-stage"><div class="ex-stage-name t">TOFU</div><div class="ex-stage-text">Facebook video showing a <strong>kids class in action</strong>. Parents who don't know the school yet see it. No selling, just showing.</div></div>
+            <div class="ex-stage"><div class="ex-stage-name m">MOFU</div><div class="ex-stage-text">Parents who clicked get <strong>retargeted with a free trial offer</strong>. Email sequence answers "is martial arts right for my kid?"</div></div>
+            <div class="ex-stage"><div class="ex-stage-name b">BOFU</div><div class="ex-stage-text"><strong>"Book a free trial class this week"</strong> ad. Urgency. Specific. Low risk. Goes to warm audiences only.</div></div>
+          </div>
+          <div class="ex-col">
+            <div class="ex-biz">Home Services (Plumber)</div>
+            <div class="ex-stage"><div class="ex-stage-name t">TOFU</div><div class="ex-stage-text">Blog post: <strong>"5 signs you need to call a plumber before it becomes an emergency."</strong> Shows up in Google. Builds trust.</div></div>
+            <div class="ex-stage"><div class="ex-stage-name m">MOFU</div><div class="ex-stage-text">Retargeting to blog readers. <strong>Google Business Profile</strong> with 40+ reviews for when people search for plumbers.</div></div>
+            <div class="ex-stage"><div class="ex-stage-name b">BOFU</div><div class="ex-stage-text">Google search ad for <strong>"emergency plumber [city]"</strong>. People searching this are ready to hire in the next 30 minutes.</div></div>
+          </div>
+          <div class="ex-col">
+            <div class="ex-biz">Med Spa / Wellness</div>
+            <div class="ex-stage"><div class="ex-stage-name t">TOFU</div><div class="ex-stage-text">Instagram before/after content. <strong>Educational posts about treatments.</strong> People scroll, learn, and recognize the brand.</div></div>
+            <div class="ex-stage"><div class="ex-stage-name m">MOFU</div><div class="ex-stage-text">Email sequence after downloading a <strong>"what to expect from your first botox appointment"</strong> guide. Answers objections.</div></div>
+            <div class="ex-stage"><div class="ex-stage-name b">BOFU</div><div class="ex-stage-text"><strong>"Book your consultation, first visit 20% off."</strong> Specific offer. Low commitment ask. Warm audiences only.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ DICTIONARY TAB ═══════════ -->
+    <div class="tab-content" id="tab-dictionary">
+      <div class="dict-search-bar">
+        <div class="dict-search-wrap">
+          <span class="dict-search-icon">🔍</span>
+          <input class="dict-search-input" type="text" id="dict-search" placeholder='Search any term... try "CAC" or "funnel" or "ROI"'>
+          <button class="dict-clear" id="dict-clear" onclick="clearDictSearch()">×</button>
+        </div>
+        <div class="dict-filter-pills" id="dict-pills"></div>
+      </div>
+      <div class="dict-results-count" id="dict-results-count">
+        Showing <span id="dict-results-num">0</span> results for "<span id="dict-results-query"></span>"
+        <button onclick="clearDictSearch()" style="background:none;border:none;color:var(--purple);font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-left:0.5rem">Clear</button>
+      </div>
+      <div id="dict-main"></div>
+      <div class="dict-no-results" id="dict-no-results">
+        <div style="font-size:3rem;opacity:0.2;margin-bottom:0.75rem">¯\_(ツ)_/¯</div>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.65">Nothing matched that. Try a different word.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════ EMAIL 101 TAB ═══════════ -->
+    <div class="tab-content" id="tab-email101">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Email Marketing 101</div>
+          <h2 class="sec-title">Email is not dead.<br><span class="acc-b">You just have to use it right.</span></h2>
+          <div class="sec-body">
+            <p>Most small businesses either have no email strategy or blast the same message to everyone once a month hoping something sticks. Neither works.</p>
+            <p><strong>The businesses that win with email treat it like a conversation, not a megaphone.</strong> The average ROI for email is $36 for every $1 spent. You own the list. No algorithm. No platform changing the rules overnight.</p>
+          </div>
+        </div>
+        <div class="stat-blocks">
+          <div class="stat-block"><div class="stat-num">$36</div><div class="stat-text"><strong>Average return</strong> for every $1 spent on email. Higher than social, paid search, and display combined.</div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--blue)">4B+</div><div class="stat-text"><strong>People use email every day.</strong> More than any social platform. Your customers are in there.</div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--green)">3×</div><div class="stat-text"><strong>More likely to purchase</strong> from email than from social media. Higher intent, higher conversion.</div></div>
+        </div>
+      </div>
+
+      <div class="em-section">
+        <div class="sec-divider">Calculate your email ROI</div>
+        <div class="em-2col">
+          <div>
+            <div class="sec-body">
+              <p>Before building an email strategy, it helps to know what it's actually worth. Plug in your numbers and see what a healthy email list means for your bottom line.</p>
+              <p style="margin-top:1rem"><strong>The rule of thumb:</strong> if your list isn't generating at least $1 per subscriber per month, your email marketing has room to grow. Most businesses with a working strategy hit $2–5 per subscriber.</p>
+            </div>
+          </div>
+          <div class="em-calc">
+            <div class="em-calc-head"><div class="em-calc-title">📊 Email ROI Calculator</div></div>
+            <div class="em-calc-body">
+              <div><label class="em-field-label">List size</label><input type="number" id="em-list" class="em-input" placeholder="1000" oninput="calcEmailROI()"></div>
+              <div><label class="em-field-label">Average open rate %</label><input type="number" id="em-open" class="em-input" placeholder="22" oninput="calcEmailROI()"></div>
+              <div><label class="em-field-label">Click through rate %</label><input type="number" id="em-ctr" class="em-input" placeholder="3" oninput="calcEmailROI()"></div>
+              <div><label class="em-field-label">Average client value $</label><input type="number" id="em-acv" class="em-input" placeholder="500" oninput="calcEmailROI()"></div>
+              <div><label class="em-field-label">Close rate from email %</label><input type="number" id="em-close" class="em-input" placeholder="10" oninput="calcEmailROI()"></div>
+              <div class="em-results" id="em-results">
+                <div class="em-res-grid">
+                  <div class="em-res-cell"><div class="em-res-label">Emails opened</div><div class="em-res-val" id="em-opens-out">—</div></div>
+                  <div class="em-res-cell"><div class="em-res-label">Clicks per send</div><div class="em-res-val" id="em-clicks-out">—</div></div>
+                </div>
+                <div class="em-res-main">
+                  <div class="em-res-main-label">Revenue per email send</div>
+                  <div class="em-res-main-val" id="em-revenue-out">—</div>
+                  <div class="em-res-verdict" id="em-verdict"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="em-section">
+        <div class="sec-divider">The single biggest lever — segmentation</div>
+        <div class="em-2col">
+          <div class="sec-body">
+            <p>The number one mistake small businesses make with email is treating their list like one group of people. It is not. A lead who found you on Google is different from a referral. Someone who bought once is different from a long-term client.</p>
+            <p><strong>When you send the same email to all of them, you are relevant to none of them.</strong> Segmentation is splitting your list into groups so each group gets a message that actually applies to them. A 10% increase in relevance can double your open rate.</p>
+          </div>
+          <div class="seg-cards">
+            <div class="seg-card"><div class="seg-card-type">By behavior</div><div class="seg-card-name">Opened last 3 emails</div><div class="seg-card-text">Your most engaged subscribers. Send them your best offer. They're already warm.</div></div>
+            <div class="seg-card"><div class="seg-card-type">By status</div><div class="seg-card-name">Past clients</div><div class="seg-card-text">They've paid you before. Different message than cold leads. Focus on upsell and referral asks.</div></div>
+            <div class="seg-card"><div class="seg-card-type">By source</div><div class="seg-card-name">Google vs referral</div><div class="seg-card-text">Referrals trust you more from the start. Google leads need more nurturing before they convert.</div></div>
+            <div class="seg-card"><div class="seg-card-type">By inactivity</div><div class="seg-card-name">No open in 90 days</div><div class="seg-card-text">Win-back sequence. One last good offer. If no response, remove them — clean lists perform better.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="em-section">
+        <div class="sec-divider">Platform comparison — which one is right for you</div>
+        <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+          <div id="platform-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ LOCAL SEO TAB ═══════════ -->
+    <div class="tab-content" id="tab-localseo">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Local SEO 101</div>
+          <h2 class="sec-title">97% of people search<br><span class="acc-p">for local businesses online.</span></h2>
+          <div class="sec-body">
+            <p>Local SEO is the process of making sure your business shows up when people in your area search for what you sell. It's different from regular SEO because <strong>proximity, relevance, and prominence</strong> all factor in — not just keywords.</p>
+            <p>The good news: most of your local competitors are doing this wrong. A business that gets the basics right consistently will dominate local search within 3–6 months.</p>
+          </div>
+        </div>
+        <div class="stat-blocks">
+          <div class="stat-block"><div class="stat-num">76%</div><div class="stat-text"><strong>Of people who search</strong> for something nearby on their phone <strong>visit a business within a day.</strong></div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--blue)">28%</div><div class="stat-text">Of local searches result in a <strong>purchase within 24 hours.</strong> The intent is immediate.</div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--green)">46%</div><div class="stat-text">Of all Google searches have <strong>local intent.</strong> Nearly half of everyone searching Google wants something near them.</div></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">The 3 things Google looks at for local results</div>
+        <div class="lseo-grid">
+          <div class="lseo-card">
+            <div class="lseo-card-icon">📍</div>
+            <div class="lseo-card-title">Proximity</div>
+            <div class="lseo-card-text">How physically close your business is to the searcher. You can't fake proximity — but you <strong>can optimize the radius</strong> by being precise about your service area in Google Business Profile and on your website.</div>
+          </div>
+          <div class="lseo-card">
+            <div class="lseo-card-icon">🎯</div>
+            <div class="lseo-card-title">Relevance</div>
+            <div class="lseo-card-text">How well your business matches what someone searched for. This comes from <strong>your GBP category, your website copy, and the keywords in your reviews.</strong> The more specific you are, the better you rank for specific searches.</div>
+          </div>
+          <div class="lseo-card">
+            <div class="lseo-card-icon">⭐</div>
+            <div class="lseo-card-title">Prominence</div>
+            <div class="lseo-card-text">How well-known and trusted Google thinks you are. Determined by <strong>review count, review recency, response rate, backlinks, citations, and time in business.</strong> This is the one you have the most control over.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">Local ranking signals — what matters most</div>
+        <div class="signal-rows">
+          <div class="signal-row"><div class="signal-name">Google Business Profile completeness</div><div class="signal-weight-wrap"><div class="signal-weight" style="color:var(--pink)">25%</div></div><div><div class="signal-bar-wrap"><div class="signal-bar" style="width:100%"></div></div><div class="signal-tip">Category, hours, photos, attributes, Q&amp;A, posts. Most businesses are only 40% complete.</div></div></div>
+          <div class="signal-row"><div class="signal-name">Reviews (count + quality + recency)</div><div class="signal-weight-wrap"><div class="signal-weight" style="color:var(--red)">20%</div></div><div><div class="signal-bar-wrap"><div class="signal-bar" style="width:80%"></div></div><div class="signal-tip">Getting 1 new review per week consistently beats competitors with more reviews but none recently.</div></div></div>
+          <div class="signal-row"><div class="signal-name">On-page SEO (city + service pages)</div><div class="signal-weight-wrap"><div class="signal-weight" style="color:var(--yellow)">15%</div></div><div><div class="signal-bar-wrap"><div class="signal-bar" style="width:60%"></div></div><div class="signal-tip">"Plumber in Cleveland" on your homepage title and H1. Sounds obvious. Most businesses skip it.</div></div></div>
+          <div class="signal-row"><div class="signal-name">Citations (NAP consistency)</div><div class="signal-weight-wrap"><div class="signal-weight" style="color:var(--blue)">11%</div></div><div><div class="signal-bar-wrap"><div class="signal-bar" style="width:44%"></div></div><div class="signal-tip">Name, Address, Phone identical across Yelp, YP, BBB, Apple Maps. One wrong digit hurts you.</div></div></div>
+          <div class="signal-row"><div class="signal-name">Behavioral signals (clicks, calls, directions)</div><div class="signal-weight-wrap"><div class="signal-weight" style="color:var(--green)">10%</div></div><div><div class="signal-bar-wrap"><div class="signal-bar" style="width:40%"></div></div><div class="signal-tip">When people click your GBP listing and call or get directions, Google takes that as a quality signal.</div></div></div>
+          <div class="signal-row"><div class="signal-name">Backlinks (local relevance matters)</div><div class="signal-weight-wrap"><div class="signal-weight" style="color:var(--muted)">8%</div></div><div><div class="signal-bar-wrap"><div class="signal-bar" style="width:32%;background:rgba(160,160,192,0.5)"></div></div><div class="signal-tip">Local newspaper mentions, chamber of commerce links, sponsor pages. Local backlinks beat generic ones.</div></div></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;">
+        <div class="sec-divider">The 5 things to fix this week</div>
+        <div class="lseo-grid" style="grid-template-columns:1fr 1fr">
+          <div class="lseo-card" style="border-left:3px solid var(--green)"><div class="lseo-card-title">1. Claim and complete your GBP</div><div class="lseo-card-text">If you haven't claimed your Google Business Profile, do it today. Add every photo, every category, every attribute. Fill in the description with your city and your top 3 services.</div></div>
+          <div class="lseo-card" style="border-left:3px solid var(--green)"><div class="lseo-card-title">2. Ask for reviews — every time</div><div class="lseo-card-text">Build it into your process. After every job, every appointment, every sale — ask. A direct link to your Google review page removes all friction. Respond to every single review.</div></div>
+          <div class="lseo-card" style="border-left:3px solid var(--yellow)"><div class="lseo-card-title">3. Add city + service to your homepage</div><div class="lseo-card-text">Your &lt;title&gt; tag and H1 should say "[Service] in [City]." If your homepage says "Welcome to our website" you are invisible. Rewrite it today.</div></div>
+          <div class="lseo-card" style="border-left:3px solid var(--yellow)"><div class="lseo-card-title">4. Fix your citations</div><div class="lseo-card-text">Search for your business on Yelp, YP.com, Apple Maps, and BBB. Make sure your Name, Address, and Phone are identical everywhere. One discrepancy hurts you.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ PPC TAB ═══════════ -->
+    <div class="tab-content" id="tab-ppc">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">How PPC Works</div>
+          <h2 class="sec-title">You pay when<br><span class="acc-p">someone clicks your ad.</span></h2>
+          <div class="sec-body">
+            <p>Pay-per-click advertising means you only pay when someone actually clicks on your ad — not when they see it. No impressions fee. No minimum spend per view. <strong>You're buying intent, not eyeballs.</strong></p>
+            <p>When done right, PPC is the fastest way to put your business in front of people who are actively searching for exactly what you sell right now. The math is simple: spend less per lead than a lead is worth to you.</p>
+          </div>
+        </div>
+        <div class="stat-blocks">
+          <div class="stat-block"><div class="stat-num">65%</div><div class="stat-text"><strong>Of high-intent searches</strong> result in a click on a paid ad. When someone types "emergency plumber near me" — ads win.</div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--blue)">$2</div><div class="stat-text">Average <strong>return for every $1</strong> spent on Google Ads across all industries. Some industries see 5× or more.</div></div>
+        </div>
+      </div>
+
+      <div class="ppc-flow">
+        <div class="ppc-step"><div class="ppc-step-icon" style="background:rgba(105,44,142,0.15);border-color:var(--purple)">🔍</div><div class="ppc-step-label">Someone searches</div><div class="ppc-step-sub">"plumber near me"</div></div>
+        <div class="ppc-arrow">→</div>
+        <div class="ppc-step"><div class="ppc-step-icon" style="background:rgba(30,191,220,0.1);border-color:var(--blue)">⚡</div><div class="ppc-step-label">Auction fires</div><div class="ppc-step-sub">in milliseconds</div></div>
+        <div class="ppc-arrow">→</div>
+        <div class="ppc-step"><div class="ppc-step-icon" style="background:rgba(250,163,28,0.1);border-color:var(--yellow)">🏆</div><div class="ppc-step-label">Winner shows</div><div class="ppc-step-sub">top of results</div></div>
+        <div class="ppc-arrow">→</div>
+        <div class="ppc-step"><div class="ppc-step-icon" style="background:rgba(237,8,117,0.1);border-color:var(--pink)">👆</div><div class="ppc-step-label">Person clicks</div><div class="ppc-step-sub">you get charged</div></div>
+        <div class="ppc-arrow">→</div>
+        <div class="ppc-step"><div class="ppc-step-icon" style="background:rgba(79,255,176,0.1);border-color:var(--green)">📋</div><div class="ppc-step-label">They land on page</div><div class="ppc-step-sub">conversion happens</div></div>
+        <div class="ppc-arrow">→</div>
+        <div class="ppc-step"><div class="ppc-step-icon" style="background:rgba(79,255,176,0.15);border-color:var(--green)">💵</div><div class="ppc-step-label">New client</div><div class="ppc-step-sub">ROI calculated</div></div>
+      </div>
+
+      <div class="ppc-slider-section">
+        <div class="sec-divider">See what your budget could unlock</div>
+        <div class="ppc-slider-grid">
+          <div class="ppc-slider-wrap">
+            <div class="ppc-slider-row">
+              <div class="ppc-slider-label">Monthly budget <span id="sl-budget-val">$1,500</span></div>
+              <input type="range" class="ppc-slider" id="sl-budget" min="500" max="10000" step="250" value="1500" oninput="updatePPCCalc()">
+            </div>
+            <div class="ppc-slider-row">
+              <div class="ppc-slider-label">Avg cost per click <span id="sl-cpc-val">$8.00</span></div>
+              <input type="range" class="ppc-slider" id="sl-cpc" min="1" max="30" step="0.5" value="8" oninput="updatePPCCalc()">
+            </div>
+            <div class="ppc-slider-row">
+              <div class="ppc-slider-label">Landing page conversion rate <span id="sl-conv-val">8%</span></div>
+              <input type="range" class="ppc-slider" id="sl-conv" min="1" max="25" step="0.5" value="8" oninput="updatePPCCalc()">
+            </div>
+            <div class="ppc-slider-row">
+              <div class="ppc-slider-label">Close rate <span id="sl-close-val">35%</span></div>
+              <input type="range" class="ppc-slider" id="sl-close" min="5" max="80" step="5" value="35" oninput="updatePPCCalc()">
+            </div>
+            <div class="ppc-slider-row">
+              <div class="ppc-slider-label">Average client value <span id="sl-aov-val">$850</span></div>
+              <input type="range" class="ppc-slider" id="sl-aov" min="50" max="15000" step="50" value="850" oninput="updatePPCCalc()">
+            </div>
+          </div>
+          <div>
+            <div class="ppc-results-grid" id="ppc-results-grid">
+              <div class="ppc-res-cell"><div class="ppc-res-label">Clicks / mo</div><div class="ppc-res-val" id="ppc-clicks" style="color:var(--blue)">—</div></div>
+              <div class="ppc-res-cell"><div class="ppc-res-label">Leads / mo</div><div class="ppc-res-val" id="ppc-leads" style="color:var(--yellow)">—</div></div>
+              <div class="ppc-res-cell"><div class="ppc-res-label">New Clients / mo</div><div class="ppc-res-val" id="ppc-clients" style="color:var(--green)">—</div></div>
+              <div class="ppc-res-cell"><div class="ppc-res-label">Est. Revenue / mo</div><div class="ppc-res-val" id="ppc-revenue" style="color:var(--pink)">—</div></div>
+              <div class="ppc-res-cell"><div class="ppc-res-label">Cost Per Lead</div><div class="ppc-res-val" id="ppc-cpl" style="color:var(--white)">—</div></div>
+              <div class="ppc-res-cell"><div class="ppc-res-label">ROI</div><div class="ppc-res-val" id="ppc-roi" style="color:var(--green)">—</div></div>
+            </div>
+            <div style="margin-top:1rem;padding:0.85rem 1rem;background:rgba(105,44,142,0.08);border:1px solid var(--border);border-radius:6px;font-size:0.78rem;color:var(--muted);line-height:1.65;" id="ppc-insight"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;">
+        <div class="sec-divider">Common myths vs reality</div>
+        <div class="ppc-myth-grid">
+          <div class="myth-card"><div class="myth-label myth">MYTH</div><div class="myth-text">"PPC is too expensive for small businesses." <strong>Reality:</strong> PPC is expensive when your landing page is bad or your targeting is off. With the right setup, a $500/mo budget can generate a positive ROI within 60 days.</div></div>
+          <div class="myth-card"><div class="myth-label truth">REALITY</div><div class="myth-text">You're <strong>in complete control of your spend.</strong> Set a daily cap. Pause anytime. The difference between a profitable campaign and a money pit is strategy — not budget size.</div></div>
+          <div class="myth-card"><div class="myth-label myth">MYTH</div><div class="myth-text">"I tried Google Ads once and it didn't work." Most first attempts fail because of poor keyword targeting, weak ad copy, or a landing page that doesn't convert. <strong>The channel wasn't the problem.</strong></div></div>
+          <div class="myth-card"><div class="myth-label truth">REALITY</div><div class="myth-text">A well-run PPC campaign gets <strong>more efficient over time,</strong> not less. Quality Scores improve. Negative keywords trim waste. Data shows what converts. Month 3 always beats month 1.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ AI & GEO TAB ═══════════ -->
+    <div class="tab-content" id="tab-geo">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">AI &amp; GEO Visibility</div>
+          <h2 class="sec-title">Search is changing.<br><span class="acc-p">Here's what it means for you.</span></h2>
+          <div class="sec-body">
+            <p>Google, ChatGPT, Perplexity, and other AI tools are increasingly answering questions directly — without sending users to a website. This is called <strong>Generative Engine Optimization (GEO).</strong></p>
+            <p>For local businesses, this is both a threat and an opportunity. Businesses that get cited by AI systems will see a new stream of high-intent customers. Businesses that ignore it will slowly become invisible.</p>
+          </div>
+        </div>
+        <div class="stat-blocks">
+          <div class="stat-block"><div class="stat-num">60%</div><div class="stat-text">Of Google searches now <strong>end without a click</strong> — answered by AI Overviews directly in the results page.</div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--blue)">2026</div><div class="stat-text">Analysts project AI search engines will <strong>handle over 30% of all search queries</strong> within 18 months.</div></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">How AI decides what to recommend</div>
+        <div class="geo-cards">
+          <div class="geo-card"><div class="geo-card-head"><span class="geo-card-icon">📝</span><div class="geo-card-title">Authoritative content</div></div><div class="geo-card-text">AI systems pull from pages that <strong>clearly answer specific questions.</strong> FAQ pages, detailed service descriptions, and blog posts that answer "how" and "what" questions are prime targets.</div></div>
+          <div class="geo-card"><div class="geo-card-head"><span class="geo-card-icon">⭐</span><div class="geo-card-title">Reviews and reputation signals</div></div><div class="geo-card-text">When someone asks an AI "who is the best plumber in Cleveland," it reads reviews across Google, Yelp, and other platforms. <strong>High ratings + high volume = more AI citations.</strong></div></div>
+          <div class="geo-card"><div class="geo-card-head"><span class="geo-card-icon">🔗</span><div class="geo-card-title">Citations and mentions</div></div><div class="geo-card-text">If other credible websites — news outlets, directories, local blogs — mention your business, AI systems treat that as a trust signal. <strong>It's the same logic as traditional SEO, amplified.</strong></div></div>
+          <div class="geo-card"><div class="geo-card-head"><span class="geo-card-icon">📍</span><div class="geo-card-title">Structured data and schema</div></div><div class="geo-card-text">Schema markup on your website tells AI crawlers exactly what your business does, where you are, and what you offer. <strong>Most local businesses have none.</strong> This is a competitive opening.</div></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">Traditional SEO vs GEO — what changes</div>
+        <div class="geo-compare">
+          <div class="geo-compare-col">
+            <div class="geo-compare-head" style="color:var(--muted)">Traditional SEO</div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--muted)"></div>Optimize for ranking position 1–10</div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--muted)"></div>Drive clicks to your website</div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--muted)"></div>Keywords in title tags and headers</div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--muted)"></div>Backlinks from other websites</div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--muted)"></div>Page speed and technical signals</div>
+          </div>
+          <div class="geo-compare-col">
+            <div class="geo-compare-head" style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">GEO — Generative Engine Optimization</div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--green)"></div>Optimize to be <strong>cited in AI answers</strong></div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--green)"></div>Be recommended <strong>directly to searchers</strong></div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--green)"></div>Natural language answers to questions</div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--green)"></div>Reviews, citations, and <strong>entity authority</strong></div>
+            <div class="geo-compare-item"><div class="geo-compare-dot" style="background:var(--green)"></div>Schema markup and <strong>structured data</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;">
+        <div class="sec-divider">What Zoek does about this</div>
+        <div class="lseo-grid">
+          <div class="lseo-card"><div class="lseo-card-icon">🛡️</div><div class="lseo-card-title">GEO Audit</div><div class="lseo-card-text">We test how your business appears (or doesn't) in ChatGPT, Perplexity, Google AI Overview, and Gemini for your top keywords. <strong>Most of our clients are invisible.</strong> We fix that.</div></div>
+          <div class="lseo-card"><div class="lseo-card-icon">📐</div><div class="lseo-card-title">Schema Implementation</div><div class="lseo-card-text">We add structured data markup to your website so AI crawlers know exactly who you are, what you do, and where you serve. Takes days to implement. <strong>Most agencies skip it entirely.</strong></div></div>
+          <div class="lseo-card"><div class="lseo-card-icon">🌐</div><div class="lseo-card-title">Citation Building</div><div class="lseo-card-text">We build citations across 80+ directories so AI systems see your business mentioned consistently across the web. Consistency = authority. Authority = citations in AI answers.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ WHY ZOEK TAB ═══════════ -->
+    <div class="tab-content" id="tab-whyzoek">
+      <div class="why-hero">
+        <div style="max-width:600px">
+          <div class="sec-eyebrow">Why Zoek Marketing</div>
+          <h2 class="sec-title" style="font-size:clamp(1.8rem,3.5vw,3rem)">We've done this<br><span class="acc-p">132,000 times.</span></h2>
+          <div class="sec-body">
+            <p>Zoek Marketing is the <strong>#1 Wix Partner in North America</strong> and a Google Premier Partner. We've helped over 50,000 local businesses build a real online presence — not vanity metrics, not agency jargon. Real leads, real calls, real revenue.</p>
+          </div>
+        </div>
+        <div class="why-stats">
+          <div class="why-stat"><div class="why-stat-val">50K+</div><div class="why-stat-label">Clients Served</div></div>
+          <div class="why-stat"><div class="why-stat-val">#1</div><div class="why-stat-label">Wix Partner</div></div>
+          <div class="why-stat"><div class="why-stat-val">132K</div><div class="why-stat-label">Websites Built</div></div>
+          <div class="why-stat"><div class="why-stat-val">10yr</div><div class="why-stat-label">In Business</div></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">What we actually do</div>
+        <div class="services-grid">
+          <div class="service-card"><div class="service-icon">🌐</div><div class="service-name">Website Design</div><div class="service-text">Fast, mobile-first websites built on Wix that are optimized for local search from day one. Not templates. Custom designs that convert.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">🔍</div><div class="service-name">Local SEO</div><div class="service-text">Full local search optimization — GBP, citations, on-page, schema, review strategy. We handle everything so you show up when it matters.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">⚡</div><div class="service-name">Google &amp; Meta Ads</div><div class="service-text">Paid campaigns built for local lead generation. We write the ads, build the landing pages, manage the budget, and send you the leads.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">⭐</div><div class="service-name">Reputation Management</div><div class="service-text">Automated review requests, response management, and reputation monitoring. Your reviews are your most powerful sales tool.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">🤖</div><div class="service-name">AI Receptionist</div><div class="service-text">24/7 AI that answers calls, books appointments, and qualifies leads while you sleep. Never miss a lead again.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">📧</div><div class="service-name">Email &amp; SMS Marketing</div><div class="service-text">Automated nurture sequences that convert leads into clients and turn clients into repeat customers and referral sources.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">What our clients say</div>
+        <div class="testimonial-grid">
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">Zoek completely transformed our online presence. We went from getting maybe 2 calls a week from Google to over 15. The ROI has been incredible.</div><div class="tcard-name">Mike R.</div><div class="tcard-biz">HVAC Contractor · Cleveland, OH</div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">I was skeptical about digital marketing after getting burned by another agency. Zoek was completely different. Transparent, results-focused, and actually answers the phone.</div><div class="tcard-name">Sarah K.</div><div class="tcard-biz">Family Dental Practice · Phoenix, AZ</div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">Our restaurant was struggling after COVID. Zoek got us ranking #1 for "best pizza near me" within 4 months. Our weekend reservations are fully booked two weeks out now.</div><div class="tcard-name">Tony M.</div><div class="tcard-biz">Restaurant Owner · Chicago, IL</div></div>
+        </div>
+      </div>
+
+      <div class="why-cta">
+        <div class="why-cta-title">Ready to grow your business?</div>
+        <div class="why-cta-sub">Get a free 30-minute strategy call with a Zoek growth expert. No pitch. No pressure. Just a real conversation about what's holding your marketing back.</div>
+        <a href="https://calendly.com/expert-sales" target="_blank" class="why-cta-btn">Book Your Free Strategy Call</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
+  <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · 1-888-737-9635</span>
+</footer>
+
+<script src="cta.js"></script>
+<script>
+
+// ─── TAB SWITCHING ──────────────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  } else {
+    // called from hero — find matching btn
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) {
+        document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+      }
+    });
+    // scroll to content
+    document.querySelector('.academy-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// ─── NAV ────────────────────────────────────
+function toggleNav(btn) {
+  btn.classList.toggle('open');
+  document.getElementById('nl-tools-menu').classList.toggle('open');
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('.nav-dropdown')) {
+    document.querySelectorAll('.nav-drop-btn').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.nav-drop-menu').forEach(m => m.classList.remove('open'));
+  }
+});
+
+// ─── FUNNEL STAGE DATA ───────────────────────
+const STAGE_DATA = {
+  tofu: {
+    label: 'Top of Funnel — What to actually do',
+    cols: [
+      { label:'What it is', title:'Awareness', items:['People who have never heard of you','The biggest pool — but lowest buying intent','Your job is to get on their radar without asking for anything yet','Think: free content, social posts, educational videos, search ads for broad terms','You are planting seeds, not harvesting'] },
+      { label:'Content that works', title:'TOFU content', items:['<strong>Blog posts</strong> answering questions your customers Google','<strong>Social media content</strong> that educates or entertains','<strong>YouTube/video</strong> showing your work or explaining your industry','<strong>Google/Facebook ads</strong> to cold audiences — not "buy now" but "learn this"','<strong>SEO-optimized pages</strong> targeting informational search terms'] },
+      { label:'The goal', title:'Get known', items:['Not a sale. Not even a lead yet. Just awareness.','A plumber who writes "5 signs you have a slow leak" owns that search query forever.','Someone who doesn\'t need you today will remember you when they do.','TOFU ROI is slow but compounding. It builds an audience you don\'t have to keep paying for.'] },
+    ]
+  },
+  mofu: {
+    label: 'Middle of Funnel — What to actually do',
+    cols: [
+      { label:'What it is', title:'Consideration', items:['People who know you exist and are thinking about it','They\'ve visited your site, watched a video, or engaged with an ad','They\'re comparing you to competitors — consciously or not','Your job is to stay visible and build enough trust that you\'re the obvious choice','The gap between TOFU and BOFU is where most businesses lose people'] },
+      { label:'Content that works', title:'MOFU content', items:['<strong>Retargeting ads</strong> to people who visited your site','<strong>Email nurture sequences</strong> with useful information','<strong>Case studies and reviews</strong> — social proof is everything here','<strong>Comparison content</strong> — "why choose us vs DIY vs the other guys"','<strong>Free resources</strong> like guides, checklists, or consultations'] },
+      { label:'The goal', title:'Build trust', items:['You want to be the brand they already feel good about when they\'re ready to buy.','Most decisions take 7–12 touchpoints before someone converts. MOFU is where you accumulate those touchpoints.','A business that does MOFU well costs less per lead over time because they close faster.'] },
+    ]
+  },
+  bofu: {
+    label: 'Bottom of Funnel — What to actually do',
+    cols: [
+      { label:'What it is', title:'Decision', items:['People who are actively looking to buy right now','They\'re typing "emergency plumber near me" or "best dentist in [city]"','Highest buying intent — but also most competitive and most expensive to reach','Your job is to remove every possible reason NOT to choose you','Speed matters — the first business to respond often wins'] },
+      { label:'Content that works', title:'BOFU content', items:['<strong>Google search ads</strong> for high-intent keywords with location','<strong>Strong offer</strong> — free consultation, free estimate, guarantee','<strong>Social proof above the fold</strong> — star rating, review count visible immediately','<strong>Fast response</strong> — text or call back within 5 minutes','<strong>Clear CTA</strong> — one action, not five options'] },
+      { label:'The goal', title:'Win the sale', items:['The sale. This is the conversion event.','If TOFU and MOFU worked, BOFU is easier and cheaper because they already trust you.','The biggest mistake at this stage: weak offers, slow follow-up, and landing pages that confuse instead of convert.'] },
+    ]
+  },
+  after: {
+    label: 'After Purchase — The most overlooked stage',
+    cols: [
+      { label:'What it is', title:'Retention', items:['People who already paid you — your most valuable asset','Most businesses forget about customers the moment they pay','Your job is to keep them and turn them into advocates','Referrals from happy clients close at 3–4× higher rates','Keeping a client costs 5–7× less than acquiring a new one'] },
+      { label:'Content that works', title:'Retention content', items:['<strong>Onboarding sequences</strong> that set expectations and build excitement','<strong>Check-in emails</strong> that show you care beyond the transaction','<strong>Loyalty programs</strong> or exclusive member perks','<strong>Referral asks</strong> at the moment they\'re happiest','<strong>Review requests</strong> — automated, timely, frictionless'] },
+      { label:'The goal', title:'Turn clients into marketers', items:['A happy client who refers one person has generated the cheapest lead you\'ll ever get.','The after stage is the most overlooked part of the funnel. Everyone obsesses over getting new clients. The real money is in keeping the ones you have.','Build a system that asks every happy client for a review and a referral. Not sometimes. Every time.'] },
+    ]
+  }
+};
+
+function activateStage(stage) {
+  document.querySelectorAll('.fsc').forEach(c => c.classList.remove('active'));
+  const cards = document.querySelectorAll('.fsc');
+  const map = { tofu:0, mofu:1, bofu:2, after:3 };
+  cards[map[stage]].classList.add('active');
+  ['tofu','mofu','bofu','after'].forEach(s => document.getElementById('tier-'+s)?.classList.remove('active'));
+  document.getElementById('tier-'+stage)?.classList.add('active');
+  const data = STAGE_DATA[stage];
+  document.getElementById('stage-detail-label').textContent = data.label;
+  document.getElementById('stage-detail-grid').innerHTML = data.cols.map(col => `
+    <div class="sdc">
+      <div class="sdc-label">${col.label}</div>
+      <div class="sdc-title">${col.title}</div>
+      <ul class="sdc-items">${col.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+activateStage('tofu');
+
+// ─── DICTIONARY ──────────────────────────────
+const DICT_CATS = [
+  { id:'acronyms',  label:'The Acronyms' },
+  { id:'funnel',    label:'Funnel & Lead Gen' },
+  { id:'analytics', label:'Analytics & Tracking' },
+  { id:'buzzwords', label:'Buzzwords & BS Bingo' },
+];
+const DICT_TERMS = [
+  { cat:'acronyms', acronym:'CAC', name:'Customer Acquisition Cost', plain:'How much money you spent in total to get one new paying customer. Add up everything you spent on marketing and sales, then divide by how many new customers you got.', example:'You spent $2,000 on Facebook ads in March and got 20 new clients. Your CAC is $100. Whether that\'s good or bad depends entirely on what those clients are worth to you.' },
+  { cat:'acronyms', acronym:'LTV', name:'Lifetime Value', plain:'The total amount of money a customer is expected to spend with you over the entire time they\'re your customer. Not just their first purchase.', example:'A gym member pays $50/month and stays for 18 months. Their LTV is $900. Knowing this tells you how much you can afford to spend to get them in the door.' },
+  { cat:'acronyms', acronym:'ROI', name:'Return on Investment', plain:'How much you got back compared to how much you put in. If you spent $500 and made $2,000, your ROI is 4×.', example:'You ran a $500 Google Ads campaign. It brought 3 new clients worth $600 each. That\'s $1,800 in revenue. Your ROI is 3.6× — $3.60 for every dollar spent.' },
+  { cat:'acronyms', acronym:'ROAS', name:'Return on Ad Spend', plain:'How much revenue your ads generated compared to what you paid for them. Used heavily in ecommerce and paid advertising.', example:'You spent $1,000 on Instagram ads. Those ads led to $4,500 in sales. Your ROAS is 4.5×. Most businesses want at least 3× to be profitable.' },
+  { cat:'acronyms', acronym:'CTR', name:'Click Through Rate', plain:'The percentage of people who saw your ad or email and actually clicked on it. Tells you how compelling your message is.', example:'You sent an email to 1,000 people. 45 clicked the link. Your CTR is 4.5%. Average email CTR is 2–3%, so 4.5% is solid.' },
+  { cat:'acronyms', acronym:'CPL', name:'Cost Per Lead', plain:'How much you spent to get one person to raise their hand and say they\'re interested. Different from CAC because a lead isn\'t a customer yet.', example:'You spent $1,000 on Facebook ads and got 50 people to fill out your contact form. Your CPL is $20. Now figure out how many of those become clients.' },
+  { cat:'acronyms', acronym:'CPC', name:'Cost Per Click', plain:'How much you pay every time someone clicks on your ad. You\'re charged per click whether or not that person ever buys anything.', example:'Your Google Ad has a $2.50 CPC. 100 people click. You spent $250. If 3 book an appointment, your cost per appointment is $83.' },
+  { cat:'acronyms', acronym:'CPM', name:'Cost Per Thousand Impressions', plain:'The price you pay for your ad to be shown 1,000 times. Doesn\'t matter if anyone clicks. You\'re paying for eyeballs.', example:'Your Facebook campaign has a $15 CPM. Every 1,000 times your ad shows in someone\'s feed costs $15. Good for brand awareness, less ideal for direct response.' },
+  { cat:'acronyms', acronym:'CRO', name:'Conversion Rate Optimization', plain:'Making more of the people who already visit your website actually do something — instead of getting more traffic, you make existing traffic work harder.', example:'Your website gets 1,000 visitors and 10 fill out the contact form. That\'s 1%. CRO means figuring out why the other 990 left without doing anything.' },
+  { cat:'acronyms', acronym:'CTA', name:'Call to Action', plain:'The thing you want someone to do next. A button, a link, a phrase. The answer to "okay I\'ve read this, now what?"', example:'At the bottom of your ad: "Book a free trial class today." That\'s your CTA. If you don\'t tell people what to do next, most won\'t figure it out.' },
+  { cat:'acronyms', acronym:'KPI', name:'Key Performance Indicator', plain:'A number you track to know if something is working. The \'key\' part means you pick the ones that actually matter — not everything.', example:'For a local gym, KPIs might be new members per month, churn rate, and cost per lead. Not Instagram followers, unless those directly drive revenue.' },
+  { cat:'acronyms', acronym:'A/B Test', name:'A/B Testing', plain:'Showing two different versions of something to different people at the same time to see which performs better. Then keeping the winner.', example:'You run two Facebook ads. Same image, two different headlines. After 500 impressions each, one gets twice as many clicks. Kill the loser, scale the winner.' },
+  { cat:'funnel', name:'Lead', plain:'Any person who has shown some interest in what you sell. They raised their hand somehow — filled out a form, called you, walked in, clicked an ad.', example:'Someone sees your Facebook ad for a free HVAC inspection and fills out the form. They\'re a lead. They haven\'t hired you yet but they showed interest.' },
+  { cat:'funnel', name:'Conversion', plain:'When someone takes the action you wanted them to take. Filling out a form, booking an appointment, making a purchase, signing a contract.', example:'Out of 100 people who land on your website, 4 fill out your contact form. You have a 4% conversion rate. The goal of most marketing is to increase this number.' },
+  { cat:'funnel', name:'Lead Magnet', plain:'Something free you offer in exchange for someone\'s contact information. You give them value upfront and they give you permission to follow up.', example:'A chiropractor offers a free "5 exercises to fix lower back pain" PDF. You download it and give your email. Now they have your contact and can follow up.' },
+  { cat:'funnel', name:'Retargeting', plain:'Showing ads to people who have already visited your website or engaged with your content. They\'re warmer than strangers.', example:'Someone visited your plumbing website but didn\'t call. Now they see your ad on Facebook: "Still need a plumber? Book now — same day available." That\'s retargeting.' },
+  { cat:'funnel', name:'Sales Funnel', plain:'The journey a prospect takes from first hearing about you to becoming a paying customer. Called a funnel because most people drop out at each stage.', example:'1,000 people see your ad. 100 click it. 20 fill out the form. 8 book a call. 3 become clients. That\'s your funnel. The goal is to improve each step.' },
+  { cat:'analytics', name:'Bounce Rate', plain:'The percentage of people who visit one page of your website and leave without clicking anything else. High bounce rate usually means the page didn\'t match what they expected.', example:'Your homepage has a 78% bounce rate. That means 78% of visitors leave immediately. Could be slow load time, wrong audience, or the page just isn\'t convincing.' },
+  { cat:'analytics', name:'Session', plain:'One continuous visit to your website. A session ends after 30 minutes of inactivity or when someone leaves. One person can have multiple sessions.', example:'You visit a website, browse for 10 minutes, close the tab. That\'s one session. You come back tomorrow — that\'s a second session, even though you\'re the same person.' },
+  { cat:'analytics', name:'Impressions', plain:'How many times your ad, post, or content was shown. Not clicks. Not sales. Just eyeballs.', example:'Your Facebook ad had 10,000 impressions but only 50 clicks. That\'s a 0.5% CTR. The ad was shown a lot but wasn\'t compelling enough to get people to act.' },
+  { cat:'analytics', name:'Attribution', plain:'Figuring out which marketing channel gets credit for a sale. Complicated because most customers touch multiple channels before buying.', example:'Someone saw your Facebook ad, then Googled you, then clicked your Google ad, then called you. Which channel gets credit? That\'s the attribution problem.' },
+  { cat:'buzzwords', name:'Synergy', plain:'When two things work better together than they would separately. In marketing, usually used as filler to sound smart.', example:'"Our content marketing and SEO create synergies that amplify brand presence." Translation: "When we write good content, it also helps with Google rankings." Same thing, less words.' },
+  { cat:'buzzwords', name:'Omnichannel', plain:'Being present and consistent across all the places your customers are — website, email, social, in-store, phone. Not juggling channels, but connecting them.', example:'A customer sees your Instagram ad, visits your website, signs up for email, and walks into your store. An omnichannel strategy makes sure the message is consistent across all of those.' },
+  { cat:'buzzwords', name:'Growth Hacking', plain:'Finding clever, often unconventional ways to grow a business fast — usually on a small budget. Sometimes genuinely useful, often overhyped.', example:'Dropbox offered extra storage for every referral. Hotmail added "Sent from Hotmail" to every email. Both grew massively from it. That\'s growth hacking done right.' },
+  { cat:'buzzwords', name:'Brand Awareness', plain:'How familiar people are with your brand. Do they know you exist? Do they recognize your logo? Do they think of you when they need what you sell?', example:'If you\'re a local HVAC company and people think of you first when their AC breaks in summer — that\'s strong brand awareness. Most local businesses have essentially none outside their customer base.' },
+];
+
+function buildDict() {
+  const pillsEl = document.getElementById('dict-pills');
+  pillsEl.innerHTML = DICT_CATS.map(c =>
+    `<button class="dict-pill" data-cat="${c.id}" onclick="filterDict('${c.id}',this)">${c.label}</button>`
+  ).join('');
+
+  const mainEl = document.getElementById('dict-main');
+  mainEl.innerHTML = DICT_CATS.map(cat => {
+    const terms = DICT_TERMS.filter(t => t.cat === cat.id);
+    return `
+      <div class="dict-category" id="dcat-${cat.id}">
+        <div class="dict-cat-header" onclick="toggleCat('${cat.id}')">
+          <span class="dict-cat-name">${cat.label}</span>
+          <span class="dict-cat-count">${terms.length} terms</span>
+        </div>
+        <div class="dict-terms-grid">
+          ${terms.map(t => `
+            <div class="dict-term" data-cat="${t.cat}" data-text="${(t.acronym||'') + t.name + t.plain}">
+              ${t.acronym ? `<div class="dict-acronym">${t.acronym}</div>` : ''}
+              <div class="dict-name">${t.name}</div>
+              <div class="dict-plain">${t.plain}</div>
+              <div class="dict-example">${t.example}</div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleCat(id) {
+  document.getElementById('dcat-'+id).classList.toggle('collapsed');
+}
+
+let activeFilter = null;
+function filterDict(cat, btn) {
+  if (activeFilter === cat) {
+    activeFilter = null;
+    document.querySelectorAll('.dict-pill').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.dict-term').forEach(t => t.classList.remove('hidden'));
+    document.querySelectorAll('.dict-category').forEach(c => c.style.display='');
+  } else {
+    activeFilter = cat;
+    document.querySelectorAll('.dict-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.dict-term').forEach(t => t.classList.toggle('hidden', t.dataset.cat !== cat));
+    document.querySelectorAll('.dict-category').forEach(c => {
+      const visible = c.querySelectorAll('.dict-term:not(.hidden)').length > 0;
+      c.style.display = visible ? '' : 'none';
+    });
+  }
+}
+
+document.getElementById('dict-search').addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  const clear = document.getElementById('dict-clear');
+  const countEl = document.getElementById('dict-results-count');
+  const noRes = document.getElementById('dict-no-results');
+  clear.classList.toggle('show', q.length > 0);
+
+  if (!q) {
+    document.querySelectorAll('.dict-term').forEach(t => t.classList.remove('hidden'));
+    document.querySelectorAll('.dict-category').forEach(c => c.style.display='');
+    countEl.style.display='none';
+    noRes.style.display='none';
+    return;
+  }
+
+  let count = 0;
+  document.querySelectorAll('.dict-term').forEach(t => {
+    const match = t.dataset.text.toLowerCase().includes(q);
+    t.classList.toggle('hidden', !match);
+    if (match) count++;
+  });
+  document.querySelectorAll('.dict-category').forEach(c => {
+    c.classList.remove('collapsed');
+    const vis = c.querySelectorAll('.dict-term:not(.hidden)').length > 0;
+    c.style.display = vis ? '' : 'none';
+  });
+
+  document.getElementById('dict-results-num').textContent = count;
+  document.getElementById('dict-results-query').textContent = this.value.trim();
+  countEl.style.display = 'block';
+  noRes.style.display = count === 0 ? 'block' : 'none';
+});
+
+function clearDictSearch() {
+  document.getElementById('dict-search').value = '';
+  document.getElementById('dict-search').dispatchEvent(new Event('input'));
+}
+
+// ─── EMAIL ROI CALC ──────────────────────────
+function calcEmailROI() {
+  const list  = parseFloat(document.getElementById('em-list').value)  || 0;
+  const open  = parseFloat(document.getElementById('em-open').value)  || 0;
+  const ctr   = parseFloat(document.getElementById('em-ctr').value)   || 0;
+  const acv   = parseFloat(document.getElementById('em-acv').value)   || 0;
+  const close = parseFloat(document.getElementById('em-close').value) || 0;
+  if (!list || !open || !ctr || !acv || !close) { document.getElementById('em-results').classList.remove('show'); return; }
+
+  const opens   = Math.round(list * open / 100);
+  const clicks  = Math.round(opens * ctr / 100);
+  const revenue = Math.round(clicks * (close / 100) * acv);
+  const perSub  = list > 0 ? (revenue / list).toFixed(2) : 0;
+
+  document.getElementById('em-opens-out').textContent  = opens.toLocaleString();
+  document.getElementById('em-clicks-out').textContent = clicks.toLocaleString();
+  document.getElementById('em-revenue-out').textContent = '$' + revenue.toLocaleString();
+  document.getElementById('em-verdict').textContent = `$${perSub} per subscriber per send. ${perSub >= 2 ? 'Strong performance — your list is working hard.' : perSub >= 1 ? 'Solid. Room to grow with better segmentation.' : 'Below average. Segmentation and better offers will help.'}`;
+  document.getElementById('em-results').classList.add('show');
+}
+
+// ─── PLATFORM LIST ───────────────────────────
+const PLATFORMS = [
+  { name:'Mailchimp',     price:'Free to 500, then $13+/mo',   best:'Beginners just starting out', pros:['Easy to use interface','Strong template library','Good free tier for very small lists'], cons:['Gets expensive fast as list grows','Automation is basic on lower plans','Limited segmentation on free'] },
+  { name:'Klaviyo',       price:'Free to 250, then $20+/mo',   best:'Ecommerce businesses',        pros:['Best-in-class ecommerce integrations','Powerful segmentation and flows','Revenue tracking built in'], cons:['Overkill for service businesses','Higher learning curve','Pricing jumps fast'] },
+  { name:'ActiveCampaign',price:'From $15/mo',                 best:'Businesses that want automation',pros:['Best automation builder in the industry','Built-in CRM','Conditional logic and branching'], cons:['Steeper learning curve','Can feel overwhelming at first','Design tools less polished'] },
+  { name:'Beehiiv',       price:'Free to 2500, then $42/mo',   best:'Newsletter creators',          pros:['Built for newsletters','Clean subscriber analytics','Monetization tools built in'], cons:['Limited automation','Not ideal for service businesses','Less CRM functionality'] },
+  { name:'ConvertKit',    price:'Free to 1000, then $25+/mo',  best:'Creators and coaches',         pros:['Very clean interface','Good tagging and segmentation','Landing pages included'], cons:['Limited templates','Automation less visual','Ecommerce limited'] },
+  { name:'HubSpot',       price:'Free CRM, email from $18/mo', best:'Growing businesses',           pros:['Full CRM included','Excellent reporting','Scales to enterprise'], cons:['Free tier very limited','Gets expensive quickly','Overkill for small businesses'] },
+  { name:'MailerLite',    price:'Free to 1000, then $9+/mo',   best:'Budget-conscious starts',      pros:['Very affordable','Good automation for the price','Clean builder'], cons:['Smaller feature set','Deliverability can vary','Support slower on free plan'] },
+];
+
+function renderPlatforms() {
+  document.getElementById('platform-list').innerHTML = PLATFORMS.map(p => `
+    <div class="platform-row">
+      <div><div class="plat-name">${p.name}</div><div class="plat-best">${p.best}</div></div>
+      <div><div class="plat-col-label">Pros</div>${p.pros.map(x=>`<div class="plat-item pro">${x}</div>`).join('')}</div>
+      <div><div class="plat-col-label">Cons</div>${p.cons.map(x=>`<div class="plat-item con">${x}</div>`).join('')}</div>
+      <div><div class="plat-col-label">Pricing</div><div class="plat-price">${p.price}</div></div>
+    </div>`).join('');
+}
+
+// ─── PPC SLIDER CALC ─────────────────────────
+function updatePPCCalc() {
+  const budget = parseFloat(document.getElementById('sl-budget').value);
+  const cpc    = parseFloat(document.getElementById('sl-cpc').value);
+  const conv   = parseFloat(document.getElementById('sl-conv').value);
+  const close  = parseFloat(document.getElementById('sl-close').value);
+  const aov    = parseFloat(document.getElementById('sl-aov').value);
+
+  document.getElementById('sl-budget-val').textContent = '$' + budget.toLocaleString();
+  document.getElementById('sl-cpc-val').textContent    = '$' + cpc.toFixed(2);
+  document.getElementById('sl-conv-val').textContent   = conv + '%';
+  document.getElementById('sl-close-val').textContent  = close + '%';
+  document.getElementById('sl-aov-val').textContent    = '$' + aov.toLocaleString();
+
+  const clicks  = Math.round(budget / cpc);
+  const leads   = Math.round(clicks * conv / 100);
+  const clients = Math.round(leads * close / 100);
+  const revenue = clients * aov;
+  const cpl     = leads > 0 ? Math.round(budget / leads) : 0;
+  const roi     = budget > 0 ? Math.round(((revenue - budget) / budget) * 100) : 0;
+
+  document.getElementById('ppc-clicks').textContent  = clicks.toLocaleString();
+  document.getElementById('ppc-leads').textContent   = leads.toLocaleString();
+  document.getElementById('ppc-clients').textContent = clients.toLocaleString();
+  document.getElementById('ppc-revenue').textContent = '$' + revenue.toLocaleString();
+  document.getElementById('ppc-cpl').textContent     = '$' + cpl;
+  document.getElementById('ppc-roi').textContent     = roi + '%';
+
+  const insight = roi >= 200
+    ? `At ${roi}% ROI, every dollar you put in returns ${(roi/100+1).toFixed(1)}×. This is a strong campaign setup — scale the budget.`
+    : roi >= 50
+    ? `${roi}% ROI is profitable territory. Improving your landing page conversion rate is the fastest lever to grow this further.`
+    : `At this setup, margins are tight. Focus on lowering CPC with better keyword targeting or raising conversion rate before scaling budget.`;
+  document.getElementById('ppc-insight').innerHTML = `<strong>Insight:</strong> ${insight}`;
+}
+
+// ─── INIT ─────────────────────────────────────
+buildDict();
+renderPlatforms();
+updatePPCCalc();
+
+</script>
+</body>
+</html>
