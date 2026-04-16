@@ -3,22 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Build Your Package | Zoek Marketing</title>
+<title>Build Your Marketing Package | Zoek Marketing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--navy:#1E1044;--sidebar:#27215C;--purple:#692C8E;--blue:#1EBFDC;--white:#ffffff;--muted:#a0a0c0;--border:rgba(105,44,142,0.2);--border-light:rgba(255,255,255,0.07);--green:#4fffb0;--red:#ff5c7c;--yellow:#FAA31C;--gradient:linear-gradient(135deg,#692C8E 0%,#ED0875 100%);}
+:root{
+  --navy:#1E1044;--sidebar:#27215C;--purple:#692C8E;--pink:#ED0875;
+  --blue:#1EBFDC;--white:#fff;--muted:#a0a0c0;--green:#4fffb0;--red:#ff5c7c;--yellow:#FAA31C;
+  --border:rgba(105,44,142,0.2);--border-light:rgba(255,255,255,0.07);
+  --gradient:linear-gradient(135deg,#692C8E 0%,#ED0875 100%);
+}
 html{scroll-behavior:smooth;}
 body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;background:rgba(26,26,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
 .nav-links{display:flex;align-items:center;gap:0.15rem;list-style:none;}
 .nav-links>li>a{font-size:0.82rem;font-weight:600;letter-spacing:0.03em;color:var(--muted);text-decoration:none;padding:0.45rem 0.9rem;border-radius:4px;transition:all 0.15s;display:block;}
-.nav-links>li>a:hover,.nav-links>li>a.active{color:var(--white);background:rgba(255,255,255,0.07);}
+.nav-links>li>a:hover{color:var(--white);background:rgba(255,255,255,0.07);}
 .nav-dropdown{position:relative;}
-.nav-drop-btn{background:transparent;border:none;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:0.03em;padding:0.45rem 0.9rem;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:0.3rem;transition:all 0.15s;}
-.nav-drop-btn:hover{background:rgba(255,255,255,0.07);}
+.nav-drop-btn{background:transparent;border:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;padding:0.45rem 0.9rem;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:0.3rem;transition:all 0.15s;}
+.nav-drop-btn:hover,.nav-drop-btn.open{color:var(--white);background:rgba(255,255,255,0.07);}
 .nav-chevron{font-size:0.55rem;transition:transform 0.2s;}
 .nav-drop-btn.open .nav-chevron{transform:rotate(180deg);}
 .nav-drop-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%);background:#1E1044;border:1px solid var(--border);border-radius:8px;padding:1.25rem;display:none;min-width:460px;box-shadow:0 16px 48px rgba(0,0,0,0.45);gap:1.5rem;}
@@ -31,116 +38,148 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-cta:hover{box-shadow:0 6px 20px rgba(105,44,142,0.5);transform:translateY(-1px);}
 @media(max-width:700px){.nav-links{display:none;}}
 
-.hero{margin-top:60px;padding:4rem 2rem 3rem;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(105,44,142,0.14) 0%,transparent 65%);border-bottom:1px solid var(--border);}
-.hero-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(105,44,142,0.15);color:var(--purple);border:1px solid rgba(105,44,142,0.3);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
-.hero-title{font-family:'Poppins',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem;}
+/* HERO */
+.hero{margin-top:60px;padding:4rem 2rem 3rem;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(105,44,142,0.18) 0%,transparent 65%);border-bottom:1px solid var(--border);}
+.hero-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(105,44,142,0.2);color:rgba(200,160,255,0.9);border:1px solid rgba(105,44,142,0.35);padding:0.25rem 0.75rem;border-radius:3px;margin-bottom:1.25rem;}
+.hero-title{font-family:'Poppins',sans-serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem;}
 .hero-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:540px;margin:0 auto;}
+.hero-sub{font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:500px;margin:0 auto;}
 .hero-sub strong{color:var(--white);}
 
-/* LAYOUT */
-.builder-wrap{display:grid;grid-template-columns:1fr 380px;min-height:85vh;border-bottom:1px solid var(--border);}
-.services-col{padding:2.5rem 2rem;display:flex;flex-direction:column;gap:2.5rem;}
+/* PROGRESS STEPPER */
+.stepper{display:flex;align-items:center;justify-content:center;gap:0;padding:1.5rem 2rem;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.1);}
+.step-item{display:flex;align-items:center;gap:0.5rem;}
+.step-circle{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:transparent;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:0.72rem;font-weight:800;color:var(--muted);transition:all 0.3s;flex-shrink:0;}
+.step-circle.active{border-color:var(--purple);background:rgba(105,44,142,0.2);color:var(--white);}
+.step-circle.done{border-color:var(--green);background:rgba(79,255,176,0.15);color:var(--green);}
+.step-label{font-size:0.75rem;font-weight:600;color:var(--muted);transition:color 0.3s;white-space:nowrap;}
+.step-item.active .step-label{color:var(--white);}
+.step-item.done .step-label{color:rgba(79,255,176,0.7);}
+.step-connector{width:40px;height:2px;background:var(--border);margin:0 0.5rem;transition:background 0.3s;flex-shrink:0;}
+.step-connector.done{background:rgba(79,255,176,0.3);}
+@media(max-width:600px){.step-label{display:none;}.step-connector{width:20px;}}
 
-/* CATEGORY */
-.cat-block{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
-.cat-header{padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;border-bottom:1px solid var(--border);}
-.cat-icon{font-size:1.4rem;}
-.cat-title{font-family:'Poppins',sans-serif;font-size:1.05rem;font-weight:800;}
-.cat-subtitle{font-size:0.72rem;color:var(--muted);margin-top:0.1rem;}
-.cat-billing{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:3px;margin-left:auto;flex-shrink:0;}
-.billing-one{background:rgba(105,44,142,0.15);color:var(--purple);}
-.billing-monthly{background:rgba(30,191,220,0.12);color:var(--blue);}
+/* QUIZ CONTAINER */
+.quiz-wrap{max-width:820px;margin:0 auto;padding:3rem 2rem 5rem;}
 
-/* TIER GRID — radio-style selector */
-.tier-grid{display:grid;gap:0;border-top:none;}
-.tier-grid.cols-2{grid-template-columns:1fr 1fr;}
-.tier-grid.cols-3{grid-template-columns:1fr 1fr 1fr;}
-.tier-grid.cols-4{grid-template-columns:1fr 1fr 1fr 1fr;}
-.tier-card{padding:1.1rem 1.15rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);cursor:pointer;transition:all 0.15s;position:relative;user-select:none;}
-.tier-card:last-child{border-right:none;}
-.tier-card:hover{background:rgba(105,44,142,0.05);}
-.tier-card.selected{background:rgba(105,44,142,0.1);border-color:var(--purple)!important;z-index:1;}
-.tier-card.selected::after{content:'✓';position:absolute;top:0.6rem;right:0.65rem;width:20px;height:20px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;color:white;line-height:20px;text-align:center;}
-.tier-badge{font-size:0.58rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2px;display:inline-block;margin-bottom:0.45rem;}
-.badge-popular{background:rgba(255,209,102,0.2);color:var(--yellow);}
-.badge-starter{background:rgba(105,44,142,0.15);color:var(--purple);}
-.badge-growth{background:rgba(30,191,220,0.15);color:var(--blue);}
-.badge-enterprise{background:rgba(255,92,124,0.15);color:var(--red);}
-.badge-fast{background:rgba(79,255,176,0.15);color:var(--green);}
-.tier-name{font-family:'Poppins',sans-serif;font-size:0.92rem;font-weight:800;margin-bottom:0.2rem;line-height:1.2;}
-.tier-desc{font-size:0.72rem;color:var(--muted);line-height:1.5;margin-bottom:0.6rem;}
-.tier-includes{display:flex;flex-direction:column;gap:0.18rem;}
-.ti-row{font-size:0.68rem;color:var(--muted);display:flex;gap:0.35rem;line-height:1.4;}
-.ti-row::before{content:'·';color:var(--purple);flex-shrink:0;}
-/* standalone items (checkboxes, not tiers) */
-.standalone-items{display:flex;flex-direction:column;}
-.standalone-item{display:flex;align-items:flex-start;gap:0.85rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border-light);cursor:pointer;transition:all 0.15s;user-select:none;}
-.standalone-item:last-child{border-bottom:none;}
-.standalone-item:hover{background:rgba(255,255,255,0.02);}
-.standalone-item.selected{background:rgba(105,44,142,0.07);}
-.si-check{width:22px;height:22px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:0.72rem;transition:all 0.15s;}
-.standalone-item.selected .si-check{background:var(--purple);border-color:var(--purple);color:white;}
-.si-text{flex:1;}
-.si-name{font-weight:700;font-size:0.88rem;margin-bottom:0.18rem;}
-.si-desc{font-size:0.73rem;color:var(--muted);line-height:1.55;}
+/* STEP PANELS */
+.step-panel{display:none;animation:fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) both;}
+.step-panel.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 
-/* SUMMARY PANEL */
-.summary-col{background:var(--sidebar);border-left:1px solid var(--border);position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;display:flex;flex-direction:column;}
-.sum-header{padding:1.25rem 1.5rem 0;}
-.sum-label{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.85rem;}
-.sum-empty{text-align:center;padding:2.5rem 1rem;}
-.sum-empty-icon{font-size:2.5rem;opacity:0.25;margin-bottom:0.6rem;}
-.sum-empty-text{font-size:0.8rem;color:var(--muted);line-height:1.65;}
-.sum-items{display:flex;flex-direction:column;gap:0.4rem;padding:0 1.5rem;}
-.sum-item{display:flex;align-items:flex-start;justify-content:space-between;gap:0.65rem;padding:0.65rem 0.8rem;background:rgba(255,255,255,0.03);border:1px solid var(--border-light);border-radius:5px;}
-.sim-left{flex:1;}
-.sim-name{font-size:0.8rem;font-weight:700;line-height:1.3;}
-.sim-cat{font-size:0.62rem;color:var(--muted);margin-top:0.1rem;}
-.sim-remove{background:transparent;border:none;color:rgba(255,255,255,0.2);cursor:pointer;padding:0.1rem 0.3rem;border-radius:3px;transition:all 0.15s;font-size:0.85rem;flex-shrink:0;}
-.sim-remove:hover{color:var(--red);background:rgba(255,92,124,0.1);}
+.step-panel-title{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;line-height:1.15;margin-bottom:0.5rem;}
+.step-panel-sub{font-size:0.88rem;color:var(--muted);margin-bottom:2rem;line-height:1.65;}
+.step-panel-sub strong{color:var(--white);}
 
-.sum-section{padding:0.85rem 1.5rem 0;}
-.ss-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem;}
-.ss-label::after{content:'';flex:1;height:1px;background:var(--border-light);}
-.ss-row{display:flex;align-items:flex-start;gap:0.5rem;padding:0.25rem 0;font-size:0.75rem;color:var(--muted);line-height:1.5;}
-.ss-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;}
-.ss-check::before{content:'✓';color:var(--green);font-weight:700;font-size:0.68rem;flex-shrink:0;}
+/* GOAL CARDS — Step 1 */
+.goal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-bottom:2rem;}
+.goal-card{padding:1.25rem;background:var(--sidebar);border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;gap:0.5rem;text-align:left;user-select:none;}
+.goal-card:hover{border-color:rgba(105,44,142,0.5);background:rgba(105,44,142,0.1);}
+.goal-card.selected{border-color:var(--purple);background:rgba(105,44,142,0.18);box-shadow:0 0 0 1px var(--purple);}
+.goal-card.selected .gc-icon{background:var(--gradient);color:white;}
+.gc-icon{width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all 0.2s;flex-shrink:0;}
+.gc-name{font-size:0.9rem;font-weight:700;line-height:1.2;}
+.gc-sub{font-size:0.72rem;color:var(--muted);line-height:1.45;}
+.goal-card.selected .gc-sub{color:rgba(200,160,255,0.7);}
+.goal-limit-note{font-size:0.72rem;color:var(--muted);text-align:center;margin-bottom:1.25rem;}
+.goal-limit-note strong{color:var(--white);}
 
-.sum-cta{padding:1rem 1.5rem 1.5rem;margin-top:auto;}
-.scta-box{background:var(--gradient);border-radius:8px;padding:1.25rem;text-align:center;}
-.scta-eyebrow{font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.3rem;}
-.scta-title{font-family:'Poppins',sans-serif;font-size:0.92rem;font-weight:800;margin-bottom:0.3rem;line-height:1.2;}
-.scta-sub{font-size:0.7rem;color:rgba(255,255,255,0.72);line-height:1.55;margin-bottom:0.85rem;}
-.scta-btn{display:block;width:100%;background:white;color:var(--purple);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:800;text-align:center;padding:0.65rem;border-radius:4px;border:none;cursor:pointer;transition:all 0.15s;}
-.scta-btn:hover{transform:translateY(-1px);}
-.scta-btn:disabled{opacity:0.45;cursor:not-allowed;transform:none;}
+/* Q&A — Step 2 */
+.qa-stack{display:flex;flex-direction:column;gap:1.75rem;margin-bottom:2rem;}
+.qa-block{}
+.qa-question{font-size:0.88rem;font-weight:700;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;}
+.qa-q-num{width:22px;height:22px;border-radius:50%;background:var(--gradient);font-family:'Poppins',sans-serif;font-size:0.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.qa-options{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.qa-option{padding:0.5rem 1rem;border:1.5px solid var(--border);border-radius:6px;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.qa-option:hover{border-color:rgba(105,44,142,0.5);color:var(--white);}
+.qa-option.selected{border-color:var(--purple);background:rgba(105,44,142,0.18);color:var(--white);}
 
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:300;display:none;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px);}
-.modal-overlay.open{display:flex;}
-.modal-box{background:var(--sidebar);border:1px solid rgba(105,44,142,0.35);border-radius:10px;max-width:500px;width:100%;padding:2rem;max-height:90vh;overflow-y:auto;}
-.modal-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:0.5rem;}
-.modal-title{font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:0.4rem;line-height:1.2;}
-.modal-sub{font-size:0.82rem;color:var(--muted);line-height:1.65;margin-bottom:0.85rem;}
-.modal-sub strong{color:var(--white);}
-.modal-preview{background:rgba(105,44,142,0.07);border:1px solid var(--border);border-radius:6px;padding:0.85rem 1rem;margin-bottom:1.25rem;font-size:0.75rem;color:var(--muted);line-height:1.8;}
-.modal-preview strong{color:var(--white);display:block;font-size:0.78rem;margin-bottom:0.3rem;}
-.modal-fields{display:flex;flex-direction:column;gap:0.65rem;margin-bottom:1.25rem;}
-.modal-input{width:100%;padding:0.65rem 0.85rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
-.modal-input:focus{border-color:var(--purple);}
-.modal-input::placeholder{color:rgba(255,255,255,0.25);}
-.modal-submit{width:100%;padding:0.85rem;background:var(--gradient);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.92rem;font-weight:800;border:none;border-radius:4px;cursor:pointer;box-shadow:0 4px 14px rgba(105,44,142,0.35);}
-.modal-cancel{width:100%;margin-top:0.5rem;padding:0.5rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;border:none;cursor:pointer;}
-.modal-cancel:hover{color:var(--white);}
-.modal-error{color:var(--red);font-size:0.75rem;text-align:center;margin-top:0.4rem;display:none;}
+/* CONTACT FIELDS — Step 2 bottom */
+.contact-fields{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:2rem;}
+.cf-field{display:flex;flex-direction:column;gap:0.35rem;}
+.cf-field.full{grid-column:1/-1;}
+.cf-label{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+.cf-input{padding:0.65rem 0.9rem;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:6px;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
+.cf-input:focus{border-color:var(--purple);}
+.cf-input::placeholder{color:rgba(255,255,255,0.2);}
 
+/* BUILDING ANIMATION — Step 3 */
+.building-wrap{text-align:center;padding:4rem 2rem;}
+.building-spinner{width:56px;height:56px;border:3px solid var(--border);border-top-color:var(--purple);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1.5rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.building-steps{display:flex;flex-direction:column;gap:0.5rem;max-width:280px;margin:1.5rem auto 0;text-align:left;}
+.bs-step{font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:0.6rem;transition:color 0.3s;}
+.bs-step.active{color:var(--white);}
+.bs-step.done{color:var(--green);}
+.bs-dot{width:6px;height:6px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.3s;}
+.bs-step.active .bs-dot{background:var(--purple);animation:pulse 1s infinite;}
+.bs-step.done .bs-dot{background:var(--green);}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+/* RESULTS — Step 4 */
+.results-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:0.5rem;}
+.results-intro{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;}
+.results-intro strong{color:var(--white);}
+
+.rec-cards{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+.rec-card{background:var(--sidebar);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s;}
+.rec-card.primary{border-color:var(--purple);box-shadow:0 0 0 1px rgba(105,44,142,0.3);}
+.rec-card-head{padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.rch-left{display:flex;align-items:center;gap:0.75rem;}
+.rch-icon{font-size:1.2rem;}
+.rch-name{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;}
+.rch-category{font-size:0.68rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-top:0.1rem;}
+.rch-badge{font-size:0.62rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:3px;}
+.badge-best{background:var(--gradient);color:white;}
+.badge-also{background:rgba(30,191,220,0.12);color:var(--blue);border:1px solid rgba(30,191,220,0.2);}
+.rec-card-body{padding:1rem 1.5rem;}
+.rec-includes{display:flex;flex-direction:column;gap:0.35rem;}
+.rec-include-item{font-size:0.8rem;color:var(--muted);display:flex;align-items:flex-start;gap:0.5rem;line-height:1.5;}
+.rec-include-item::before{content:'✓';color:var(--green);font-weight:700;font-size:0.75rem;margin-top:1px;flex-shrink:0;}
+
+/* SUBMIT FORM */
+.submit-block{background:rgba(105,44,142,0.08);border:1px solid var(--border);border-radius:12px;padding:2rem;margin-bottom:1.5rem;}
+.sb-title{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:0.4rem;}
+.sb-sub{font-size:0.82rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem;}
+.submit-btn{width:100%;padding:1rem;background:var(--gradient);border:none;border-radius:8px;color:white;font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 20px rgba(105,44,142,0.4);letter-spacing:0.02em;display:flex;align-items:center;justify-content:center;gap:0.6rem;}
+.submit-btn:hover:not(:disabled){box-shadow:0 6px 30px rgba(105,44,142,0.6);transform:translateY(-1px);}
+.submit-btn:disabled{opacity:0.6;cursor:not-allowed;}
+.privacy-note{font-size:0.68rem;color:rgba(160,160,192,0.5);text-align:center;margin-top:0.75rem;line-height:1.6;}
+
+/* SUCCESS */
+.success-wrap{text-align:center;padding:4rem 2rem;}
+.success-icon{font-size:3.5rem;margin-bottom:1.25rem;}
+.success-title{font-family:'Poppins',sans-serif;font-size:1.75rem;font-weight:800;margin-bottom:0.75rem;}
+.success-sub{font-size:0.92rem;color:var(--muted);line-height:1.75;max-width:420px;margin:0 auto 2rem;}
+.success-sub strong{color:var(--white);}
+.success-cta{display:inline-block;background:var(--gradient);color:white;text-decoration:none;padding:0.9rem 2rem;border-radius:8px;font-size:0.9rem;font-weight:800;box-shadow:0 4px 18px rgba(105,44,142,0.4);transition:all 0.2s;}
+.success-cta:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(105,44,142,0.6);}
+
+/* NAV BUTTONS */
+.nav-btns{display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;}
+.btn-back{padding:0.7rem 1.25rem;background:transparent;border:1.5px solid var(--border);border-radius:6px;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.btn-back:hover{border-color:rgba(105,44,142,0.4);color:var(--white);}
+.btn-next{padding:0.8rem 1.75rem;background:var(--gradient);border:none;border-radius:8px;color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 16px rgba(105,44,142,0.35);display:flex;align-items:center;gap:0.5rem;}
+.btn-next:hover{box-shadow:0 6px 24px rgba(105,44,142,0.55);transform:translateY(-1px);}
+.btn-next:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+
+/* ERROR */
+.field-error{font-size:0.72rem;color:var(--red);margin-top:0.25rem;display:none;}
+.cf-input.error{border-color:var(--red);}
+
+/* FOOTER */
 footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
 .footer-note{font-size:0.72rem;color:rgba(255,255,255,0.25);}
 .footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
 .footer-link:hover{color:var(--white);}
-@media(max-width:960px){.builder-wrap{grid-template-columns:1fr;}.summary-col{position:static;height:auto;border-left:none;border-top:1px solid var(--border);}.tier-grid.cols-4{grid-template-columns:1fr 1fr;}.tier-grid.cols-3{grid-template-columns:1fr 1fr;}}
-@media(max-width:600px){.hero{padding:3rem 1.25rem 2rem;}.services-col{padding:1.25rem 1rem;gap:1.5rem;}.tier-grid.cols-2,.tier-grid.cols-3,.tier-grid.cols-4{grid-template-columns:1fr;}footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+
+@media(max-width:700px){
+  .goal-grid{grid-template-columns:1fr 1fr;}
+  .contact-fields{grid-template-columns:1fr;}
+  .cf-field.full{grid-column:1;}
+  .quiz-wrap{padding:2rem 1.25rem 4rem;}
+}
+@media(max-width:420px){.goal-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -149,9 +188,9 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="results.html">Results</a></li>
+    <li><a href="learn.html">Academy</a></li>
     <li class="nav-dropdown">
-      <button class="nav-drop-btn" onclick="toggleNav(this)" id="nl-tools-btn">Tools <span class="nav-chevron">&#9660;</span></button>
+      <button class="nav-drop-btn" onclick="toggleNav(this)">Tools <span class="nav-chevron">&#9660;</span></button>
       <div class="nav-drop-menu" id="nl-tools-menu">
         <div class="ndm-col">
           <div class="ndm-label">Calculators</div>
@@ -161,11 +200,12 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           <a href="budget.html">Ad Budget Planner</a>
           <a href="revenue-loss.html">Revenue Loss</a>
           <a href="ai-calculator.html">AI Receptionist ROI</a>
-          <a href="package-builder.html">Package Builder</a>
+          <a href="package-builder.html" style="color:var(--white);font-weight:700;">Package Builder ✨</a>
         </div>
         <div class="ndm-col">
-          <div class="ndm-label">Audits &amp; Quizzes</div>
+          <div class="ndm-label">Audits &amp; Scanners</div>
           <a href="business-snapshot.html">Business Snapshot ✨</a>
+          <a href="local-market-scanner.html">Local Market Scanner 🗺️</a>
           <a href="marketing-wheel.html">Marketing Wheel</a>
           <a href="website-quiz.html">Website Quiz</a>
           <a href="positioning.html">Positioning Worksheet</a>
@@ -178,681 +218,593 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 </nav>
 
 <div class="hero">
-  <div class="hero-tag">Tool 12 · Package Builder</div>
-  <h1 class="hero-title">Build your perfect<br><span class="accent">marketing package</span></h1>
-  <p class="hero-sub">Pick the services that match where your business is headed. <strong>No pricing shown here</strong> — every package is scoped to your budget. A real Zoek strategist will follow up with a custom proposal.</p>
+  <div class="hero-tag">Package Builder</div>
+  <h1 class="hero-title">Find the right<br><span class="accent">Zoek package for you</span></h1>
+  <p class="hero-sub">Answer 3 quick questions and we'll match you with the services that fit your goals. <strong>Takes less than 2 minutes.</strong></p>
 </div>
 
-<div class="builder-wrap">
-  <div class="services-col" id="services-col"></div>
-
-  <div class="summary-col">
-    <div class="sum-header">
-      <div class="sum-label">Your package</div>
-      <div id="sum-empty" class="sum-empty">
-        <div class="sum-empty-icon">📦</div>
-        <p class="sum-empty-text">Select services on the left to build your package. Your choices will appear here.</p>
-      </div>
-      <div id="sum-items" style="display:none"></div>
-    </div>
-    <div id="sum-timeline" style="display:none" class="sum-section">
-      <div class="ss-label">Estimated timeline</div>
-      <div id="tl-rows"></div>
-    </div>
-    <div id="sum-features" style="display:none" class="sum-section">
-      <div class="ss-label">What's included</div>
-      <div id="feat-rows"></div>
-    </div>
-    <div class="sum-cta">
-      <div class="scta-box">
-        <div class="scta-eyebrow">No commitment required</div>
-        <div class="scta-title" id="scta-title">Select services to get started</div>
-        <div class="scta-sub" id="scta-sub">A Zoek strategist will review your selections and reach out with a custom proposal built around your budget and goals.</div>
-        <button class="scta-btn" id="scta-btn" onclick="openModal()" disabled>Get My Custom Quote →</button>
-      </div>
-    </div>
+<!-- STEPPER -->
+<div class="stepper">
+  <div class="step-item active" id="si-1">
+    <div class="step-circle active" id="sc-1">1</div>
+    <span class="step-label">Your Goals</span>
+  </div>
+  <div class="step-connector" id="conn-1"></div>
+  <div class="step-item" id="si-2">
+    <div class="step-circle" id="sc-2">2</div>
+    <span class="step-label">Quick Questions</span>
+  </div>
+  <div class="step-connector" id="conn-2"></div>
+  <div class="step-item" id="si-3">
+    <div class="step-circle" id="sc-3">3</div>
+    <span class="step-label">Your Recommendation</span>
   </div>
 </div>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal-box">
-    <div class="modal-tag">Almost there</div>
-    <div class="modal-title">Tell us about your business</div>
-    <div class="modal-sub">A Zoek strategist — <strong>not an autoresponder</strong> — will review your package and reach out within one business day.</div>
-    <div class="modal-preview" id="modal-preview"></div>
-    <div class="modal-fields">
-      <input class="modal-input" id="m-name" type="text" placeholder="Your name *">
-      <input class="modal-input" id="m-biz" type="text" placeholder="Business name *">
-      <input class="modal-input" id="m-email" type="email" placeholder="Email address *">
-      <input class="modal-input" id="m-phone" type="tel" placeholder="Phone number *">
-      <input class="modal-input" id="m-city" type="text" placeholder="City / state">
-      <textarea class="modal-input" id="m-notes" rows="2" placeholder="Anything else we should know? (optional)" style="resize:none;"></textarea>
+<div class="quiz-wrap">
+
+  <!-- ═══ STEP 1: GOALS ═══ -->
+  <div class="step-panel active" id="panel-1">
+    <div class="step-panel-title">What are your top marketing goals?</div>
+    <p class="step-panel-sub">Pick <strong>up to 3</strong> that matter most to your business right now.</p>
+    <div class="goal-limit-note" id="goal-limit-note">Select 1–3 goals to continue</div>
+    <div class="goal-grid">
+      <div class="goal-card" data-goal="website" onclick="toggleGoal(this)">
+        <div class="gc-icon">🌐</div>
+        <div class="gc-name">Get Online</div>
+        <div class="gc-sub">Build or upgrade my website</div>
+      </div>
+      <div class="goal-card" data-goal="seo" onclick="toggleGoal(this)">
+        <div class="gc-icon">🔍</div>
+        <div class="gc-name">Get Found on Google</div>
+        <div class="gc-sub">Show up in local search results</div>
+      </div>
+      <div class="goal-card" data-goal="ads" onclick="toggleGoal(this)">
+        <div class="gc-icon">⚡</div>
+        <div class="gc-name">Run Ads</div>
+        <div class="gc-sub">Drive leads with paid advertising</div>
+      </div>
+      <div class="goal-card" data-goal="social" onclick="toggleGoal(this)">
+        <div class="gc-icon">📱</div>
+        <div class="gc-name">Grow Social Media</div>
+        <div class="gc-sub">Build presence on Facebook & Instagram</div>
+      </div>
+      <div class="goal-card" data-goal="reviews" onclick="toggleGoal(this)">
+        <div class="gc-icon">⭐</div>
+        <div class="gc-name">Manage My Reputation</div>
+        <div class="gc-sub">Get more reviews and protect my brand</div>
+      </div>
+      <div class="goal-card" data-goal="brand" onclick="toggleGoal(this)">
+        <div class="gc-icon">🎨</div>
+        <div class="gc-name">Build My Brand</div>
+        <div class="gc-sub">Logo, design, and visual identity</div>
+      </div>
     </div>
-    <button class="modal-submit" id="modal-submit-btn" onclick="submitPackage()">Send My Package to Zoek →</button>
-    <button class="modal-cancel" onclick="closeModal()">← Go back</button>
-    <div class="modal-error" id="modal-error">Please fill in your name, business, email, and phone.</div>
+    <div class="nav-btns">
+      <span></span>
+      <button class="btn-next" id="btn-1-next" onclick="goToStep2()" disabled>
+        Next: Quick Questions <span>→</span>
+      </button>
+    </div>
   </div>
-</div>
+
+  <!-- ═══ STEP 2: QUESTIONS + CONTACT ═══ -->
+  <div class="step-panel" id="panel-2">
+    <div class="step-panel-title">A few quick questions</div>
+    <p class="step-panel-sub">This helps us match you to the right package — no wrong answers.</p>
+
+    <div class="qa-stack">
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">1</span> Do you currently have a website?</div>
+        <div class="qa-options">
+          <button class="qa-option" data-q="website_status" data-v="none" onclick="selectQA(this)">No website yet</button>
+          <button class="qa-option" data-q="website_status" data-v="old" onclick="selectQA(this)">Yes, but it needs work</button>
+          <button class="qa-option" data-q="website_status" data-v="good" onclick="selectQA(this)">Yes, and it's solid</button>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">2</span> How would you describe your market?</div>
+        <div class="qa-options">
+          <button class="qa-option" data-q="market" data-v="local" onclick="selectQA(this)">Local — one city or town</button>
+          <button class="qa-option" data-q="market" data-v="regional" onclick="selectQA(this)">Regional — multiple cities</button>
+          <button class="qa-option" data-q="market" data-v="national" onclick="selectQA(this)">National or multiple locations</button>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">3</span> How would you describe your business?</div>
+        <div class="qa-options">
+          <button class="qa-option" data-q="size" data-v="new" onclick="selectQA(this)">Just starting out</button>
+          <button class="qa-option" data-q="size" data-v="growing" onclick="selectQA(this)">Established and growing</button>
+          <button class="qa-option" data-q="size" data-v="scaling" onclick="selectQA(this)">Scaling fast or multi-location</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Your contact info</div>
+    <div class="contact-fields">
+      <div class="cf-field">
+        <label class="cf-label">First &amp; Last Name *</label>
+        <input type="text" class="cf-input" id="cf-name" placeholder="Jane Smith">
+        <div class="field-error" id="err-name">Please enter your name</div>
+      </div>
+      <div class="cf-field">
+        <label class="cf-label">Business Name *</label>
+        <input type="text" class="cf-input" id="cf-biz" placeholder="Acme Plumbing">
+        <div class="field-error" id="err-biz">Please enter your business name</div>
+      </div>
+      <div class="cf-field">
+        <label class="cf-label">Phone Number *</label>
+        <input type="tel" class="cf-input" id="cf-phone" placeholder="(555) 000-0000">
+        <div class="field-error" id="err-phone">Please enter your phone number</div>
+      </div>
+      <div class="cf-field">
+        <label class="cf-label">Email Address *</label>
+        <input type="email" class="cf-input" id="cf-email" placeholder="jane@acmeplumbing.com">
+        <div class="field-error" id="err-email">Please enter a valid email</div>
+      </div>
+      <div class="cf-field full">
+        <label class="cf-label">Website URL <span style="color:rgba(160,160,192,0.4);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+        <input type="text" class="cf-input" id="cf-url" placeholder="www.yourbusiness.com">
+      </div>
+    </div>
+
+    <div class="nav-btns">
+      <button class="btn-back" onclick="goToStep(1)">← Back</button>
+      <button class="btn-next" id="btn-2-next" onclick="goToStep3()">
+        Build My Recommendation <span>→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 3: BUILDING ANIMATION ═══ -->
+  <div class="step-panel" id="panel-3">
+    <div class="building-wrap">
+      <div class="building-spinner"></div>
+      <div style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;">Building your recommendation...</div>
+      <div class="building-steps">
+        <div class="bs-step active" id="bs1"><span class="bs-dot"></span>Analyzing your goals...</div>
+        <div class="bs-step" id="bs2"><span class="bs-dot"></span>Matching Zoek packages...</div>
+        <div class="bs-step" id="bs3"><span class="bs-dot"></span>Personalizing your plan...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 4: RESULTS ═══ -->
+  <div class="step-panel" id="panel-4">
+    <div class="results-eyebrow">✦ Your personalized recommendation</div>
+    <div class="step-panel-title" id="results-title">Here's what we'd build for you</div>
+    <p class="results-intro" id="results-intro">Loading...</p>
+
+    <div class="rec-cards" id="rec-cards"></div>
+
+    <div class="submit-block">
+      <div class="sb-title">Ready to get started?</div>
+      <div class="sb-sub">One of our growth strategists will reach out within one business day to walk you through pricing and next steps — no pressure, just a real conversation.</div>
+      <button class="submit-btn" id="submit-btn" onclick="submitProposal()">
+        <span>📋</span> Send Me a Custom Proposal
+      </button>
+      <div class="privacy-note">By submitting, you agree to be contacted by a Zoek representative. We never share or sell your information.</div>
+    </div>
+
+    <div style="text-align:center;">
+      <button onclick="goToStep(1)" style="background:none;border:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;cursor:pointer;text-decoration:underline;padding:0.5rem;">Start over</button>
+    </div>
+  </div>
+
+  <!-- ═══ SUCCESS ═══ -->
+  <div class="step-panel" id="panel-success">
+    <div class="success-wrap">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">You're all set!</div>
+      <p class="success-sub">Your recommendation has been sent to our team. <strong>Expect a call or email within one business day</strong> to go over your custom proposal.</p>
+      <a href="https://calendly.com/expert-sales" target="_blank" class="success-cta">Or Book a Call Right Now →</a>
+    </div>
+  </div>
+
+</div><!-- /quiz-wrap -->
 
 <footer>
   <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:20px;width:auto"></a>
   <span class="footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · 1-888-737-9635</span>
 </footer>
 
+<script src="cta.js"></script>
 <script>
-// ============================================================
-// SERVICE DATA — built from Zoek's actual pricing sheet
-// ============================================================
 
-// State: one selection per "tier" category, multiple for standalone
-const selections = {}; // catId -> itemId (for tier groups)
-const addons = new Set(); // itemId (for standalone checkboxes)
+// ─── FORMSPREE ENDPOINT ───────────────────────
+// Replace with Chad's real Formspree form ID
+const FORMSPREE_URL = 'https://formspree.io/f/CHAD_FORM_ID';
 
-const CATS = [
+// ─── STATE ────────────────────────────────────
+let selectedGoals = [];
+let answers       = {};
+let recommendations = [];
 
-  // ── WEBSITE DESIGN ─────────────────────────────────────
-  {
-    id: 'website',
-    icon: '🌐',
-    title: 'Website Design',
-    subtitle: 'Your 24/7 salesperson — built by Zoek, optimized to convert',
-    billing: 'one-time',
-    type: 'tiers', // radio-style
-    cols: 4,
-    items: [
-      {
-        id: 'web-express',
-        badge: 'badge-fast', badgeLabel: 'Fastest',
-        name: 'Express Website',
-        desc: 'High-converting 1-page site delivered in 3 business days. No calls needed — conducted entirely over email.',
-        includes: ['1 focused landing page','3 rounds of edits','Mobile-ready','Lead capture form','Delivered in 3 days'],
-        timeline: '3 business days',
-      },
-      {
-        id: 'web-small',
-        badge: 'badge-starter', badgeLabel: 'Starter',
-        name: 'Small Website',
-        desc: 'A clean, professional 1–2 page site. Your digital handshake — perfect for new businesses or simple service providers.',
-        includes: ['1–2 pages','Mobile-optimized','Click-to-call & contact form','Google Analytics setup','Social media links'],
-        timeline: '2–4 weeks',
-      },
-      {
-        id: 'web-classic',
-        badge: 'badge-popular', badgeLabel: 'Most Popular',
-        name: 'Classic Website',
-        desc: '3–5 pages with dedicated service pages, about, contact, and an SEO-smart site structure built for local search.',
-        includes: ['3–5 pages','SEO-smart structure','Service & about pages','3 rounds of edits','Sitemap submission','App integrations'],
-        timeline: '5 weeks',
-      },
-      {
-        id: 'web-advanced',
-        badge: 'badge-growth', badgeLabel: 'Full Solution',
-        name: 'Advanced Website',
-        desc: 'Up to 8 pages with eCommerce, booking, payments, product pages, and full app integrations. Built to sell.',
-        includes: ['Up to 8 pages','eCommerce & checkout','Booking & payments','Drop-shipping setup','Product pages','5+ app integrations'],
-        timeline: '8 weeks',
-      }
-    ]
+// ─── PACKAGE CATALOG ─────────────────────────
+// Maps goals + answers → Zoek packages
+// No prices shown — Chad handles that
+const PACKAGES = {
+
+  // WEBSITE
+  website_express: {
+    icon:'🌐', category:'Website', name:'Express Website',
+    includes:['Up to 6 pages on Wix','Standard hosting included','1-week turnaround','Professional design'],
+    tags:['website'], sizeTags:['new'], marketTags:['local','regional','national']
+  },
+  website_classic: {
+    icon:'🌐', category:'Website', name:'Classic Website',
+    includes:['3–5 pages with advanced design','3 rounds of edits','Initial draft in 5 weeks','3 Wix Marketplace apps included'],
+    tags:['website'], sizeTags:['growing'], marketTags:['local','regional','national']
+  },
+  website_advanced: {
+    icon:'🌐', category:'Website', name:'Advanced Website',
+    includes:['Up to 8 pages with premium design','4 rounds of edits','5 Wix Marketplace apps','Wix payment integration'],
+    tags:['website'], sizeTags:['scaling'], marketTags:['local','regional','national']
+  },
+  website_managed_core: {
+    icon:'🔄', category:'Managed Website', name:'Core Managed Website',
+    includes:['Hosting + domain + SSL included','Unlimited web design requests','2 concurrent design requests','Ongoing support and updates'],
+    tags:['website'], sizeTags:['new','growing'], marketTags:['local','regional','national']
+  },
+  website_managed_adv: {
+    icon:'🔄', category:'Managed Website', name:'Advanced Managed Website',
+    includes:['Everything in Core Managed','Advanced graphic design requests','Content requests included','4 concurrent requests at a time'],
+    tags:['website'], sizeTags:['growing','scaling'], marketTags:['local','regional','national']
+  },
+  website_redesign: {
+    icon:'✏️', category:'Website Redesign', name:'Website Redesign',
+    includes:['Full redesign of existing site','3–5 pages rebuilt from scratch','3 rounds of edits','Initial build in 5 weeks'],
+    tags:['website'], sizeTags:['new','growing','scaling'], marketTags:['local','regional','national'],
+    requiresExisting: true
   },
 
-  // ── WEBSITE BUNDLES ─────────────────────────────────────
-  {
-    id: 'bundle',
-    icon: '📦',
-    title: 'Website Bundle',
-    subtitle: 'Website + ongoing management — all-in-one monthly plans',
-    billing: 'monthly',
-    type: 'tiers',
-    cols: 3,
-    note: 'Includes a professionally built website combined with continuous support and management. Best value for businesses that want everything handled.',
-    items: [
-      {
-        id: 'bundle-express',
-        badge: 'badge-starter', badgeLabel: 'Base Plan',
-        name: 'Express Bundle',
-        desc: 'Express website included plus ongoing core management. Entry-level plan for businesses wanting a managed presence.',
-        includes: ['Express website included','Core monthly management','Performance monitoring','Priority support'],
-        timeline: 'Ongoing monthly',
-      },
-      {
-        id: 'bundle-classic',
-        badge: 'badge-popular', badgeLabel: 'Enhanced Plan',
-        name: 'Classic Bundle',
-        desc: 'Classic website included plus enhanced monthly management. The most popular all-in-one option for local businesses.',
-        includes: ['Classic website included','Enhanced monthly management','Regular design updates','Analytics reporting','Priority support'],
-        timeline: 'Ongoing monthly',
-      },
-      {
-        id: 'bundle-advanced',
-        badge: 'badge-growth', badgeLabel: 'Premier Plan',
-        name: 'Advanced Bundle',
-        desc: 'Advanced website included with premier-level management. Full-service monthly plan for businesses ready to grow.',
-        includes: ['Advanced website included','Premier monthly management','Speed & SEO optimization','Monthly strategy review','Dedicated account manager'],
-        timeline: 'Ongoing monthly',
-      }
-    ]
+  // SEO
+  seo_local_starter: {
+    icon:'🔍', category:'SEO', name:'Local Starter SEO',
+    includes:['Hyperlocal keyword targeting','Basic on-page optimization','Great for new businesses','Monthly performance reporting'],
+    tags:['seo'], sizeTags:['new'], marketTags:['local']
+  },
+  seo_local_expand: {
+    icon:'🔍', category:'SEO', name:'Local Expand SEO',
+    includes:['Targeted keyword strategy','1 geolocation focus','Monthly reporting sessions','Ongoing optimization'],
+    tags:['seo'], sizeTags:['new','growing'], marketTags:['local']
+  },
+  seo_competitive: {
+    icon:'🔍', category:'SEO', name:'Competitive Local SEO',
+    includes:['Ideal for populated cities','Blog content creation','Google Business Profile management','GBP posting and optimization'],
+    tags:['seo'], sizeTags:['growing'], marketTags:['local','regional']
+  },
+  seo_enterprise: {
+    icon:'🔍', category:'SEO', name:'Enterprise SEO',
+    includes:['2 geolocation targeting','14 keyword focus areas','Perfect for multi-location businesses','Advanced reporting dashboard'],
+    tags:['seo'], sizeTags:['scaling'], marketTags:['regional','national']
+  },
+  get_found: {
+    icon:'📍', category:'Local Listings', name:'Get Found',
+    includes:['50+ premium directory submissions','NAP consistency across the web','Listing distribution to top 4 data aggregators','Dashboard and analytics'],
+    tags:['seo','reviews'], sizeTags:['new','growing','scaling'], marketTags:['local','regional','national']
   },
 
-  // ── SEO ─────────────────────────────────────────────────
-  {
-    id: 'seo',
-    icon: '🔍',
-    title: 'SEO & Search Visibility',
-    subtitle: 'Get found on Google by people actively searching for what you do',
-    billing: 'monthly',
-    type: 'tiers',
-    cols: 4,
-    note: 'The right plan is determined through a quick discovery + scoping process. Packages are scoped to your location, competitiveness, keyword targets, and growth goals.',
-    items: [
-      {
-        id: 'seo-listed',
-        badge: 'badge-starter', badgeLabel: 'Foundation',
-        name: 'Get Listed',
-        desc: 'Your business name, address, and phone — consistent and accurate across 50+ online directories and maps.',
-        includes: ['50+ directory submissions','NAP consistency audit','Google, Yelp, Bing, Apple Maps','Citation monitoring','Map pack visibility'],
-        timeline: '2–3 weeks setup',
-      },
-      {
-        id: 'seo-local',
-        badge: 'badge-popular', badgeLabel: 'Most Popular',
-        name: 'Local SEO',
-        desc: 'Rank higher in your city for high-intent searches. Includes GBP optimization, content, and monthly rank tracking.',
-        includes: ['Keyword research & strategy','On-page optimization','Google Business Profile mgmt','Content creation','Monthly rank reporting'],
-        timeline: 'Results in 60–90 days',
-      },
-      {
-        id: 'seo-competitive',
-        badge: 'badge-growth', badgeLabel: 'Growth',
-        name: 'Competitive SEO',
-        desc: 'For businesses in competitive markets or multi-location campaigns that need deeper strategy and more content velocity.',
-        includes: ['Everything in Local SEO','Multi-location targeting','Expanded content strategy','Competitor analysis','Authority link building'],
-        timeline: 'Results in 60–90 days',
-      },
-      {
-        id: 'seo-enterprise',
-        badge: 'badge-enterprise', badgeLabel: 'Enterprise',
-        name: 'Enterprise SEO',
-        desc: 'Full-scale SEO for high-volume, multi-location, or highly competitive industries. Custom strategy, maximum output.',
-        includes: ['Custom keyword strategy','Full technical SEO audit','High-volume content creation','Premium link acquisition','Dedicated SEO manager'],
-        timeline: 'Custom scoping call',
-      }
-    ]
+  // ADS
+  ads_sem: {
+    icon:'⚡', category:'Paid Ads', name:'Search Engine Marketing (SEM)',
+    includes:['Google Ads management','Comprehensive tracking dashboard','Monthly reporting and optimization','Ad creation by our team'],
+    tags:['ads'], sizeTags:['new','growing','scaling'], marketTags:['local','regional','national']
+  },
+  ads_social: {
+    icon:'📣', category:'Social Ads', name:'Social Display Advertising',
+    includes:['Facebook and Instagram ad creation','Targeted placement and budget management','Geographic and demographic targeting','Performance reporting'],
+    tags:['ads','social'], sizeTags:['growing','scaling'], marketTags:['local','regional','national']
+  },
+  ads_omni: {
+    icon:'🌐', category:'Omnichannel', name:'Omnichannel Marketing',
+    includes:['Paid ads + display + social combined','Custom audience targeting','Expert budget allocation across channels','Geo-targeted campaigns'],
+    tags:['ads','social'], sizeTags:['scaling'], marketTags:['regional','national']
+  },
+  ads_display: {
+    icon:'🖥️', category:'Display Ads', name:'Display Advertising',
+    includes:['Display ad creation','Placement on top US websites','Full tracking and dashboard','Geography and demographic targeting'],
+    tags:['ads'], sizeTags:['growing','scaling'], marketTags:['local','regional','national']
   },
 
-  // ── AI SEARCH ───────────────────────────────────────────
-  {
-    id: 'ai',
-    icon: '🤖',
-    title: 'AI Command Center',
-    subtitle: 'Get found in ChatGPT, Gemini & Perplexity — where your next customers are already searching',
-    billing: 'monthly',
-    type: 'standalone',
-    items: [
-      {
-        id: 'ai-standard',
-        name: 'AI Command Center w/ ADA',
-        desc: 'Future-proof your visibility across AI-powered search engines. Includes llms.txt setup, schema optimization, AI engine indexing, ADA compliance widget, and monthly AI visibility reporting.',
-        features: ['AI search optimization (llms.txt)','Schema markup','AI engine indexing readiness','ADA compliance widget','Monthly AI visibility score']
-      },
-      {
-        id: 'ai-sms',
-        name: 'AI Command Center + SMS w/ ADA',
-        desc: 'Everything in AI Command Center plus SMS marketing integration — automated text campaigns, lead nurturing, and appointment reminders tied to your AI search presence.',
-        features: ['Everything in AI Command Center','SMS campaign setup','Automated lead nurturing texts','Appointment reminder sequences','Two-way SMS inbox']
-      }
-    ]
+  // SOCIAL
+  smm_starter: {
+    icon:'📱', category:'Social Media', name:'SMM Starter',
+    includes:['2 posts per week on Facebook & Instagram','Content and image creation','AI-powered post scheduler','Quarterly reviews with your manager'],
+    tags:['social'], sizeTags:['new','growing'], marketTags:['local','regional']
+  },
+  smm_premium: {
+    icon:'📱', category:'Social Media', name:'SMM Premium',
+    includes:['8 posts per week on 2 networks','10 hrs/mo personalized engagement','Auto-responses to direct messages','Promoted posts included'],
+    tags:['social'], sizeTags:['growing'], marketTags:['local','regional','national']
+  },
+  smm_enterprise: {
+    icon:'📱', category:'Social Media', name:'SMM Enterprise',
+    includes:['10 posts per week on 2 networks','15 hrs/mo personalized engagement','CRM and platform integrations','Advanced promoted posts strategy'],
+    tags:['social'], sizeTags:['scaling'], marketTags:['regional','national']
   },
 
-  // ── PAID ADS ─────────────────────────────────────────────
-  {
-    id: 'ads',
-    icon: '📣',
-    title: 'Paid Advertising',
-    subtitle: 'Consistent, measurable leads from Google and Meta — managed by Zoek',
-    billing: 'monthly',
-    type: 'tiers',
-    cols: 3,
-    note: 'Pricing is highly customized based on monthly budget, location, industry competitiveness, keyword competition, and platform strategy.',
-    items: [
-      {
-        id: 'ads-search',
-        badge: 'badge-starter', badgeLabel: 'Search',
-        name: 'Search & Shopping',
-        desc: 'Google Search, Shopping, and PPC campaigns targeting people actively looking for your services right now.',
-        includes: ['Google Search campaigns','Shopping ads (if applicable)','Keyword research & targeting','Automated bid management','Call tracking','Monthly reporting'],
-        timeline: 'Live in 1–2 weeks',
-      },
-      {
-        id: 'ads-social',
-        badge: 'badge-popular', badgeLabel: 'Social',
-        name: 'Social Advertising',
-        desc: 'Facebook, Instagram, YouTube, LinkedIn, and TikTok ads tailored to your audience and goals.',
-        includes: ['Facebook & Instagram ads','YouTube / LinkedIn / TikTok (if applicable)','Audience research & targeting','Creative direction','Lead form setup','Monthly reporting'],
-        timeline: 'Live in 1–2 weeks',
-      },
-      {
-        id: 'ads-omni',
-        badge: 'badge-growth', badgeLabel: 'Full Coverage',
-        name: 'Omnichannel & Display',
-        desc: 'Amazon, Display, Retargeting, and full omnichannel strategies for maximum reach and ROI across every platform.',
-        includes: ['Search + social + display','Amazon advertising','Retargeting campaigns','Cross-platform attribution','Unified dashboard reporting','Omnichannel strategy'],
-        timeline: 'Live in 2 weeks',
-      }
-    ]
+  // REVIEWS / REPUTATION
+  get_listed: {
+    icon:'📋', category:'Local Listings', name:'Get Listed',
+    includes:['50+ premium directory submissions','NAP consistency management','Duplicate suppression','Citation creation and dashboard'],
+    tags:['reviews','seo'], sizeTags:['new','growing','scaling'], marketTags:['local','regional']
   },
 
-  // ── SOCIAL MEDIA ─────────────────────────────────────────
-  {
-    id: 'social',
-    icon: '📱',
-    title: 'Social Media Management',
-    subtitle: 'Done-for-you social content — consistent, on-brand, and always active',
-    billing: 'monthly',
-    type: 'tiers',
-    cols: 4,
-    items: [
-      {
-        id: 'smm-starter',
-        badge: 'badge-starter', badgeLabel: 'Starter',
-        name: 'SMM Starter',
-        desc: 'Foundational social presence. Consistent branded content to keep your business visible and professional.',
-        includes: ['Content strategy','Custom post creation','Posting & scheduling','Monthly analytics'],
-        timeline: 'Starts within 2 weeks',
-      },
-      {
-        id: 'smm-premium',
-        badge: 'badge-popular', badgeLabel: 'Most Popular',
-        name: 'SMM Premium',
-        desc: 'Full social management with engagement monitoring, stories, and a higher content volume across platforms.',
-        includes: ['Everything in Starter','Stories & reels','Engagement monitoring','Comment responses','Platform optimization'],
-        timeline: 'Starts within 2 weeks',
-      },
-      {
-        id: 'smm-enterprise',
-        badge: 'badge-growth', badgeLabel: 'Enterprise',
-        name: 'SMM Enterprise',
-        desc: 'High-volume, multi-platform social management for businesses that need a full agency-level presence.',
-        includes: ['Everything in Premium','Multi-platform management','Influencer outreach','Monthly strategy review','Dedicated content team'],
-        timeline: 'Starts within 2 weeks',
-      },
-      {
-        id: 'smm-agency',
-        badge: 'badge-enterprise', badgeLabel: 'Agency',
-        name: 'SMM Agency',
-        desc: 'Full-scale agency-level social management. Maximum content output, platform diversity, and brand authority.',
-        includes: ['Everything in Enterprise','Maximum content output','Full platform suite','Weekly reporting','Senior strategist assigned'],
-        timeline: 'Starts within 2 weeks',
-      }
-    ]
+  // BRAND / DESIGN
+  branding_kit: {
+    icon:'🎨', category:'Graphic Design', name:'Business Branding Kit',
+    includes:['Custom logo design','Brand color and font system','Business card and letterhead','Brand guidelines document'],
+    tags:['brand'], sizeTags:['new','growing','scaling'], marketTags:['local','regional','national']
   },
-
-  // ── GRAPHIC DESIGN ───────────────────────────────────────
-  {
-    id: 'design',
-    icon: '🎨',
-    title: 'Graphic Design & Branding',
-    subtitle: 'Make every touchpoint look intentional — online and off',
-    billing: 'one-time',
-    type: 'tiers',
-    cols: 3,
-    items: [
-      {
-        id: 'design-branding',
-        badge: 'badge-starter', badgeLabel: 'Branding Kit',
-        name: 'Business Branding Kit',
-        desc: 'A complete visual identity — logo, color palette, typography, and brand guide so every touchpoint looks cohesive.',
-        includes: ['Primary logo + variations','Color palette & typography','Brand style guide','Business card design','Print-ready files'],
-        timeline: '3–4 weeks',
-      },
-      {
-        id: 'design-social',
-        badge: 'badge-popular', badgeLabel: 'Social Kit',
-        name: 'Social Standout Kit',
-        desc: 'Custom branded social templates, profile graphics, and cover images designed to stop the scroll.',
-        includes: ['Social profile graphics','Branded post templates','Cover images','Story templates','Reusable Canva/Adobe files'],
-        timeline: '2–3 weeks',
-      },
-      {
-        id: 'design-site',
-        badge: 'badge-growth', badgeLabel: 'Site Kit',
-        name: 'Site Enhance Kit',
-        desc: 'Custom imagery, banners, and design assets that elevate your website beyond generic stock photos.',
-        includes: ['Custom site banners','Section background graphics','Icon sets','Custom CTA graphics','Brand-matched imagery'],
-        timeline: '2–3 weeks',
-      }
-    ]
+  social_kit: {
+    icon:'✨', category:'Graphic Design', name:'Social Standout Kit',
+    includes:['Custom social media templates','Profile and cover image design','Story and post graphics','Branded content system'],
+    tags:['brand','social'], sizeTags:['new','growing'], marketTags:['local','regional','national']
   },
+  site_enhance: {
+    icon:'🖼️', category:'Graphic Design', name:'Site Enhance Kit',
+    includes:['Custom website graphics','Hero images and banners','Icon and illustration set','Optimized for web performance'],
+    tags:['brand','website'], sizeTags:['new','growing','scaling'], marketTags:['local','regional','national']
+  },
+};
 
-  // ── ADD-ONS ──────────────────────────────────────────────
-  {
-    id: 'addons',
-    icon: '➕',
-    title: 'Add-Ons & Extras',
-    subtitle: 'Enhance any package with these standalone services',
-    billing: 'varies',
-    type: 'standalone',
-    items: [
-      {
-        id: 'addon-ada',
-        name: 'Website Accessibility (ADA Compliance)',
-        desc: 'Protect your business legally and open your site to every potential customer. Monthly compliance widget, audit, and certification.',
-        features: ['ADA compliance widget','Accessibility audit','Screen reader optimization','Keyboard navigation support','Compliance monitoring']
-      },
-      {
-        id: 'addon-chatbot',
-        name: 'Website AI Chatbot',
-        desc: 'An AI-powered chatbot that answers visitor questions, captures leads, and books appointments 24/7 — even when you\'re not there.',
-        features: ['Custom AI chatbot setup','Lead capture flows','FAQ training','Appointment booking integration','Monthly conversation reporting']
-      },
-      {
-        id: 'addon-logo',
-        name: 'Custom Logo Design',
-        desc: 'A professionally designed logo built around your brand vision. Delivered in all formats — web, print, social, and transparent.',
-        features: ['2 initial concepts','2 rounds of revisions','Full file package (SVG, PNG, PDF)','Light & dark versions','Social-ready variants']
-      },
-      {
-        id: 'addon-video',
-        name: 'Intro / Product Video',
-        desc: 'A short-form video (under 30 seconds) for your homepage, social media, or paid ads — designed to grab attention fast.',
-        features: ['Up to 30-second video','Script consultation','Brand-matched graphics','Social & web formats delivered','One round of revisions']
-      }
-    ]
-  }
-];
-
-// ============================================================
-// RENDER SERVICES
-// ============================================================
-function buildUI() {
-  const col = document.getElementById('services-col');
-  col.innerHTML = CATS.map(cat => {
-    const billingLabel = cat.billing === 'monthly' ? 'Monthly plan' : cat.billing === 'one-time' ? 'One-time' : 'Varies';
-    const billingCls = cat.billing === 'monthly' ? 'billing-monthly' : 'billing-one';
-
-    let body = '';
-    if (cat.type === 'tiers') {
-      const sel = selections[cat.id];
-      body = `<div class="tier-grid cols-${cat.cols}">` +
-        cat.items.map(item => `
-          <div class="tier-card ${sel===item.id?'selected':''}" id="tc-${item.id}" onclick="selectTier('${cat.id}','${item.id}')">
-            <div class="tier-badge ${item.badge}">${item.badgeLabel}</div>
-            <div class="tier-name">${item.name}</div>
-            <div class="tier-desc">${item.desc}</div>
-            <div class="tier-includes">${item.includes.map(i=>`<div class="ti-row">${i}</div>`).join('')}</div>
-          </div>`).join('') + '</div>';
-      if (cat.note) body += `<div style="padding:0.75rem 1.1rem;font-size:0.72rem;color:var(--muted);border-top:1px solid var(--border-light);line-height:1.6">${cat.note}</div>`;
-    } else {
-      body = `<div class="standalone-items">` +
-        cat.items.map(item => `
-          <div class="standalone-item ${addons.has(item.id)?'selected':''}" id="sa-${item.id}" onclick="toggleAddon('${item.id}')">
-            <div class="si-check">${addons.has(item.id)?'✓':''}</div>
-            <div class="si-text">
-              <div class="si-name">${item.name}</div>
-              <div class="si-desc">${item.desc}</div>
-            </div>
-          </div>`).join('') + '</div>';
-    }
-
-    return `<div class="cat-block">
-      <div class="cat-header" style="background:rgba(${hexToRgb(catColor(cat.id))},0.06)">
-        <div class="cat-icon">${cat.icon}</div>
-        <div>
-          <div class="cat-title" style="color:${catColor(cat.id)}">${cat.title}</div>
-          <div class="cat-subtitle">${cat.subtitle}</div>
-        </div>
-        <div class="cat-billing ${billingCls}">${billingLabel}</div>
-      </div>
-      ${body}
-    </div>`;
-  }).join('');
-}
-
-function catColor(id) {
-  const map = {website:'#692C8E',bundle:'#a78bfa',seo:'#4fffb0',ai:'#1EBFDC',ads:'#ff5ca8',social:'#FAA31C',design:'#f97316',addons:'#a0a0c0'};
-  return map[id] || '#692C8E';
-}
-function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-  return `${r},${g},${b}`;
-}
-
-function selectTier(catId, itemId) {
-  if (selections[catId] === itemId) {
-    delete selections[catId]; // deselect
+// ─── GOAL SELECTION ───────────────────────────
+function toggleGoal(card) {
+  const goal = card.dataset.goal;
+  if (card.classList.contains('selected')) {
+    card.classList.remove('selected');
+    selectedGoals = selectedGoals.filter(g => g !== goal);
   } else {
-    // Deselect old
-    if (selections[catId]) {
-      const old = document.getElementById('tc-' + selections[catId]);
-      if (old) old.classList.remove('selected');
-    }
-    selections[catId] = itemId;
+    if (selectedGoals.length >= 3) return;
+    card.classList.add('selected');
+    selectedGoals.push(goal);
   }
-  const el = document.getElementById('tc-' + itemId);
-  if (el) el.classList.toggle('selected', !!selections[catId]);
-  updateSummary();
+  const n = selectedGoals.length;
+  const note = document.getElementById('goal-limit-note');
+  note.innerHTML = n === 0 ? 'Select 1–3 goals to continue'
+    : n === 3 ? '<strong style="color:var(--white)">3 selected</strong> — that\'s the max'
+    : `<strong style="color:var(--white)">${n} selected</strong> — add ${3-n} more or continue`;
+  document.getElementById('btn-1-next').disabled = n === 0;
 }
 
-function toggleAddon(itemId) {
-  if (addons.has(itemId)) addons.delete(itemId);
-  else addons.add(itemId);
-  const el = document.getElementById('sa-' + itemId);
-  if (el) {
-    el.classList.toggle('selected', addons.has(itemId));
-    el.querySelector('.si-check').textContent = addons.has(itemId) ? '✓' : '';
-  }
-  updateSummary();
+// ─── Q&A SELECTION ────────────────────────────
+function selectQA(btn) {
+  const q = btn.dataset.q;
+  document.querySelectorAll(`[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[q] = btn.dataset.v;
 }
 
-// ============================================================
-// SUMMARY
-// ============================================================
-function getAllSelected() {
-  const items = [];
-  // Tier selections
-  Object.entries(selections).forEach(([catId, itemId]) => {
-    const cat = CATS.find(c => c.id === catId);
-    if (!cat) return;
-    const item = cat.items.find(i => i.id === itemId);
-    if (!item) return;
-    items.push({ ...item, catTitle: cat.title, catColor: catColor(catId), billing: cat.billing, timeline: item.timeline || 'Custom' });
+// ─── STEP NAVIGATION ─────────────────────────
+function goToStep(n) {
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+  updateStepper(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToStep2() {
+  if (selectedGoals.length === 0) return;
+  goToStep(2);
+}
+
+function goToStep3() {
+  // Validate contact fields
+  let valid = true;
+  const checks = [
+    { id:'cf-name',  err:'err-name',  test: v => v.trim().length > 1 },
+    { id:'cf-biz',   err:'err-biz',   test: v => v.trim().length > 1 },
+    { id:'cf-phone', err:'err-phone', test: v => v.trim().length > 6 },
+    { id:'cf-email', err:'err-email', test: v => /\S+@\S+\.\S+/.test(v) },
+  ];
+  checks.forEach(c => {
+    const el = document.getElementById(c.id);
+    const err = document.getElementById(c.err);
+    const ok = c.test(el.value);
+    el.classList.toggle('error', !ok);
+    err.style.display = ok ? 'none' : 'block';
+    if (!ok) valid = false;
   });
-  // Addon selections
-  addons.forEach(itemId => {
-    for (const cat of CATS) {
-      const item = cat.items.find(i => i.id === itemId);
-      if (item) {
-        items.push({ ...item, catTitle: cat.title, catColor: catColor(cat.id), billing: cat.billing, timeline: 'As needed', includes: item.features || [] });
-      }
+  if (!valid) return;
+
+  // Show building animation
+  goToStep(3);
+
+  // Animate steps
+  const buildSteps = ['bs1','bs2','bs3'];
+  const delays = [0, 900, 1700];
+  buildSteps.forEach((id, i) => {
+    setTimeout(() => {
+      if (i > 0) document.getElementById(buildSteps[i-1]).className = 'bs-step done';
+      document.getElementById(id).className = 'bs-step active';
+    }, delays[i]);
+  });
+
+  // Build recommendations then show results
+  setTimeout(() => {
+    document.getElementById('bs3').className = 'bs-step done';
+    recommendations = buildRecommendations();
+    renderResults();
+    goToStep(4);
+    updateStepper(3);
+  }, 2800);
+}
+
+function updateStepper(activeStep) {
+  [1,2,3].forEach(i => {
+    const item   = document.getElementById('si-' + i);
+    const circle = document.getElementById('sc-' + i);
+    const conn   = document.getElementById('conn-' + i);
+    if (i < activeStep) {
+      item.className   = 'step-item done';
+      circle.className = 'step-circle done';
+      circle.textContent = '✓';
+      if (conn) conn.className = 'step-connector done';
+    } else if (i === activeStep) {
+      item.className   = 'step-item active';
+      circle.className = 'step-circle active';
+      circle.textContent = i;
+    } else {
+      item.className   = 'step-item';
+      circle.className = 'step-circle';
+      circle.textContent = i;
+      if (conn) conn.className = 'step-connector';
     }
   });
-  return items;
 }
 
-function removeItem(itemId) {
-  // Check if it's a tier
-  for (const [catId, selId] of Object.entries(selections)) {
-    if (selId === itemId) {
-      delete selections[catId];
-      const el = document.getElementById('tc-' + itemId);
-      if (el) el.classList.remove('selected');
-      updateSummary();
-      return;
+// ─── RECOMMENDATION ENGINE ────────────────────
+function buildRecommendations() {
+  const size   = answers.size   || 'growing';
+  const market = answers.market || 'local';
+  const hasSite= answers.website_status === 'good';
+  const needsRedesign = answers.website_status === 'old';
+
+  let scored = [];
+
+  Object.entries(PACKAGES).forEach(([key, pkg]) => {
+    // Must match at least one selected goal
+    const goalMatch = pkg.tags.some(t => selectedGoals.includes(t));
+    if (!goalMatch) return;
+
+    // Skip redesign packages if they have a good site or no site
+    if (pkg.requiresExisting && !needsRedesign && answers.website_status !== 'old') return;
+
+    let score = 0;
+    if (pkg.sizeTags.includes(size))     score += 3;
+    if (pkg.marketTags.includes(market)) score += 2;
+    // Bonus for exact goal match
+    selectedGoals.forEach(g => { if (pkg.tags.includes(g)) score += 1; });
+
+    scored.push({ key, pkg, score });
+  });
+
+  // Sort by score, pick top 3 unique categories
+  scored.sort((a, b) => b.score - a.score);
+
+  const seen = new Set();
+  const result = [];
+  for (const item of scored) {
+    if (result.length >= 3) break;
+    const catKey = item.pkg.category;
+    if (!seen.has(catKey)) {
+      seen.add(catKey);
+      result.push(item);
     }
   }
-  // Check addons
-  if (addons.has(itemId)) {
-    addons.delete(itemId);
-    const el = document.getElementById('sa-' + itemId);
-    if (el) {
-      el.classList.remove('selected');
-      el.querySelector('.si-check').textContent = '';
-    }
-    updateSummary();
-  }
+  return result;
 }
 
-function updateSummary() {
-  const items = getAllSelected();
-  const emptyEl = document.getElementById('sum-empty');
-  const itemsEl = document.getElementById('sum-items');
-  const tlEl = document.getElementById('sum-timeline');
-  const featEl = document.getElementById('sum-features');
-  const btn = document.getElementById('scta-btn');
-  const ctaTitle = document.getElementById('scta-title');
-  const ctaSub = document.getElementById('scta-sub');
+// ─── RENDER RESULTS ───────────────────────────
+function renderResults() {
+  const name = document.getElementById('cf-name').value.split(' ')[0];
+  const biz  = document.getElementById('cf-biz').value;
 
-  if (items.length === 0) {
-    emptyEl.style.display = 'block';
-    itemsEl.style.display = 'none';
-    tlEl.style.display = 'none';
-    featEl.style.display = 'none';
-    btn.disabled = true;
-    ctaTitle.textContent = 'Select services to get started';
-    ctaSub.textContent = 'A Zoek strategist will review your selections and reach out with a custom proposal built around your budget and goals.';
-    return;
-  }
+  document.getElementById('results-title').textContent =
+    `Here's what we'd build for ${biz || 'your business'}`;
+  document.getElementById('results-intro').innerHTML =
+    `Based on your goals and answers, ${name ? name + ', ' : ''}these are the Zoek services that fit your situation best. A strategist will walk you through the details and build a custom proposal around your budget.`;
 
-  emptyEl.style.display = 'none';
-  itemsEl.style.display = 'flex';
-  itemsEl.style.flexDirection = 'column';
-  itemsEl.style.gap = '0.4rem';
-  itemsEl.style.padding = '0 1.5rem';
-  tlEl.style.display = 'block';
-  featEl.style.display = 'block';
-  btn.disabled = false;
-
-  // Items
-  itemsEl.innerHTML = items.map(item => `
-    <div class="sum-item">
-      <div class="sim-left">
-        <div class="sim-name">${item.name}</div>
-        <div class="sim-cat" style="color:${item.catColor}">${item.catTitle} · ${item.billing === 'monthly' ? 'Monthly' : item.billing === 'one-time' ? 'One-time' : 'Varies'}</div>
+  document.getElementById('rec-cards').innerHTML = recommendations.map((r, i) => `
+    <div class="rec-card ${i === 0 ? 'primary' : ''}">
+      <div class="rec-card-head">
+        <div class="rch-left">
+          <span class="rch-icon">${r.pkg.icon}</span>
+          <div>
+            <div class="rch-name">${r.pkg.name}</div>
+            <div class="rch-category">${r.pkg.category}</div>
+          </div>
+        </div>
+        <span class="rch-badge ${i === 0 ? 'badge-best' : 'badge-also'}">${i === 0 ? '★ Best Match' : 'Also Recommended'}</span>
       </div>
-      <button class="sim-remove" onclick="removeItem('${item.id}')" title="Remove">✕</button>
-    </div>`).join('');
-
-  // Timeline
-  document.getElementById('tl-rows').innerHTML = items.map(item => `
-    <div class="ss-row">
-      <div class="ss-dot" style="background:${item.catColor}"></div>
-      <span style="color:var(--white);font-weight:600;margin-right:0.35rem">${item.name}</span>
-      <span style="margin-left:auto;font-size:0.7rem;white-space:nowrap">${item.timeline}</span>
-    </div>`).join('');
-
-  // Features (deduped)
-  const allFeats = [];
-  items.forEach(item => {
-    (item.includes || []).forEach(f => {
-      if (!allFeats.includes(f) && !f.toLowerCase().startsWith('everything')) allFeats.push(f);
-    });
-  });
-  document.getElementById('feat-rows').innerHTML = allFeats.slice(0, 12).map(f =>
-    `<div class="ss-row"><span class="ss-check" style="color:var(--green);font-weight:700;font-size:0.68rem;flex-shrink:0;margin-top:2px">✓</span><span style="margin-left:0.35rem">${f}</span></div>`
-  ).join('') + (allFeats.length > 12 ? `<div style="font-size:0.7rem;color:var(--muted);margin-top:0.25rem">+ ${allFeats.length-12} more included</div>` : '');
-
-  // CTA
-  const n = items.length;
-  const hasMonthly = items.some(i => i.billing === 'monthly');
-  ctaTitle.textContent = n === 1 ? `Ready to get started with ${items[0].name}?` : `Your ${n}-service package is ready`;
-  ctaSub.textContent = `You've selected ${n} service${n!==1?'s':''}${hasMonthly?' including monthly plans':''}. A Zoek strategist will reach out within one business day with a custom proposal for your budget and market.`;
+      <div class="rec-card-body">
+        <div class="rec-includes">
+          ${r.pkg.includes.map(inc => `<div class="rec-include-item">${inc}</div>`).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
 }
 
-// ============================================================
-// MODAL + SUBMIT
-// ============================================================
-function openModal() {
-  const items = getAllSelected();
-  if (items.length === 0) return;
-  const preview = document.getElementById('modal-preview');
-  preview.innerHTML = `<strong>Your selected package (${items.length} service${items.length!==1?'s':''}):</strong>` +
-    items.map(i => `${i.name} — ${i.catTitle}`).join('<br>');
-  document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('m-name').focus(), 100);
-}
-
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function submitPackage() {
-  const name  = document.getElementById('m-name').value.trim();
-  const biz   = document.getElementById('m-biz').value.trim();
-  const email = document.getElementById('m-email').value.trim();
-  const phone = document.getElementById('m-phone').value.trim();
-  const city  = document.getElementById('m-city').value.trim();
-  const notes = document.getElementById('m-notes').value.trim();
-  const errEl = document.getElementById('modal-error');
-  const btn   = document.getElementById('modal-submit-btn');
-
-  if (!name || !biz || !email || !phone) { errEl.style.display = 'block'; return; }
-  errEl.style.display = 'none';
-  btn.textContent = 'Sending...';
+// ─── SUBMIT TO FORMSPREE → CHAD ────────────────
+async function submitProposal() {
+  const btn = document.getElementById('submit-btn');
   btn.disabled = true;
+  btn.innerHTML = '<span>⏳</span> Sending...';
 
-  const items = getAllSelected();
-  const packageList = items.map(i => `• ${i.name} (${i.catTitle}) — ${i.billing === 'monthly' ? 'Monthly plan' : 'One-time'} — ${i.timeline}`).join('\n');
+  const name    = document.getElementById('cf-name').value;
+  const biz     = document.getElementById('cf-biz').value;
+  const phone   = document.getElementById('cf-phone').value;
+  const email   = document.getElementById('cf-email').value;
+  const url     = document.getElementById('cf-url').value;
 
-  // Replace with real Formspree form ID pointed to chada@gozoek.com
-  fetch('https://formspree.io/f/xpwzgkqr', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json', Accept:'application/json'},
-    body: JSON.stringify({
-      _subject: `🚀 Package Builder Lead: ${biz} (${items.length} services)`,
-      _replyto: email,
-      name, business: biz, email, phone,
-      city: city || 'Not provided',
-      notes: notes || 'None',
-      services_count: items.length,
-      package_summary: packageList
-    })
-  }).finally(() => {
-    closeModal();
-    showSuccess(name, items);
-  });
+  const goalLabels = {
+    website:'Get Online', seo:'Get Found on Google', ads:'Run Ads',
+    social:'Grow Social Media', reviews:'Manage Reputation', brand:'Build Brand'
+  };
+  const answerLabels = {
+    website_status: { none:'No website yet', old:'Has site — needs work', good:'Has solid website' },
+    market:         { local:'Local', regional:'Regional', national:'National / Multi-location' },
+    size:           { new:'Just starting out', growing:'Established & growing', scaling:'Scaling / Multi-location' },
+  };
+
+  const goalsText = selectedGoals.map(g => goalLabels[g]).join(', ');
+  const websiteStatusText = answerLabels.website_status[answers.website_status] || 'Not answered';
+  const marketText        = answerLabels.market[answers.market] || 'Not answered';
+  const sizeText          = answerLabels.size[answers.size] || 'Not answered';
+  const recsText          = recommendations.map((r, i) =>
+    `${i+1}. ${r.pkg.name} (${r.pkg.category})${i===0?' — BEST MATCH':''}`
+  ).join('\n');
+
+  const body = {
+    _subject: `New Package Request — ${biz} | ${name}`,
+    Name:             name,
+    Business:         biz,
+    Phone:            phone,
+    Email:            email,
+    Website:          url || 'Not provided',
+    '---':            '---',
+    Goals:            goalsText,
+    'Website Status': websiteStatusText,
+    Market:           marketText,
+    'Business Size':  sizeText,
+    '----':           '----',
+    Recommendations:  recsText,
+  };
+
+  try {
+    const res = await fetch(FORMSPREE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (res.ok) {
+      document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-success').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      throw new Error('Form submission failed');
+    }
+  } catch(e) {
+    btn.disabled = false;
+    btn.innerHTML = '<span>📋</span> Send Me a Custom Proposal';
+    alert('Something went wrong. Please try again or call us at 1-888-737-9635.');
+  }
 }
 
-function showSuccess(name, items) {
-  document.querySelector('.builder-wrap').innerHTML = `
-    <div style="padding:5rem 2rem;text-align:center;width:100%;grid-column:1/-1">
-      <div style="font-size:3.5rem;margin-bottom:1.25rem">🎉</div>
-      <div style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin-bottom:0.75rem">You're all set, ${name.split(' ')[0]}!</div>
-      <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;max-width:440px;margin:0 auto 0.75rem">Your package has been sent to Zoek. <strong style="color:var(--white)">A real strategist will review your ${items.length} selected service${items.length!==1?'s':''} and reach out within one business day</strong> with a custom proposal.</p>
-      <div style="background:var(--sidebar);border:1px solid var(--border);border-radius:8px;padding:1.25rem;max-width:400px;margin:1.5rem auto;text-align:left;">
-        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.65rem">Your package</div>
-        ${items.map(i=>`<div style="display:flex;align-items:center;gap:0.5rem;padding:0.35rem 0;border-bottom:1px solid var(--border-light);font-size:0.82rem;"><span style="color:${i.catColor}">✓</span> <span style="font-weight:600">${i.name}</span></div>`).join('')}
-      </div>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <a href="https://calendly.com/expert-sales" target="_blank" style="background:var(--gradient);color:white;text-decoration:none;padding:0.75rem 1.75rem;border-radius:4px;font-size:0.88rem;font-weight:700;box-shadow:0 4px 14px rgba(105,44,142,0.35);">Book a Call Now →</a>
-        <a href="index.html" style="background:rgba(255,255,255,0.06);color:var(--white);text-decoration:none;padding:0.75rem 1.75rem;border-radius:4px;font-size:0.88rem;font-weight:600;border:1px solid var(--border);">Explore More Tools</a>
-      </div>
-    </div>`;
-}
-
-// NAV
+// ─── NAV ────────────────────────────────────
 function toggleNav(btn) {
-  const menu = document.getElementById('nl-tools-menu');
-  const isOpen = menu.classList.contains('open');
-  menu.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open');
+  document.getElementById('nl-tools-menu').classList.toggle('open');
 }
-document.addEventListener('click', function(e) {
-  const dd = document.querySelector('.nav-dropdown');
-  if (dd && !dd.contains(e.target)) {
-    const m = document.getElementById('nl-tools-menu');
-    const b = document.getElementById('nl-tools-btn');
-    if (m) m.classList.remove('open');
-    if (b) b.classList.remove('open');
+document.addEventListener('click', e => {
+  if (!e.target.closest('.nav-dropdown')) {
+    document.querySelectorAll('.nav-drop-btn').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.nav-drop-menu').forEach(m => m.classList.remove('open'));
   }
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-// INIT
-buildUI();
-updateSummary();
 </script>
-<script src="cta.js"></script>
 </body>
 </html>
