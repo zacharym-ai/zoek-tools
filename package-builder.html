@@ -232,11 +232,16 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <div class="step-connector" id="conn-1"></div>
   <div class="step-item" id="si-2">
     <div class="step-circle" id="sc-2">2</div>
-    <span class="step-label">Quick Questions</span>
+    <span class="step-label">About You</span>
   </div>
   <div class="step-connector" id="conn-2"></div>
   <div class="step-item" id="si-3">
     <div class="step-circle" id="sc-3">3</div>
+    <span class="step-label">Your Situation</span>
+  </div>
+  <div class="step-connector" id="conn-3"></div>
+  <div class="step-item" id="si-4">
+    <div class="step-circle" id="sc-4">4</div>
     <span class="step-label">Your Recommendation</span>
   </div>
 </div>
@@ -288,40 +293,12 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
     </div>
   </div>
 
-  <!-- ═══ STEP 2: QUESTIONS + CONTACT ═══ -->
+  <!-- ═══ STEP 2: ABOUT YOU ═══ -->
   <div class="step-panel" id="panel-2">
-    <div class="step-panel-title">A few quick questions</div>
-    <p class="step-panel-sub">This helps us match you to the right package — no wrong answers.</p>
+    <div class="step-panel-title">Tell us about yourself</div>
+    <p class="step-panel-sub">Just the basics so we know who we're talking to.</p>
 
-    <div class="qa-stack">
-      <div class="qa-block">
-        <div class="qa-question"><span class="qa-q-num">1</span> Do you currently have a website?</div>
-        <div class="qa-options">
-          <button class="qa-option" data-q="website_status" data-v="none" onclick="selectQA(this)">No website yet</button>
-          <button class="qa-option" data-q="website_status" data-v="old" onclick="selectQA(this)">Yes, but it needs work</button>
-          <button class="qa-option" data-q="website_status" data-v="good" onclick="selectQA(this)">Yes, and it's solid</button>
-        </div>
-      </div>
-      <div class="qa-block">
-        <div class="qa-question"><span class="qa-q-num">2</span> How would you describe your market?</div>
-        <div class="qa-options">
-          <button class="qa-option" data-q="market" data-v="local" onclick="selectQA(this)">Local — one city or town</button>
-          <button class="qa-option" data-q="market" data-v="regional" onclick="selectQA(this)">Regional — multiple cities</button>
-          <button class="qa-option" data-q="market" data-v="national" onclick="selectQA(this)">National or multiple locations</button>
-        </div>
-      </div>
-      <div class="qa-block">
-        <div class="qa-question"><span class="qa-q-num">3</span> How would you describe your business?</div>
-        <div class="qa-options">
-          <button class="qa-option" data-q="size" data-v="new" onclick="selectQA(this)">Just starting out</button>
-          <button class="qa-option" data-q="size" data-v="growing" onclick="selectQA(this)">Established and growing</button>
-          <button class="qa-option" data-q="size" data-v="scaling" onclick="selectQA(this)">Scaling fast or multi-location</button>
-        </div>
-      </div>
-    </div>
-
-    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Your contact info</div>
-    <div class="contact-fields">
+    <div class="contact-fields" style="margin-bottom:1.75rem;">
       <div class="cf-field">
         <label class="cf-label">First &amp; Last Name *</label>
         <input type="text" class="cf-input" id="cf-name" placeholder="Jane Smith">
@@ -348,16 +325,111 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       </div>
     </div>
 
-    <div class="nav-btns">
+    <div class="qa-stack">
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">1</span> What industry are you in?</div>
+        <div class="qa-options" style="flex-wrap:wrap;">
+          <button class="qa-option" data-q="industry" data-v="home_services"  onclick="selectQA(this)">🔧 Home Services</button>
+          <button class="qa-option" data-q="industry" data-v="healthcare"     onclick="selectQA(this)">🏥 Healthcare</button>
+          <button class="qa-option" data-q="industry" data-v="restaurant"     onclick="selectQA(this)">🍽️ Restaurant / Food</button>
+          <button class="qa-option" data-q="industry" data-v="retail"         onclick="selectQA(this)">🛍️ Retail</button>
+          <button class="qa-option" data-q="industry" data-v="professional"   onclick="selectQA(this)">💼 Professional Services</button>
+          <button class="qa-option" data-q="industry" data-v="fitness"        onclick="selectQA(this)">💪 Fitness / Wellness</button>
+          <button class="qa-option" data-q="industry" data-v="beauty"         onclick="selectQA(this)">✨ Beauty / Salon</button>
+          <button class="qa-option" data-q="industry" data-v="real_estate"    onclick="selectQA(this)">🏠 Real Estate</button>
+          <button class="qa-option" data-q="industry" data-v="automotive"     onclick="selectQA(this)">🚗 Automotive</button>
+          <button class="qa-option" data-q="industry" data-v="construction"   onclick="selectQA(this)">🏗️ Construction</button>
+          <button class="qa-option" data-q="industry" data-v="other"          onclick="selectQA(this)">📁 Other</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-btns" style="margin-top:2rem;">
       <button class="btn-back" onclick="goToStep(1)">← Back</button>
-      <button class="btn-next" id="btn-2-next" onclick="goToStep3()">
+      <button class="btn-next" id="btn-2-next" onclick="validateStep2()">
+        Next <span>→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 3: YOUR SITUATION ═══ -->
+  <div class="step-panel" id="panel-3">
+    <div class="step-panel-title">A little more about your situation</div>
+    <p class="step-panel-sub">This is what helps us get the recommendation right. <strong>No wrong answers.</strong></p>
+
+    <div class="qa-stack">
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">1</span> Do you currently have a website?</div>
+        <div class="qa-options">
+          <button class="qa-option" data-q="website_status" data-v="none" onclick="selectQA(this)">No website yet</button>
+          <button class="qa-option" data-q="website_status" data-v="old"  onclick="selectQA(this)">Yes, but it needs work</button>
+          <button class="qa-option" data-q="website_status" data-v="good" onclick="selectQA(this)">Yes, and it's solid</button>
+        </div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">2</span> What's your biggest marketing challenge right now?</div>
+        <div class="qa-options" style="flex-wrap:wrap;">
+          <button class="qa-option" data-q="challenge" data-v="no_leads"      onclick="selectQA(this)">😤 Not enough leads</button>
+          <button class="qa-option" data-q="challenge" data-v="no_visibility" onclick="selectQA(this)">👻 Hard to find online</button>
+          <button class="qa-option" data-q="challenge" data-v="bad_reviews"   onclick="selectQA(this)">⭐ Bad or few reviews</button>
+          <button class="qa-option" data-q="challenge" data-v="no_website"    onclick="selectQA(this)">🌐 No good website</button>
+          <button class="qa-option" data-q="challenge" data-v="no_social"     onclick="selectQA(this)">📱 No social presence</button>
+          <button class="qa-option" data-q="challenge" data-v="need_brand"    onclick="selectQA(this)">🎨 Need a real brand</button>
+          <button class="qa-option" data-q="challenge" data-v="competitors"   onclick="selectQA(this)">🏆 Losing to competitors</button>
+        </div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">3</span> How would you describe your market?</div>
+        <div class="qa-options">
+          <button class="qa-option" data-q="market" data-v="local"    onclick="selectQA(this)">📍 Local — one city or area</button>
+          <button class="qa-option" data-q="market" data-v="regional" onclick="selectQA(this)">🗺️ Regional — multiple cities</button>
+          <button class="qa-option" data-q="market" data-v="national" onclick="selectQA(this)">🌎 National / Multi-location</button>
+        </div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">4</span> What stage is your business at?</div>
+        <div class="qa-options">
+          <button class="qa-option" data-q="size" data-v="new"     onclick="selectQA(this)">🌱 Just starting out</button>
+          <button class="qa-option" data-q="size" data-v="growing" onclick="selectQA(this)">📈 Established and growing</button>
+          <button class="qa-option" data-q="size" data-v="scaling" onclick="selectQA(this)">🚀 Scaling fast or multi-location</button>
+        </div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">5</span> What's your estimated monthly marketing budget?</div>
+        <div class="qa-options" style="flex-wrap:wrap;">
+          <button class="qa-option" data-q="budget" data-v="under500"    onclick="selectQA(this)">Under $500</button>
+          <button class="qa-option" data-q="budget" data-v="500_1500"    onclick="selectQA(this)">$500 – $1,500</button>
+          <button class="qa-option" data-q="budget" data-v="1500_3000"   onclick="selectQA(this)">$1,500 – $3,000</button>
+          <button class="qa-option" data-q="budget" data-v="3000_5000"   onclick="selectQA(this)">$3,000 – $5,000</button>
+          <button class="qa-option" data-q="budget" data-v="over5000"    onclick="selectQA(this)">$5,000+</button>
+          <button class="qa-option" data-q="budget" data-v="not_sure"    onclick="selectQA(this)">Not sure yet</button>
+        </div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-question"><span class="qa-q-num">6</span> When are you looking to get started?</div>
+        <div class="qa-options">
+          <button class="qa-option" data-q="timeline" data-v="asap"     onclick="selectQA(this)">🔥 ASAP — ready now</button>
+          <button class="qa-option" data-q="timeline" data-v="soon"     onclick="selectQA(this)">📅 Next 1–3 months</button>
+          <button class="qa-option" data-q="timeline" data-v="exploring" onclick="selectQA(this)">🔍 Just exploring options</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-btns" style="margin-top:2rem;">
+      <button class="btn-back" onclick="goToStep(2)">← Back</button>
+      <button class="btn-next" id="btn-3-next" onclick="goToBuild()">
         Build My Recommendation <span>→</span>
       </button>
     </div>
   </div>
 
-  <!-- ═══ STEP 3: BUILDING ANIMATION ═══ -->
-  <div class="step-panel" id="panel-3">
+  <!-- ═══ STEP 4: BUILDING ANIMATION ═══ -->
+  <div class="step-panel" id="panel-4">
     <div class="building-wrap">
       <div class="building-spinner"></div>
       <div style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;">Building your recommendation...</div>
@@ -369,8 +441,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
     </div>
   </div>
 
-  <!-- ═══ STEP 4: RESULTS ═══ -->
-  <div class="step-panel" id="panel-4">
+  <!-- ═══ STEP 5: RESULTS ═══ -->
+  <div class="step-panel" id="panel-5">
     <div class="results-eyebrow">✦ Your personalized recommendation</div>
     <div class="step-panel-title" id="results-title">Here's what we'd build for you</div>
     <p class="results-intro" id="results-intro">Loading...</p>
@@ -387,7 +459,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
     </div>
 
     <div style="text-align:center;">
-      <button onclick="goToStep(1)" style="background:none;border:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;cursor:pointer;text-decoration:underline;padding:0.5rem;">Start over</button>
+      <button onclick="resetAll()" style="background:none;border:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;cursor:pointer;text-decoration:underline;padding:0.5rem;">Start over</button>
     </div>
   </div>
 
@@ -589,8 +661,7 @@ function goToStep2() {
   goToStep(2);
 }
 
-function goToStep3() {
-  // Validate contact fields
+function validateStep2() {
   let valid = true;
   const checks = [
     { id:'cf-name',  err:'err-name',  test: v => v.trim().length > 1 },
@@ -599,21 +670,24 @@ function goToStep3() {
     { id:'cf-email', err:'err-email', test: v => /\S+@\S+\.\S+/.test(v) },
   ];
   checks.forEach(c => {
-    const el = document.getElementById(c.id);
+    const el  = document.getElementById(c.id);
     const err = document.getElementById(c.err);
-    const ok = c.test(el.value);
+    const ok  = c.test(el.value);
     el.classList.toggle('error', !ok);
     err.style.display = ok ? 'none' : 'block';
     if (!ok) valid = false;
   });
   if (!valid) return;
-
-  // Show building animation
   goToStep(3);
+}
 
-  // Animate steps
+function goToBuild() {
+  // Show building animation
+  goToStep(4);
+  updateStepper(4);
+
   const buildSteps = ['bs1','bs2','bs3'];
-  const delays = [0, 900, 1700];
+  const delays     = [0, 900, 1700];
   buildSteps.forEach((id, i) => {
     setTimeout(() => {
       if (i > 0) document.getElementById(buildSteps[i-1]).className = 'bs-step done';
@@ -621,30 +695,50 @@ function goToStep3() {
     }, delays[i]);
   });
 
-  // Build recommendations then show results
   setTimeout(() => {
     document.getElementById('bs3').className = 'bs-step done';
     recommendations = buildRecommendations();
     renderResults();
-    goToStep(4);
-    updateStepper(3);
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-5').classList.add('active');
+    updateStepper(4);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, 2800);
 }
 
+function resetAll() {
+  selectedGoals = [];
+  answers = {};
+  recommendations = [];
+  document.querySelectorAll('.goal-card').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.qa-option').forEach(b => b.classList.remove('selected'));
+  ['cf-name','cf-biz','cf-phone','cf-email','cf-url'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.value = ''; el.classList.remove('error'); }
+  });
+  document.getElementById('goal-limit-note').textContent = 'Select 1–3 goals to continue';
+  document.getElementById('btn-1-next').disabled = true;
+  goToStep(1);
+}
+
 function updateStepper(activeStep) {
-  [1,2,3].forEach(i => {
+  // Map panel step to stepper step (building = step 4 visually = stepper 4)
+  const stepperStep = activeStep <= 3 ? activeStep : 4;
+  [1,2,3,4].forEach(i => {
     const item   = document.getElementById('si-' + i);
     const circle = document.getElementById('sc-' + i);
     const conn   = document.getElementById('conn-' + i);
-    if (i < activeStep) {
+    if (!item) return;
+    if (i < stepperStep) {
       item.className   = 'step-item done';
       circle.className = 'step-circle done';
       circle.textContent = '✓';
       if (conn) conn.className = 'step-connector done';
-    } else if (i === activeStep) {
+    } else if (i === stepperStep) {
       item.className   = 'step-item active';
       circle.className = 'step-circle active';
       circle.textContent = i;
+      if (conn) conn.className = 'step-connector';
     } else {
       item.className   = 'step-item';
       circle.className = 'step-circle';
@@ -656,40 +750,74 @@ function updateStepper(activeStep) {
 
 // ─── RECOMMENDATION ENGINE ────────────────────
 function buildRecommendations() {
-  const size   = answers.size   || 'growing';
-  const market = answers.market || 'local';
-  const hasSite= answers.website_status === 'good';
+  const size      = answers.size            || 'growing';
+  const market    = answers.market          || 'local';
+  const challenge = answers.challenge       || '';
+  const budget    = answers.budget          || '500_1500';
+  const hasSite   = answers.website_status  === 'good';
   const needsRedesign = answers.website_status === 'old';
 
+  // Map challenge → boost goals
+  const challengeBoosts = {
+    no_leads:      ['ads','seo'],
+    no_visibility: ['seo','reviews'],
+    bad_reviews:   ['reviews','seo'],
+    no_website:    ['website'],
+    no_social:     ['social'],
+    need_brand:    ['brand'],
+    competitors:   ['seo','ads'],
+  };
+  const boostedGoals = new Set([
+    ...selectedGoals,
+    ...(challengeBoosts[challenge] || [])
+  ]);
+
+  // Budget tier mapping for scoring
+  const budgetTier = {
+    under500:   1, '500_1500': 2, '1500_3000': 3,
+    '3000_5000': 4, over5000:  5, not_sure:    2,
+  };
+  const tier = budgetTier[budget] || 2;
+
   let scored = [];
-
   Object.entries(PACKAGES).forEach(([key, pkg]) => {
-    // Must match at least one selected goal
-    const goalMatch = pkg.tags.some(t => selectedGoals.includes(t));
+    const goalMatch = pkg.tags.some(t => boostedGoals.has(t));
     if (!goalMatch) return;
-
-    // Skip redesign packages if they have a good site or no site
-    if (pkg.requiresExisting && !needsRedesign && answers.website_status !== 'old') return;
+    if (pkg.requiresExisting && !needsRedesign) return;
 
     let score = 0;
     if (pkg.sizeTags.includes(size))     score += 3;
     if (pkg.marketTags.includes(market)) score += 2;
-    // Bonus for exact goal match
-    selectedGoals.forEach(g => { if (pkg.tags.includes(g)) score += 1; });
+    boostedGoals.forEach(g => { if (pkg.tags.includes(g)) score += 1; });
+    selectedGoals.forEach(g => { if (pkg.tags.includes(g)) score += 1; }); // extra for explicit
+
+    // Budget fit bonus
+    const budgetFit = {
+      website_express: 2, website_managed_core: 2, seo_local_starter: 2,
+      seo_local_expand: 2, smm_starter: 2, get_listed: 2, branding_kit: 2,
+    };
+    const midBudgetFit = {
+      website_classic: 3, website_managed_adv: 3, seo_competitive: 3,
+      ads_sem: 3, ads_display: 3, smm_premium: 3, social_kit: 3,
+    };
+    const highBudgetFit = {
+      website_advanced: 4, seo_enterprise: 4, ads_omni: 4, smm_enterprise: 4,
+    };
+    if      (tier <= 2 && budgetFit[key])     score += 2;
+    else if (tier === 3 && midBudgetFit[key]) score += 2;
+    else if (tier >= 4 && highBudgetFit[key]) score += 2;
 
     scored.push({ key, pkg, score });
   });
 
-  // Sort by score, pick top 3 unique categories
   scored.sort((a, b) => b.score - a.score);
 
-  const seen = new Set();
+  const seen   = new Set();
   const result = [];
   for (const item of scored) {
     if (result.length >= 3) break;
-    const catKey = item.pkg.category;
-    if (!seen.has(catKey)) {
-      seen.add(catKey);
+    if (!seen.has(item.pkg.category)) {
+      seen.add(item.pkg.category);
       result.push(item);
     }
   }
@@ -733,44 +861,66 @@ async function submitProposal() {
   btn.disabled = true;
   btn.innerHTML = '<span>⏳</span> Sending...';
 
-  const name    = document.getElementById('cf-name').value;
-  const biz     = document.getElementById('cf-biz').value;
-  const phone   = document.getElementById('cf-phone').value;
-  const email   = document.getElementById('cf-email').value;
-  const url     = document.getElementById('cf-url').value;
+  const name  = document.getElementById('cf-name').value;
+  const biz   = document.getElementById('cf-biz').value;
+  const phone = document.getElementById('cf-phone').value;
+  const email = document.getElementById('cf-email').value;
+  const url   = document.getElementById('cf-url').value;
 
   const goalLabels = {
     website:'Get Online', seo:'Get Found on Google', ads:'Run Ads',
     social:'Grow Social Media', reviews:'Manage Reputation', brand:'Build Brand'
   };
-  const answerLabels = {
-    website_status: { none:'No website yet', old:'Has site — needs work', good:'Has solid website' },
-    market:         { local:'Local', regional:'Regional', national:'National / Multi-location' },
-    size:           { new:'Just starting out', growing:'Established & growing', scaling:'Scaling / Multi-location' },
+  const industryLabels = {
+    home_services:'Home Services', healthcare:'Healthcare', restaurant:'Restaurant / Food',
+    retail:'Retail', professional:'Professional Services', fitness:'Fitness / Wellness',
+    beauty:'Beauty / Salon', real_estate:'Real Estate', automotive:'Automotive',
+    construction:'Construction', other:'Other'
   };
+  const challengeLabels = {
+    no_leads:'Not enough leads', no_visibility:'Hard to find online',
+    bad_reviews:'Bad or few reviews', no_website:'No good website',
+    no_social:'No social presence', need_brand:'Need a real brand',
+    competitors:'Losing to competitors'
+  };
+  const budgetLabels = {
+    under500:'Under $500', '500_1500':'$500 – $1,500', '1500_3000':'$1,500 – $3,000',
+    '3000_5000':'$3,000 – $5,000', over5000:'$5,000+', not_sure:'Not sure yet'
+  };
+  const timelineLabels = {
+    asap:'ASAP — ready now', soon:'Next 1–3 months', exploring:'Just exploring options'
+  };
+  const websiteLabels = {
+    none:'No website yet', old:'Has site — needs work', good:'Has solid website'
+  };
+  const marketLabels  = { local:'Local', regional:'Regional', national:'National / Multi-location' };
+  const sizeLabels    = { new:'Just starting out', growing:'Established & growing', scaling:'Scaling / Multi-location' };
 
-  const goalsText = selectedGoals.map(g => goalLabels[g]).join(', ');
-  const websiteStatusText = answerLabels.website_status[answers.website_status] || 'Not answered';
-  const marketText        = answerLabels.market[answers.market] || 'Not answered';
-  const sizeText          = answerLabels.size[answers.size] || 'Not answered';
-  const recsText          = recommendations.map((r, i) =>
-    `${i+1}. ${r.pkg.name} (${r.pkg.category})${i===0?' — BEST MATCH':''}`
+  const goalsText    = selectedGoals.map(g => goalLabels[g]).join(', ');
+  const recsText     = recommendations.map((r, i) =>
+    `${i+1}. ${r.pkg.name} (${r.pkg.category})${i===0?' ← BEST MATCH':''}`
   ).join('\n');
 
   const body = {
-    _subject: `New Package Request — ${biz} | ${name}`,
-    Name:             name,
-    Business:         biz,
-    Phone:            phone,
-    Email:            email,
-    Website:          url || 'Not provided',
-    '---':            '---',
-    Goals:            goalsText,
-    'Website Status': websiteStatusText,
-    Market:           marketText,
-    'Business Size':  sizeText,
-    '----':           '----',
-    Recommendations:  recsText,
+    _subject: `🎯 New Package Request — ${biz} | ${name} | ${budgetLabels[answers.budget] || 'Budget TBD'}`,
+    '👤 CONTACT':        '---',
+    Name:                name,
+    Business:            biz,
+    Phone:               phone,
+    Email:               email,
+    Website:             url || 'Not provided',
+    '🎯 THEIR GOALS':    '---',
+    Goals:               goalsText,
+    Industry:            industryLabels[answers.industry]  || 'Not answered',
+    'Biggest Challenge': challengeLabels[answers.challenge] || 'Not answered',
+    '📊 THEIR SITUATION':'---',
+    'Website Status':    websiteLabels[answers.website_status] || 'Not answered',
+    Market:              marketLabels[answers.market]       || 'Not answered',
+    'Business Stage':    sizeLabels[answers.size]           || 'Not answered',
+    Budget:              budgetLabels[answers.budget]       || 'Not answered',
+    Timeline:            timelineLabels[answers.timeline]   || 'Not answered',
+    '📦 RECOMMENDATIONS':'---',
+    Recommendations:     recsText,
   };
 
   try {
@@ -784,7 +934,7 @@ async function submitProposal() {
       document.getElementById('panel-success').classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      throw new Error('Form submission failed');
+      throw new Error('Submission failed');
     }
   } catch(e) {
     btn.disabled = false;
