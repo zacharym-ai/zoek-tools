@@ -594,21 +594,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
         <span class="mpi-name">Why Zoek</span>
         <span class="mpi-badge badge-live">Live</span>
       </div>
-      <div class="module-preview-item" onclick="switchTab('checklist',null)">
-        <div class="mpi-dot" style="background:var(--green)"></div>
-        <span class="mpi-name">Marketing Self-Audit</span>
-        <span class="mpi-badge badge-new">New</span>
-      </div>
-      <div class="module-preview-item" onclick="switchTab('budget',null)">
-        <div class="mpi-dot" style="background:var(--yellow)"></div>
-        <span class="mpi-name">Budget Reality Check</span>
-        <span class="mpi-badge badge-new">New</span>
-      </div>
-      <div class="module-preview-item" onclick="switchTab('diy',null)">
-        <div class="mpi-dot" style="background:var(--blue)"></div>
-        <span class="mpi-name">DIY vs Zoek</span>
-        <span class="mpi-badge badge-new">New</span>
-      </div>
+
     </div>
   </div>
 </div>
@@ -652,22 +638,9 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
         <span class="tab-text"><span class="tab-name">AI &amp; GEO Visibility</span><span class="tab-sub">The next frontier</span></span>
         <span class="tab-badge tb-new">New</span>
       </button>
-    </div>
-    <div class="sb-section">
-      <div class="sb-label">Is Zoek right for me?</div>
-      <button class="tab-btn" onclick="switchTab('checklist',this)">
-        <span class="tab-icon">✅</span>
-        <span class="tab-text"><span class="tab-name">Marketing Self-Audit</span><span class="tab-sub">Score your marketing in 2 min</span></span>
-        <span class="tab-badge tb-new">New</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('budget',this)">
-        <span class="tab-icon">💰</span>
-        <span class="tab-text"><span class="tab-name">Budget Reality Check</span><span class="tab-sub">What things actually cost</span></span>
-        <span class="tab-badge tb-new">New</span>
-      </button>
-      <button class="tab-btn" onclick="switchTab('diy',this)">
-        <span class="tab-icon">⚖️</span>
-        <span class="tab-text"><span class="tab-name">DIY vs Zoek</span><span class="tab-sub">The honest math</span></span>
+      <button class="tab-btn" onclick="switchTab('social101',this)">
+        <span class="tab-icon">📱</span>
+        <span class="tab-text"><span class="tab-name">Social Media 101</span><span class="tab-sub">What actually works</span></span>
         <span class="tab-badge tb-new">New</span>
       </button>
     </div>
@@ -1124,159 +1097,156 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       </div>
     </div>
 
-    <!-- ═══════════ SELF-AUDIT TAB ═══════════ -->
-    <div class="tab-content" id="tab-checklist">
+    <!-- ═══════════ SOCIAL MEDIA 101 TAB ═══════════ -->
+    <div class="tab-content" id="tab-social101">
       <div class="sec-header">
         <div>
-          <div class="sec-eyebrow">Marketing Self-Audit</div>
-          <h2 class="sec-title">Score your marketing.<br><span class="acc-g">Find your biggest gaps.</span></h2>
+          <div class="sec-eyebrow">Social Media 101</div>
+          <h2 class="sec-title">Social media that<br><span class="acc-b">actually does something.</span></h2>
           <div class="sec-body">
-            <p>Answer yes or no to each question. Be honest — there are no wrong answers. At the end you'll see exactly where your marketing stands and what to fix first.</p>
-            <p><strong>Takes about 2 minutes.</strong> Every "No" is a gap a competitor could be filling right now.</p>
+            <p>Most small businesses treat social media like a bulletin board — post something occasionally, hope someone sees it, wonder why nothing happens. <strong>That's not social media. That's shouting into a void.</strong></p>
+            <p>Social media works when it's consistent, intentional, and matched to the right platform. Here's how it actually works.</p>
           </div>
         </div>
-        <div class="audit-total-card" id="audit-total-card">
-          <div class="atc-head">
-            <div>
-              <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;">Your Score</div>
-              <div class="atc-score-wrap">
-                <div class="atc-score-num" id="atc-score-num">0</div>
-                <div class="atc-score-denom">/ 20</div>
-              </div>
-            </div>
-            <div class="atc-grade audit-score-na" id="atc-grade">Not started</div>
-          </div>
-          <div class="atc-body">
-            <div style="background:rgba(255,255,255,0.04);border-radius:4px;height:8px;overflow:hidden;margin-bottom:1rem;">
-              <div id="atc-bar" style="height:100%;border-radius:4px;background:var(--gradient);width:0;transition:width 0.6s cubic-bezier(0.16,1,0.3,1);"></div>
-            </div>
-            <div class="atc-gaps" id="atc-gaps">
-              <div style="font-size:0.8rem;color:var(--muted);">Answer questions to see your gaps.</div>
-            </div>
-          </div>
+        <div class="stat-blocks">
+          <div class="stat-block"><div class="stat-num">5B+</div><div class="stat-text"><strong>People use social media</strong> globally. Your customers are on at least one platform — the question is which one and what they want to see.</div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--yellow)">3×</div><div class="stat-text">Businesses that post <strong>consistently see 3× more engagement</strong> than those who post sporadically — even if the sporadic posts are higher quality.</div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--green)">78%</div><div class="stat-text">Of consumers are <strong>more likely to buy from a brand</strong> they follow on social media. Presence builds trust over time.</div></div>
         </div>
       </div>
 
-      <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:0 3rem 2rem;">
-        <div class="audit-categories" id="audit-categories"></div>
-      </div>
-
-      <div style="padding:0 3rem 2.5rem;">
-        <div style="background:var(--gradient);border-radius:12px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
-          <div>
-            <div style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:0.4rem;">See what Zoek would do about your gaps</div>
-            <div style="font-size:0.85rem;color:rgba(255,255,255,0.75);">Get matched to the right packages based on exactly what you need.</div>
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">Platform guide — where your business actually belongs</div>
+        <div class="lseo-grid">
+          <div class="lseo-card" style="border-left:3px solid #1877F2;">
+            <div class="lseo-card-icon">📘</div>
+            <div class="lseo-card-title">Facebook</div>
+            <div class="lseo-card-text"><strong style="color:var(--white)">Best for:</strong> Home services, healthcare, restaurants, real estate, professional services — any local business with a 35+ audience.<br><br>Facebook's reach has declined for organic posts, but its ad targeting is still the most powerful in local marketing. <strong>Paid beats organic here.</strong> If you're only going to run ads on one platform, this is usually it.</div>
           </div>
-          <a href="package-builder.html" style="display:inline-block;background:white;color:var(--purple);text-decoration:none;padding:0.85rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:800;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.2);">Build My Package →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════ BUDGET REALITY CHECK TAB ═══════════ -->
-    <div class="tab-content" id="tab-budget">
-      <div class="sec-header">
-        <div>
-          <div class="sec-eyebrow">Budget Reality Check</div>
-          <h2 class="sec-title">What does marketing<br><span class="acc-p">actually cost?</span></h2>
-          <div class="sec-body">
-            <p>Most business owners either overpay because they don't know better, or underspend and wonder why nothing works. <strong>Here's the honest breakdown</strong> of what each marketing channel costs to do right — not the best case scenario, the real one.</p>
-            <p>These are industry ranges, not Zoek prices. Think of this as the context you need before any sales conversation.</p>
+          <div class="lseo-card" style="border-left:3px solid #E1306C;">
+            <div class="lseo-card-icon">📸</div>
+            <div class="lseo-card-title">Instagram</div>
+            <div class="lseo-card-text"><strong style="color:var(--white)">Best for:</strong> Beauty, fitness, restaurants, retail, real estate — any business where the work is visual.<br><br>Instagram rewards consistency and aesthetics. Reels get the most organic reach right now. <strong>Before/after content, behind-the-scenes, and customer results</strong> outperform promotional posts every time.</div>
           </div>
-        </div>
-        <div class="budget-truth-cards">
-          <div class="btc">
-            <div class="btc-num" style="color:var(--red);">80%</div>
-            <div class="btc-label">Of small businesses</div>
-            <div class="btc-text">underspend on marketing relative to their revenue. <strong>Industry average is 7–10% of revenue.</strong></div>
+          <div class="lseo-card" style="border-left:3px solid #000000;">
+            <div class="lseo-card-icon">🎵</div>
+            <div class="lseo-card-title">TikTok</div>
+            <div class="lseo-card-text"><strong style="color:var(--white)">Best for:</strong> Restaurants, fitness, beauty, retail, any business that can show the work on video.<br><br>The only platform where a brand new account can reach thousands of people organically. Short-form video showing real work, real people, real results. <strong>Authenticity beats production value.</strong></div>
           </div>
-          <div class="btc">
-            <div class="btc-num" style="color:var(--yellow);">$0</div>
-            <div class="btc-label">What bad SEO costs you</div>
-            <div class="btc-text">in upfront fees — but <strong>thousands per month in lost leads</strong> going to competitors who showed up and you didn't.</div>
+          <div class="lseo-card" style="border-left:3px solid #0077B5;">
+            <div class="lseo-card-icon">💼</div>
+            <div class="lseo-card-title">LinkedIn</div>
+            <div class="lseo-card-text"><strong style="color:var(--white)">Best for:</strong> Professional services, B2B, contractors, consultants — anyone selling to other businesses or professionals.<br><br>Organic reach is still strong for personal profiles. <strong>Share expertise, not promotions.</strong> One thoughtful post per week beats daily promotional content by a wide margin.</div>
           </div>
-          <div class="btc">
-            <div class="btc-num" style="color:var(--green);">3–5×</div>
-            <div class="btc-label">Typical ROI</div>
-            <div class="btc-text">for well-run local marketing campaigns. <strong>The issue is never the channel — it's the execution.</strong></div>
+          <div class="lseo-card" style="border-left:3px solid #FF0000;">
+            <div class="lseo-card-icon">▶️</div>
+            <div class="lseo-card-title">YouTube</div>
+            <div class="lseo-card-text"><strong style="color:var(--white)">Best for:</strong> Any business that can explain or demonstrate what they do — contractors, lawyers, healthcare, fitness.<br><br>YouTube videos rank in Google search. A 3-minute video answering "how much does a kitchen remodel cost?" can generate leads for years. <strong>The highest ROI content you can create — but the highest effort too.</strong></div>
+          </div>
+          <div class="lseo-card" style="border-left:3px solid var(--border);">
+            <div class="lseo-card-icon">❓</div>
+            <div class="lseo-card-title">The honest answer</div>
+            <div class="lseo-card-text"><strong style="color:var(--white)">Don't be on every platform.</strong> Pick the 1–2 where your customers actually spend time and do those well. A business that posts consistently on Facebook and Instagram will outperform one trying to juggle 5 platforms with no strategy.</div>
           </div>
         </div>
       </div>
 
       <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
-        <div class="sec-divider">What each channel costs to do right</div>
-        <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;">
-          <div class="bc-row bc-head-row">
-            <div class="bc-head-cell">Channel</div>
-            <div class="bc-head-cell">Monthly Range</div>
-            <div class="bc-head-cell">What you're paying for</div>
-            <div class="bc-head-cell">Entry point</div>
+        <div class="sec-divider">The content that actually gets engagement</div>
+        <div class="examples-grid">
+          <div class="ex-col">
+            <div class="ex-biz" style="color:var(--green)">✓ What works</div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Before & after</strong> — show the transformation. A messy yard → pristine landscaping. Chipped nails → perfect set. Broken pipe → clean repair. The most shareable content format for service businesses.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Behind the scenes</strong> — show the work. People are fascinated by how things get made or done. A 30-second Reel of a job in progress gets more reach than a promotional graphic.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Customer wins</strong> — share a testimonial with the customer's photo (with permission), or a screenshot of a 5-star review. Social proof in a social feed is extremely powerful.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Educational tips</strong> — "3 signs your HVAC needs service before summer." Useful content positions you as the expert and gets saved and shared.</div></div>
           </div>
-          <div class="bc-row">
-            <div class="bc-channel"><span class="bc-channel-icon">🌐</span><span class="bc-channel-name">Website</span></div>
-            <div><div class="bc-range">$100–$500/mo</div><div class="bc-range-note">or $1K–$5K one-time</div></div>
-            <div class="bc-what">Hosting, maintenance, ongoing design updates. <strong>A site that never gets updated stops converting.</strong></div>
-            <div><span class="bc-verdict bc-v-low">Low barrier</span></div>
+          <div class="ex-col">
+            <div class="ex-biz" style="color:var(--red)">✗ What doesn't</div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Promotional graphics</strong> — "Call us for a free estimate!" posted to a stock photo background. Nobody engages with this. It looks like an ad, gets treated like an ad, and gets ignored.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Inconsistent posting</strong> — 5 posts one week, nothing for 3 weeks. The algorithm punishes dormant accounts and audiences forget you exist. Boring and consistent beats brilliant and sporadic.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Irrelevant shares</strong> — sharing motivational quotes or viral memes that have nothing to do with your business. It fills the calendar but builds no brand equity.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Ignoring comments</strong> — posting and ghosting. Not responding to comments signals you're not actually engaged. The algorithm also rewards accounts that spark conversation.</div></div>
           </div>
-          <div class="bc-row">
-            <div class="bc-channel"><span class="bc-channel-icon">🔍</span><span class="bc-channel-name">Local SEO</span></div>
-            <div><div class="bc-range">$300–$2,000/mo</div><div class="bc-range-note">depends on competition</div></div>
-            <div class="bc-what">Keywords, GBP management, citations, content, link building. <strong>Cheap SEO = no SEO.</strong></div>
-            <div><span class="bc-verdict bc-v-mid">Medium</span></div>
+          <div class="ex-col">
+            <div class="ex-biz" style="color:var(--blue)">📐 The framework</div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>The 3-1 rule:</strong> For every 3 posts that educate, entertain, or show your work — post 1 that promotes. Most businesses do this backwards and wonder why nobody cares.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Batch your content:</strong> Set aside 2 hours once a month and create 8–12 posts at once. Schedule them out. This is more sustainable than trying to post something every day.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Video first:</strong> On every platform right now, video content gets 2–3× the organic reach of static images. Even a 15-second clip filmed on your phone outperforms a polished graphic.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Respond within 24 hours:</strong> Comments, DMs, and reviews. Responsiveness is a trust signal — 78% of customers expect a reply within a day.</div></div>
           </div>
-          <div class="bc-row">
-            <div class="bc-channel"><span class="bc-channel-icon">⚡</span><span class="bc-channel-name">Google Ads</span></div>
-            <div><div class="bc-range">$500–$5,000/mo</div><div class="bc-range-note">ad spend only, add mgmt fee</div></div>
-            <div class="bc-what">Ad spend + management. <strong>Under $500/mo rarely produces enough data to optimize.</strong> Sweet spot is $1,000–$2,000/mo.</div>
-            <div><span class="bc-verdict bc-v-mid">Medium</span></div>
-          </div>
-          <div class="bc-row">
-            <div class="bc-channel"><span class="bc-channel-icon">📱</span><span class="bc-channel-name">Social Media</span></div>
-            <div><div class="bc-range">$400–$2,000/mo</div><div class="bc-range-note">management + content</div></div>
-            <div class="bc-what">Content creation, scheduling, engagement, and ads. <strong>Posting 2× a week with no strategy produces essentially zero ROI.</strong></div>
-            <div><span class="bc-verdict bc-v-low">Low barrier</span></div>
-          </div>
-          <div class="bc-row">
-            <div class="bc-channel"><span class="bc-channel-icon">⭐</span><span class="bc-channel-name">Reputation Mgmt</span></div>
-            <div><div class="bc-range">$150–$600/mo</div><div class="bc-range-note">monitoring + review gen</div></div>
-            <div class="bc-what">Automated review requests, response management, citation monitoring. <strong>One bad review costs you 22% of customers who find it.</strong></div>
-            <div><span class="bc-verdict bc-v-low">Low barrier</span></div>
-          </div>
-          <div class="bc-row">
-            <div class="bc-channel"><span class="bc-channel-icon">🎨</span><span class="bc-channel-name">Branding / Design</span></div>
-            <div><div class="bc-range">$500–$3,000</div><div class="bc-range-note">one-time, with ongoing updates</div></div>
-            <div class="bc-what">Logo, brand system, templates, social graphics. <strong>Bad branding actively erodes trust before anyone reads a single word.</strong></div>
-            <div><span class="bc-verdict bc-v-low">Low barrier</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
-        <div class="sec-divider">Allocate a budget across channels</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;">
-          <div>
-            <div class="bs-label">Your monthly marketing budget <span id="bs-budget-val">$1,500</span></div>
-            <input type="range" class="bs-slider" id="bs-budget" min="300" max="10000" step="100" value="1500" oninput="updateBudgetAlloc()">
-            <div class="sec-body" style="margin-top:0.5rem;">
-              <p>Drag the slider to see how a realistic budget breaks down across channels for a local business. These are rough allocations — actual splits depend on your goals and gaps.</p>
-            </div>
-          </div>
-          <div id="bs-alloc-list"></div>
         </div>
       </div>
 
       <div style="padding:2.5rem 3rem;">
-        <div style="background:rgba(105,44,142,0.08);border:1px solid var(--border);border-radius:12px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
-          <div>
-            <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.35rem;">Not sure what fits your budget?</div>
-            <div style="font-size:0.85rem;color:var(--muted);">Our Package Builder matches you to the right services based on your goals and spend.</div>
+        <div class="sec-divider">Organic vs paid — understanding the difference</div>
+        <div class="channel-compare" style="grid-template-columns:1fr 1fr;">
+          <div class="ch-card ppc">
+            <div class="ch-head"><span class="ch-icon">📣</span><div><div class="ch-head-title">Paid Social</div><div class="ch-head-sub">Reach people who don't follow you</div></div></div>
+            <div class="ch-body">
+              <div class="ch-metric"><div><div class="ch-m-label">What it is</div></div><div class="ch-m-val" style="font-size:0.78rem;font-weight:600;color:var(--blue);text-align:right;max-width:200px;">Ads shown to targeted audiences based on location, demographics, and interests</div></div>
+              <div class="ch-metric"><div><div class="ch-m-label">Best for</div></div><div class="ch-m-val" style="font-size:0.78rem;font-weight:600;color:var(--blue);text-align:right;">Lead generation, promotions, reaching new customers</div></div>
+              <div class="ch-metric"><div><div class="ch-m-label">Minimum budget</div></div><div class="ch-m-val" style="color:var(--blue);">$5–$20/day</div></div>
+              <div class="ch-metric"><div><div class="ch-m-label">Stops working when</div></div><div class="ch-m-val" style="font-size:0.78rem;color:var(--blue);text-align:right;">You stop paying. No budget = no reach.</div></div>
+            </div>
           </div>
-          <a href="package-builder.html" style="display:inline-block;background:var(--gradient);color:white;text-decoration:none;padding:0.85rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:800;white-space:nowrap;box-shadow:0 4px 16px rgba(105,44,142,0.35);">Find My Package →</a>
+          <div class="ch-card seo">
+            <div class="ch-head"><span class="ch-icon">🌱</span><div><div class="ch-head-title">Organic Social</div><div class="ch-head-sub">Reach people who already follow you</div></div></div>
+            <div class="ch-body">
+              <div class="ch-metric"><div><div class="ch-m-label">What it is</div></div><div class="ch-m-val" style="font-size:0.78rem;font-weight:600;color:var(--green);text-align:right;max-width:200px;">Regular posts to your followers — no ad spend required</div></div>
+              <div class="ch-metric"><div><div class="ch-m-label">Best for</div></div><div class="ch-m-val" style="font-size:0.78rem;font-weight:600;color:var(--green);text-align:right;">Building trust, staying top of mind, brand personality</div></div>
+              <div class="ch-metric"><div><div class="ch-m-label">Minimum budget</div></div><div class="ch-m-val" style="color:var(--green);">$0 (just time)</div></div>
+              <div class="ch-metric"><div><div class="ch-m-label">Reality check</div></div><div class="ch-m-val" style="font-size:0.78rem;color:var(--green);text-align:right;">Organic reach on Facebook is ~2–5%. Most followers never see your posts.</div></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ═══════════ DIY vs ZOEK TAB ═══════════ -->
-    <div class="tab-content" id="tab-diy">
+    <!-- ═══════════ WHY ZOEK TAB ═══════════ -->
+    <div class="tab-content" id="tab-whyzoek">
+      <div class="why-hero">
+        <div style="max-width:600px">
+          <div class="sec-eyebrow">Why Zoek Marketing</div>
+          <h2 class="sec-title" style="font-size:clamp(1.8rem,3.5vw,3rem)">We've done this<br><span class="acc-p">132,000 times.</span></h2>
+          <div class="sec-body">
+            <p>Zoek Marketing is the <strong>#1 Wix Partner in North America</strong> and a Google Premier Partner. We've helped over 50,000 local businesses build a real online presence — not vanity metrics, not agency jargon. Real leads, real calls, real revenue.</p>
+          </div>
+        </div>
+        <div class="why-stats">
+          <div class="why-stat"><div class="why-stat-val">50K+</div><div class="why-stat-label">Clients Served</div></div>
+          <div class="why-stat"><div class="why-stat-val">#1</div><div class="why-stat-label">Wix Partner</div></div>
+          <div class="why-stat"><div class="why-stat-val">132K</div><div class="why-stat-label">Websites Built</div></div>
+          <div class="why-stat"><div class="why-stat-val">10yr</div><div class="why-stat-label">In Business</div></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">What we actually do</div>
+        <div class="services-grid">
+          <div class="service-card"><div class="service-icon">🌐</div><div class="service-name">Website Design</div><div class="service-text">Fast, mobile-first websites built on Wix that are optimized for local search from day one. Not templates. Custom designs that convert.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">🔍</div><div class="service-name">Local SEO</div><div class="service-text">Full local search optimization — GBP, citations, on-page, schema, review strategy. We handle everything so you show up when it matters.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">⚡</div><div class="service-name">Google &amp; Meta Ads</div><div class="service-text">Paid campaigns built for local lead generation. We write the ads, build the landing pages, manage the budget, and send you the leads.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">⭐</div><div class="service-name">Reputation Management</div><div class="service-text">Automated review requests, response management, and reputation monitoring. Your reviews are your most powerful sales tool.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">🤖</div><div class="service-name">AI Receptionist</div><div class="service-text">24/7 AI that answers calls, books appointments, and qualifies leads while you sleep. Never miss a lead again.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+          <div class="service-card"><div class="service-icon">📧</div><div class="service-name">Email &amp; SMS Marketing</div><div class="service-text">Automated nurture sequences that convert leads into clients and turn clients into repeat customers and referral sources.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">What our clients say</div>
+        <div class="testimonial-grid">
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">Zoek completely transformed our online presence. We went from getting maybe 2 calls a week from Google to over 15. The ROI has been incredible.</div><div class="tcard-name">Mike R.</div><div class="tcard-biz">HVAC Contractor · Cleveland, OH</div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">I was skeptical about digital marketing after getting burned by another agency. Zoek was completely different. Transparent, results-focused, and actually answers the phone.</div><div class="tcard-name">Sarah K.</div><div class="tcard-biz">Family Dental Practice · Phoenix, AZ</div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">Our restaurant was struggling after COVID. Zoek got us ranking #1 for "best pizza near me" within 4 months. Our weekend reservations are fully booked two weeks out now.</div><div class="tcard-name">Tony M.</div><div class="tcard-biz">Restaurant Owner · Chicago, IL</div></div>
+        </div>
+      </div>
+
+
+      <div style="border-top:1px solid var(--border);margin-top:0;">
+        <div style="padding:1rem 1.25rem;background:rgba(105,44,142,0.06);border-bottom:1px solid var(--border);">
+          <div class="sec-divider" style="margin:0;">DIY vs Zoek — the honest math</div>
+        </div>
       <div class="sec-header">
         <div>
           <div class="sec-eyebrow">DIY vs Zoek</div>
@@ -1372,45 +1342,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           <a href="package-builder.html" style="display:inline-block;background:white;color:var(--purple);text-decoration:none;padding:0.85rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:800;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.2);">Build My Package →</a>
         </div>
       </div>
-    </div>
 
-    <!-- ═══════════ WHY ZOEK TAB ═══════════ -->
-    <div class="tab-content" id="tab-whyzoek">
-      <div class="why-hero">
-        <div style="max-width:600px">
-          <div class="sec-eyebrow">Why Zoek Marketing</div>
-          <h2 class="sec-title" style="font-size:clamp(1.8rem,3.5vw,3rem)">We've done this<br><span class="acc-p">132,000 times.</span></h2>
-          <div class="sec-body">
-            <p>Zoek Marketing is the <strong>#1 Wix Partner in North America</strong> and a Google Premier Partner. We've helped over 50,000 local businesses build a real online presence — not vanity metrics, not agency jargon. Real leads, real calls, real revenue.</p>
-          </div>
-        </div>
-        <div class="why-stats">
-          <div class="why-stat"><div class="why-stat-val">50K+</div><div class="why-stat-label">Clients Served</div></div>
-          <div class="why-stat"><div class="why-stat-val">#1</div><div class="why-stat-label">Wix Partner</div></div>
-          <div class="why-stat"><div class="why-stat-val">132K</div><div class="why-stat-label">Websites Built</div></div>
-          <div class="why-stat"><div class="why-stat-val">10yr</div><div class="why-stat-label">In Business</div></div>
-        </div>
-      </div>
-
-      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
-        <div class="sec-divider">What we actually do</div>
-        <div class="services-grid">
-          <div class="service-card"><div class="service-icon">🌐</div><div class="service-name">Website Design</div><div class="service-text">Fast, mobile-first websites built on Wix that are optimized for local search from day one. Not templates. Custom designs that convert.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
-          <div class="service-card"><div class="service-icon">🔍</div><div class="service-name">Local SEO</div><div class="service-text">Full local search optimization — GBP, citations, on-page, schema, review strategy. We handle everything so you show up when it matters.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
-          <div class="service-card"><div class="service-icon">⚡</div><div class="service-name">Google &amp; Meta Ads</div><div class="service-text">Paid campaigns built for local lead generation. We write the ads, build the landing pages, manage the budget, and send you the leads.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
-          <div class="service-card"><div class="service-icon">⭐</div><div class="service-name">Reputation Management</div><div class="service-text">Automated review requests, response management, and reputation monitoring. Your reviews are your most powerful sales tool.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
-          <div class="service-card"><div class="service-icon">🤖</div><div class="service-name">AI Receptionist</div><div class="service-text">24/7 AI that answers calls, books appointments, and qualifies leads while you sleep. Never miss a lead again.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
-          <div class="service-card"><div class="service-icon">📧</div><div class="service-name">Email &amp; SMS Marketing</div><div class="service-text">Automated nurture sequences that convert leads into clients and turn clients into repeat customers and referral sources.</div><a href="https://gozoek.com" target="_blank" class="service-link">Learn more →</a></div>
-        </div>
-      </div>
-
-      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
-        <div class="sec-divider">What our clients say</div>
-        <div class="testimonial-grid">
-          <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">Zoek completely transformed our online presence. We went from getting maybe 2 calls a week from Google to over 15. The ROI has been incredible.</div><div class="tcard-name">Mike R.</div><div class="tcard-biz">HVAC Contractor · Cleveland, OH</div></div>
-          <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">I was skeptical about digital marketing after getting burned by another agency. Zoek was completely different. Transparent, results-focused, and actually answers the phone.</div><div class="tcard-name">Sarah K.</div><div class="tcard-biz">Family Dental Practice · Phoenix, AZ</div></div>
-          <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">Our restaurant was struggling after COVID. Zoek got us ranking #1 for "best pizza near me" within 4 months. Our weekend reservations are fully booked two weeks out now.</div><div class="tcard-name">Tony M.</div><div class="tcard-biz">Restaurant Owner · Chicago, IL</div></div>
-        </div>
       </div>
 
       <div class="why-cta">
@@ -1712,9 +1644,7 @@ const MODULES = [
   { id:'localseo',   name:'Local SEO',     icon:'📍' },
   { id:'ppc',        name:'How PPC Works', icon:'⚡' },
   { id:'geo',        name:'AI & GEO',      icon:'🤖' },
-  { id:'checklist',  name:'Self-Audit',    icon:'✅' },
-  { id:'budget',     name:'Budget Check',  icon:'💰' },
-  { id:'diy',        name:'DIY vs Zoek',   icon:'⚖️' },
+  { id:'social101',  name:'Social Media',  icon:'📱' },
   { id:'whyzoek',    name:'Why Zoek',      icon:'🏆' },
 ];
 let visitedModules = new Set(['funnel']);
@@ -1825,156 +1755,6 @@ function updatePPCCalc() {
   document.getElementById('ppc-insight').innerHTML = `<strong>Insight:</strong> ${insight}`;
 }
 
-// ─── SELF-AUDIT CHECKLIST ────────────────────
-const AUDIT_CATS = [
-  { id:'website', icon:'🌐', name:'Website', items:[
-    { label:'My website loads in under 3 seconds on mobile', why:'53% of mobile users leave if a page takes more than 3 seconds. Page speed is also a Google ranking factor.' },
-    { label:'My website clearly shows what I do and where I serve', why:'If a visitor can\'t figure out what you do within 5 seconds, <strong>they leave and call a competitor.</strong>' },
-    { label:'My website has a clear call-to-action on every page', why:'Without a clear next step, most visitors browse and leave. A phone number or "Book Now" button doubles conversion rates.' },
-    { label:'My website has been updated in the last 6 months', why:'Outdated websites signal to Google and customers that the business may not be active or trustworthy.' },
-  ]},
-  { id:'seo', icon:'🔍', name:'Local SEO', items:[
-    { label:'My Google Business Profile is fully filled out (photos, hours, description)', why:'Businesses with complete GBPs get <strong>7× more clicks</strong> than incomplete ones. Most are less than 40% complete.' },
-    { label:'I show up in the top 3 Google results when I search my service + city', why:'The top 3 local results capture 75% of all clicks. Below that, almost nobody finds you.' },
-    { label:'My business name, address, and phone are identical everywhere online', why:'Inconsistent NAP data confuses Google and drops your local rankings — even one wrong digit counts.' },
-    { label:'I\'m listed in at least 50 online directories (Yelp, YP, Apple Maps, etc.)', why:'Citations are one of the top local ranking signals. Most competitors have 100+ correct listings.' },
-  ]},
-  { id:'reviews', icon:'⭐', name:'Reviews & Reputation', items:[
-    { label:'I have at least 20 Google reviews', why:'Businesses with fewer than 10 reviews are skipped by 80% of searchers. 20+ is the minimum to be credible.' },
-    { label:'My average rating is 4.2 stars or higher', why:'4.0–4.2 is the minimum viable rating. Below 4.0, <strong>most customers won\'t even call.</strong>' },
-    { label:'I respond to every review — good and bad', why:'Responding to reviews improves your Google ranking AND shows prospects you care. 89% of consumers read business responses.' },
-    { label:'I get at least 2–3 new reviews per month consistently', why:'Recency matters. A business with 50 old reviews loses to one with 20 recent ones. Google weights freshness heavily.' },
-  ]},
-  { id:'ads', icon:'⚡', name:'Paid Advertising', items:[
-    { label:'I know exactly how many leads came from my ads last month', why:'If you can\'t track leads to source, you\'re flying blind. <strong>You can\'t optimize what you don\'t measure.</strong>' },
-    { label:'My ads send people to a dedicated landing page, not my homepage', why:'Dedicated landing pages convert at 3–5× the rate of homepages. Most small business ads waste 60–70% of their budget on this.' },
-    { label:'I know my cost per lead and it\'s profitable', why:'You need to know: CPL × close rate = cost per client. If that number is less than what a client is worth, scale the ads.' },
-  ]},
-  { id:'social', icon:'📱', name:'Social Media', items:[
-    { label:'I post on Facebook or Instagram at least 3× per week', why:'Businesses posting 3–5× per week get 3× more engagement than those posting less. Consistency beats quality alone.' },
-    { label:'My social posts include original content (not just shares)', why:'Original content builds trust and brand recognition. Shared posts get 80% less reach on average.' },
-    { label:'I have a process for responding to comments and DMs within 24 hours', why:'78% of customers expect a response within 24 hours. Fast response signals you\'re active and trustworthy.' },
-  ]},
-];
-
-let auditAnswers = {};
-
-function buildAuditChecklist() {
-  const container = document.getElementById('audit-categories');
-  if (!container) return;
-  container.innerHTML = AUDIT_CATS.map(cat => `
-    <div class="audit-cat" id="acat-${cat.id}">
-      <div class="audit-cat-head" onclick="toggleAuditCat('${cat.id}')">
-        <div class="audit-cat-left">
-          <span class="audit-cat-icon">${cat.icon}</span>
-          <span class="audit-cat-name">${cat.name}</span>
-        </div>
-        <span class="audit-cat-score audit-score-na" id="ascore-${cat.id}">0 / ${cat.items.length}</span>
-      </div>
-      <div class="audit-items">
-        ${cat.items.map((item, i) => `
-          <div class="audit-item">
-            <div class="audit-item-check">
-              <button class="audit-check-btn ck-yes" id="ayes-${cat.id}-${i}" onclick="setAudit('${cat.id}',${i},true)">Yes</button>
-              <button class="audit-check-btn ck-no"  id="ano-${cat.id}-${i}"  onclick="setAudit('${cat.id}',${i},false)">No</button>
-            </div>
-            <div class="audit-item-text">
-              <div class="audit-item-label">${item.label}</div>
-              <div class="audit-item-why">${item.why}</div>
-            </div>
-          </div>`).join('')}
-      </div>
-    </div>`).join('');
-  // Open first category
-  document.getElementById('acat-website').classList.add('open');
-}
-
-function toggleAuditCat(id) {
-  document.getElementById('acat-' + id).classList.toggle('open');
-}
-
-function setAudit(cat, idx, val) {
-  const key = `${cat}-${idx}`;
-  auditAnswers[key] = val;
-  const yesBtn = document.getElementById(`ayes-${cat}-${idx}`);
-  const noBtn  = document.getElementById(`ano-${cat}-${idx}`);
-  yesBtn.classList.toggle('active', val === true);
-  noBtn.classList.toggle('active',  val === false);
-  updateAuditScore();
-}
-
-function updateAuditScore() {
-  let totalYes = 0, totalQ = 0;
-  const gaps = [];
-
-  AUDIT_CATS.forEach(cat => {
-    let catYes = 0;
-    cat.items.forEach((item, i) => {
-      const key = `${cat.id}-${i}`;
-      totalQ++;
-      if (auditAnswers[key] === true)  { catYes++; totalYes++; }
-      if (auditAnswers[key] === false) { gaps.push({ cat: cat.name, label: item.label }); }
-    });
-
-    const answered = cat.items.filter((_,i) => auditAnswers[`${cat.id}-${i}`] !== undefined).length;
-    const scoreEl = document.getElementById(`ascore-${cat.id}`);
-    scoreEl.textContent = `${catYes} / ${cat.items.length}`;
-    const pct = answered > 0 ? catYes / cat.items.length : -1;
-    scoreEl.className = 'audit-cat-score ' + (answered === 0 ? 'audit-score-na' : pct >= 0.75 ? 'audit-score-good' : pct >= 0.5 ? 'audit-score-med' : 'audit-score-bad');
-  });
-
-  const answered = Object.keys(auditAnswers).length;
-  const score    = totalYes;
-  const pct      = answered > 0 ? score / Math.min(answered, 20) : 0;
-
-  document.getElementById('atc-score-num').textContent = score;
-  document.getElementById('atc-bar').style.width = `${(score/20)*100}%`;
-  document.getElementById('atc-bar').style.background = score >= 16 ? 'var(--green)' : score >= 10 ? 'var(--yellow)' : 'var(--gradient)';
-
-  const grade = document.getElementById('atc-grade');
-  if (answered === 0) {
-    grade.textContent = 'Not started'; grade.className = 'atc-grade audit-score-na';
-  } else if (score >= 17) {
-    grade.textContent = '🏆 Strong'; grade.className = 'atc-grade audit-score-good';
-  } else if (score >= 12) {
-    grade.textContent = '⚠ Room to grow'; grade.className = 'atc-grade audit-score-med';
-  } else {
-    grade.textContent = '🚨 Needs work'; grade.className = 'atc-grade audit-score-bad';
-  }
-
-  const gapsEl = document.getElementById('atc-gaps');
-  if (gaps.length === 0 && answered === 0) {
-    gapsEl.innerHTML = '<div style="font-size:0.8rem;color:var(--muted);">Answer questions to see your gaps.</div>';
-  } else if (gaps.length === 0) {
-    gapsEl.innerHTML = '<div style="font-size:0.82rem;color:var(--green);font-weight:600;">✓ No gaps found yet — keep going!</div>';
-  } else {
-    gapsEl.innerHTML = `<div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Your gaps (${gaps.length})</div>` +
-      gaps.slice(0,5).map(g => `<div class="atc-gap-item">⚠ <span><strong>${g.cat}:</strong> ${g.label}</span></div>`).join('') +
-      (gaps.length > 5 ? `<div style="font-size:0.72rem;color:var(--muted);padding:0.25rem 0.5rem;">+${gaps.length-5} more gaps below</div>` : '');
-  }
-}
-
-// ─── BUDGET ALLOCATION SLIDER ─────────────────
-function updateBudgetAlloc() {
-  const budget = parseInt(document.getElementById('bs-budget').value);
-  document.getElementById('bs-budget-val').textContent = '$' + budget.toLocaleString();
-
-  // Allocation percentages by budget tier
-  let allocs;
-  if      (budget < 750)  allocs = [{ label:'Website / Hosting', pct:0.35, color:'#692C8E' }, { label:'Local SEO', pct:0.40, color:'#1EBFDC' }, { label:'Reputation Mgmt', pct:0.25, color:'#4fffb0' }];
-  else if (budget < 2000) allocs = [{ label:'Website / Hosting', pct:0.20, color:'#692C8E' }, { label:'Local SEO', pct:0.40, color:'#1EBFDC' }, { label:'Paid Ads', pct:0.25, color:'#ED0875' }, { label:'Social Media', pct:0.15, color:'#FAA31C' }];
-  else if (budget < 5000) allocs = [{ label:'Website / Hosting', pct:0.15, color:'#692C8E' }, { label:'Local SEO', pct:0.30, color:'#1EBFDC' }, { label:'Paid Ads', pct:0.35, color:'#ED0875' }, { label:'Social Media', pct:0.12, color:'#FAA31C' }, { label:'Reputation', pct:0.08, color:'#4fffb0' }];
-  else                    allocs = [{ label:'Website / Hosting', pct:0.10, color:'#692C8E' }, { label:'Local SEO', pct:0.25, color:'#1EBFDC' }, { label:'Paid Ads', pct:0.40, color:'#ED0875' }, { label:'Social Media', pct:0.15, color:'#FAA31C' }, { label:'Reputation', pct:0.05, color:'#4fffb0' }, { label:'Branding', pct:0.05, color:'#ff5c7c' }];
-
-  const maxVal = Math.max(...allocs.map(a => a.pct));
-  document.getElementById('bs-alloc-list').innerHTML = allocs.map(a => `
-    <div class="bs-alloc-item">
-      <div class="bs-alloc-label">${a.label}</div>
-      <div class="bs-alloc-bar-wrap"><div class="bs-alloc-bar" style="width:${(a.pct/maxVal)*100}%;background:${a.color};"></div></div>
-      <div class="bs-alloc-val" style="color:${a.color}">$${Math.round(budget*a.pct).toLocaleString()}</div>
-    </div>`).join('');
-}
-
 // ─── DIY CALCULATOR ───────────────────────────
 function updateDIYCalc() {
   const rate = parseInt(document.getElementById('diy-rate').value);
@@ -1996,8 +1776,6 @@ renderPlatforms();
 updatePPCCalc();
 buildProgressBar();
 updateProgressBar('funnel');
-buildAuditChecklist();
-updateBudgetAlloc();
 updateDIYCalc();
 
 </script>
