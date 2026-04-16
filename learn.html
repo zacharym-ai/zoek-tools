@@ -317,6 +317,100 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .geo-compare-item:last-child{border-bottom:none;}
 .geo-compare-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;}
 
+/* ──── TABS: CHECKLIST / BUDGET / DIY ───────── */
+.audit-categories{display:flex;flex-direction:column;gap:0;}
+.audit-cat{border-bottom:1px solid var(--border);}
+.audit-cat:last-child{border-bottom:none;}
+.audit-cat-head{padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background 0.15s;}
+.audit-cat-head:hover{background:rgba(105,44,142,0.05);}
+.audit-cat-left{display:flex;align-items:center;gap:0.75rem;}
+.audit-cat-icon{font-size:1.1rem;}
+.audit-cat-name{font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:800;}
+.audit-cat-score{font-size:0.72rem;font-weight:700;padding:0.18rem 0.55rem;border-radius:3px;}
+.audit-score-good{background:rgba(79,255,176,0.12);color:var(--green);}
+.audit-score-med{background:rgba(250,163,28,0.1);color:var(--yellow);}
+.audit-score-bad{background:rgba(255,92,124,0.1);color:var(--red);}
+.audit-score-na{background:rgba(160,160,192,0.08);color:var(--muted);}
+.audit-items{display:none;padding:0 1.25rem 1rem;}
+.audit-cat.open .audit-items{display:block;}
+.audit-item{display:flex;align-items:flex-start;gap:0.85rem;padding:0.7rem 0;border-bottom:1px solid var(--border-light);}
+.audit-item:last-child{border-bottom:none;}
+.audit-item-check{display:flex;gap:0.4rem;flex-shrink:0;margin-top:1px;}
+.audit-check-btn{padding:0.22rem 0.55rem;border-radius:4px;font-size:0.7rem;font-weight:700;cursor:pointer;border:1.5px solid;transition:all 0.15s;font-family:'Plus Jakarta Sans',sans-serif;}
+.ck-yes{border-color:rgba(79,255,176,0.3);color:rgba(79,255,176,0.6);background:transparent;}
+.ck-yes.active{background:rgba(79,255,176,0.15);color:var(--green);border-color:var(--green);}
+.ck-no{border-color:rgba(255,92,124,0.25);color:rgba(255,92,124,0.5);background:transparent;}
+.ck-no.active{background:rgba(255,92,124,0.12);color:var(--red);border-color:var(--red);}
+.audit-item-text{flex:1;}
+.audit-item-label{font-size:0.85rem;font-weight:600;margin-bottom:0.15rem;}
+.audit-item-why{font-size:0.72rem;color:var(--muted);line-height:1.5;}
+.audit-item-why strong{color:var(--white);}
+.audit-total-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.75rem;}
+.atc-head{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.atc-score-wrap{display:flex;align-items:baseline;gap:0.4rem;}
+.atc-score-num{font-family:'Poppins',sans-serif;font-size:2.5rem;font-weight:800;line-height:1;}
+.atc-score-denom{font-size:1rem;color:var(--muted);}
+.atc-grade{font-size:0.72rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:4px;}
+.atc-body{padding:1.25rem 1.5rem;}
+.atc-gaps{display:flex;flex-direction:column;gap:0.5rem;}
+.atc-gap-item{font-size:0.82rem;color:var(--muted);padding:0.5rem 0.75rem;border-radius:5px;border:1px solid var(--border);display:flex;align-items:flex-start;gap:0.5rem;}
+.atc-gap-item strong{color:var(--white);}
+.bc-row{display:grid;grid-template-columns:180px 1fr 1fr 140px;align-items:start;gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border-light);transition:background 0.15s;}
+.bc-row:last-child{border-bottom:none;}
+.bc-row:hover{background:rgba(105,44,142,0.04);}
+.bc-row.bc-head-row{background:rgba(105,44,142,0.08);border-bottom:1px solid var(--border);}
+.bc-head-cell{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+.bc-channel{display:flex;align-items:center;gap:0.5rem;}
+.bc-channel-icon{font-size:1rem;}
+.bc-channel-name{font-weight:700;font-size:0.88rem;}
+.bc-range{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:700;color:var(--green);}
+.bc-range-note{font-size:0.68rem;color:var(--muted);margin-top:0.15rem;}
+.bc-what{font-size:0.78rem;color:var(--muted);line-height:1.55;}
+.bc-what strong{color:var(--white);}
+.bc-verdict{font-size:0.72rem;font-weight:700;padding:0.18rem 0.5rem;border-radius:3px;display:inline-block;}
+.bc-v-low{background:rgba(79,255,176,0.1);color:var(--green);}
+.bc-v-mid{background:rgba(250,163,28,0.1);color:var(--yellow);}
+.bc-v-high{background:rgba(255,92,124,0.1);color:var(--red);}
+.budget-truth-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.btc{background:var(--sidebar);padding:1.25rem;}
+.btc-num{font-family:'Poppins',sans-serif;font-size:1.8rem;font-weight:800;line-height:1;margin-bottom:0.3rem;}
+.btc-label{font-size:0.75rem;font-weight:700;color:var(--muted);}
+.btc-text{font-size:0.75rem;color:var(--muted);line-height:1.55;margin-top:0.4rem;}
+.btc-text strong{color:var(--white);}
+.bs-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:0.4rem;}
+.bs-label span{color:var(--white);font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:800;}
+.bs-slider{width:100%;accent-color:var(--purple);cursor:pointer;margin-bottom:1.25rem;}
+.bs-alloc-item{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;}
+.bs-alloc-label{font-size:0.78rem;font-weight:600;min-width:110px;}
+.bs-alloc-bar-wrap{flex:1;background:rgba(255,255,255,0.05);border-radius:3px;height:8px;overflow:hidden;}
+.bs-alloc-bar{height:100%;border-radius:3px;transition:width 0.5s cubic-bezier(0.16,1,0.3,1);}
+.bs-alloc-val{font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:700;min-width:55px;text-align:right;}
+.diy-compare-table{border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.diy-table-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(105,44,142,0.08);}
+.diy-th{padding:0.85rem 1.25rem;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+.diy-th.zoek-col{color:var(--purple);background:rgba(105,44,142,0.12);}
+.diy-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border-light);}
+.diy-row:hover{background:rgba(105,44,142,0.03);}
+.diy-cell{padding:0.9rem 1.25rem;font-size:0.82rem;color:var(--muted);line-height:1.55;display:flex;align-items:flex-start;gap:0.4rem;}
+.diy-cell.zoek-col{background:rgba(105,44,142,0.04);color:var(--white);}
+.diy-cell-task{font-weight:600;color:var(--white);}
+.diy-cell-task .task-sub{font-size:0.68rem;color:var(--muted);font-weight:400;display:block;margin-top:0.1rem;}
+.diy-check{color:var(--green);flex-shrink:0;margin-top:1px;}
+.diy-x{color:var(--red);flex-shrink:0;margin-top:1px;}
+.diy-time-calc{background:rgba(250,163,28,0.05);border:1px solid rgba(250,163,28,0.2);border-radius:10px;padding:2rem;margin-bottom:1.75rem;}
+.dtc-title{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:1.25rem;}
+.dtc-row{display:grid;grid-template-columns:1fr auto auto;gap:1rem;align-items:center;padding:0.6rem 0;border-bottom:1px solid var(--border-light);}
+.dtc-row:last-child{border-bottom:none;}
+.dtc-task{font-size:0.82rem;font-weight:600;}
+.dtc-hrs{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:700;color:var(--yellow);white-space:nowrap;}
+.dtc-cost{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:700;color:var(--red);white-space:nowrap;}
+.dtc-total{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);}
+.dtc-total-label{font-size:0.85rem;font-weight:700;}
+.dtc-total-val{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;color:var(--red);}
+.dtc-slider-wrap{display:flex;align-items:center;gap:1rem;margin-top:1rem;}
+.dtc-slider-label{font-size:0.72rem;color:var(--muted);white-space:nowrap;}
+.dtc-slider{flex:1;accent-color:var(--yellow);cursor:pointer;}
+.dtc-rate-val{font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:800;color:var(--yellow);min-width:60px;}
 /* ──── TAB 7: WHY ZOEK ───────────────────── */
 .why-hero{padding:3rem;border-bottom:1px solid var(--border);background:radial-gradient(ellipse at 50% 0%,rgba(105,44,142,0.18) 0%,transparent 65%);}
 .why-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2rem;}
@@ -496,9 +590,24 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
         <span class="mpi-badge badge-new">New</span>
       </div>
       <div class="module-preview-item" onclick="switchTab('whyzoek',null)">
-        <div class="mpi-dot" style="background:var(--gradient);background:linear-gradient(135deg,#692C8E,#ED0875)"></div>
+        <div class="mpi-dot" style="background:linear-gradient(135deg,#692C8E,#ED0875)"></div>
         <span class="mpi-name">Why Zoek</span>
         <span class="mpi-badge badge-live">Live</span>
+      </div>
+      <div class="module-preview-item" onclick="switchTab('checklist',null)">
+        <div class="mpi-dot" style="background:var(--green)"></div>
+        <span class="mpi-name">Marketing Self-Audit</span>
+        <span class="mpi-badge badge-new">New</span>
+      </div>
+      <div class="module-preview-item" onclick="switchTab('budget',null)">
+        <div class="mpi-dot" style="background:var(--yellow)"></div>
+        <span class="mpi-name">Budget Reality Check</span>
+        <span class="mpi-badge badge-new">New</span>
+      </div>
+      <div class="module-preview-item" onclick="switchTab('diy',null)">
+        <div class="mpi-dot" style="background:var(--blue)"></div>
+        <span class="mpi-name">DIY vs Zoek</span>
+        <span class="mpi-badge badge-new">New</span>
       </div>
     </div>
   </div>
@@ -541,6 +650,24 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       <button class="tab-btn" onclick="switchTab('geo',this)">
         <span class="tab-icon">🤖</span>
         <span class="tab-text"><span class="tab-name">AI &amp; GEO Visibility</span><span class="tab-sub">The next frontier</span></span>
+        <span class="tab-badge tb-new">New</span>
+      </button>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Is Zoek right for me?</div>
+      <button class="tab-btn" onclick="switchTab('checklist',this)">
+        <span class="tab-icon">✅</span>
+        <span class="tab-text"><span class="tab-name">Marketing Self-Audit</span><span class="tab-sub">Score your marketing in 2 min</span></span>
+        <span class="tab-badge tb-new">New</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('budget',this)">
+        <span class="tab-icon">💰</span>
+        <span class="tab-text"><span class="tab-name">Budget Reality Check</span><span class="tab-sub">What things actually cost</span></span>
+        <span class="tab-badge tb-new">New</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('diy',this)">
+        <span class="tab-icon">⚖️</span>
+        <span class="tab-text"><span class="tab-name">DIY vs Zoek</span><span class="tab-sub">The honest math</span></span>
         <span class="tab-badge tb-new">New</span>
       </button>
     </div>
@@ -997,6 +1124,256 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       </div>
     </div>
 
+    <!-- ═══════════ SELF-AUDIT TAB ═══════════ -->
+    <div class="tab-content" id="tab-checklist">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Marketing Self-Audit</div>
+          <h2 class="sec-title">Score your marketing.<br><span class="acc-g">Find your biggest gaps.</span></h2>
+          <div class="sec-body">
+            <p>Answer yes or no to each question. Be honest — there are no wrong answers. At the end you'll see exactly where your marketing stands and what to fix first.</p>
+            <p><strong>Takes about 2 minutes.</strong> Every "No" is a gap a competitor could be filling right now.</p>
+          </div>
+        </div>
+        <div class="audit-total-card" id="audit-total-card">
+          <div class="atc-head">
+            <div>
+              <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;">Your Score</div>
+              <div class="atc-score-wrap">
+                <div class="atc-score-num" id="atc-score-num">0</div>
+                <div class="atc-score-denom">/ 20</div>
+              </div>
+            </div>
+            <div class="atc-grade audit-score-na" id="atc-grade">Not started</div>
+          </div>
+          <div class="atc-body">
+            <div style="background:rgba(255,255,255,0.04);border-radius:4px;height:8px;overflow:hidden;margin-bottom:1rem;">
+              <div id="atc-bar" style="height:100%;border-radius:4px;background:var(--gradient);width:0;transition:width 0.6s cubic-bezier(0.16,1,0.3,1);"></div>
+            </div>
+            <div class="atc-gaps" id="atc-gaps">
+              <div style="font-size:0.8rem;color:var(--muted);">Answer questions to see your gaps.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:0 3rem 2rem;">
+        <div class="audit-categories" id="audit-categories"></div>
+      </div>
+
+      <div style="padding:0 3rem 2.5rem;">
+        <div style="background:var(--gradient);border-radius:12px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+          <div>
+            <div style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:0.4rem;">See what Zoek would do about your gaps</div>
+            <div style="font-size:0.85rem;color:rgba(255,255,255,0.75);">Get matched to the right packages based on exactly what you need.</div>
+          </div>
+          <a href="package-builder.html" style="display:inline-block;background:white;color:var(--purple);text-decoration:none;padding:0.85rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:800;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.2);">Build My Package →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ BUDGET REALITY CHECK TAB ═══════════ -->
+    <div class="tab-content" id="tab-budget">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Budget Reality Check</div>
+          <h2 class="sec-title">What does marketing<br><span class="acc-p">actually cost?</span></h2>
+          <div class="sec-body">
+            <p>Most business owners either overpay because they don't know better, or underspend and wonder why nothing works. <strong>Here's the honest breakdown</strong> of what each marketing channel costs to do right — not the best case scenario, the real one.</p>
+            <p>These are industry ranges, not Zoek prices. Think of this as the context you need before any sales conversation.</p>
+          </div>
+        </div>
+        <div class="budget-truth-cards">
+          <div class="btc">
+            <div class="btc-num" style="color:var(--red);">80%</div>
+            <div class="btc-label">Of small businesses</div>
+            <div class="btc-text">underspend on marketing relative to their revenue. <strong>Industry average is 7–10% of revenue.</strong></div>
+          </div>
+          <div class="btc">
+            <div class="btc-num" style="color:var(--yellow);">$0</div>
+            <div class="btc-label">What bad SEO costs you</div>
+            <div class="btc-text">in upfront fees — but <strong>thousands per month in lost leads</strong> going to competitors who showed up and you didn't.</div>
+          </div>
+          <div class="btc">
+            <div class="btc-num" style="color:var(--green);">3–5×</div>
+            <div class="btc-label">Typical ROI</div>
+            <div class="btc-text">for well-run local marketing campaigns. <strong>The issue is never the channel — it's the execution.</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">What each channel costs to do right</div>
+        <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+          <div class="bc-row bc-head-row">
+            <div class="bc-head-cell">Channel</div>
+            <div class="bc-head-cell">Monthly Range</div>
+            <div class="bc-head-cell">What you're paying for</div>
+            <div class="bc-head-cell">Entry point</div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-channel"><span class="bc-channel-icon">🌐</span><span class="bc-channel-name">Website</span></div>
+            <div><div class="bc-range">$100–$500/mo</div><div class="bc-range-note">or $1K–$5K one-time</div></div>
+            <div class="bc-what">Hosting, maintenance, ongoing design updates. <strong>A site that never gets updated stops converting.</strong></div>
+            <div><span class="bc-verdict bc-v-low">Low barrier</span></div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-channel"><span class="bc-channel-icon">🔍</span><span class="bc-channel-name">Local SEO</span></div>
+            <div><div class="bc-range">$300–$2,000/mo</div><div class="bc-range-note">depends on competition</div></div>
+            <div class="bc-what">Keywords, GBP management, citations, content, link building. <strong>Cheap SEO = no SEO.</strong></div>
+            <div><span class="bc-verdict bc-v-mid">Medium</span></div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-channel"><span class="bc-channel-icon">⚡</span><span class="bc-channel-name">Google Ads</span></div>
+            <div><div class="bc-range">$500–$5,000/mo</div><div class="bc-range-note">ad spend only, add mgmt fee</div></div>
+            <div class="bc-what">Ad spend + management. <strong>Under $500/mo rarely produces enough data to optimize.</strong> Sweet spot is $1,000–$2,000/mo.</div>
+            <div><span class="bc-verdict bc-v-mid">Medium</span></div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-channel"><span class="bc-channel-icon">📱</span><span class="bc-channel-name">Social Media</span></div>
+            <div><div class="bc-range">$400–$2,000/mo</div><div class="bc-range-note">management + content</div></div>
+            <div class="bc-what">Content creation, scheduling, engagement, and ads. <strong>Posting 2× a week with no strategy produces essentially zero ROI.</strong></div>
+            <div><span class="bc-verdict bc-v-low">Low barrier</span></div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-channel"><span class="bc-channel-icon">⭐</span><span class="bc-channel-name">Reputation Mgmt</span></div>
+            <div><div class="bc-range">$150–$600/mo</div><div class="bc-range-note">monitoring + review gen</div></div>
+            <div class="bc-what">Automated review requests, response management, citation monitoring. <strong>One bad review costs you 22% of customers who find it.</strong></div>
+            <div><span class="bc-verdict bc-v-low">Low barrier</span></div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-channel"><span class="bc-channel-icon">🎨</span><span class="bc-channel-name">Branding / Design</span></div>
+            <div><div class="bc-range">$500–$3,000</div><div class="bc-range-note">one-time, with ongoing updates</div></div>
+            <div class="bc-what">Logo, brand system, templates, social graphics. <strong>Bad branding actively erodes trust before anyone reads a single word.</strong></div>
+            <div><span class="bc-verdict bc-v-low">Low barrier</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">Allocate a budget across channels</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;">
+          <div>
+            <div class="bs-label">Your monthly marketing budget <span id="bs-budget-val">$1,500</span></div>
+            <input type="range" class="bs-slider" id="bs-budget" min="300" max="10000" step="100" value="1500" oninput="updateBudgetAlloc()">
+            <div class="sec-body" style="margin-top:0.5rem;">
+              <p>Drag the slider to see how a realistic budget breaks down across channels for a local business. These are rough allocations — actual splits depend on your goals and gaps.</p>
+            </div>
+          </div>
+          <div id="bs-alloc-list"></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;">
+        <div style="background:rgba(105,44,142,0.08);border:1px solid var(--border);border-radius:12px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+          <div>
+            <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.35rem;">Not sure what fits your budget?</div>
+            <div style="font-size:0.85rem;color:var(--muted);">Our Package Builder matches you to the right services based on your goals and spend.</div>
+          </div>
+          <a href="package-builder.html" style="display:inline-block;background:var(--gradient);color:white;text-decoration:none;padding:0.85rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:800;white-space:nowrap;box-shadow:0 4px 16px rgba(105,44,142,0.35);">Find My Package →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ DIY vs ZOEK TAB ═══════════ -->
+    <div class="tab-content" id="tab-diy">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">DIY vs Zoek</div>
+          <h2 class="sec-title">The honest math on<br><span class="acc-p">doing it yourself.</span></h2>
+          <div class="sec-body">
+            <p>We're not going to tell you that you can't do your own marketing. You can. Plenty of businesses do. <strong>What we will show you is what it actually costs in time, tools, and learning curve</strong> — and then you can decide.</p>
+            <p>This isn't a sales pitch dressed up as a comparison. It's the real numbers.</p>
+          </div>
+        </div>
+        <div class="stat-blocks">
+          <div class="stat-block"><div class="stat-num" style="color:var(--yellow);">15–20</div><div class="stat-text"><strong>Hours per month</strong> is what doing local marketing properly takes. That's a part-time job on top of running your business.</div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--red);">$400+</div><div class="stat-text"><strong>Monthly tool cost</strong> if you buy the software needed to do SEO, social, ads, and reputation management properly.</div></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">What your time is really costing you</div>
+        <div class="diy-time-calc">
+          <div class="dtc-title">⏱️ Monthly DIY Marketing Time & Cost Calculator</div>
+          <div class="dtc-slider-wrap" style="margin-bottom:1.5rem;">
+            <span class="dtc-slider-label">Your hourly rate:</span>
+            <input type="range" class="dtc-slider" id="diy-rate" min="25" max="300" step="25" value="75" oninput="updateDIYCalc()">
+            <span class="dtc-rate-val" id="diy-rate-val">$75/hr</span>
+          </div>
+          <div class="dtc-row" style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding-bottom:0.5rem;">
+            <div>Task</div><div>Hrs/mo</div><div>Your cost</div>
+          </div>
+          <div class="dtc-row"><div class="dtc-task">Website updates & maintenance</div><div class="dtc-hrs" id="diy-h1">2 hrs</div><div class="dtc-cost" id="diy-c1">$150</div></div>
+          <div class="dtc-row"><div class="dtc-task">Local SEO (keywords, GBP, citations)</div><div class="dtc-hrs" id="diy-h2">5 hrs</div><div class="dtc-cost" id="diy-c2">$375</div></div>
+          <div class="dtc-row"><div class="dtc-task">Social media content & posting</div><div class="dtc-hrs" id="diy-h3">4 hrs</div><div class="dtc-cost" id="diy-c3">$300</div></div>
+          <div class="dtc-row"><div class="dtc-task">Review monitoring & responses</div><div class="dtc-hrs" id="diy-h4">2 hrs</div><div class="dtc-cost" id="diy-c4">$150</div></div>
+          <div class="dtc-row"><div class="dtc-task">Ad management & optimization</div><div class="dtc-hrs" id="diy-h5">4 hrs</div><div class="dtc-cost" id="diy-c5">$300</div></div>
+          <div class="dtc-row"><div class="dtc-task">Learning & staying current</div><div class="dtc-hrs">3 hrs</div><div class="dtc-cost" id="diy-c6">$225</div></div>
+          <div class="dtc-total">
+            <div class="dtc-total-label">Total monthly opportunity cost</div>
+            <div class="dtc-total-val" id="diy-total">$1,500</div>
+          </div>
+        </div>
+        <div style="font-size:0.75rem;color:rgba(160,160,192,0.5);text-align:center;">Plus ~$400/mo in tools (SEO software, social scheduler, review platform, ad manager)</div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">Side by side — what you actually get</div>
+        <div class="diy-compare-table">
+          <div class="diy-table-head">
+            <div class="diy-th">What you need</div>
+            <div class="diy-th">Doing it yourself</div>
+            <div class="diy-th zoek-col">✦ With Zoek</div>
+          </div>
+          <div class="diy-row">
+            <div class="diy-cell diy-cell-task">Professional website<span class="task-sub">Fast, mobile-first, converts visitors</span></div>
+            <div class="diy-cell"><span class="diy-x">✗</span>Wix drag-and-drop works, but template sites rarely convert well without design expertise</div>
+            <div class="diy-cell zoek-col"><span class="diy-check">✓</span>Custom-designed by Wix-certified designers. Built to convert, not just look nice</div>
+          </div>
+          <div class="diy-row">
+            <div class="diy-cell diy-cell-task">Local SEO<span class="task-sub">Rank when people search near you</span></div>
+            <div class="diy-cell"><span class="diy-x">✗</span>Takes 6–12 months to learn properly. Most DIY attempts focus on wrong signals and see no results</div>
+            <div class="diy-cell zoek-col"><span class="diy-check">✓</span>Dedicated SEO team with proven local methodology. Results tracked monthly with full reporting</div>
+          </div>
+          <div class="diy-row">
+            <div class="diy-cell diy-cell-task">Google Ads<span class="task-sub">Pay-per-click lead generation</span></div>
+            <div class="diy-cell"><span class="diy-x">✗</span>Easy to set up, very easy to waste money. Most DIY campaigns burn 40–60% of budget on wrong keywords</div>
+            <div class="diy-cell zoek-col"><span class="diy-check">✓</span>Google Premier Partner. Certified campaign managers who optimize weekly, not monthly</div>
+          </div>
+          <div class="diy-row">
+            <div class="diy-cell diy-cell-task">Review management<span class="task-sub">Get more 5-star reviews consistently</span></div>
+            <div class="diy-cell"><span class="diy-x">✗</span>Manual ask after every job. Most businesses forget or feel awkward. Average is 1–2 reviews per month</div>
+            <div class="diy-cell zoek-col"><span class="diy-check">✓</span>Automated review requests via text and email. Average clients see 8–15 new reviews per month</div>
+          </div>
+          <div class="diy-row">
+            <div class="diy-cell diy-cell-task">Social media<span class="task-sub">Consistent presence on key platforms</span></div>
+            <div class="diy-cell"><span class="diy-x">✗</span>Most business owners post inconsistently and run out of ideas within 3 months</div>
+            <div class="diy-cell zoek-col"><span class="diy-check">✓</span>Done-for-you content creation, scheduling, and engagement. You just approve and grow</div>
+          </div>
+          <div class="diy-row">
+            <div class="diy-cell diy-cell-task">Reporting & strategy<span class="task-sub">Know what's working and what to do next</span></div>
+            <div class="diy-cell"><span class="diy-x">✗</span>Google Analytics is complex. Most DIY owners don't know which numbers to watch</div>
+            <div class="diy-cell zoek-col"><span class="diy-check">✓</span>Monthly reporting sessions with your account manager. Plain English, clear action items</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;">
+        <div style="background:rgba(237,8,117,0.06);border:1px solid rgba(237,8,117,0.18);border-radius:12px;padding:2rem;margin-bottom:1.75rem;">
+          <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.5rem;">The real question isn't "can I do this myself?"</div>
+          <div style="font-size:0.88rem;color:var(--muted);line-height:1.75;">It's <strong style="color:var(--white)">"is spending 15–20 hours a month on marketing the best use of my time?"</strong> Most business owners are worth $75–$150/hr to their own business. At that rate, DIY marketing costs $1,500–$3,000/month in lost productivity — often more than hiring a team that does it better.</div>
+        </div>
+        <div style="background:var(--gradient);border-radius:12px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+          <div>
+            <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.35rem;">Ready to stop doing it yourself?</div>
+            <div style="font-size:0.85rem;color:rgba(255,255,255,0.75);">See which Zoek services fit your goals and budget — takes 2 minutes.</div>
+          </div>
+          <a href="package-builder.html" style="display:inline-block;background:white;color:var(--purple);text-decoration:none;padding:0.85rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:800;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.2);">Build My Package →</a>
+        </div>
+      </div>
+    </div>
+
     <!-- ═══════════ WHY ZOEK TAB ═══════════ -->
     <div class="tab-content" id="tab-whyzoek">
       <div class="why-hero">
@@ -1335,6 +1712,9 @@ const MODULES = [
   { id:'localseo',   name:'Local SEO',     icon:'📍' },
   { id:'ppc',        name:'How PPC Works', icon:'⚡' },
   { id:'geo',        name:'AI & GEO',      icon:'🤖' },
+  { id:'checklist',  name:'Self-Audit',    icon:'✅' },
+  { id:'budget',     name:'Budget Check',  icon:'💰' },
+  { id:'diy',        name:'DIY vs Zoek',   icon:'⚖️' },
   { id:'whyzoek',    name:'Why Zoek',      icon:'🏆' },
 ];
 let visitedModules = new Set(['funnel']);
@@ -1445,12 +1825,180 @@ function updatePPCCalc() {
   document.getElementById('ppc-insight').innerHTML = `<strong>Insight:</strong> ${insight}`;
 }
 
+// ─── SELF-AUDIT CHECKLIST ────────────────────
+const AUDIT_CATS = [
+  { id:'website', icon:'🌐', name:'Website', items:[
+    { label:'My website loads in under 3 seconds on mobile', why:'53% of mobile users leave if a page takes more than 3 seconds. Page speed is also a Google ranking factor.' },
+    { label:'My website clearly shows what I do and where I serve', why:'If a visitor can\'t figure out what you do within 5 seconds, <strong>they leave and call a competitor.</strong>' },
+    { label:'My website has a clear call-to-action on every page', why:'Without a clear next step, most visitors browse and leave. A phone number or "Book Now" button doubles conversion rates.' },
+    { label:'My website has been updated in the last 6 months', why:'Outdated websites signal to Google and customers that the business may not be active or trustworthy.' },
+  ]},
+  { id:'seo', icon:'🔍', name:'Local SEO', items:[
+    { label:'My Google Business Profile is fully filled out (photos, hours, description)', why:'Businesses with complete GBPs get <strong>7× more clicks</strong> than incomplete ones. Most are less than 40% complete.' },
+    { label:'I show up in the top 3 Google results when I search my service + city', why:'The top 3 local results capture 75% of all clicks. Below that, almost nobody finds you.' },
+    { label:'My business name, address, and phone are identical everywhere online', why:'Inconsistent NAP data confuses Google and drops your local rankings — even one wrong digit counts.' },
+    { label:'I\'m listed in at least 50 online directories (Yelp, YP, Apple Maps, etc.)', why:'Citations are one of the top local ranking signals. Most competitors have 100+ correct listings.' },
+  ]},
+  { id:'reviews', icon:'⭐', name:'Reviews & Reputation', items:[
+    { label:'I have at least 20 Google reviews', why:'Businesses with fewer than 10 reviews are skipped by 80% of searchers. 20+ is the minimum to be credible.' },
+    { label:'My average rating is 4.2 stars or higher', why:'4.0–4.2 is the minimum viable rating. Below 4.0, <strong>most customers won\'t even call.</strong>' },
+    { label:'I respond to every review — good and bad', why:'Responding to reviews improves your Google ranking AND shows prospects you care. 89% of consumers read business responses.' },
+    { label:'I get at least 2–3 new reviews per month consistently', why:'Recency matters. A business with 50 old reviews loses to one with 20 recent ones. Google weights freshness heavily.' },
+  ]},
+  { id:'ads', icon:'⚡', name:'Paid Advertising', items:[
+    { label:'I know exactly how many leads came from my ads last month', why:'If you can\'t track leads to source, you\'re flying blind. <strong>You can\'t optimize what you don\'t measure.</strong>' },
+    { label:'My ads send people to a dedicated landing page, not my homepage', why:'Dedicated landing pages convert at 3–5× the rate of homepages. Most small business ads waste 60–70% of their budget on this.' },
+    { label:'I know my cost per lead and it\'s profitable', why:'You need to know: CPL × close rate = cost per client. If that number is less than what a client is worth, scale the ads.' },
+  ]},
+  { id:'social', icon:'📱', name:'Social Media', items:[
+    { label:'I post on Facebook or Instagram at least 3× per week', why:'Businesses posting 3–5× per week get 3× more engagement than those posting less. Consistency beats quality alone.' },
+    { label:'My social posts include original content (not just shares)', why:'Original content builds trust and brand recognition. Shared posts get 80% less reach on average.' },
+    { label:'I have a process for responding to comments and DMs within 24 hours', why:'78% of customers expect a response within 24 hours. Fast response signals you\'re active and trustworthy.' },
+  ]},
+];
+
+let auditAnswers = {};
+
+function buildAuditChecklist() {
+  const container = document.getElementById('audit-categories');
+  if (!container) return;
+  container.innerHTML = AUDIT_CATS.map(cat => `
+    <div class="audit-cat" id="acat-${cat.id}">
+      <div class="audit-cat-head" onclick="toggleAuditCat('${cat.id}')">
+        <div class="audit-cat-left">
+          <span class="audit-cat-icon">${cat.icon}</span>
+          <span class="audit-cat-name">${cat.name}</span>
+        </div>
+        <span class="audit-cat-score audit-score-na" id="ascore-${cat.id}">0 / ${cat.items.length}</span>
+      </div>
+      <div class="audit-items">
+        ${cat.items.map((item, i) => `
+          <div class="audit-item">
+            <div class="audit-item-check">
+              <button class="audit-check-btn ck-yes" id="ayes-${cat.id}-${i}" onclick="setAudit('${cat.id}',${i},true)">Yes</button>
+              <button class="audit-check-btn ck-no"  id="ano-${cat.id}-${i}"  onclick="setAudit('${cat.id}',${i},false)">No</button>
+            </div>
+            <div class="audit-item-text">
+              <div class="audit-item-label">${item.label}</div>
+              <div class="audit-item-why">${item.why}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+  // Open first category
+  document.getElementById('acat-website').classList.add('open');
+}
+
+function toggleAuditCat(id) {
+  document.getElementById('acat-' + id).classList.toggle('open');
+}
+
+function setAudit(cat, idx, val) {
+  const key = `${cat}-${idx}`;
+  auditAnswers[key] = val;
+  const yesBtn = document.getElementById(`ayes-${cat}-${idx}`);
+  const noBtn  = document.getElementById(`ano-${cat}-${idx}`);
+  yesBtn.classList.toggle('active', val === true);
+  noBtn.classList.toggle('active',  val === false);
+  updateAuditScore();
+}
+
+function updateAuditScore() {
+  let totalYes = 0, totalQ = 0;
+  const gaps = [];
+
+  AUDIT_CATS.forEach(cat => {
+    let catYes = 0;
+    cat.items.forEach((item, i) => {
+      const key = `${cat.id}-${i}`;
+      totalQ++;
+      if (auditAnswers[key] === true)  { catYes++; totalYes++; }
+      if (auditAnswers[key] === false) { gaps.push({ cat: cat.name, label: item.label }); }
+    });
+
+    const answered = cat.items.filter((_,i) => auditAnswers[`${cat.id}-${i}`] !== undefined).length;
+    const scoreEl = document.getElementById(`ascore-${cat.id}`);
+    scoreEl.textContent = `${catYes} / ${cat.items.length}`;
+    const pct = answered > 0 ? catYes / cat.items.length : -1;
+    scoreEl.className = 'audit-cat-score ' + (answered === 0 ? 'audit-score-na' : pct >= 0.75 ? 'audit-score-good' : pct >= 0.5 ? 'audit-score-med' : 'audit-score-bad');
+  });
+
+  const answered = Object.keys(auditAnswers).length;
+  const score    = totalYes;
+  const pct      = answered > 0 ? score / Math.min(answered, 20) : 0;
+
+  document.getElementById('atc-score-num').textContent = score;
+  document.getElementById('atc-bar').style.width = `${(score/20)*100}%`;
+  document.getElementById('atc-bar').style.background = score >= 16 ? 'var(--green)' : score >= 10 ? 'var(--yellow)' : 'var(--gradient)';
+
+  const grade = document.getElementById('atc-grade');
+  if (answered === 0) {
+    grade.textContent = 'Not started'; grade.className = 'atc-grade audit-score-na';
+  } else if (score >= 17) {
+    grade.textContent = '🏆 Strong'; grade.className = 'atc-grade audit-score-good';
+  } else if (score >= 12) {
+    grade.textContent = '⚠ Room to grow'; grade.className = 'atc-grade audit-score-med';
+  } else {
+    grade.textContent = '🚨 Needs work'; grade.className = 'atc-grade audit-score-bad';
+  }
+
+  const gapsEl = document.getElementById('atc-gaps');
+  if (gaps.length === 0 && answered === 0) {
+    gapsEl.innerHTML = '<div style="font-size:0.8rem;color:var(--muted);">Answer questions to see your gaps.</div>';
+  } else if (gaps.length === 0) {
+    gapsEl.innerHTML = '<div style="font-size:0.82rem;color:var(--green);font-weight:600;">✓ No gaps found yet — keep going!</div>';
+  } else {
+    gapsEl.innerHTML = `<div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Your gaps (${gaps.length})</div>` +
+      gaps.slice(0,5).map(g => `<div class="atc-gap-item">⚠ <span><strong>${g.cat}:</strong> ${g.label}</span></div>`).join('') +
+      (gaps.length > 5 ? `<div style="font-size:0.72rem;color:var(--muted);padding:0.25rem 0.5rem;">+${gaps.length-5} more gaps below</div>` : '');
+  }
+}
+
+// ─── BUDGET ALLOCATION SLIDER ─────────────────
+function updateBudgetAlloc() {
+  const budget = parseInt(document.getElementById('bs-budget').value);
+  document.getElementById('bs-budget-val').textContent = '$' + budget.toLocaleString();
+
+  // Allocation percentages by budget tier
+  let allocs;
+  if      (budget < 750)  allocs = [{ label:'Website / Hosting', pct:0.35, color:'#692C8E' }, { label:'Local SEO', pct:0.40, color:'#1EBFDC' }, { label:'Reputation Mgmt', pct:0.25, color:'#4fffb0' }];
+  else if (budget < 2000) allocs = [{ label:'Website / Hosting', pct:0.20, color:'#692C8E' }, { label:'Local SEO', pct:0.40, color:'#1EBFDC' }, { label:'Paid Ads', pct:0.25, color:'#ED0875' }, { label:'Social Media', pct:0.15, color:'#FAA31C' }];
+  else if (budget < 5000) allocs = [{ label:'Website / Hosting', pct:0.15, color:'#692C8E' }, { label:'Local SEO', pct:0.30, color:'#1EBFDC' }, { label:'Paid Ads', pct:0.35, color:'#ED0875' }, { label:'Social Media', pct:0.12, color:'#FAA31C' }, { label:'Reputation', pct:0.08, color:'#4fffb0' }];
+  else                    allocs = [{ label:'Website / Hosting', pct:0.10, color:'#692C8E' }, { label:'Local SEO', pct:0.25, color:'#1EBFDC' }, { label:'Paid Ads', pct:0.40, color:'#ED0875' }, { label:'Social Media', pct:0.15, color:'#FAA31C' }, { label:'Reputation', pct:0.05, color:'#4fffb0' }, { label:'Branding', pct:0.05, color:'#ff5c7c' }];
+
+  const maxVal = Math.max(...allocs.map(a => a.pct));
+  document.getElementById('bs-alloc-list').innerHTML = allocs.map(a => `
+    <div class="bs-alloc-item">
+      <div class="bs-alloc-label">${a.label}</div>
+      <div class="bs-alloc-bar-wrap"><div class="bs-alloc-bar" style="width:${(a.pct/maxVal)*100}%;background:${a.color};"></div></div>
+      <div class="bs-alloc-val" style="color:${a.color}">$${Math.round(budget*a.pct).toLocaleString()}</div>
+    </div>`).join('');
+}
+
+// ─── DIY CALCULATOR ───────────────────────────
+function updateDIYCalc() {
+  const rate = parseInt(document.getElementById('diy-rate').value);
+  document.getElementById('diy-rate-val').textContent = '$' + rate + '/hr';
+  const hrs = [2, 5, 4, 2, 4, 3];
+  const ids = ['diy-c1','diy-c2','diy-c3','diy-c4','diy-c5','diy-c6'];
+  let total = 0;
+  hrs.forEach((h, i) => {
+    const cost = h * rate;
+    total += cost;
+    document.getElementById(ids[i]).textContent = '$' + cost.toLocaleString();
+  });
+  document.getElementById('diy-total').textContent = '$' + total.toLocaleString();
+}
+
 // ─── INIT ─────────────────────────────────────
 buildDict();
 renderPlatforms();
 updatePPCCalc();
 buildProgressBar();
 updateProgressBar('funnel');
+buildAuditChecklist();
+updateBudgetAlloc();
+updateDIYCalc();
 
 </script>
 </body>
