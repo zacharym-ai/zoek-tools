@@ -88,6 +88,7 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .grade-C{background:rgba(255,209,102,0.12);color:var(--yellow);}
 .grade-D{background:rgba(255,92,124,0.1);color:#ff8fa3;}
 .grade-F{background:rgba(255,92,124,0.15);color:var(--red);}
+.grade-Q{background:rgba(160,160,192,0.12);color:var(--muted);}
 .grade-eyebrow{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
 .grade-headline{font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:800;line-height:1.2;margin-bottom:0.5rem;}
 .grade-sub{font-size:0.85rem;color:var(--muted);line-height:1.65;}
@@ -175,7 +176,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <a href="index.html" class="nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
   <ul class="nav-links">
     <li><a href="index.html" id="nl-home">Home</a></li>
-    <li><a href="learn.html" id="nl-academy">Academy</a></li>
+    <li><a href="results.html" id="nl-results">Results</a></li>
     <li class="nav-dropdown">
       <button class="nav-drop-btn" onclick="toggleNav(this)" id="nl-tools-btn" style="color:var(--white)">Tools <span class="nav-chevron">&#9660;</span></button>
       <div class="nav-drop-menu" id="nl-tools-menu">
@@ -190,9 +191,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           <a href="package-builder.html">Package Builder</a>
         </div>
         <div class="ndm-col">
-          <div class="ndm-label">Audits &amp; Scanners</div>
+          <div class="ndm-label">Audits &amp; Quizzes</div>
           <a href="business-snapshot.html">Business Snapshot ✨</a>
-          <a href="local-market-scanner.html" style="font-weight:700;color:var(--white)">Local Market Scanner 🗺️</a>
           <a href="marketing-wheel.html">Marketing Wheel</a>
           <a href="website-quiz.html">Website Quiz</a>
           <a href="positioning.html">Positioning Worksheet</a>
@@ -323,7 +323,32 @@ function updateBenchHints(){
   rb.textContent=`${ind.label}: ${ind.retention[0]}–${ind.retention[1]}%`;
   rb.className='bench-hint '+(rv>=ind.retention[1]?'good':rv>=ind.retention[0]?'ok':'bad');
 }
-function getGrade(roi,ind){if(roi>=ind.roiGood*1.5)return{letter:'A',label:'Crushing it'};if(roi>=ind.roiGood)return{letter:'B',label:'Solid work'};if(roi>=ind.roiOk)return{letter:'C',label:'Room to grow'};if(roi>=1)return{letter:'D',label:'Barely breaking even'};return{letter:'F',label:'Losing money'};}
+function getGrade(roi, ind, spend, revenue, newClients, acv) {
+  // ── Sanity checks first ──────────────────────────────────────────
+  // 1. Spend is suspiciously tiny relative to revenue (e.g. $1 spend on $50k revenue)
+  const spendPctOfRevenue = revenue > 0 ? (spend / revenue) * 100 : 0;
+  const minReasonableSpendPct = ind.budgetPct[0] * 0.15; // at least 15% of the industry's LOW end
+  // 2. Revenue per client makes no sense (e.g. $1 ACV)
+  const acvTooLow = acv < 10;
+  // 3. Implausibly high ROI — over 50× is almost certainly bad inputs
+  const roiUnrealistic = roi > 50;
+  // 4. Zero or near-zero spend
+  const spendTooLow = spend < 10;
+  // 5. More new clients than could realistically be attributed to the spend
+  //    (e.g. 1000 clients from $5 spend)
+  const cacTooLow = newClients > 0 && (spend / newClients) < 1;
+
+  if (spendTooLow || acvTooLow || roiUnrealistic || cacTooLow ||
+      (spendPctOfRevenue < minReasonableSpendPct && revenue > 1000)) {
+    return { letter:'?', label:'Check your inputs', sanityFail: true };
+  }
+  // ── Normal grading ───────────────────────────────────────────────
+  if (roi >= ind.roiGood * 1.5) return { letter:'A', label:'Crushing it' };
+  if (roi >= ind.roiGood)       return { letter:'B', label:'Solid work' };
+  if (roi >= ind.roiOk)         return { letter:'C', label:'Room to grow' };
+  if (roi >= 1)                 return { letter:'D', label:'Barely breaking even' };
+  return { letter:'F', label:'Losing money' };
+}
 function getVerdict(g,roi,spend,rLow,rHigh,revenue,cac,acv,closeRate,ind){
   const over=spend>rHigh,under=spend<rLow;
   const v={
@@ -354,8 +379,7 @@ function recalc(){
   const rHigh=revenue*(ind.budgetPct[1]/100);
   const ltv=acv*(1+(retention/100));
   const ltvCac=cac>0?ltv/cac:0;
-  const grade=getGrade(roi,ind);
-  const verdict=getVerdict(grade,roi,spend,rLow,rHigh,revenue,cac,acv,closeRate,ind);
+  const grade=getGrade(roi, ind, spend, revenue, newClients, acv);
   const spendStatus=spend<rLow?'underspending':spend>rHigh?'overspending':'on target';
   const spendDiff=spend<rLow?rLow-spend:spend-rHigh;
   const steps=[];
@@ -372,9 +396,15 @@ function recalc(){
     {metric:'Retention',yours:retention+'%',industry:`${ind.retention[0]}–${ind.retention[1]}%`,status:retention>=ind.retention[1]?'good':retention>=ind.retention[0]?'ok':'bad',statusLabel:retention>=ind.retention[1]?'Above avg':retention>=ind.retention[0]?'Average':'Below avg'},
     {metric:'Cost per client',yours:'$'+Math.round(cac).toLocaleString(),industry:`$${ind.cac[0]}–$${ind.cac[1]}`,status:cac<=ind.cac[0]?'good':cac<=ind.cac[1]?'ok':'bad',statusLabel:cac<=ind.cac[0]?'Great':cac<=ind.cac[1]?'Average':'High'},
   ];
+  // Handle sanity fail — show warning instead of grade
+  const gradeClass = grade.letter === '?' ? 'Q' : grade.letter;
+  const verdict = grade.sanityFail
+    ? `<strong>These numbers don't quite add up.</strong> Double-check your inputs — something looks off. Common issues: marketing spend is much lower than typical for your revenue level, cost-per-client is under $1, or ACV is very low. The goal is to enter your real monthly numbers so the grade reflects your actual situation.`
+    : getVerdict(grade, roi, spend, rLow, rHigh, revenue, cac, acv, closeRate, ind);
+
   panel.innerHTML=`
-    <div class="grade-hero"><div class="grade-bg">${grade.letter}</div><div class="grade-letter grade-${grade.letter}">${grade.letter}</div><div class="grade-right"><div class="grade-eyebrow">Your marketing ROI grade</div><div class="grade-headline">${grade.label}. ${roi.toFixed(1)}x return on your marketing spend.</div><div class="grade-sub">For every <strong>$1</strong> spent on marketing you're getting back <strong>$${(revFromMkt/spend).toFixed(2)}</strong> in client revenue.${ind.label!=='General'?` The ${ind.label} benchmark is ${ind.roiOk}x–${ind.roiGood}x.`:''}</div></div></div>
-    <div class="verdict ${grade.letter}">${verdict}</div>
+    <div class="grade-hero"><div class="grade-bg">${grade.letter}</div><div class="grade-letter grade-${gradeClass}">${grade.letter}</div><div class="grade-right"><div class="grade-eyebrow">Your marketing ROI grade</div><div class="grade-headline">${grade.label}. ${grade.sanityFail ? 'Please review your inputs.' : roi.toFixed(1)+'x return on your marketing spend.'}</div><div class="grade-sub">${grade.sanityFail ? 'Enter your real monthly numbers to get an accurate grade.' : `For every <strong>$1</strong> spent on marketing you're getting back <strong>$${(revFromMkt/spend).toFixed(2)}</strong> in client revenue.${ind.label!=='General'?` The ${ind.label} benchmark is ${ind.roiOk}x–${ind.roiGood}x.`:''}`}</div></div></div>
+    <div class="verdict ${gradeClass}">${verdict}</div>
     <div class="metrics-grid">
       <div class="metric-box"><div class="metric-label">Marketing ROI</div><div class="metric-val ${roi>=ind.roiGood?'good':roi>=ind.roiOk?'warn':'bad'}">${roi.toFixed(1)}x</div><div class="metric-sub">Revenue per dollar spent</div></div>
       <div class="metric-box"><div class="metric-label">Cost per new client</div><div class="metric-val ${cac<=ind.cac[0]?'good':cac<=ind.cac[1]?'warn':'bad'}">$${Math.round(cac).toLocaleString()}</div><div class="metric-sub">${ind.label} range: $${ind.cac[0]}–$${ind.cac[1]}</div></div>
