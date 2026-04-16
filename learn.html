@@ -366,12 +366,58 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   .why-stats{grid-template-columns:1fr 1fr;}
   .funnel-tier-info{display:none;}
 }
+/* ── UX: PROGRESS + NAVIGATION ─────────────── */
+.module-progress{padding:0.75rem 1rem;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.1);display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;}
+.mp-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.mp-steps{display:flex;align-items:center;gap:0.25rem;flex:1;flex-wrap:wrap;}
+.mp-step{display:flex;align-items:center;gap:0.25rem;cursor:pointer;}
+.mp-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--border);background:transparent;transition:all 0.2s;flex-shrink:0;}
+.mp-step.done .mp-dot{background:rgba(105,44,142,0.4);border-color:rgba(105,44,142,0.4);}
+.mp-step.active .mp-dot{background:var(--gradient);border-color:transparent;width:10px;height:10px;box-shadow:0 0 6px rgba(237,8,117,0.5);}
+.mp-step-name{font-size:0.65rem;font-weight:600;color:var(--muted);transition:color 0.2s;white-space:nowrap;}
+.mp-step.active .mp-step-name{color:var(--white);}
+.mp-step.done .mp-step-name{color:rgba(160,160,192,0.6);}
+.mp-connector{width:16px;height:1px;background:var(--border);flex-shrink:0;}
+.mp-step.done .mp-connector{background:rgba(105,44,142,0.3);}
+
+.next-module-bar{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.08);}
+.next-module-btn{display:flex;align-items:center;gap:0.75rem;padding:0.85rem 1.5rem;background:var(--gradient);border:none;border-radius:8px;color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 16px rgba(105,44,142,0.35);}
+.next-module-btn:hover{box-shadow:0 6px 24px rgba(105,44,142,0.55);transform:translateY(-1px);}
+.next-module-btn .nxt-icon{font-size:1rem;}
+.next-module-meta{font-size:0.75rem;color:var(--muted);}
+.next-module-meta strong{color:var(--white);}
+.prev-module-btn{display:flex;align-items:center;gap:0.5rem;padding:0.75rem 1.1rem;background:transparent;border:1.5px solid var(--border);border-radius:6px;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.prev-module-btn:hover{border-color:rgba(105,44,142,0.4);color:var(--white);}
+
+/* ── UX: SECTION NUMBERS ────────────────────── */
+.sec-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gradient);font-family:'Poppins',sans-serif;font-size:0.7rem;font-weight:800;color:white;flex-shrink:0;margin-right:0.5rem;}
+
+/* ── UX: PLATFORM TIERS ─────────────────────── */
+.platform-filters{display:flex;gap:0.4rem;padding:0.85rem 1.25rem;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.08);flex-wrap:wrap;align-items:center;}
+.platform-filter-label{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-right:0.25rem;}
+.plat-filter-btn{padding:0.25rem 0.65rem;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.7rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all 0.15s;}
+.plat-filter-btn:hover{border-color:var(--purple);color:var(--white);}
+.plat-filter-btn.active{background:rgba(105,44,142,0.2);border-color:var(--purple);color:var(--white);}
+.plat-tier-badge{font-size:0.6rem;font-weight:700;padding:0.1rem 0.45rem;border-radius:3px;margin-left:0.4rem;text-transform:uppercase;letter-spacing:0.05em;}
+.tier-smb{background:rgba(79,255,176,0.12);color:var(--green);}
+.tier-mid{background:rgba(30,191,220,0.12);color:var(--blue);}
+.tier-enterprise{background:rgba(250,163,28,0.1);color:var(--yellow);}
+.tier-creator{background:rgba(105,44,142,0.2);color:rgba(200,160,255,0.9);}
+.platform-row.hidden{display:none;}
+
+/* ── UX: DICTIONARY IMPROVEMENTS ───────────── */
+.dict-cat-count-badge{font-size:0.65rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px;background:rgba(105,44,142,0.2);color:rgba(200,160,255,0.9);border:1px solid rgba(105,44,142,0.3);}
+.dict-search-hint{font-size:0.68rem;color:var(--muted);padding:0.5rem 2rem;border-bottom:1px solid var(--border-light);}
+.dict-search-hint span{color:var(--purple);cursor:pointer;font-weight:600;}
+.dict-search-hint span:hover{color:var(--pink);}
+@media(max-width:600px){.next-module-bar{flex-direction:column;gap:1rem;padding:1.5rem;}.mp-steps{display:none;}}
 @media(max-width:600px){
   .hero-left{padding:2.5rem 1.5rem;}
   .sec-header,.em-section,.stage-detail,.ppc-slider-section{padding:2rem 1.5rem;}
   .platform-row{grid-template-columns:1fr 1fr;gap:0.75rem;}
   .ppc-flow{padding:1.5rem;}
 }
+
 </style>
 </head>
 <body>
@@ -511,6 +557,12 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <!-- CONTENT -->
   <div class="content-area">
 
+    <!-- PROGRESS BAR — sticky across all tabs -->
+    <div class="module-progress" id="module-progress">
+      <span class="mp-label">Your progress</span>
+      <div class="mp-steps" id="mp-steps"></div>
+    </div>
+
     <!-- ═══════════ FUNNEL TAB ═══════════ -->
     <div class="tab-content active" id="tab-funnel">
       <div class="sec-header">
@@ -639,6 +691,16 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
         </div>
         <div class="dict-filter-pills" id="dict-pills"></div>
       </div>
+      <div class="dict-search-hint">
+        Quick searches: 
+        <span onclick="quickSearch('pixel')">Pixel</span> · 
+        <span onclick="quickSearch('call tracking')">Call Tracking</span> · 
+        <span onclick="quickSearch('remarketing')">Remarketing</span> · 
+        <span onclick="quickSearch('channel')">Channel</span> · 
+        <span onclick="quickSearch('CAC')">CAC</span> · 
+        <span onclick="quickSearch('LTV')">LTV</span> · 
+        <span onclick="quickSearch('attribution')">Attribution</span>
+      </div>
       <div class="dict-results-count" id="dict-results-count">
         Showing <span id="dict-results-num">0</span> results for "<span id="dict-results-query"></span>"
         <button onclick="clearDictSearch()" style="background:none;border:none;color:var(--purple);font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-left:0.5rem">Clear</button>
@@ -720,6 +782,14 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       <div class="em-section">
         <div class="sec-divider">Platform comparison — which one is right for you</div>
         <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+          <div class="platform-filters">
+            <span class="platform-filter-label">Filter by:</span>
+            <button class="plat-filter-btn active" onclick="filterPlatforms('all',this)">All platforms</button>
+            <button class="plat-filter-btn" onclick="filterPlatforms('smb',this)">Small Business</button>
+            <button class="plat-filter-btn" onclick="filterPlatforms('mid',this)">Mid-Market</button>
+            <button class="plat-filter-btn" onclick="filterPlatforms('enterprise',this)">Enterprise</button>
+            <button class="plat-filter-btn" onclick="filterPlatforms('creator',this)">Creators</button>
+          </div>
           <div id="platform-list"></div>
         </div>
       </div>
@@ -984,26 +1054,6 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <script src="cta.js"></script>
 <script>
 
-// ─── TAB SWITCHING ──────────────────────────
-function switchTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  if (btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  } else {
-    // called from hero — find matching btn
-    document.querySelectorAll('.tab-btn').forEach(b => {
-      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) {
-        document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
-        b.classList.add('active');
-      }
-    });
-    // scroll to content
-    document.querySelector('.academy-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
 // ─── NAV ────────────────────────────────────
 function toggleNav(btn) {
   btn.classList.toggle('open');
@@ -1094,9 +1144,16 @@ const DICT_TERMS = [
   { cat:'funnel', name:'Conversion', plain:'When someone takes the action you wanted them to take. Filling out a form, booking an appointment, making a purchase, signing a contract.', example:'Out of 100 people who land on your website, 4 fill out your contact form. You have a 4% conversion rate. The goal of most marketing is to increase this number.' },
   { cat:'funnel', name:'Lead Magnet', plain:'Something free you offer in exchange for someone\'s contact information. You give them value upfront and they give you permission to follow up.', example:'A chiropractor offers a free "5 exercises to fix lower back pain" PDF. You download it and give your email. Now they have your contact and can follow up.' },
   { cat:'funnel', name:'Retargeting', plain:'Showing ads to people who have already visited your website or engaged with your content. They\'re warmer than strangers.', example:'Someone visited your plumbing website but didn\'t call. Now they see your ad on Facebook: "Still need a plumber? Book now — same day available." That\'s retargeting.' },
+  { cat:'funnel', name:'Remarketing', plain:'Often used interchangeably with retargeting, but technically broader — remarketing includes re-engaging past customers through email, SMS, or ads. Retargeting is usually just ads. Remarketing is the full strategy of winning back people who have already shown interest or bought from you.', example:'A dental office sends a text to patients who haven\'t booked in 12 months: "It\'s been a while — your next cleaning is on us if you book this month." That\'s remarketing.' },
   { cat:'funnel', name:'Sales Funnel', plain:'The journey a prospect takes from first hearing about you to becoming a paying customer. Called a funnel because most people drop out at each stage.', example:'1,000 people see your ad. 100 click it. 20 fill out the form. 8 book a call. 3 become clients. That\'s your funnel. The goal is to improve each step.' },
   { cat:'analytics', name:'Bounce Rate', plain:'The percentage of people who visit one page of your website and leave without clicking anything else. High bounce rate usually means the page didn\'t match what they expected.', example:'Your homepage has a 78% bounce rate. That means 78% of visitors leave immediately. Could be slow load time, wrong audience, or the page just isn\'t convincing.' },
   { cat:'analytics', name:'Session', plain:'One continuous visit to your website. A session ends after 30 minutes of inactivity or when someone leaves. One person can have multiple sessions.', example:'You visit a website, browse for 10 minutes, close the tab. That\'s one session. You come back tomorrow — that\'s a second session, even though you\'re the same person.' },
+  { cat:'analytics', name:'New Users vs. Returning Users', plain:'New users are visiting your site for the first time. Returning users have been before. The ratio tells you a lot — a site with 90% new users has an awareness problem or a loyalty problem. A site with 90% returning users may not be reaching enough new people.', example:'Your blog gets 80% new users — Google is sending people to your content but they\'re not coming back. The fix: better CTAs, email capture, and retargeting to turn one-time readers into repeat visitors.' },
+  { cat:'analytics', name:'Channel', plain:'Where your website traffic comes from. Google Analytics breaks this into buckets: Organic Search (people found you on Google), Paid Search (your ads), Social (Facebook, Instagram, etc.), Direct (typed your URL), Referral (another website linked to you), and Email (clicked a link in your email).', example:'Your traffic report shows 60% Organic, 25% Paid, 10% Direct, 5% Social. That tells you Google SEO is your biggest driver — and if that ever dropped, you\'d lose most of your traffic overnight.' },
+  { cat:'analytics', name:'Pageviews', plain:'The total number of times a page on your website was loaded. One person visiting three pages counts as three pageviews. Useful for seeing which content gets the most attention.', example:'Your "Services" page has 4,200 pageviews this month but your contact form only has 180. Something is stopping people from taking the next step — that gap is worth investigating.' },
+  { cat:'analytics', name:'Events', plain:'Specific actions people take on your website that you\'ve set up tracking for — things beyond just visiting a page. Button clicks, form fills, phone number clicks, video plays, scroll depth. Events tell you what people are actually doing, not just where they went.', example:'You set up an event for "phone number click." It fires 340 times in a month but only 80 people fill out your contact form. That means phone is your primary conversion channel and your form may not be necessary.' },
+  { cat:'analytics', name:'Pixel', plain:'A tiny piece of code (usually one line) you paste on your website that lets an ad platform — Facebook, Google, TikTok — track what visitors do after they see or click your ad. It\'s how platforms know if an ad led to a sale or form fill, and how retargeting audiences get built.', example:'You add the Meta Pixel to your website. Now Facebook knows when someone who saw your ad visits your site but doesn\'t book. You can retarget exactly those people with a follow-up ad — and Facebook\'s algorithm learns which users are more likely to convert.' },
+  { cat:'analytics', name:'Call Tracking', plain:'Technology that assigns unique phone numbers to different marketing channels so you can see which campaigns are actually generating phone calls. Solves the age-old problem of "I don\'t know which ad the caller came from."', example:'You give your Google Ads a different phone number than your Facebook ads. At the end of the month, the Google number got 47 calls and the Facebook number got 8. Now you know exactly which channel is driving phone leads — and what each call cost you.' },
   { cat:'analytics', name:'Impressions', plain:'How many times your ad, post, or content was shown. Not clicks. Not sales. Just eyeballs.', example:'Your Facebook ad had 10,000 impressions but only 50 clicks. That\'s a 0.5% CTR. The ad was shown a lot but wasn\'t compelling enough to get people to act.' },
   { cat:'analytics', name:'Attribution', plain:'Figuring out which marketing channel gets credit for a sale. Complicated because most customers touch multiple channels before buying.', example:'Someone saw your Facebook ad, then Googled you, then clicked your Google ad, then called you. Which channel gets credit? That\'s the attribution problem.' },
   { cat:'buzzwords', name:'Synergy', plain:'When two things work better together than they would separately. In marketing, usually used as filler to sound smart.', example:'"Our content marketing and SEO create synergies that amplify brand presence." Translation: "When we write good content, it also helps with Google rankings." Same thing, less words.' },
@@ -1194,6 +1251,13 @@ function clearDictSearch() {
   document.getElementById('dict-search').dispatchEvent(new Event('input'));
 }
 
+function quickSearch(term) {
+  const input = document.getElementById('dict-search');
+  input.value = term;
+  input.dispatchEvent(new Event('input'));
+  input.focus();
+}
+
 // ─── EMAIL ROI CALC ──────────────────────────
 function calcEmailROI() {
   const list  = parseFloat(document.getElementById('em-list').value)  || 0;
@@ -1217,23 +1281,132 @@ function calcEmailROI() {
 
 // ─── PLATFORM LIST ───────────────────────────
 const PLATFORMS = [
-  { name:'Mailchimp',     price:'Free to 500, then $13+/mo',   best:'Beginners just starting out', pros:['Easy to use interface','Strong template library','Good free tier for very small lists'], cons:['Gets expensive fast as list grows','Automation is basic on lower plans','Limited segmentation on free'] },
-  { name:'Klaviyo',       price:'Free to 250, then $20+/mo',   best:'Ecommerce businesses',        pros:['Best-in-class ecommerce integrations','Powerful segmentation and flows','Revenue tracking built in'], cons:['Overkill for service businesses','Higher learning curve','Pricing jumps fast'] },
-  { name:'ActiveCampaign',price:'From $15/mo',                 best:'Businesses that want automation',pros:['Best automation builder in the industry','Built-in CRM','Conditional logic and branching'], cons:['Steeper learning curve','Can feel overwhelming at first','Design tools less polished'] },
-  { name:'Beehiiv',       price:'Free to 2500, then $42/mo',   best:'Newsletter creators',          pros:['Built for newsletters','Clean subscriber analytics','Monetization tools built in'], cons:['Limited automation','Not ideal for service businesses','Less CRM functionality'] },
-  { name:'ConvertKit',    price:'Free to 1000, then $25+/mo',  best:'Creators and coaches',         pros:['Very clean interface','Good tagging and segmentation','Landing pages included'], cons:['Limited templates','Automation less visual','Ecommerce limited'] },
-  { name:'HubSpot',       price:'Free CRM, email from $18/mo', best:'Growing businesses',           pros:['Full CRM included','Excellent reporting','Scales to enterprise'], cons:['Free tier very limited','Gets expensive quickly','Overkill for small businesses'] },
-  { name:'MailerLite',    price:'Free to 1000, then $9+/mo',   best:'Budget-conscious starts',      pros:['Very affordable','Good automation for the price','Clean builder'], cons:['Smaller feature set','Deliverability can vary','Support slower on free plan'] },
+  { name:'Mailchimp',          price:'Free to 500, then $13+/mo',    best:'Beginners just starting out',       pros:['Easy to use interface','Strong template library','Good free tier for very small lists'],                                   cons:['Gets expensive fast as list grows','Automation is basic on lower plans','Limited segmentation on free'] },
+  { name:'Klaviyo',            price:'Free to 250, then $20+/mo',    best:'Ecommerce businesses',              pros:['Best-in-class ecommerce integrations','Powerful segmentation and flows','Revenue tracking built in'],                     cons:['Overkill for service businesses','Higher learning curve','Pricing jumps fast'] },
+  { name:'ActiveCampaign',     price:'From $15/mo',                  best:'Businesses that want automation',   pros:['Best automation builder in the industry','Built-in CRM','Conditional logic and branching'],                               cons:['Steeper learning curve','Can feel overwhelming at first','Design tools less polished'] },
+  { name:'HubSpot',            price:'Free CRM, email from $18/mo',  best:'Growing businesses',                pros:['Full CRM included','Excellent reporting','Scales to enterprise'],                                                         cons:['Free tier very limited','Gets expensive quickly','Overkill for small businesses'] },
+  { name:'Salesforce Marketing Cloud', price:'From $400/mo',         best:'Enterprise & large teams',          pros:['Most powerful platform available','Deep CRM integration with Salesforce','Advanced AI and journey builder'],               cons:['Very expensive','Complex setup requires dedicated admin','Overkill for most small businesses'] },
+  { name:'SharpSpring',        price:'From $449/mo',                 best:'Marketing agencies & SMBs',         pros:['Built-in CRM and automation','Strong agency features and white-labeling','Behavioral-based email triggers'],              cons:['Steep learning curve','Higher price point','Support can be slow'] },
+  { name:'Watson Campaign Automation', price:'Enterprise pricing',   best:'Large enterprises with IBM stack',  pros:['AI-powered personalization','Deep analytics and reporting','Integrates with IBM ecosystem'],                             cons:['Enterprise-only pricing','Requires technical resources to set up','Not suitable for small businesses'] },
+  { name:'Constant Contact',   price:'From $12/mo',                  best:'Traditional small businesses',      pros:['Simple and reliable','Good event marketing tools','Phone support included'],                                             cons:['Dated interface','Automation is basic','Less innovative than competitors'] },
+  { name:'Beehiiv',            price:'Free to 2500, then $42/mo',    best:'Newsletter creators',               pros:['Built for newsletters','Clean subscriber analytics','Monetization tools built in'],                                      cons:['Limited automation','Not ideal for service businesses','Less CRM functionality'] },
+  { name:'ConvertKit',         price:'Free to 1000, then $25+/mo',   best:'Creators and coaches',              pros:['Very clean interface','Good tagging and segmentation','Landing pages included'],                                         cons:['Limited templates','Automation less visual','Ecommerce limited'] },
+  { name:'MailerLite',         price:'Free to 1000, then $9+/mo',    best:'Budget-conscious starts',           pros:['Very affordable','Good automation for the price','Clean builder'],                                                       cons:['Smaller feature set','Deliverability can vary','Support slower on free plan'] },
 ];
 
+const PLATFORM_TIERS = {
+  'Mailchimp':'smb', 'Klaviyo':'smb', 'ActiveCampaign':'mid',
+  'HubSpot':'mid', 'Salesforce Marketing Cloud':'enterprise',
+  'SharpSpring':'mid', 'Watson Campaign Automation':'enterprise',
+  'Constant Contact':'smb', 'Beehiiv':'creator', 'ConvertKit':'creator', 'MailerLite':'smb'
+};
+const TIER_LABELS = { smb:'Small Business', mid:'Mid-Market', enterprise:'Enterprise', creator:'Creator' };
+const TIER_CLASS  = { smb:'tier-smb', mid:'tier-mid', enterprise:'tier-enterprise', creator:'tier-creator' };
+
 function renderPlatforms() {
-  document.getElementById('platform-list').innerHTML = PLATFORMS.map(p => `
-    <div class="platform-row">
-      <div><div class="plat-name">${p.name}</div><div class="plat-best">${p.best}</div></div>
+  document.getElementById('platform-list').innerHTML = PLATFORMS.map(p => {
+    const tier = PLATFORM_TIERS[p.name] || 'smb';
+    return `
+    <div class="platform-row" data-tier="${tier}">
+      <div>
+        <div class="plat-name">${p.name}<span class="plat-tier-badge ${TIER_CLASS[tier]}">${TIER_LABELS[tier]}</span></div>
+        <div class="plat-best">${p.best}</div>
+      </div>
       <div><div class="plat-col-label">Pros</div>${p.pros.map(x=>`<div class="plat-item pro">${x}</div>`).join('')}</div>
       <div><div class="plat-col-label">Cons</div>${p.cons.map(x=>`<div class="plat-item con">${x}</div>`).join('')}</div>
       <div><div class="plat-col-label">Pricing</div><div class="plat-price">${p.price}</div></div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+}
+
+function filterPlatforms(tier, btn) {
+  document.querySelectorAll('.plat-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.platform-row').forEach(row => {
+    row.classList.toggle('hidden', tier !== 'all' && row.dataset.tier !== tier);
+  });
+}
+
+// ─── MODULE PROGRESS + NEXT/PREV NAV ────────
+const MODULES = [
+  { id:'funnel',     name:'The Funnel',    icon:'↓' },
+  { id:'dictionary', name:'Dictionary',    icon:'📖' },
+  { id:'email101',   name:'Email 101',     icon:'✉' },
+  { id:'localseo',   name:'Local SEO',     icon:'📍' },
+  { id:'ppc',        name:'How PPC Works', icon:'⚡' },
+  { id:'geo',        name:'AI & GEO',      icon:'🤖' },
+  { id:'whyzoek',    name:'Why Zoek',      icon:'🏆' },
+];
+let visitedModules = new Set(['funnel']);
+let currentModuleIndex = 0;
+
+function buildProgressBar() {
+  document.getElementById('mp-steps').innerHTML = MODULES.map((m, i) => `
+    <div class="mp-step ${i === 0 ? 'active' : ''}" id="mp-step-${m.id}" onclick="switchTab('${m.id}', null)">
+      <div class="mp-dot"></div>
+      <span class="mp-step-name">${m.name}</span>
+    </div>
+    ${i < MODULES.length - 1 ? '<div class="mp-connector"></div>' : ''}
+  `).join('');
+}
+
+function updateProgressBar(id) {
+  visitedModules.add(id);
+  currentModuleIndex = MODULES.findIndex(m => m.id === id);
+  MODULES.forEach((m, i) => {
+    const step = document.getElementById('mp-step-' + m.id);
+    if (!step) return;
+    step.className = 'mp-step' +
+      (m.id === id ? ' active' : visitedModules.has(m.id) ? ' done' : '');
+  });
+  renderNextPrev(id);
+}
+
+function renderNextPrev(id) {
+  const idx  = MODULES.findIndex(m => m.id === id);
+  const prev = idx > 0 ? MODULES[idx - 1] : null;
+  const next = idx < MODULES.length - 1 ? MODULES[idx + 1] : null;
+
+  // Remove existing next/prev bars
+  document.querySelectorAll('.next-module-bar').forEach(el => el.remove());
+
+  const bar = document.createElement('div');
+  bar.className = 'next-module-bar';
+  bar.innerHTML = `
+    <div>
+      ${prev ? `<button class="prev-module-btn" onclick="switchTab('${prev.id}',null)">← ${prev.name}</button>` : '<span></span>'}
+    </div>
+    <div class="next-module-meta" style="text-align:center;display:${next ? 'block' : 'none'}">
+      Up next: <strong>${next ? next.name : ''}</strong>
+    </div>
+    <div>
+      ${next
+        ? `<button class="next-module-btn" onclick="switchTab('${next.id}',null)"><span class="nxt-icon">${next.icon}</span> ${next.name} →</button>`
+        : `<a href="https://calendly.com/expert-sales" target="_blank" class="next-module-btn" style="text-decoration:none">🏆 Book a Free Strategy Call</a>`
+      }
+    </div>
+  `;
+  document.getElementById('tab-' + id).appendChild(bar);
+}
+
+// ─── PATCH switchTab to update progress ─────
+const _origSwitchTab = switchTab;
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  } else {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) {
+        document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+      }
+    });
+    document.querySelector('.academy-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  updateProgressBar(id);
 }
 
 // ─── PPC SLIDER CALC ─────────────────────────
@@ -1276,6 +1449,8 @@ function updatePPCCalc() {
 buildDict();
 renderPlatforms();
 updatePPCCalc();
+buildProgressBar();
+updateProgressBar('funnel');
 
 </script>
 </body>
