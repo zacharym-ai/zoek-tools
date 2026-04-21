@@ -309,6 +309,104 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 
 <!-- Google Places API -->
 <script>
+let placesService       = null;
+let autocompleteService = null;
+let selectedPlace       = null;
+let bizData             = {};
+let searchTimeout;
+
+// ── onSearch defined here so it's available the moment the input is enabled ──
+function onSearch(val) {
+  clearTimeout(searchTimeout);
+  document.getElementById('run-btn').disabled = true;
+  if (val.length < 2) { closeAutocomplete(); return; }
+  searchTimeout = setTimeout(async () => {
+    try {
+      const { AutocompleteSuggestion } = await google.maps.importLibrary('places');
+      const { suggestions } = await AutocompleteSuggestion.fetchAutocompleteSuggestions({
+        input: val,
+        includedPrimaryTypes: ['establishment'],
+      });
+      if (!suggestions || suggestions.length === 0) { closeAutocomplete(); return; }
+      showAutocomplete(suggestions.slice(0, 6));
+    } catch(e) {
+      console.warn('Autocomplete error:', e);
+      closeAutocomplete();
+    }
+  }, 300);
+}
+
+function showAutocomplete(suggestions) {
+  const list = document.getElementById('autocomplete-list');
+  list.innerHTML = suggestions.map(s => {
+    const place = s.placePrediction;
+    const main  = place.mainText?.text  || place.text?.text || '';
+    const full  = place.text?.text || '';
+    const id    = place.placeId || '';
+    return `<div class="sb-option" onclick="selectPlace('${id}','${escHtml(main)}','${escHtml(full)}')">
+      <div class="sb-opt-name">${main}</div>
+      <div class="sb-opt-addr">${full}</div>
+    </div>`;
+  }).join('');
+  list.classList.add('open');
+}
+
+function closeAutocomplete() {
+  document.getElementById('autocomplete-list').classList.remove('open');
+}
+
+async function selectPlace(placeId, name, desc) {
+  document.getElementById('biz-search').value = name;
+  document.getElementById('f-name').value = name;
+  closeAutocomplete();
+
+  try {
+    const { Place } = await google.maps.importLibrary('places');
+    const place = new Place({
+      id: placeId,
+      requestedLanguage: 'en',
+    });
+    await place.fetchFields({
+      fields: ['displayName','formattedAddress','nationalPhoneNumber','websiteURI',
+               'rating','userRatingCount','regularOpeningHours','types','photos','googleMapsURI','reviews'],
+    });
+
+    // Map new API fields to old shape so rest of codebase works unchanged
+    selectedPlace = {
+      name:                    place.displayName,
+      formatted_address:       place.formattedAddress,
+      formatted_phone_number:  place.nationalPhoneNumber,
+      website:                 place.websiteURI,
+      rating:                  place.rating,
+      user_ratings_total:      place.userRatingCount,
+      opening_hours:           place.regularOpeningHours ? { open_now: true } : null,
+      types:                   place.types || [],
+      url:                     place.googleMapsURI,
+      reviews:                 (place.reviews || []).map(r => ({
+        rating:            r.rating,
+        text:              r.text?.text || '',
+        relative_time_description: r.relativePublishTimeDescription || '',
+        author_name:       r.authorAttribution?.displayName || '',
+      })),
+    };
+
+    if (place.nationalPhoneNumber) {
+      const ph = document.getElementById('f-phone');
+      ph.value = place.nationalPhoneNumber;
+      ph.classList.add('filled');
+    }
+    if (place.websiteURI) {
+      const ws = document.getElementById('f-website');
+      ws.value = place.websiteURI;
+      ws.classList.add('filled');
+    }
+    document.getElementById('f-name').classList.add('filled');
+    checkReady();
+  } catch(e) {
+    console.error('Place details fetch failed:', e);
+  }
+}
+
 async function loadGooglePlaces() {
   const inp = document.getElementById('biz-search');
   try {
@@ -323,22 +421,16 @@ async function loadGooglePlaces() {
     }
     window._gkey = key;
 
-    // Load the Maps script without callback
     await new Promise((resolve, reject) => {
       const script = document.createElement('script');
-      script.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places';
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places&v=weekly`;
       script.onload  = resolve;
       script.onerror = reject;
       document.head.appendChild(script);
     });
 
-    // Use importLibrary to ensure the places library is fully ready
-    const { Map }              = await google.maps.importLibrary('maps');
-    const { PlacesService, AutocompleteService } = await google.maps.importLibrary('places');
-
-    const map = new Map(document.createElement('div'));
-    placesService       = new PlacesService(map);
-    autocompleteService = new AutocompleteService();
+    // Warm up the places library
+    await google.maps.importLibrary('places');
 
     inp.placeholder = 'Start typing your business name...';
     inp.disabled    = false;
@@ -350,6 +442,7 @@ async function loadGooglePlaces() {
     console.error('loadGooglePlaces failed:', e);
   }
 }
+
 window.addEventListener('DOMContentLoaded', loadGooglePlaces);
 </script>
 
@@ -365,74 +458,8 @@ const BUILTWITH_API_KEY   = 'YOUR_BUILTWITH_API_KEY';      // ← free at api.bu
 // ============================================================
 // STATE
 // ============================================================
-let placesService, autocompleteService;
-let selectedPlace = null;
-let bizData = {};
+// bizData declared in Places script block above
 
-// ============================================================
-// GOOGLE PLACES AUTOCOMPLETE
-// ============================================================
-
-let searchTimeout;
-function onSearch(val) {
-  clearTimeout(searchTimeout);
-  document.getElementById('run-btn').disabled = true;
-  if (val.length < 2) { closeAutocomplete(); return; }
-  searchTimeout = setTimeout(() => {
-    autocompleteService.getPlacePredictions(
-      { input: val, types: ['establishment'] },
-      (predictions, status) => {
-        if (status !== google.maps.places.PlacesServiceStatus.OK || !predictions) {
-          closeAutocomplete(); return;
-        }
-        showAutocomplete(predictions.slice(0, 6));
-      }
-    );
-  }, 300);
-}
-
-function showAutocomplete(predictions) {
-  const list = document.getElementById('autocomplete-list');
-  list.innerHTML = predictions.map(p => `
-    <div class="sb-option" onclick="selectPlace('${p.place_id}','${escHtml(p.structured_formatting.main_text)}','${escHtml(p.description)}')">
-      <div class="sb-opt-name">${p.structured_formatting.main_text}</div>
-      <div class="sb-opt-addr">${p.description}</div>
-    </div>`).join('');
-  list.classList.add('open');
-}
-
-function closeAutocomplete() {
-  document.getElementById('autocomplete-list').classList.remove('open');
-}
-
-function selectPlace(placeId, name, desc) {
-  document.getElementById('biz-search').value = name;
-  document.getElementById('f-name').value = name;
-  closeAutocomplete();
-
-  // Fetch full place details
-  placesService.getDetails(
-    { placeId, fields: ['name','formatted_address','formatted_phone_number','website','rating','user_ratings_total','opening_hours','types','photos','url','reviews'] },
-    (place, status) => {
-      if (status !== google.maps.places.PlacesServiceStatus.OK) return;
-      selectedPlace = place;
-
-      // Auto-fill fields
-      if (place.formatted_phone_number) {
-        const ph = document.getElementById('f-phone');
-        ph.value = place.formatted_phone_number;
-        ph.classList.add('filled');
-      }
-      if (place.website) {
-        const ws = document.getElementById('f-website');
-        ws.value = place.website;
-        ws.classList.add('filled');
-      }
-      document.getElementById('f-name').classList.add('filled');
-      checkReady();
-    }
-  );
-}
 
 function checkReady() {
   const name  = document.getElementById('f-name').value.trim();
