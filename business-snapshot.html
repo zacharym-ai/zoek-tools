@@ -371,35 +371,35 @@ async function selectPlace(placeId, name, desc) {
   document.getElementById('f-name').value = name;
   closeAutocomplete();
 
+  // Set a basic selectedPlace immediately so checkReady can enable the button
+  // even if fetchFields fails or is slow
+  selectedPlace = {
+    name: name, formatted_address: desc,
+    formatted_phone_number: null, website: null,
+    rating: null, user_ratings_total: 0,
+    types: [], url: null, reviews: [],
+  };
+  document.getElementById('f-name').classList.add('filled');
+  checkReady();
+
+  // Then try to enrich with full Place details
   try {
     const { Place } = await google.maps.importLibrary('places');
-    const place = new Place({
-      id: placeId,
-      requestedLanguage: 'en',
-    });
+    const place = new Place({ id: placeId });
     await place.fetchFields({
-      fields: ['displayName','formattedAddress','nationalPhoneNumber','websiteURI',
-               'rating','userRatingCount','regularOpeningHours','types','photos','googleMapsURI','reviews'],
+      fields: ['displayName','formattedAddress','nationalPhoneNumber',
+               'websiteURI','rating','userRatingCount','types','googleMapsURI'],
     });
 
-    // Map new API fields to old shape so rest of codebase works unchanged
-    selectedPlace = {
-      name:                    place.displayName,
-      formatted_address:       place.formattedAddress,
-      formatted_phone_number:  place.nationalPhoneNumber,
-      website:                 place.websiteURI,
-      rating:                  place.rating,
-      user_ratings_total:      place.userRatingCount,
-      opening_hours:           place.regularOpeningHours ? { open_now: true } : null,
-      types:                   place.types || [],
-      url:                     place.googleMapsURI,
-      reviews:                 (place.reviews || []).map(r => ({
-        rating:            r.rating,
-        text:              r.text?.text || '',
-        relative_time_description: r.relativePublishTimeDescription || '',
-        author_name:       r.authorAttribution?.displayName || '',
-      })),
-    };
+    // Enrich selectedPlace with real data
+    selectedPlace.name              = place.displayName       || name;
+    selectedPlace.formatted_address = place.formattedAddress  || desc;
+    selectedPlace.formatted_phone_number = place.nationalPhoneNumber || null;
+    selectedPlace.website           = place.websiteURI        || null;
+    selectedPlace.rating            = place.rating            || null;
+    selectedPlace.user_ratings_total= place.userRatingCount   || 0;
+    selectedPlace.types             = place.types             || [];
+    selectedPlace.url               = place.googleMapsURI     || null;
 
     if (place.nationalPhoneNumber) {
       const ph = document.getElementById('f-phone');
@@ -411,10 +411,9 @@ async function selectPlace(placeId, name, desc) {
       ws.value = place.websiteURI;
       ws.classList.add('filled');
     }
-    document.getElementById('f-name').classList.add('filled');
-    checkReady();
+    console.log('Place enriched:', selectedPlace.name);
   } catch(e) {
-    console.error('Place details fetch failed:', e);
+    console.warn('Place enrichment failed (basic data still used):', e.message);
   }
 }
 
