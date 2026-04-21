@@ -393,14 +393,16 @@ async function selectPlace(placeId, name, desc) {
     });
 
     // Enrich selectedPlace with real data
-    selectedPlace.name              = place.displayName       || name;
-    selectedPlace.formatted_address = place.formattedAddress  || desc;
+    // displayName in new Places API is a string
+    const dName = typeof place.displayName === 'string' ? place.displayName : (place.displayName?.text || name);
+    selectedPlace.name               = dName;
+    selectedPlace.formatted_address  = place.formattedAddress       || desc;
     selectedPlace.formatted_phone_number = place.nationalPhoneNumber || null;
-    selectedPlace.website           = place.websiteURI        || null;
-    selectedPlace.rating            = place.rating            || null;
-    selectedPlace.user_ratings_total= place.userRatingCount   || 0;
-    selectedPlace.types             = place.types             || [];
-    selectedPlace.url               = place.googleMapsURI     || null;
+    selectedPlace.website            = place.websiteURI             || null;
+    selectedPlace.rating             = place.rating                 || null;
+    selectedPlace.user_ratings_total = place.userRatingCount        || 0;
+    selectedPlace.types              = place.types                  || [];
+    selectedPlace.url                = place.googleMapsURI          || null;
 
     if (place.nationalPhoneNumber) {
       const ph = document.getElementById('f-phone');
@@ -412,7 +414,7 @@ async function selectPlace(placeId, name, desc) {
       ws.value = place.websiteURI;
       ws.classList.add('filled');
     }
-    console.log('Place enriched:', selectedPlace.name);
+    console.log('Place enriched:', selectedPlace.name, '| rating:', selectedPlace.rating, '| website:', selectedPlace.website, '| types:', selectedPlace.types?.slice(0,2));
   } catch(e) {
     console.warn('Place enrichment failed (basic data still used):', e.message);
   }
@@ -423,8 +425,14 @@ async function loadGooglePlaces() {
   const btn = document.getElementById('run-btn');
   if (btn) {
     btn.disabled = true;
-    btn.addEventListener('click', function() {
-      if (!btn.disabled && typeof runReport === 'function') runReport();
+    btn.addEventListener('click', async function() {
+      if (btn.disabled) return;
+      try {
+        await runReport();
+      } catch(e) {
+        console.error('runReport error:', e);
+        alert('Something went wrong: ' + e.message);
+      }
     });
   }
   const inp = document.getElementById('biz-search');
