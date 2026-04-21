@@ -309,45 +309,46 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 
 <!-- Google Places API -->
 <script>
-// Define initPlaces on window FIRST so Google Maps callback can find it
-// regardless of async timing — the real implementation is in the main script block below
-// and will override this once it runs, but this prevents the "not a function" error
-window.initPlaces = function() {
-  // Will be overridden by the full definition below — this is just a safety guard
-  setTimeout(function() {
-    if (typeof window._initPlacesFull === 'function') window._initPlacesFull();
-  }, 50);
-};
-
 async function loadGooglePlaces() {
   const inp = document.getElementById('biz-search');
   try {
+    // Get key from Netlify config function
     const res = await fetch('/.netlify/functions/config');
     const cfg = await res.json();
     const key = cfg.googleApiKey;
 
     if (!key) {
-      inp.placeholder = '⚠️ Google API key not configured — contact admin';
+      inp.placeholder = '⚠️ Google API key not configured';
       inp.style.borderColor = 'var(--pink)';
-      console.error('GOOGLE_API_KEY not set in Netlify environment variables');
       return;
     }
 
     window._gkey = key;
-    const script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places&loading=async&callback=initPlaces';
-    script.async = true;
-    script.defer = true;
-    script.onerror = function() {
-      inp.placeholder = '⚠️ Google API failed — check Console for details';
-      inp.style.borderColor = 'var(--pink)';
-      console.error('Google Places API failed to load.');
-    };
-    document.head.appendChild(script);
+
+    // Load Maps JS using the modern bootstrap loader — no global callback needed
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&loading=async&libraries=places';
+      script.async = true;
+      script.defer = true;
+      script.onload  = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+
+    // Now google is available — initialize directly
+    const map = new google.maps.Map(document.createElement('div'));
+    placesService       = new google.maps.places.PlacesService(map);
+    autocompleteService = new google.maps.places.AutocompleteService();
+
+    inp.placeholder = 'Start typing your business name...';
+    inp.disabled    = false;
+    console.log('Google Places loaded ✓');
+
   } catch(e) {
     inp.placeholder = '⚠️ Could not load search — please refresh';
     inp.style.borderColor = 'var(--pink)';
-    console.error('loadGooglePlaces config fetch failed:', e.message);
+    console.error('loadGooglePlaces failed:', e);
   }
 }
 window.addEventListener('DOMContentLoaded', loadGooglePlaces);
@@ -372,26 +373,6 @@ let bizData = {};
 // ============================================================
 // GOOGLE PLACES AUTOCOMPLETE
 // ============================================================
-// Override window.initPlaces with the real implementation
-// This handles both: Google Maps calling it before this block runs (via _initPlacesFull guard)
-// and the normal case where this block runs first
-window._initPlacesFull = function initPlacesImpl() {
-  try {
-    const map = new google.maps.Map(document.createElement('div'));
-    placesService       = new google.maps.places.PlacesService(map);
-    autocompleteService = new google.maps.places.AutocompleteService();
-    const inp = document.getElementById('biz-search');
-    inp.placeholder = 'Start typing your business name...';
-    inp.disabled = false;
-    console.log('Google Places API loaded successfully');
-  } catch(e) {
-    console.error('initPlaces failed:', e);
-    const inp = document.getElementById('biz-search');
-    inp.placeholder = '⚠️ Google Places failed to initialize — check Console';
-    inp.style.borderColor = 'var(--pink)';
-  }
-};
-window.initPlaces = window._initPlacesFull;
 
 let searchTimeout;
 function onSearch(val) {
