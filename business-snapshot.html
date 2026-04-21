@@ -169,6 +169,32 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 .footer-link{color:rgba(255,255,255,0.35);text-decoration:none;}
 
 @media(max-width:600px){.sb-fields{grid-template-columns:1fr;}.rh-overall{position:static;transform:none;margin-top:1rem;}.grade-bar-wrap{flex-direction:column;align-items:flex-start;}.report{padding:1.5rem 1rem 4rem;}}
+/* ── AI CHAT WIDGET ──────────────────────────── */
+#zk-chat{position:fixed;bottom:5.5rem;right:1.5rem;z-index:8000;display:none;flex-direction:column;width:340px;max-height:480px;background:#1a1535;border:1px solid rgba(105,44,142,0.35);border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,0.5);overflow:hidden;font-family:'Plus Jakarta Sans',sans-serif;}
+#zk-chat.open{display:flex;}
+.zkc-head{background:linear-gradient(135deg,#692C8E,#ED0875);padding:0.85rem 1rem;display:flex;align-items:center;justify-content:space-between;}
+.zkc-head-left{display:flex;align-items:center;gap:0.6rem;}
+.zkc-avatar{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:0.85rem;}
+.zkc-head-title{font-size:0.82rem;font-weight:700;color:white;}
+.zkc-head-sub{font-size:0.65rem;color:rgba(255,255,255,0.7);}
+.zkc-close{background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:1.1rem;line-height:1;padding:0;transition:color 0.15s;}
+.zkc-close:hover{color:white;}
+.zkc-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:0.65rem;}
+.zkc-msg{max-width:85%;padding:0.6rem 0.85rem;border-radius:8px;font-size:0.8rem;line-height:1.55;}
+.zkc-msg.ai{background:rgba(105,44,142,0.15);border:1px solid rgba(105,44,142,0.2);color:#e0e0f0;align-self:flex-start;border-bottom-left-radius:2px;}
+.zkc-msg.user{background:var(--gradient);color:white;align-self:flex-end;border-bottom-right-radius:2px;}
+.zkc-msg.typing{background:rgba(105,44,142,0.1);border:1px solid rgba(105,44,142,0.15);color:#888;align-self:flex-start;}
+.zkc-input-row{display:flex;gap:0.4rem;padding:0.65rem;border-top:1px solid rgba(105,44,142,0.2);background:rgba(0,0,0,0.2);}
+.zkc-input{flex:1;padding:0.5rem 0.75rem;background:rgba(255,255,255,0.06);border:1px solid rgba(105,44,142,0.25);border-radius:6px;color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;outline:none;transition:border-color 0.2s;}
+.zkc-input:focus{border-color:var(--purple);}
+.zkc-input::placeholder{color:rgba(255,255,255,0.25);}
+.zkc-send{padding:0.5rem 0.85rem;background:var(--gradient);border:none;border-radius:6px;color:white;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.zkc-send:hover{opacity:0.9;}
+.zkc-send:disabled{opacity:0.4;cursor:not-allowed;}
+#zk-chat-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:7999;display:none;background:linear-gradient(135deg,#692C8E,#ED0875);border:none;border-radius:50px;padding:0.65rem 1.1rem;color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(105,44,142,0.5);transition:all 0.2s;display:none;align-items:center;gap:0.5rem;}
+#zk-chat-fab:hover{box-shadow:0 6px 28px rgba(105,44,142,0.7);transform:translateY(-1px);}
+.zkc-fab-dot{width:7px;height:7px;border-radius:50%;background:#4fffb0;animation:zkpulse 2s ease-in-out infinite;}
+@keyframes zkpulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 </style>
 </head>
 <body>
@@ -284,8 +310,8 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 <!-- Google Places API -->
 <script>
 function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
+  const key = 'YOUR_GOOGLE_PLACES_API_KEY';
+  if (!key || key === 'YOUR_GOOGLE_PLACES_API_KEY') {
     const inp = document.getElementById('biz-search');
     inp.placeholder = '⚠️ API key not configured — see setup instructions';
     inp.style.borderColor = 'var(--pink)';
@@ -477,7 +503,49 @@ async function runReport() {
   buildReport(reportData, bizData);
   document.getElementById('step-report').style.display = 'block';
   window.scrollTo(0, 0);
+
+  // ── Lead capture → Supabase + Kesley alert ──────────────────────
+  captureLead(reportData, bizData);
 }
+
+async function captureLead(data, biz) {
+  try {
+    const sections = [
+      { id:'google',   title:'Google Business Profile', ...scoreGoogle(data.google)   },
+      { id:'reviews',  title:'Reviews & Reputation',    ...scoreReviews(data.google)  },
+      { id:'website',  title:'Website Performance',     ...scoreWebsite(data)         },
+      { id:'seo',      title:'SEO & Backlinks',          ...scoreSEO(data)             },
+      { id:'ai',       title:'AI & GEO Visibility',      ...scoreAIVisibility(data)   },
+      { id:'listings', title:'Local Listings',           ...scoreListings(data.google) },
+    ];
+    const overall   = Math.round(sections.reduce((s,x) => s + x.score, 0) / sections.length);
+    const weakAreas = sections.filter(s => s.score < 70).map(s => s.title);
+
+    await fetch('/.netlify/functions/leads', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tool:          'business_snapshot',
+        name:          biz.contact  || biz.name || null,
+        email:         biz.email    || null,
+        business_name: biz.name     || null,
+        overall_score: overall,
+        weak_areas:    weakAreas,
+        industry:      data.google?.types?.[0] || null,
+        extra: {
+          rating:      data.google?.rating      || null,
+          reviewCount: data.google?.reviewCount || null,
+          website:     biz.website || data.google?.website || null,
+          phone:       biz.phone   || data.google?.phone   || null,
+          address:     data.google?.address     || null,
+        },
+      }),
+    });
+  } catch(e) {
+    // Silent fail — never block the user experience
+    console.warn('Lead capture failed:', e.message);
+  }
+
 
 // ============================================================
 // DATA FETCHING
@@ -1404,6 +1472,9 @@ function buildReport(data, biz) {
   const worst = sections.reduce((a,b) => a.score < b.score ? a : b);
   toggleSection(worst.id);
 
+  // ── Activate AI chat with full report context ──
+  showChat(data, biz, sections, overall);
+
   // ── CTA ──
   const weakAreas = sections.filter(s => s.score < 70).map(s => s.fix).filter(Boolean);
   document.getElementById('report-cta').innerHTML = `
@@ -1454,6 +1525,113 @@ document.addEventListener('click', function(e) {
   if (!e.target.closest('.sb-input-wrap')) closeAutocomplete();
 });
 </script>
+<!-- AI Chat Widget -->
+<button id="zk-chat-fab" onclick="toggleChat()" style="display:none;">
+  <span class="zkc-fab-dot"></span> Ask Zoek AI
+</button>
+
+<div id="zk-chat">
+  <div class="zkc-head">
+    <div class="zkc-head-left">
+      <div class="zkc-avatar">🤖</div>
+      <div>
+        <div class="zkc-head-title">Zoek AI</div>
+        <div class="zkc-head-sub">Ask about your results</div>
+      </div>
+    </div>
+    <button class="zkc-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="zkc-messages" id="zkc-messages">
+    <div class="zkc-msg ai">Hi! I've reviewed your business report. Ask me anything — what your score means, what to fix first, or how Zoek can help. 👋</div>
+  </div>
+  <div class="zkc-input-row">
+    <input class="zkc-input" id="zkc-input" type="text" placeholder="Ask about your results..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="zkc-send" id="zkc-send" onclick="sendChat()">Send</button>
+  </div>
+</div>
+
 <script src="cta.js"></script>
+<script>
+// ── AI CHAT WIDGET ─────────────────────────────────────────────────
+let chatHistory = [];
+let chatReportContext = null;
+
+function buildChatContext(data, biz, sections, overall) {
+  // Build a concise audit summary to feed Claude as system context
+  const sectionLines = sections.map(s =>
+    `- ${s.title}: ${s.score}/100 — ${s.findings.filter(f=>f.type!=='pass').map(f=>f.text).join(', ') || 'No major issues'}`
+  ).join('\n');
+  return `You are Zoek AI, a friendly and knowledgeable local marketing assistant embedded in the Zoek Marketing Tools website. You have just analyzed the online presence of a business and have their full audit data.
+
+BUSINESS: ${biz.name || 'Unknown'}
+LOCATION: ${data.google?.address || 'Unknown'}
+OVERALL SCORE: ${overall}/100
+GOOGLE RATING: ${data.google?.rating || 'N/A'} (${data.google?.reviewCount || 0} reviews)
+WEBSITE: ${biz.website || data.google?.website || 'None found'}
+
+SECTION SCORES:
+${sectionLines}
+
+Your job:
+- Answer questions about their specific results in plain English
+- Be honest but constructive — if their score is low, say so and explain why
+- Explain what each score means in practical terms (lost leads, lost revenue, etc.)
+- Suggest how Zoek can help but don't be pushy — focus on being genuinely useful
+- Keep answers concise (2-4 sentences max unless they ask for detail)
+- Never make up data — only reference what's in the audit above
+- If asked about pricing, say "A Zoek strategist can walk you through options — book a free call at gozoek.com"`;
+}
+
+function showChat(data, biz, sections, overall) {
+  chatReportContext = buildChatContext(data, biz, sections, overall);
+  chatHistory = [];
+  const fab = document.getElementById('zk-chat-fab');
+  if (fab) { fab.style.display = 'flex'; }
+}
+
+function toggleChat() {
+  const chat = document.getElementById('zk-chat');
+  const fab  = document.getElementById('zk-chat-fab');
+  const open = chat.classList.toggle('open');
+  if (fab) fab.style.display = open ? 'none' : 'flex';
+  if (open) setTimeout(() => document.getElementById('zkc-input')?.focus(), 100);
+}
+
+async function sendChat() {
+  const input = document.getElementById('zkc-input');
+  const send  = document.getElementById('zkc-send');
+  const msgs  = document.getElementById('zkc-messages');
+  const text  = input.value.trim();
+  if (!text || !chatReportContext) return;
+
+  // Show user message
+  input.value = '';
+  send.disabled = true;
+  msgs.innerHTML += `<div class="zkc-msg user">${text}</div>`;
+  msgs.innerHTML += `<div class="zkc-msg typing" id="zkc-typing">Zoek AI is thinking...</div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+
+  chatHistory.push({ role: 'user', content: text });
+
+  try {
+    const res  = await fetch('/.netlify/functions/chat', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ system: chatReportContext, messages: chatHistory }),
+    });
+    const data = await res.json();
+    const reply = data?.content?.[0]?.text || "Sorry, I couldn't generate a response. Please try again.";
+    chatHistory.push({ role: 'assistant', content: reply });
+    document.getElementById('zkc-typing')?.remove();
+    msgs.innerHTML += `<div class="zkc-msg ai">${reply}</div>`;
+  } catch(e) {
+    document.getElementById('zkc-typing')?.remove();
+    msgs.innerHTML += `<div class="zkc-msg ai">Something went wrong. Try again in a moment.</div>`;
+  }
+
+  send.disabled = false;
+  msgs.scrollTop = msgs.scrollHeight;
+}
+</script>
 </body>
 </html>
