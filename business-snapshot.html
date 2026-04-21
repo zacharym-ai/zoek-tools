@@ -309,10 +309,19 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 
 <!-- Google Places API -->
 <script>
+// Define initPlaces on window FIRST so Google Maps callback can find it
+// regardless of async timing — the real implementation is in the main script block below
+// and will override this once it runs, but this prevents the "not a function" error
+window.initPlaces = function() {
+  // Will be overridden by the full definition below — this is just a safety guard
+  setTimeout(function() {
+    if (typeof window._initPlacesFull === 'function') window._initPlacesFull();
+  }, 50);
+};
+
 async function loadGooglePlaces() {
   const inp = document.getElementById('biz-search');
   try {
-    // Fetch the API key from our Netlify config function (keeps key server-side)
     const res = await fetch('/.netlify/functions/config');
     const cfg = await res.json();
     const key = cfg.googleApiKey;
@@ -326,12 +335,13 @@ async function loadGooglePlaces() {
 
     window._gkey = key;
     const script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places&callback=initPlaces';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places&loading=async&callback=initPlaces';
     script.async = true;
+    script.defer = true;
     script.onerror = function() {
       inp.placeholder = '⚠️ Google API failed — check Console for details';
       inp.style.borderColor = 'var(--pink)';
-      console.error('Google Places API failed to load. Check: 1) Key is valid 2) Places API enabled 3) Domain whitelisted');
+      console.error('Google Places API failed to load.');
     };
     document.head.appendChild(script);
   } catch(e) {
@@ -362,12 +372,14 @@ let bizData = {};
 // ============================================================
 // GOOGLE PLACES AUTOCOMPLETE
 // ============================================================
-function initPlaces() {
+// Override window.initPlaces with the real implementation
+// This handles both: Google Maps calling it before this block runs (via _initPlacesFull guard)
+// and the normal case where this block runs first
+window._initPlacesFull = function initPlacesImpl() {
   try {
     const map = new google.maps.Map(document.createElement('div'));
     placesService       = new google.maps.places.PlacesService(map);
     autocompleteService = new google.maps.places.AutocompleteService();
-    // Signal ready
     const inp = document.getElementById('biz-search');
     inp.placeholder = 'Start typing your business name...';
     inp.disabled = false;
@@ -378,7 +390,8 @@ function initPlaces() {
     inp.placeholder = '⚠️ Google Places failed to initialize — check Console';
     inp.style.borderColor = 'var(--pink)';
   }
-}
+};
+window.initPlaces = window._initPlacesFull;
 
 let searchTimeout;
 function onSearch(val) {
