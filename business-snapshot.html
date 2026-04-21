@@ -269,7 +269,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
         </div>
       </div>
 
-      <button class="sb-cta" id="run-btn" onclick="runReport()" disabled>
+      <button class="sb-cta" id="run-btn">
         <span>🚀</span> Run My Free Snapshot Report
       </button>
       <div class="sb-disclaimer">Free report · No credit card · Takes about 30 seconds</div>
@@ -419,6 +419,14 @@ async function selectPlace(placeId, name, desc) {
 }
 
 async function loadGooglePlaces() {
+  // Set button disabled initially and wire click handler
+  const btn = document.getElementById('run-btn');
+  if (btn) {
+    btn.disabled = true;
+    btn.addEventListener('click', function() {
+      if (!btn.disabled && typeof runReport === 'function') runReport();
+    });
+  }
   const inp = document.getElementById('biz-search');
   try {
     const res = await fetch('/.netlify/functions/config');
@@ -473,7 +481,7 @@ const BUILTWITH_API_KEY   = 'YOUR_BUILTWITH_API_KEY';      // ← free at api.bu
 
 
 // checkReady defined in Places script block above
-['f-name','f-email','f-contact','f-website','f-phone'].forEach(id => {
+;['f-name','f-email','f-contact','f-website','f-phone'].forEach(id => {
   document.getElementById(id).addEventListener('input', checkReady);
 });
 
