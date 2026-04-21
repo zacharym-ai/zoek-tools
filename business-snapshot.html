@@ -309,26 +309,36 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 
 <!-- Google Places API -->
 <script>
-function loadGooglePlaces() {
-  const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
-  if (!key) {
-    const inp = document.getElementById('biz-search');
-    inp.placeholder = '⚠️ API key not configured — see setup instructions';
+async function loadGooglePlaces() {
+  const inp = document.getElementById('biz-search');
+  try {
+    // Fetch the API key from our Netlify config function (keeps key server-side)
+    const res = await fetch('/.netlify/functions/config');
+    const cfg = await res.json();
+    const key = cfg.googleApiKey;
+
+    if (!key) {
+      inp.placeholder = '⚠️ Google API key not configured — contact admin';
+      inp.style.borderColor = 'var(--pink)';
+      console.error('GOOGLE_API_KEY not set in Netlify environment variables');
+      return;
+    }
+
+    window._gkey = key;
+    const script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places&callback=initPlaces';
+    script.async = true;
+    script.onerror = function() {
+      inp.placeholder = '⚠️ Google API failed — check Console for details';
+      inp.style.borderColor = 'var(--pink)';
+      console.error('Google Places API failed to load. Check: 1) Key is valid 2) Places API enabled 3) Domain whitelisted');
+    };
+    document.head.appendChild(script);
+  } catch(e) {
+    inp.placeholder = '⚠️ Could not load search — please refresh';
     inp.style.borderColor = 'var(--pink)';
-    console.error('Google Places API key not set in business-snapshot.html');
-    return;
+    console.error('loadGooglePlaces config fetch failed:', e.message);
   }
-  const script = document.createElement('script');
-  window._gkey = key; // store before script loads
-  script.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places&callback=initPlaces';
-  script.async = true;
-  script.onerror = function() {
-    const inp = document.getElementById('biz-search');
-    inp.placeholder = '⚠️ Google API failed — check Console for details';
-    inp.style.borderColor = 'var(--pink)';
-    console.error('Google Places API failed. Check: 1) Key is valid 2) Places API enabled in Cloud Console 3) Domain is whitelisted under key restrictions');
-  };
-  document.head.appendChild(script);
 }
 window.addEventListener('DOMContentLoaded', loadGooglePlaces);
 </script>
