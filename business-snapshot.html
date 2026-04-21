@@ -319,6 +319,13 @@ function escHtml(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
+function checkReady() {
+  const name    = document.getElementById('f-name').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const contact = document.getElementById('f-contact').value.trim();
+  document.getElementById('run-btn').disabled = !(name && email && contact && selectedPlace);
+}
+
 // ── onSearch defined here so it's available the moment the input is enabled ──
 function onSearch(val) {
   clearTimeout(searchTimeout);
@@ -465,13 +472,7 @@ const BUILTWITH_API_KEY   = 'YOUR_BUILTWITH_API_KEY';      // ← free at api.bu
 // bizData declared in Places script block above
 
 
-function checkReady() {
-  const name  = document.getElementById('f-name').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const contact = document.getElementById('f-contact').value.trim();
-  document.getElementById('run-btn').disabled = !(name && email && contact && selectedPlace);
-}
-
+// checkReady defined in Places script block above
 ['f-name','f-email','f-contact','f-website','f-phone'].forEach(id => {
   document.getElementById(id).addEventListener('input', checkReady);
 });
