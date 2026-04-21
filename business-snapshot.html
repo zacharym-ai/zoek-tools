@@ -249,15 +249,15 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       <div class="sb-fields">
         <div class="sb-field" style="grid-column:1/-1">
           <label class="sb-field-label">Business name</label>
-          <input type="text" class="sb-field-input" id="f-name" placeholder="Auto-filled from search">
+          <input type="text" class="sb-field-input" id="f-name" placeholder="Auto-filled from search" oninput="checkReady()">
         </div>
         <div class="sb-field">
           <label class="sb-field-label">Your name</label>
-          <input type="text" class="sb-field-input" id="f-contact" placeholder="Jane Smith">
+          <input type="text" class="sb-field-input" id="f-contact" placeholder="Jane Smith" oninput="checkReady()">
         </div>
         <div class="sb-field">
           <label class="sb-field-label">Email address</label>
-          <input type="email" class="sb-field-input" id="f-email" placeholder="jane@business.com">
+          <input type="email" class="sb-field-input" id="f-email" placeholder="jane@business.com" oninput="checkReady()">
         </div>
         <div class="sb-field">
           <label class="sb-field-label">Website URL</label>
@@ -323,7 +323,8 @@ function checkReady() {
   const name    = document.getElementById('f-name').value.trim();
   const email   = document.getElementById('f-email').value.trim();
   const contact = document.getElementById('f-contact').value.trim();
-  document.getElementById('run-btn').disabled = !(name && email && contact && selectedPlace);
+  const hasBiz  = selectedPlace !== null || name.length > 1;
+  document.getElementById('run-btn').disabled = !(name && email && contact && hasBiz);
 }
 
 // ── onSearch defined here so it's available the moment the input is enabled ──
