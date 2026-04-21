@@ -329,17 +329,25 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       <div class="qa-block">
         <div class="qa-question"><span class="qa-q-num">1</span> What industry are you in?</div>
         <div class="qa-options" style="flex-wrap:wrap;">
-          <button class="qa-option" data-q="industry" data-v="home_services"  onclick="selectQA(this)">🔧 Home Services</button>
-          <button class="qa-option" data-q="industry" data-v="healthcare"     onclick="selectQA(this)">🏥 Healthcare</button>
-          <button class="qa-option" data-q="industry" data-v="restaurant"     onclick="selectQA(this)">🍽️ Restaurant / Food</button>
-          <button class="qa-option" data-q="industry" data-v="retail"         onclick="selectQA(this)">🛍️ Retail</button>
-          <button class="qa-option" data-q="industry" data-v="professional"   onclick="selectQA(this)">💼 Professional Services</button>
-          <button class="qa-option" data-q="industry" data-v="fitness"        onclick="selectQA(this)">💪 Fitness / Wellness</button>
-          <button class="qa-option" data-q="industry" data-v="beauty"         onclick="selectQA(this)">✨ Beauty / Salon</button>
-          <button class="qa-option" data-q="industry" data-v="real_estate"    onclick="selectQA(this)">🏠 Real Estate</button>
-          <button class="qa-option" data-q="industry" data-v="automotive"     onclick="selectQA(this)">🚗 Automotive</button>
-          <button class="qa-option" data-q="industry" data-v="construction"   onclick="selectQA(this)">🏗️ Construction</button>
-          <button class="qa-option" data-q="industry" data-v="other"          onclick="selectQA(this)">📁 Other</button>
+          <button class="qa-option" data-q="industry" data-v="home_services"   onclick="selectQA(this)">🔧 Home Services</button>
+          <button class="qa-option" data-q="industry" data-v="healthcare"      onclick="selectQA(this)">🏥 Health &amp; Wellness</button>
+          <button class="qa-option" data-q="industry" data-v="restaurant"      onclick="selectQA(this)">🍽️ Food &amp; Drink</button>
+          <button class="qa-option" data-q="industry" data-v="retail"          onclick="selectQA(this)">🛍️ Retail &amp; eCommerce</button>
+          <button class="qa-option" data-q="industry" data-v="professional"    onclick="selectQA(this)">💼 Professional Services</button>
+          <button class="qa-option" data-q="industry" data-v="fitness"         onclick="selectQA(this)">💪 Fitness &amp; Wellness</button>
+          <button class="qa-option" data-q="industry" data-v="beauty"          onclick="selectQA(this)">✨ Beauty &amp; Aesthetics</button>
+          <button class="qa-option" data-q="industry" data-v="real_estate"     onclick="selectQA(this)">🏠 Real Estate</button>
+          <button class="qa-option" data-q="industry" data-v="automotive"      onclick="selectQA(this)">🚗 Automotive</button>
+          <button class="qa-option" data-q="industry" data-v="construction"    onclick="selectQA(this)">🏗️ Construction</button>
+          <button class="qa-option" data-q="industry" data-v="nonprofit"       onclick="selectQA(this)">❤️ Nonprofits &amp; Mission-Driven</button>
+          <button class="qa-option" data-q="industry" data-v="media_arts"      onclick="selectQA(this)">🎨 Media &amp; Arts</button>
+          <button class="qa-option" data-q="industry" data-v="education"       onclick="selectQA(this)">📚 Education &amp; Youth</button>
+          <button class="qa-option" data-q="industry" data-v="creator"         onclick="selectQA(this)">🎤 Creators &amp; Personal Brands</button>
+          <button class="qa-option" data-q="industry" data-v="counseling"      onclick="selectQA(this)">🧠 Counseling &amp; Coaching</button>
+          <button class="qa-option" data-q="industry" data-v="animals_pets"    onclick="selectQA(this)">🐾 Animals &amp; Pets</button>
+          <button class="qa-option" data-q="industry" data-v="travel"          onclick="selectQA(this)">✈️ Experiences &amp; Travel</button>
+          <button class="qa-option" data-q="industry" data-v="government"      onclick="selectQA(this)">🏛️ Government &amp; Organizations</button>
+          <button class="qa-option" data-q="industry" data-v="other"           onclick="selectQA(this)">📁 Other</button>
         </div>
       </div>
     </div>
@@ -368,15 +376,16 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       </div>
 
       <div class="qa-block">
-        <div class="qa-question"><span class="qa-q-num">2</span> What's your biggest marketing challenge right now?</div>
+        <div class="qa-question"><span class="qa-q-num">2</span> What are your biggest marketing challenges? <span style="font-size:0.7rem;font-weight:400;color:var(--muted);">(pick all that apply)</span></div>
         <div class="qa-options" style="flex-wrap:wrap;">
-          <button class="qa-option" data-q="challenge" data-v="no_leads"      onclick="selectQA(this)">😤 Not enough leads</button>
-          <button class="qa-option" data-q="challenge" data-v="no_visibility" onclick="selectQA(this)">👻 Hard to find online</button>
-          <button class="qa-option" data-q="challenge" data-v="bad_reviews"   onclick="selectQA(this)">⭐ Bad or few reviews</button>
-          <button class="qa-option" data-q="challenge" data-v="no_website"    onclick="selectQA(this)">🌐 No good website</button>
-          <button class="qa-option" data-q="challenge" data-v="no_social"     onclick="selectQA(this)">📱 No social presence</button>
-          <button class="qa-option" data-q="challenge" data-v="need_brand"    onclick="selectQA(this)">🎨 Need a real brand</button>
-          <button class="qa-option" data-q="challenge" data-v="competitors"   onclick="selectQA(this)">🏆 Losing to competitors</button>
+          <button class="qa-option" data-q="challenge" data-v="no_leads"      onclick="toggleMulti(this,'challenges')">😤 Not enough leads</button>
+          <button class="qa-option" data-q="challenge" data-v="no_visibility" onclick="toggleMulti(this,'challenges')">👻 Hard to find online</button>
+          <button class="qa-option" data-q="challenge" data-v="bad_reviews"   onclick="toggleMulti(this,'challenges')">⭐ Bad or few reviews</button>
+          <button class="qa-option" data-q="challenge" data-v="no_website"    onclick="toggleMulti(this,'challenges')">🌐 No good website</button>
+          <button class="qa-option" data-q="challenge" data-v="no_social"     onclick="toggleMulti(this,'challenges')">📱 No social presence</button>
+          <button class="qa-option" data-q="challenge" data-v="need_brand"    onclick="toggleMulti(this,'challenges')">🎨 Need a real brand</button>
+          <button class="qa-option" data-q="challenge" data-v="competitors"   onclick="toggleMulti(this,'challenges')">🏆 Losing to competitors</button>
+          <button class="qa-option" data-q="challenge" data-v="just_starting" onclick="toggleMulti(this,'challenges')">🌱 Just getting started — need everything</button>
         </div>
       </div>
 
@@ -640,12 +649,26 @@ function toggleGoal(card) {
   document.getElementById('btn-1-next').disabled = n === 0;
 }
 
-// ─── Q&A SELECTION ────────────────────────────
+// ─── Q&A SELECTION (single) ───────────────────
 function selectQA(btn) {
   const q = btn.dataset.q;
   document.querySelectorAll(`[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   answers[q] = btn.dataset.v;
+}
+
+// ─── Q&A SELECTION (multi) ────────────────────
+// multiAnswers stores arrays for multi-select questions
+const multiAnswers = {};
+function toggleMulti(btn, key) {
+  btn.classList.toggle('selected');
+  multiAnswers[key] = multiAnswers[key] || [];
+  const v = btn.dataset.v;
+  if (btn.classList.contains('selected')) {
+    if (!multiAnswers[key].includes(v)) multiAnswers[key].push(v);
+  } else {
+    multiAnswers[key] = multiAnswers[key].filter(x => x !== v);
+  }
 }
 
 // ─── STEP NAVIGATION ─────────────────────────
@@ -750,15 +773,20 @@ function updateStepper(activeStep) {
 
 // ─── RECOMMENDATION ENGINE ────────────────────
 function buildRecommendations() {
-  const size      = answers.size            || 'growing';
-  const market    = answers.market          || 'local';
-  const challenge = answers.challenge       || '';
-  const budget    = answers.budget          || '500_1500';
-  const hasSite   = answers.website_status  === 'good';
+  const size      = answers.size           || 'growing';
+  const market    = answers.market         || 'local';
+  const budget    = answers.budget         || '500_1500';
+  const hasSite   = answers.website_status === 'good';
+  const noSite    = answers.website_status === 'none' || !answers.website_status;
   const needsRedesign = answers.website_status === 'old';
 
-  // Map challenge → boost goals
-  const challengeBoosts = {
+  // Collect all selected challenges (now multi-select)
+  const challenges   = multiAnswers['challenges'] || [];
+  const isJustStarting = size === 'new' || challenges.includes('just_starting');
+  const needsWebsite   = noSite || needsRedesign || isJustStarting || challenges.includes('no_website');
+
+  // Map each challenge → boosted goal tags
+  const challengeBoostMap = {
     no_leads:      ['ads','seo'],
     no_visibility: ['seo','reviews'],
     bad_reviews:   ['reviews','seo'],
@@ -766,16 +794,16 @@ function buildRecommendations() {
     no_social:     ['social'],
     need_brand:    ['brand'],
     competitors:   ['seo','ads'],
+    just_starting: ['website','brand'],
   };
-  const boostedGoals = new Set([
-    ...selectedGoals,
-    ...(challengeBoosts[challenge] || [])
-  ]);
+  const boostedGoals = new Set([...selectedGoals]);
+  challenges.forEach(c => { (challengeBoostMap[c] || []).forEach(g => boostedGoals.add(g)); });
+  if (needsWebsite) boostedGoals.add('website');
 
-  // Budget tier mapping for scoring
+  // Budget tier
   const budgetTier = {
-    under500:   1, '500_1500': 2, '1500_3000': 3,
-    '3000_5000': 4, over5000:  5, not_sure:    2,
+    under500: 1, '500_1500': 2, '1500_3000': 3,
+    '3000_5000': 4, over5000: 5, not_sure: 2,
   };
   const tier = budgetTier[budget] || 2;
 
@@ -783,29 +811,25 @@ function buildRecommendations() {
   Object.entries(PACKAGES).forEach(([key, pkg]) => {
     const goalMatch = pkg.tags.some(t => boostedGoals.has(t));
     if (!goalMatch) return;
-    if (pkg.requiresExisting && !needsRedesign) return;
+    if (pkg.requiresExisting && noSite) return;      // no redesign if no site exists
+    if (pkg.requiresExisting && !needsRedesign && !noSite) return;
 
     let score = 0;
     if (pkg.sizeTags.includes(size))     score += 3;
     if (pkg.marketTags.includes(market)) score += 2;
     boostedGoals.forEach(g => { if (pkg.tags.includes(g)) score += 1; });
-    selectedGoals.forEach(g => { if (pkg.tags.includes(g)) score += 1; }); // extra for explicit
+    selectedGoals.forEach(g => { if (pkg.tags.includes(g)) score += 1; });
 
     // Budget fit bonus
-    const budgetFit = {
-      website_express: 2, website_managed_core: 2, seo_local_starter: 2,
-      seo_local_expand: 2, smm_starter: 2, get_listed: 2, branding_kit: 2,
-    };
-    const midBudgetFit = {
-      website_classic: 3, website_managed_adv: 3, seo_competitive: 3,
-      ads_sem: 3, ads_display: 3, smm_premium: 3, social_kit: 3,
-    };
-    const highBudgetFit = {
-      website_advanced: 4, seo_enterprise: 4, ads_omni: 4, smm_enterprise: 4,
-    };
+    const budgetFit    = { website_express:2, website_managed_core:2, seo_local_starter:2, seo_local_expand:2, smm_starter:2, get_listed:2, branding_kit:2 };
+    const midBudgetFit = { website_classic:3, website_managed_adv:3, seo_competitive:3, ads_sem:3, ads_display:3, smm_premium:3, social_kit:3 };
+    const highBudgetFit= { website_advanced:4, seo_enterprise:4, ads_omni:4, smm_enterprise:4 };
     if      (tier <= 2 && budgetFit[key])     score += 2;
     else if (tier === 3 && midBudgetFit[key]) score += 2;
     else if (tier >= 4 && highBudgetFit[key]) score += 2;
+
+    // Strong bonus for new/starting on website packages — they need this first
+    if (isJustStarting && pkg.tags.includes('website')) score += 4;
 
     scored.push({ key, pkg, score });
   });
@@ -814,6 +838,17 @@ function buildRecommendations() {
 
   const seen   = new Set();
   const result = [];
+
+  // ── HARD RULE: new/no-site business → website is always recommendation #1 ──
+  if (needsWebsite) {
+    const bestWebsite = scored.find(item => item.pkg.tags.includes('website'));
+    if (bestWebsite) {
+      seen.add(bestWebsite.pkg.category);
+      result.push(bestWebsite);
+    }
+  }
+
+  // Fill remaining slots with top scored, unique categories
   for (const item of scored) {
     if (result.length >= 3) break;
     if (!seen.has(item.pkg.category)) {
@@ -872,17 +907,21 @@ async function submitProposal() {
     social:'Grow Social Media', reviews:'Manage Reputation', brand:'Build Brand'
   };
   const industryLabels = {
-    home_services:'Home Services', healthcare:'Healthcare', restaurant:'Restaurant / Food',
-    retail:'Retail', professional:'Professional Services', fitness:'Fitness / Wellness',
-    beauty:'Beauty / Salon', real_estate:'Real Estate', automotive:'Automotive',
-    construction:'Construction', other:'Other'
+    home_services:'Home Services', healthcare:'Health & Wellness', restaurant:'Food & Drink',
+    retail:'Retail & eCommerce', professional:'Professional Services', fitness:'Fitness & Wellness',
+    beauty:'Beauty & Aesthetics', real_estate:'Real Estate', automotive:'Automotive',
+    construction:'Construction', nonprofit:'Nonprofits & Mission-Driven', media_arts:'Media & Arts',
+    education:'Education & Youth', creator:'Creators & Personal Brands',
+    counseling:'Counseling & Coaching', animals_pets:'Animals & Pets',
+    travel:'Experiences & Travel', government:'Government & Organizations', other:'Other'
   };
   const challengeLabels = {
     no_leads:'Not enough leads', no_visibility:'Hard to find online',
     bad_reviews:'Bad or few reviews', no_website:'No good website',
     no_social:'No social presence', need_brand:'Need a real brand',
-    competitors:'Losing to competitors'
+    competitors:'Losing to competitors', just_starting:'Just getting started — need everything'
   };
+  const challengesText = (multiAnswers['challenges'] || []).map(c => challengeLabels[c] || c).join(', ') || 'Not answered';
   const budgetLabels = {
     under500:'Under $500', '500_1500':'$500 – $1,500', '1500_3000':'$1,500 – $3,000',
     '3000_5000':'$3,000 – $5,000', over5000:'$5,000+', not_sure:'Not sure yet'
@@ -912,7 +951,7 @@ async function submitProposal() {
     '🎯 THEIR GOALS':    '---',
     Goals:               goalsText,
     Industry:            industryLabels[answers.industry]  || 'Not answered',
-    'Biggest Challenge': challengeLabels[answers.challenge] || 'Not answered',
+    'Biggest Challenge(s)': challengesText,
     '📊 THEIR SITUATION':'---',
     'Website Status':    websiteLabels[answers.website_status] || 'Not answered',
     Market:              marketLabels[answers.market]       || 'Not answered',
