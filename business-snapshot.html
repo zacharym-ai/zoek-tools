@@ -315,6 +315,10 @@ let selectedPlace       = null;
 let bizData             = {};
 let searchTimeout;
 
+function escHtml(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
 // ── onSearch defined here so it's available the moment the input is enabled ──
 function onSearch(val) {
   clearTimeout(searchTimeout);
@@ -1533,10 +1537,6 @@ function restart() {
   document.getElementById('step-report').style.display = 'none';
   document.getElementById('step-landing').style.display = 'flex';
   window.scrollTo(0,0);
-}
-
-function escHtml(str) {
-  return str.replace(/'/g,"&#39;").replace(/"/g,'&quot;');
 }
 
 // NAV
