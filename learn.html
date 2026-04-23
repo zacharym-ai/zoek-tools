@@ -562,37 +562,37 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       <div class="module-preview-item" onclick="switchTab('funnel',null)">
         <div class="mpi-dot" style="background:var(--green)"></div>
         <span class="mpi-name">The Marketing Funnel</span>
-        <span class="mpi-badge badge-live">Live</span>
+        
       </div>
       <div class="module-preview-item" onclick="switchTab('dictionary',null)">
         <div class="mpi-dot" style="background:var(--yellow)"></div>
         <span class="mpi-name">Marketing Dictionary</span>
-        <span class="mpi-badge badge-live">Live</span>
+        
       </div>
       <div class="module-preview-item" onclick="switchTab('email101',null)">
         <div class="mpi-dot" style="background:var(--blue)"></div>
         <span class="mpi-name">Email Marketing 101</span>
-        <span class="mpi-badge badge-live">Live</span>
+        
       </div>
       <div class="module-preview-item" onclick="switchTab('localseo',null)">
         <div class="mpi-dot" style="background:var(--pink)"></div>
         <span class="mpi-name">Local SEO 101</span>
-        <span class="mpi-badge badge-new">New</span>
+        
       </div>
       <div class="module-preview-item" onclick="switchTab('ppc',null)">
         <div class="mpi-dot" style="background:var(--purple)"></div>
         <span class="mpi-name">How PPC Works</span>
-        <span class="mpi-badge badge-new">New</span>
+        
       </div>
       <div class="module-preview-item" onclick="switchTab('geo',null)">
         <div class="mpi-dot" style="background:rgba(200,160,255,0.9)"></div>
         <span class="mpi-name">AI &amp; GEO Visibility</span>
-        <span class="mpi-badge badge-new">New</span>
+        
       </div>
       <div class="module-preview-item" onclick="switchTab('whyzoek',null)">
         <div class="mpi-dot" style="background:linear-gradient(135deg,#692C8E,#ED0875)"></div>
         <span class="mpi-name">Why Zoek</span>
-        <span class="mpi-badge badge-live">Live</span>
+        
       </div>
 
     </div>
@@ -605,20 +605,25 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <div class="academy-sidebar">
     <div class="sb-section">
       <div class="sb-label">Marketing fundamentals</div>
+      <button class="tab-btn" onclick="switchTab('zero',this)">
+        <span class="tab-icon">🌱</span>
+        <span class="tab-text"><span class="tab-name">Starting From Zero</span><span class="tab-sub">Brand new? Start here</span></span>
+        <span class="tab-badge tb-new">New</span>
+      </button>
       <button class="tab-btn active" onclick="switchTab('funnel',this)">
         <span class="tab-icon">↓</span>
         <span class="tab-text"><span class="tab-name">The Funnel</span><span class="tab-sub">TOFU · MOFU · BOFU</span></span>
-        <span class="tab-badge tb-live">Live</span>
+        
       </button>
       <button class="tab-btn" onclick="switchTab('dictionary',this)">
         <span class="tab-icon">📖</span>
         <span class="tab-text"><span class="tab-name">Dictionary</span><span class="tab-sub">60+ terms explained</span></span>
-        <span class="tab-badge tb-live">Live</span>
+        
       </button>
       <button class="tab-btn" onclick="switchTab('email101',this)">
         <span class="tab-icon">✉</span>
         <span class="tab-text"><span class="tab-name">Email Marketing 101</span><span class="tab-sub">Lists, automations, ROI</span></span>
-        <span class="tab-badge tb-live">Live</span>
+        
       </button>
     </div>
     <div class="sb-section">
@@ -626,17 +631,17 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       <button class="tab-btn" onclick="switchTab('localseo',this)">
         <span class="tab-icon">📍</span>
         <span class="tab-text"><span class="tab-name">Local SEO 101</span><span class="tab-sub">Get found in your city</span></span>
-        <span class="tab-badge tb-new">New</span>
+        
       </button>
       <button class="tab-btn" onclick="switchTab('ppc',this)">
         <span class="tab-icon">⚡</span>
         <span class="tab-text"><span class="tab-name">How PPC Works</span><span class="tab-sub">Turn budget into leads</span></span>
-        <span class="tab-badge tb-new">New</span>
+        
       </button>
       <button class="tab-btn" onclick="switchTab('geo',this)">
         <span class="tab-icon">🤖</span>
         <span class="tab-text"><span class="tab-name">AI &amp; GEO Visibility</span><span class="tab-sub">The next frontier</span></span>
-        <span class="tab-badge tb-new">New</span>
+        
       </button>
       <button class="tab-btn" onclick="switchTab('social101',this)">
         <span class="tab-icon">📱</span>
@@ -649,7 +654,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
       <button class="tab-btn" onclick="switchTab('whyzoek',this)">
         <span class="tab-icon">🏆</span>
         <span class="tab-text"><span class="tab-name">Why Zoek</span><span class="tab-sub">#1 Wix Partner · 50k+ clients</span></span>
-        <span class="tab-badge tb-live">Live</span>
+        
       </button>
     </div>
   </div>
@@ -661,6 +666,162 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
     <div class="module-progress" id="module-progress">
       <span class="mp-label">Your progress</span>
       <div class="mp-steps" id="mp-steps"></div>
+    </div>
+
+    <!-- ═══════════ STARTING FROM ZERO TAB ═══════════ -->
+    <div class="tab-content" id="tab-zero">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Starting From Zero</div>
+          <h2 class="sec-title">You just started.<br><span class="acc-g">Here's what actually matters first.</span></h2>
+          <div class="sec-body">
+            <p>Most marketing advice assumes you already have a website, a Google listing, and some customers. If you're brand new — just got your LLC, just picked your business name, just started taking customers — <strong>this is your starting point.</strong></p>
+            <p>Don't run ads yet. Don't worry about social media yet. Here's the real order of operations.</p>
+          </div>
+        </div>
+        <div class="stat-blocks">
+          <div class="stat-block"><div class="stat-num" style="color:var(--green);">6</div><div class="stat-text"><strong>Things to do first</strong> before spending a single dollar on marketing. Most new businesses skip straight to ads and waste their budget.</div></div>
+          <div class="stat-block"><div class="stat-num" style="color:var(--yellow);">82%</div><div class="stat-text">Of small businesses <strong>fail within 5 years</strong> — most not because of the product, but because nobody could find them or trust them online.</div></div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">The order of operations — do these in order</div>
+        <div style="display:flex;flex-direction:column;gap:0;">
+
+          <div style="display:grid;grid-template-columns:48px 1fr;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--border-light);align-items:start;">
+            <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#692C8E,#ED0875);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:white;flex-shrink:0;">1</div>
+            <div>
+              <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.3rem;">Get your Google Business Profile <span style="font-size:0.72rem;font-weight:700;background:rgba(79,255,176,0.12);color:var(--green);padding:0.15rem 0.5rem;border-radius:3px;margin-left:0.5rem;">FREE</span></div>
+              <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">This is the single highest-ROI thing a new local business can do. Go to <strong style="color:var(--white)">google.com/business</strong> and claim your listing. Fill out every field — hours, photos, description, services. This is how you show up when someone searches "plumber near me" or "[your service] in [your city]." Without this, you're invisible.</div>
+              <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem;">
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">⏱ Takes 30 minutes</span>
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">💰 Free</span>
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(79,255,176,0.08);border:1px solid rgba(79,255,176,0.2);padding:0.2rem 0.6rem;border-radius:3px;color:var(--green);">🏆 Highest impact first step</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:48px 1fr;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--border-light);align-items:start;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(105,44,142,0.3);border:2px solid rgba(105,44,142,0.5);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:white;flex-shrink:0;">2</div>
+            <div>
+              <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.3rem;">Get a website — even a simple one</div>
+              <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">You don't need anything fancy to start. You need: your business name, what you do, where you serve, how to contact you, and a few photos of your work. That's it. A $15/month Wix site is infinitely better than no website. <strong style="color:var(--white)">73% of customers check a website before calling.</strong> If you don't have one, you're losing those people to whoever does.</div>
+              <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem;">
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">⏱ Takes a weekend</span>
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">💰 $15–50/mo DIY or hire Zoek</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:48px 1fr;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--border-light);align-items:start;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(105,44,142,0.3);border:2px solid rgba(105,44,142,0.5);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:white;flex-shrink:0;">3</div>
+            <div>
+              <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.3rem;">Ask your first customers for a Google review — immediately</div>
+              <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Right after you finish a job, send a text: <em style="color:var(--white);">"Hey [name], thanks so much — if you have 2 minutes, a Google review would mean the world: [link]."</em> Get your review link from your GBP dashboard. Your first 10 reviews are the hardest and the most important. <strong style="color:var(--white)">Businesses with 10+ reviews get 3× more clicks than those with fewer.</strong></div>
+              <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem;">
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">⏱ 2 min per customer</span>
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">💰 Free</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:48px 1fr;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--border-light);align-items:start;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(105,44,142,0.3);border:2px solid rgba(105,44,142,0.5);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:white;flex-shrink:0;">4</div>
+            <div>
+              <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.3rem;">Get listed in the top directories</div>
+              <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Yelp, Facebook Business, Apple Maps, Bing Places, and your industry-specific directories. These are called <strong style="color:var(--white)">citations</strong> and they tell Google your business is real. Make sure your name, address, and phone number are <em style="color:var(--white);">exactly the same</em> on every listing — even small differences hurt your rankings.</div>
+              <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem;">
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">⏱ 2–3 hours one time</span>
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">💰 Free (or Zoek Get Listed)</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:48px 1fr;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--border-light);align-items:start;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(105,44,142,0.3);border:2px solid rgba(105,44,142,0.5);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:white;flex-shrink:0;">5</div>
+            <div>
+              <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.3rem;">Pick ONE social platform and post consistently</div>
+              <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Not three. Not five. One. Pick where your customers actually are — Facebook for most local service businesses, Instagram if your work is visual. Post 3× a week: show your work, introduce yourself, share a tip. <strong style="color:var(--white)">Consistency beats quality at this stage.</strong> A blurry photo of a finished job posted every week beats a polished graphic posted once a month.</div>
+              <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem;">
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">⏱ 30 min/week</span>
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">💰 Free</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:48px 1fr;gap:1.5rem;padding:1.5rem 0;align-items:start;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(105,44,142,0.3);border:2px solid rgba(105,44,142,0.5);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:white;flex-shrink:0;">6</div>
+            <div>
+              <div style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;margin-bottom:0.3rem;">Now consider paid marketing — only after steps 1–5</div>
+              <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Ads send people to your website and Google listing. If those aren't ready, ads just waste money. Once you have a solid GBP, a working website, and a handful of reviews — <strong style="color:var(--white)">that's when paid traffic starts converting.</strong> Best first paid option for most local businesses: Google Local Service Ads (pay per lead, not per click).</div>
+              <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem;">
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(250,163,28,0.08);border:1px solid rgba(250,163,28,0.2);padding:0.2rem 0.6rem;border-radius:3px;color:var(--yellow);">⚠ Only after steps 1–5</span>
+                <span style="font-size:0.72rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:3px;color:var(--muted);">💰 $300–$1,000/mo to start</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">Mistakes most new businesses make</div>
+        <div class="examples-grid">
+          <div class="ex-col">
+            <div class="ex-biz" style="color:var(--red);">✗ What not to do first</div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Running ads before you have a website.</strong> You're paying to send people somewhere that doesn't convert. Every click is wasted money.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Trying to be on every social platform.</strong> Five mediocre accounts is worse than one great one. You'll burn out and abandon all of them.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Waiting until everything is perfect.</strong> An imperfect website live today gets found. A perfect website launching "next month" doesn't exist yet.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Ignoring your Google Business Profile.</strong> Most new owners claim it and never update it. Incomplete profiles rank below competitors who took 30 extra minutes.</div></div>
+          </div>
+          <div class="ex-col">
+            <div class="ex-biz" style="color:var(--green);">✓ What actually works</div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Tell everyone you know.</strong> Your first 10 customers almost always come from your personal network. Don't be shy about it.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Document everything you do.</strong> Take photos of every job, every product, every result. This becomes your content library for months.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Ask for referrals directly.</strong> "Do you know anyone else who could use this?" is the most powerful marketing question a new business can ask.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Answer your phone.</strong> New businesses lose leads constantly by not picking up. If you can't always answer, set up a professional voicemail and call back within the hour.</div></div>
+          </div>
+          <div class="ex-col">
+            <div class="ex-biz" style="color:var(--blue);">📋 Your first 30 days</div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Week 1:</strong> Claim Google Business Profile, set up basic website, get your review link ready.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Week 2:</strong> Tell your network, get your first 3–5 customers, ask each one for a Google review.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Week 3:</strong> Submit to Yelp, Facebook, Apple Maps, and 2–3 industry directories.</div></div>
+            <div class="ex-stage"><div class="ex-stage-text"><strong>Week 4:</strong> Pick one social platform, post your first 5 pieces of content. You now have a foundation.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;border-bottom:1px solid var(--border);">
+        <div class="sec-divider">What should you actually spend in year one?</div>
+        <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);">
+            <div style="background:var(--sidebar);padding:1.25rem;">
+              <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Bootstrap ($0–$200/mo)</div>
+              <div style="font-size:0.82rem;color:var(--muted);line-height:1.65;">DIY website, free GBP, free social. <strong style="color:var(--white);">Best for:</strong> Solo operators, side hustles, testing the market before investing.</div>
+            </div>
+            <div style="background:var(--sidebar);padding:1.25rem;border-left:2px solid var(--purple);">
+              <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:0.75rem;">Smart Start ($300–$800/mo) ★ Most common</div>
+              <div style="font-size:0.82rem;color:var(--muted);line-height:1.65;">Managed website + local SEO + citations. <strong style="color:var(--white);">Best for:</strong> Businesses ready to grow past friends and family referrals.</div>
+            </div>
+            <div style="background:var(--sidebar);padding:1.25rem;">
+              <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Growth Mode ($1,000+/mo)</div>
+              <div style="font-size:0.82rem;color:var(--muted);line-height:1.65;">Website + SEO + paid ads + social. <strong style="color:var(--white);">Best for:</strong> Businesses with proven demand who want to scale aggressively.</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:1rem;font-size:0.78rem;color:rgba(160,160,192,0.5);text-align:center;">Realistic ranges — not a sales pitch. The right number depends on your industry, market, and goals.</div>
+      </div>
+
+      <div style="padding:2.5rem 3rem;">
+        <div style="background:var(--gradient);border-radius:12px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+          <div>
+            <div style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:0.4rem;">Not sure where you stand?</div>
+            <div style="font-size:0.85rem;color:rgba(255,255,255,0.75);">Run your free Business Snapshot — see exactly how your online presence scores and what to fix first.</div>
+          </div>
+          <a href="business-snapshot.html" style="display:inline-block;background:white;color:var(--purple);text-decoration:none;padding:0.85rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:800;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.2);">Run Free Snapshot →</a>
+        </div>
+      </div>
     </div>
 
     <!-- ═══════════ FUNNEL TAB ═══════════ -->
@@ -1638,6 +1799,7 @@ function filterPlatforms(tier, btn) {
 
 // ─── MODULE PROGRESS + NEXT/PREV NAV ────────
 const MODULES = [
+  { id:'zero',       name:'Starting From Zero', icon:'🌱' },
   { id:'funnel',     name:'The Funnel',    icon:'↓' },
   { id:'dictionary', name:'Dictionary',    icon:'📖' },
   { id:'email101',   name:'Email 101',     icon:'✉' },
