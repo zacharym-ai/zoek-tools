@@ -437,15 +437,8 @@ async function loadGooglePlaces() {
   }
   const inp = document.getElementById('biz-search');
   try {
-    const res = await fetch('/.netlify/functions/config');
-    const cfg = await res.json();
-    const key = cfg.googleApiKey;
-
-    if (!key) {
-      inp.placeholder = '⚠️ Google API key not configured';
-      inp.style.borderColor = 'var(--pink)';
-      return;
-    }
+    // Key is domain-restricted in Google Cloud Console — safe to include here
+    const key = 'AIzaSyCsyy7qI25JAs4h1BaTZMaSPWgGISqD42o';
     window._gkey = key;
 
     await new Promise((resolve, reject) => {
@@ -470,7 +463,12 @@ async function loadGooglePlaces() {
   }
 }
 
-window.addEventListener('DOMContentLoaded', loadGooglePlaces);
+// Script is at bottom of body — DOM is already ready, call immediately
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', loadGooglePlaces);
+} else {
+  loadGooglePlaces();
+}
 
 // ============================================================
 // CONFIG — replace with real keys
