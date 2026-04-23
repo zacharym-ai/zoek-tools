@@ -309,6 +309,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 
 <!-- Google Places API -->
 <script>
+console.log('Business Snapshot script block executing...');
 let placesService       = null;
 let autocompleteService = null;
 let selectedPlace       = null;
@@ -464,6 +465,7 @@ async function loadGooglePlaces() {
 }
 
 // Script is at bottom of body — DOM is already ready, call immediately
+console.log('readyState:', document.readyState);
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', loadGooglePlaces);
 } else {
