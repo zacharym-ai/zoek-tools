@@ -65,9 +65,9 @@
         footer.innerHTML = `
           <span style="font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:800;color:white;">${window.WL.bizName}</span>
           <span class="footer-note">
-            ${window.WL.phone ? `<a href="tel:${window.WL.phone}" class="footer-link">${window.WL.phone}</a> · ` : ''}
+            ${window.WL.phone ? `<a href="tel:${window.WL.phone}" class="footer-link">${window.WL.phone}</a>` : ''}
+            ${window.WL.phone && window.WL.email ? ' · ' : ''}
             ${window.WL.email ? `<a href="mailto:${window.WL.email}" class="footer-link">${window.WL.email}</a>` : ''}
-            ${window.WL.poweredBy ? ' · <span style="opacity:0.4;font-size:0.72rem;">Powered by Zoek</span>' : ''}
           </span>`;
       }
 
@@ -1615,13 +1615,126 @@ function buildReport(data, biz) {
       : `Your online presence is strong. ${ctaBrand} can help you stay ahead of competitors and keep that edge.`}</div>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem;">
       ${ctaCalendly ? `<a href="${ctaCalendly}" target="_blank" class="rcta-btn">Book a Free Strategy Call →</a>` : ''}
-      <button onclick="window.print()" style="padding:0.85rem 1.75rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:white;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;">
-        Download PDF Report
+      <button onclick="printReport()" style="padding:0.85rem 1.75rem;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.3);color:white;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:0.5rem;">
+        ↓ Download PDF Report
       </button>
     </div>
     ${ctaPhone ? `<div class="rcta-phone" style="margin-top:0.75rem;">Call us: <a href="tel:${ctaPhone.replace(/\D/g,'')}">${ctaPhone}</a></div>` : ''}
     ${ctaEmail ? `<div class="rcta-phone">Email: <a href="mailto:${ctaEmail}">${ctaEmail}</a></div>` : ''}
-    ${wl && wl.poweredBy ? `<div style="margin-top:1rem;font-size:0.68rem;opacity:0.35;">Powered by Zoek Marketing</div>` : ''}`;
+    ${wl && wl.poweredBy ? `<div style="margin-top:1rem;font-size:0.68rem;opacity:0.3;">Powered by Zoek Marketing</div>` : ''}`;
+
+  // Store report data globally so printReport() can access it
+  window._reportData = { name, overall, overallGrade, sections, data, biz, wl, ctaBrand, ctaCalendly, ctaPhone, ctaEmail, weakAreas };
+}
+
+function printReport() {
+  const d = window._reportData;
+  if (!d) return;
+
+  const brandName  = d.wl ? d.wl.bizName  : 'Zoek Marketing';
+  const brandPhone = d.wl ? d.wl.phone    : '1-888-737-9635';
+  const brandEmail = d.wl ? d.wl.email    : '';
+  const primary    = d.wl ? d.wl.primary  : '#692C8E';
+  const accent     = d.wl ? d.wl.accent   : '#ED0875';
+  const calendly   = d.wl ? d.wl.calendly : 'https://calendly.com/expert-sales';
+  const poweredBy  = d.wl ? d.wl.poweredBy : true;
+
+  const scoreColor = d.overallGrade.color;
+
+  const sectionsHtml = d.sections.map(sec => {
+    const g = getGrade(sec.score);
+    const findings = sec.findings.map(f => `
+      <div style="display:flex;gap:0.75rem;padding:0.65rem 0;border-bottom:1px solid #f0f0f5;align-items:flex-start;">
+        <span style="font-size:0.8rem;flex-shrink:0;margin-top:0.1rem;">${f.type==='pass' ? '✓' : f.type==='warn' ? '!' : '✗'}</span>
+        <div>
+          <div style="font-weight:700;font-size:0.82rem;color:${f.type==='pass'?'#2d7a4f':f.type==='warn'?'#b45309':'#991b1b'};margin-bottom:0.15rem;">${f.text}</div>
+          <div style="font-size:0.78rem;color:#555;line-height:1.5;">${f.detail||''}</div>
+        </div>
+      </div>`).join('');
+
+    const barColor = g.color;
+    return `
+      <div style="break-inside:avoid;margin-bottom:1rem;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:1rem;padding:0.85rem 1.25rem;background:#fafafa;border-bottom:1px solid #e5e7eb;">
+          <div style="flex:1;font-weight:800;font-size:0.95rem;color:#1a1a2e;">${sec.title}</div>
+          <div style="font-size:1.25rem;font-weight:900;color:${barColor};">${sec.score}</div>
+          <div style="width:32px;height:32px;border-radius:50%;background:${barColor};display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:0.85rem;">${g.letter}</div>
+        </div>
+        <div style="padding:0.75rem 1.25rem;background:white;">
+          <div style="height:6px;background:#f0f0f5;border-radius:3px;margin-bottom:0.75rem;">
+            <div style="height:6px;width:${sec.score}%;background:${barColor};border-radius:3px;"></div>
+          </div>
+          ${findings}
+        </div>
+      </div>`;
+  }).join('');
+
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Business Snapshot — ${d.name}</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: white; color: #1a1a2e; line-height: 1.6; }
+  @page { margin: 1.5cm; size: A4; }
+  @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,${primary},${accent});padding:2rem 2.5rem;color:white;border-radius:10px;margin-bottom:1.5rem;-webkit-print-color-adjust:exact;print-color-adjust:exact;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <div style="font-family:'Poppins',sans-serif;font-size:1.75rem;font-weight:800;margin-bottom:0.25rem;">${d.name}</div>
+        <div style="font-size:0.85rem;opacity:0.85;">${d.data.google?.address || ''}</div>
+        <div style="display:flex;gap:2rem;margin-top:1rem;flex-wrap:wrap;">
+          ${d.data.google?.rating ? `<div><div style="font-size:1.5rem;font-weight:800;">${d.data.google.rating}★</div><div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.7;">Rating</div></div>` : ''}
+          ${d.data.google?.reviewCount ? `<div><div style="font-size:1.5rem;font-weight:800;">${d.data.google.reviewCount}</div><div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.7;">Reviews</div></div>` : ''}
+        </div>
+      </div>
+      <div style="text-align:center;background:rgba(255,255,255,0.15);padding:1rem 1.5rem;border-radius:10px;">
+        <div style="font-family:'Poppins',sans-serif;font-size:2.5rem;font-weight:900;">${d.overall}</div>
+        <div style="font-size:0.75rem;opacity:0.8;">/ 100</div>
+        <div style="font-size:1.5rem;font-weight:900;margin-top:0.25rem;">${d.overallGrade.letter}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Verdict -->
+  <div style="background:#f8f8fc;border:1px solid #e5e7eb;border-radius:8px;padding:1rem 1.5rem;margin-bottom:1.5rem;">
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6b7280;margin-bottom:0.35rem;">Overall Assessment</div>
+    <div style="font-size:0.92rem;color:#374151;line-height:1.6;">${d.overallGrade.letter === 'A' ? `<strong>${d.name}</strong> has a strong online presence.` : d.overallGrade.letter === 'B' ? `<strong>${d.name}</strong> is doing well online but leaving leads on the table. A few targeted fixes could move the needle significantly.` : `<strong>${d.name}</strong> has significant gaps in its online presence that are actively costing customers.`}</div>
+  </div>
+
+  <!-- Sections -->
+  ${sectionsHtml}
+
+  <!-- CTA -->
+  <div style="background:linear-gradient(135deg,${primary},${accent});border-radius:10px;padding:2rem;text-align:center;color:white;margin-top:1.5rem;-webkit-print-color-adjust:exact;print-color-adjust:exact;">
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.8;margin-bottom:0.5rem;">Ready to take action?</div>
+    <div style="font-family:'Poppins',sans-serif;font-size:1.35rem;font-weight:800;margin-bottom:0.75rem;">Let's fix what's holding ${d.name} back</div>
+    ${d.weakAreas.length > 0 ? `<div style="font-size:0.85rem;opacity:0.9;margin-bottom:1rem;">Your biggest opportunities: ${d.weakAreas.join(', ')}.</div>` : ''}
+    <div style="font-size:0.92rem;font-weight:700;margin-top:0.5rem;">${brandName}</div>
+    ${brandPhone ? `<div style="font-size:0.85rem;opacity:0.85;">${brandPhone}</div>` : ''}
+    ${brandEmail ? `<div style="font-size:0.85rem;opacity:0.85;">${brandEmail}</div>` : ''}
+    ${calendly ? `<div style="font-size:0.8rem;opacity:0.75;margin-top:0.35rem;">Book a call: ${calendly}</div>` : ''}
+    ${poweredBy ? `<div style="margin-top:1rem;font-size:0.65rem;opacity:0.3;">Powered by Zoek Marketing</div>` : ''}
+  </div>
+
+  <!-- Footer -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #e5e7eb;font-size:0.72rem;color:#9ca3af;">
+    <div style="font-weight:700;color:#374151;">${brandName}</div>
+    <div>Business Snapshot Report · ${new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>
+  </div>
+</body>
+</html>`;
+
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  win.onload = function() { win.print(); };
 }
 
 function toggleSection(id) {
