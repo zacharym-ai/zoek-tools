@@ -274,14 +274,35 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 #zk-chat-fab:hover{box-shadow:0 6px 28px rgba(105,44,142,0.7);transform:translateY(-1px);}
 .zkc-fab-dot{width:7px;height:7px;border-radius:50%;background:#4fffb0;animation:zkpulse 2s ease-in-out infinite;}
 @keyframes zkpulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+/* PRINT / PDF STYLES */
+@media print {
+  nav, .restart-btn, #zk-chat-fab, #zk-chat { display: none !important; }
+  body { background: white !important; color: #1a1a2e !important; }
+  .report { margin-top: 0 !important; padding: 1rem !important; }
+  .report-header { background: linear-gradient(135deg,#692C8E,#ED0875) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; border-radius: 10px; }
+  .section-card { border: 1px solid #ddd !important; background: white !important; break-inside: avoid; margin-bottom: 1rem; }
+  .report-cta { background: linear-gradient(135deg,#692C8E,#ED0875) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; border-radius: 10px; }
+  .finding { break-inside: avoid; }
+  button { display: none !important; }
+  @page { margin: 1.5cm; size: A4; }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="#" class="nav-brand" id="wl-nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
-  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta" id="wl-nav-cta">Book a Free Call</a>
+  <a href="#" class="nav-cta" id="wl-nav-cta">Book a Free Call</a>
 </nav>
+<script>
+// Apply nav CTA immediately — don't wait for DOMContentLoaded
+(function() {
+  var p = new URLSearchParams(window.location.search);
+  var calendly = p.get('calendly');
+  var el = document.getElementById('wl-nav-cta');
+  if (el && calendly) { el.href = calendly; el.target = '_blank'; }
+})();
+</script>
 </nav>
 
 <!-- ── STEP 0: LANDING ── -->
@@ -1587,13 +1608,20 @@ function buildReport(data, biz) {
   const ctaEmail    = wl ? wl.email : '';
 
   document.getElementById('report-cta').innerHTML = `
-    <div class="rcta-eyebrow">Free 30-minute strategy call</div>
+    <div class="rcta-eyebrow">Ready to take action?</div>
     <div class="rcta-title">${overall < 60 ? `${name} has ${100 - overall} points of untapped growth` : `Let's protect what's working and fix what's not`}</div>
-    <div class="rcta-sub">${weakAreas.length > 0 ? `Your biggest opportunities: ${weakAreas.join(', ')}. A strategist from ${ctaBrand} will show you exactly what fixing these means in new leads and revenue.` : `Your online presence is strong. ${ctaBrand} can help you stay ahead of competitors and push into that top-tier.`}</div>
-    ${ctaCalendly ? `<a href="${ctaCalendly}" target="_blank" class="rcta-btn">Book a Free Strategy Call →</a>` : ''}
-    ${ctaPhone ? `<div class="rcta-phone">Or call us: <a href="tel:${ctaPhone.replace(/\D/g,'')}">${ctaPhone}</a></div>` : ''}
+    <div class="rcta-sub">${weakAreas.length > 0
+      ? `Your biggest opportunities: ${weakAreas.join(', ')}. ${ctaBrand} can show you exactly what fixing these means in new leads and revenue.`
+      : `Your online presence is strong. ${ctaBrand} can help you stay ahead of competitors and keep that edge.`}</div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem;">
+      ${ctaCalendly ? `<a href="${ctaCalendly}" target="_blank" class="rcta-btn">Book a Free Strategy Call →</a>` : ''}
+      <button onclick="window.print()" style="padding:0.85rem 1.75rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:white;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;">
+        Download PDF Report
+      </button>
+    </div>
+    ${ctaPhone ? `<div class="rcta-phone" style="margin-top:0.75rem;">Call us: <a href="tel:${ctaPhone.replace(/\D/g,'')}">${ctaPhone}</a></div>` : ''}
     ${ctaEmail ? `<div class="rcta-phone">Email: <a href="mailto:${ctaEmail}">${ctaEmail}</a></div>` : ''}
-    ${wl && wl.poweredBy ? `<div style="margin-top:1rem;font-size:0.68rem;opacity:0.4;">Powered by Zoek Marketing</div>` : ''}`;
+    ${wl && wl.poweredBy ? `<div style="margin-top:1rem;font-size:0.68rem;opacity:0.35;">Powered by Zoek Marketing</div>` : ''}`;
 }
 
 function toggleSection(id) {

@@ -478,14 +478,31 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 @media(max-width:1100px){.tool-grid{grid-template-columns:1fr;}.inputs-panel{position:static;}}
 @media(max-width:800px){.channel-compare{grid-template-columns:1fr;}.fomo-stats{grid-template-columns:1fr 1fr;}.kv-thead,.kv-row{grid-template-columns:1fr 90px 70px;}.kvth:nth-child(4),.kvth:nth-child(5),.kv-diff,.kv-rec{display:none;}.cta-block{flex-direction:column;}.cta-actions{align-items:flex-start;}.comp-summary{grid-template-columns:1fr 1fr;}}
 @media(max-width:480px){.fomo-stats,.comp-summary{grid-template-columns:1fr;}}
+@media print {
+  nav, .inputs-panel { display: none !important; }
+  body { background: white !important; color: #1a1a2e !important; }
+  .tool-grid { grid-template-columns: 1fr !important; }
+  .cta-block { background: linear-gradient(135deg,#692C8E,#ED0875) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; border-radius: 10px; }
+  .kv-row, .channel-card { break-inside: avoid; }
+  button { display: none !important; }
+  @page { margin: 1.5cm; size: A4 landscape; }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="#" class="nav-brand" id="wl-nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
-  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta" id="wl-nav-cta">Book a Free Call</a>
+  <a href="#" class="nav-cta" id="wl-nav-cta">Book a Free Call</a>
 </nav>
+<script>
+(function() {
+  var p = new URLSearchParams(window.location.search);
+  var calendly = p.get('calendly');
+  var el = document.getElementById('wl-nav-cta');
+  if (el && calendly) { el.href = calendly; el.target = '_blank'; }
+})();
+</script>
 
 <div class="hero">
   <div class="hero-tag">Local Market Scanner · Live Data</div>
@@ -818,6 +835,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           </div>
           <div class="cta-actions">
             <a href="https://calendly.com/expert-sales" target="_blank" class="cta-btn-main" id="wl-cta-btn">Book a Free Strategy Call</a>
+            <button onclick="window.print()" style="padding:0.75rem 1.5rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;">Download PDF Report</button>
             <div class="cta-phone" id="wl-cta-phone">or call <a href="tel:18887379635">1-888-737-9635</a></div>
           </div>
         </div>
