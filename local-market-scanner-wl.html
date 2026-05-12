@@ -67,6 +67,13 @@
       const heroTag = document.querySelector('.hero-tag');
       if (heroTag) heroTag.textContent = window.WL.bizName + ' · Market Intelligence';
 
+      // Update nav CTA
+      const navCta = document.getElementById('wl-nav-cta');
+      if (navCta) {
+        navCta.href = window.WL.calendly || '#';
+        navCta.textContent = window.WL.calendly ? 'Book a Free Call' : window.WL.bizName;
+      }
+
       // Update CTA button and phone
       const ctaBtn = document.getElementById('wl-cta-btn');
       if (ctaBtn) { ctaBtn.href = window.WL.calendly || '#'; }
@@ -477,35 +484,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
 
 <nav>
   <a href="#" class="nav-brand" id="wl-nav-brand"><img src="logo-white.svg" alt="Zoek Marketing" style="height:28px;width:auto"></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="learn.html">Academy</a></li>
-    <li class="nav-dropdown">
-      <button class="nav-drop-btn" onclick="toggleNav(this)">Tools <span class="nav-chevron">&#9660;</span></button>
-      <div class="nav-drop-menu" id="nl-tools-menu">
-        <div class="ndm-col">
-          <div class="ndm-label">Calculators</div>
-          <a href="funnel.html">Lead Funnel Visualizer</a>
-          <a href="calculator.html">Cost Per Lead</a>
-          <a href="roi.html">Marketing ROI</a>
-          <a href="budget.html">Ad Budget Planner</a>
-          <a href="revenue-loss.html">Revenue Loss</a>
-          <a href="ai-calculator.html">AI Receptionist ROI</a>
-          <a href="package-builder.html">Package Builder</a>
-        </div>
-        <div class="ndm-col">
-          <div class="ndm-label">Audits &amp; Scanners</div>
-          <a href="business-snapshot.html">Business Snapshot ✨</a>
-          <a href="local-market-scanner.html" style="color:var(--white);font-weight:700;">Local Market Scanner 🗺️</a>
-          <a href="marketing-wheel.html">Marketing Wheel</a>
-          <a href="website-quiz.html">Website Quiz</a>
-          <a href="positioning.html">Positioning Worksheet</a>
-          <a href="reviews.html">Reputation Toolkit</a>
-        </div>
-      </div>
-    </li>
-  </ul>
-  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta">Book a Free Call</a>
+  <a href="https://calendly.com/expert-sales" target="_blank" class="nav-cta" id="wl-nav-cta">Book a Free Call</a>
 </nav>
 
 <div class="hero">
@@ -853,7 +832,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
   <span class="footer-note" id="wl-footer-note">© 2025 Zoek Marketing · <a href="https://gozoek.com" target="_blank" class="footer-link">gozoek.com</a> · 1-888-737-9635</span>
 </footer>
 
-<script src="cta.js"></script>
+<!-- cta.js intentionally excluded in white-label version -->
 <script>
 // ─────────────────────────────────────────────
 // CONFIG  ← set your real key here (or via env)
