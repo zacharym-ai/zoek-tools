@@ -835,7 +835,7 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
           </div>
           <div class="cta-actions">
             <a href="https://calendly.com/expert-sales" target="_blank" class="cta-btn-main" id="wl-cta-btn">Book a Free Strategy Call</a>
-            <button onclick="window.print()" style="padding:0.75rem 1.5rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;">Download PDF Report</button>
+            <button onclick="printScannerReport()" style="padding:0.75rem 1.5rem;background:rgba(255,255,255,0.12);border:2px solid rgba(255,255,255,0.3);color:white;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;">↓ Download PDF Report</button>
             <div class="cta-phone" id="wl-cta-phone">or call <a href="tel:18887379635">1-888-737-9635</a></div>
           </div>
         </div>
@@ -1128,6 +1128,8 @@ async function runScan(){
     btn.innerHTML='<span>🔄</span> Re-Scan Market';
 
     renderAll(kwData, competitors, paidCompData);
+    // Store results for PDF export
+    window._scanResults = { kwData, competitors, paidCompData, S: {...S} };
     document.getElementById('results-content').classList.add('visible');
     setTimeout(()=>document.getElementById('results-content').scrollIntoView({behavior:'smooth',block:'start'}),100);
 
@@ -1969,6 +1971,142 @@ function removeCompDomain(rowId){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{initMap();onIndustryChange();});
+
+function printScannerReport() {
+  const r = window._scanResults;
+  const wl = window.WL && window.WL.active ? window.WL : null;
+  const brandName  = wl ? wl.bizName  : 'Zoek Marketing';
+  const brandPhone = wl ? wl.phone    : '1-888-737-9635';
+  const brandEmail = wl ? wl.email    : '';
+  const primary    = wl ? wl.primary  : '#692C8E';
+  const accent     = wl ? wl.accent   : '#ED0875';
+  const calendly   = wl ? wl.calendly : 'https://calendly.com/expert-sales';
+  const poweredBy  = wl ? wl.poweredBy : true;
+
+  // Pull computed values from the DOM (simplest approach since renderAll already ran)
+  const location   = r?.S?.location?.label || 'Your Market';
+  const industry   = IND[r?.S?.industry || 'home_services'].label;
+  const radius     = r?.S?.radius || 10;
+  const budget     = r?.S?.budget || 1500;
+
+  // Extract key metrics from DOM since they're already rendered
+  function getText(id) {
+    const el = document.getElementById(id);
+    return el ? el.textContent.trim() : '—';
+  }
+
+  // Grab the rendered results HTML and clean it up for print
+  const resultsEl = document.getElementById('results-content');
+  const resultsHtml = resultsEl ? resultsEl.innerHTML : '';
+
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Local Market Report — ${location}</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: white; color: #1a1a2e; line-height: 1.6; font-size: 14px; }
+  :root {
+    --purple: ${primary}; --pink: ${accent};
+    --gradient: linear-gradient(135deg, ${primary}, ${accent});
+    --navy: #1E1044; --sidebar: #27215C;
+    --muted: #a0a0c0; --border: rgba(105,44,142,0.2);
+    --green: #4fffb0; --red: #ff5c7c; --yellow: #FAA31C; --blue: #1EBFDC;
+    --white: white;
+  }
+
+  /* Report header */
+  .report-header-print {
+    background: linear-gradient(135deg, ${primary}, ${accent});
+    padding: 1.5rem 2rem; border-radius: 10px; color: white;
+    margin-bottom: 1.5rem;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+
+  /* Hide interactive elements */
+  .inputs-panel, nav, footer, #scanning-overlay,
+  button, .scan-step, .db-badge, #empty-state,
+  .cta-btn-main, [onclick] { display: none !important; }
+
+  /* Show results */
+  .results-panel { width: 100% !important; }
+  #results-content { display: block !important; opacity: 1 !important; }
+
+  /* Cards */
+  .card { border: 1px solid #e5e7eb !important; background: white !important; break-inside: avoid; border-radius: 8px; margin-bottom: 1rem; }
+  .card-head { background: #fafafa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* Colors that need to print */
+  .fomo-block, .opp-block, .urgency-block {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+
+  /* Fix grid */
+  .tool-grid { display: block !important; }
+  .channel-compare { grid-template-columns: 1fr 1fr !important; }
+
+  /* Map */
+  #market-map { height: 250px !important; }
+
+  /* Hide things that don't make sense in print */
+  .cta-block .cta-actions { display: none !important; }
+
+  @page { margin: 1.5cm; size: A4; }
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Clean header -->
+<div class="report-header-print">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <div style="font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.25rem;">Local Market Report</div>
+      <div style="font-size:0.9rem;opacity:0.85;">${location} · ${radius} mile radius · ${industry}</div>
+      <div style="font-size:0.82rem;opacity:0.75;margin-top:0.25rem;">Monthly budget: $${budget.toLocaleString()} · Generated ${new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;">${brandName}</div>
+      ${brandPhone ? `<div style="font-size:0.82rem;opacity:0.85;">${brandPhone}</div>` : ''}
+      ${brandEmail ? `<div style="font-size:0.82rem;opacity:0.85;">${brandEmail}</div>` : ''}
+    </div>
+  </div>
+</div>
+
+<!-- Results content -->
+${resultsHtml}
+
+<!-- CTA footer -->
+<div style="background:linear-gradient(135deg,${primary},${accent});border-radius:10px;padding:1.5rem 2rem;color:white;margin-top:1.5rem;-webkit-print-color-adjust:exact;print-color-adjust:exact;">
+  <div style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:0.5rem;">Ready to capture this opportunity?</div>
+  <div style="font-size:0.85rem;opacity:0.9;margin-bottom:0.75rem;">${brandName}'s team will show you exactly how to dominate your local market and build campaigns that generate leads.</div>
+  <div style="font-size:0.9rem;font-weight:700;">${brandName}</div>
+  ${brandPhone ? `<div style="font-size:0.82rem;opacity:0.85;">${brandPhone}</div>` : ''}
+  ${brandEmail ? `<div style="font-size:0.82rem;opacity:0.85;">${brandEmail}</div>` : ''}
+  ${calendly ? `<div style="font-size:0.78rem;opacity:0.7;margin-top:0.35rem;">Book a call: ${calendly}</div>` : ''}
+  ${poweredBy ? `<div style="margin-top:0.75rem;font-size:0.62rem;opacity:0.3;">Powered by Zoek Marketing</div>` : ''}
+</div>
+
+<div style="display:flex;justify-content:space-between;margin-top:1rem;padding-top:0.75rem;border-top:1px solid #e5e7eb;font-size:0.7rem;color:#9ca3af;">
+  <span style="font-weight:700;color:#374151;">${brandName}</span>
+  <span>Local Market Scanner Report · ${new Date().toLocaleDateString()}</span>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></scr` + `ipt>
+</body>
+</html>`;
+
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  // Give Leaflet map time to render before printing
+  setTimeout(() => { win.print(); }, 1500);
+}
 </script>
 </body>
 </html>
