@@ -187,15 +187,20 @@ footer{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:spac
     </div>
     <div class="q-block">
       <div class="q-label">What type of business are you?</div>
-      <div class="mc-grid">
-        <button class="mc-option" onclick="selectMC(this,'q-biz-type','local service business')">Local Service</button>
-        <button class="mc-option" onclick="selectMC(this,'q-biz-type','healthcare or medical practice')">Healthcare</button>
-        <button class="mc-option" onclick="selectMC(this,'q-biz-type','fitness or wellness business')">Fitness / Wellness</button>
-        <button class="mc-option" onclick="selectMC(this,'q-biz-type','restaurant or food business')">Restaurant</button>
-        <button class="mc-option" onclick="selectMC(this,'q-biz-type','real estate business')">Real Estate</button>
-        <button class="mc-option" onclick="selectMC(this,'q-biz-type','e-commerce or retail business')">E-commerce</button>
-        <button class="mc-option" onclick="selectMC(this,'q-biz-type','B2B or professional services business')">B2B / Professional</button>
-        <button class="mc-option" onclick="selectMC(this,'q-biz-type','agency or marketing business')">Agency</button>
+      <div class="q-hint">Pick your category first, then drill down.</div>
+      <!-- Step 1: Broad category -->
+      <div class="mc-grid" id="biz-cat-grid">
+        <button class="mc-option" onclick="selectBizCat(this,'local')">🏠 Local Business</button>
+        <button class="mc-option" onclick="selectBizCat(this,'professional')">💼 Professional Services</button>
+        <button class="mc-option" onclick="selectBizCat(this,'food')">🍽️ Food & Hospitality</button>
+        <button class="mc-option" onclick="selectBizCat(this,'online')">💻 Online / E-commerce</button>
+        <button class="mc-option" onclick="selectBizCat(this,'health')">🏥 Health & Wellness</button>
+        <button class="mc-option" onclick="selectBizCat(this,'creative')">🎨 Creative / Media</button>
+      </div>
+      <!-- Step 2: Sub-type (shown after category selected) -->
+      <div id="biz-subtype-wrap" style="display:none;margin-top:0.75rem;">
+        <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Now pick your specific type:</div>
+        <div class="mc-grid" id="biz-sub-grid"></div>
       </div>
       <input type="hidden" id="q-biz-type">
     </div>
@@ -354,7 +359,104 @@ const STEPS=[{id:'step-0',label:'Your Business'},{id:'step-1',label:'Your Custom
 function goStep(n){if(n<0||n>=TOTAL)return;document.querySelectorAll('.step-block').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.step-nav-item').forEach((i,idx)=>{i.classList.remove('active');if(idx<n)i.classList.add('done');else i.classList.remove('done');});document.getElementById('step-results').classList.remove('active');currentStep=n;document.getElementById('step-'+n).classList.add('active');document.getElementById('nav-'+n).classList.add('active');updateProgress();window.scrollTo(0,0);}
 function nextStep(){if(currentStep<TOTAL-1)goStep(currentStep+1);}
 function prevStep(){if(currentStep>0)goStep(currentStep-1);}
-function updateProgress(){const pct=Math.round((currentStep/TOTAL)*100);document.getElementById('progress-inner').style.width=pct+'%';document.getElementById('progress-text').textContent='Step '+(currentStep+1)+' of '+TOTAL+' — '+STEPS[currentStep].label;document.getElementById('progress-pct').textContent=pct+'% complete';}
+function updateProgress(){const pct=Math.round((currentStep/TOTAL)*100);document.getElementById('progress-inner').style.width=pct+'%';document.getElementById('progress-text').textContent='Step '+(currentStep+1)+' of '+TOTAL+' - '+STEPS[currentStep].label;document.getElementById('progress-pct').textContent=pct+'% complete';}
+const BIZ_SUBTYPES = {
+  local: [
+    ['plumbing, HVAC, or electrical business', 'Plumbing / HVAC / Electrical'],
+    ['roofing or exterior services business', 'Roofing / Exterior'],
+    ['cleaning or janitorial business', 'Cleaning Services'],
+    ['landscaping or lawn care business', 'Landscaping'],
+    ['auto repair or detailing business', 'Auto Repair / Detailing'],
+    ['home remodeling or construction business', 'Remodeling / Construction'],
+    ['pest control business', 'Pest Control'],
+    ['moving or storage business', 'Moving / Storage'],
+    ['local retail or boutique', 'Retail / Boutique'],
+    ['other local service business', 'Other Local Service'],
+  ],
+  professional: [
+    ['law firm or legal services', 'Law / Legal'],
+    ['accounting or financial advisory firm', 'Accounting / Finance'],
+    ['real estate business', 'Real Estate'],
+    ['insurance agency', 'Insurance'],
+    ['marketing or advertising agency', 'Marketing / Agency'],
+    ['IT or technology consulting firm', 'IT / Tech Consulting'],
+    ['HR or recruiting firm', 'HR / Recruiting'],
+    ['business coaching or consulting firm', 'Business Coaching'],
+    ['B2B SaaS or software company', 'B2B SaaS'],
+    ['other professional services business', 'Other Professional'],
+  ],
+  food: [
+    ['full-service restaurant', 'Restaurant'],
+    ['fast casual or quick service restaurant', 'Fast Casual / QSR'],
+    ['café or coffee shop', 'Café / Coffee Shop'],
+    ['bakery or dessert shop', 'Bakery / Desserts'],
+    ['bar or brewery', 'Bar / Brewery'],
+    ['catering business', 'Catering'],
+    ['food truck or pop-up', 'Food Truck / Pop-Up'],
+    ['meal prep or delivery business', 'Meal Prep / Delivery'],
+    ['hotel or hospitality business', 'Hotel / Hospitality'],
+  ],
+  online: [
+    ['e-commerce or product brand', 'E-commerce / Product Brand'],
+    ['dropshipping or resale business', 'Dropshipping / Resale'],
+    ['subscription box business', 'Subscription Box'],
+    ['online course or education business', 'Online Courses / Education'],
+    ['SaaS or software product', 'SaaS / Software'],
+    ['affiliate or content business', 'Affiliate / Content'],
+    ['freelance or consulting business', 'Freelance / Consulting'],
+    ['marketplace or platform', 'Marketplace / Platform'],
+  ],
+  health: [
+    ['dental practice', 'Dental Practice'],
+    ['medical practice or urgent care', 'Medical / Urgent Care'],
+    ['chiropractic or physical therapy practice', 'Chiro / Physical Therapy'],
+    ['mental health or therapy practice', 'Mental Health / Therapy'],
+    ['gym or fitness studio', 'Gym / Fitness Studio'],
+    ['yoga or pilates studio', 'Yoga / Pilates'],
+    ['personal training business', 'Personal Training'],
+    ['spa or massage therapy business', 'Spa / Massage'],
+    ['nutrition or wellness coaching business', 'Nutrition / Wellness Coaching'],
+    ['veterinary or pet care business', 'Veterinary / Pet Care'],
+  ],
+  creative: [
+    ['photography or videography business', 'Photography / Video'],
+    ['graphic design or branding studio', 'Design / Branding'],
+    ['web design or development agency', 'Web Design / Dev'],
+    ['music, entertainment, or events business', 'Music / Entertainment / Events'],
+    ['interior design or architecture firm', 'Interior Design / Architecture'],
+    ['writing, copywriting, or content business', 'Writing / Copywriting'],
+    ['social media or influencer business', 'Social Media / Influencer'],
+    ['PR or communications agency', 'PR / Communications'],
+  ],
+};
+
+function selectBizCat(btn, cat) {
+  // Highlight selected category
+  document.querySelectorAll('#biz-cat-grid .mc-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+
+  // Build sub-type buttons
+  const subtypes = BIZ_SUBTYPES[cat] || [];
+  const subGrid = document.getElementById('biz-sub-grid');
+  subGrid.innerHTML = subtypes.map(([value, label]) =>
+    `<button class="mc-option" onclick="selectBizSubtype(this,'${value.replace(/'/g,"\\'")}')">
+      ${label}
+    </button>`
+  ).join('');
+
+  // Show sub-type row
+  document.getElementById('biz-subtype-wrap').style.display = 'block';
+
+  // Clear any previously selected subtype
+  document.getElementById('q-biz-type').value = '';
+}
+
+function selectBizSubtype(btn, value) {
+  document.querySelectorAll('#biz-sub-grid .mc-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('q-biz-type').value = value;
+}
+
 function selectMC(btn,fieldId,value){btn.closest('.mc-grid').querySelectorAll('.mc-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');document.getElementById(fieldId).value=value;}
 function generateResults(){
   const biz=document.getElementById('q-biz-name').value.trim()||'Your Business';
@@ -370,31 +472,31 @@ function generateResults(){
   const proofResult=document.getElementById('q-proof-result').value.trim();
   const proofGuarantee=document.getElementById('q-proof-guarantee').value.trim();
   const core=diffOne||diffBetter;
-  const headline=biz?`${biz} — ${core?core.split('.')[0]:'A different kind of '+type}`:'A different kind of '+type;
+  const headline=biz?`${biz} - ${core?core.split('.')[0]:'A different kind of '+type}`:'A different kind of '+type;
   const para1=`Most ${type} all sound the same. ${compCommon?'"'+compCommon.split('.')[0]+'."':'"Experienced. Reliable. Trusted."'} ${biz} is different.`;
-  const para2=core?core.charAt(0).toUpperCase()+core.slice(1)+(core.endsWith('.')?''):'We believe our clients deserve straight answers, fair prices, and a team that actually shows up.';
+  const para2=core?core.charAt(0).toUpperCase()+core.slice(1)+(core.endsWith('.')?'':'.'):'We believe our clients deserve straight answers, fair prices, and a team that actually shows up.';
   const para3=proofNums?proofNums.split('.')[0]+'.':outcome?'The result: '+outcome.split('.')[0]+'.':'';
   document.getElementById('ps-output').innerHTML=`<div class="ps-label">Your core positioning statement</div><div class="ps-headline">${headline}</div>`;
   document.getElementById('ps-body-output').innerHTML=`<p class="ps-copy">${para1}</p><br><p class="ps-copy"><strong>${para2}</strong></p>${para3?'<br><p class="ps-copy">'+para3+'</p>':''}`;
-  document.getElementById('result-grid-output').innerHTML=[{label:'Who you\'re for',val:who||'—'},{label:'Core differentiator',val:diffBetter||diffOne||'—'},{label:'Their real problem',val:probE||probP||'—'},{label:'The proof',val:proofNums||proofResult||'—'},{label:'Outcome they want',val:outcome||'—'},{label:'Your guarantee',val:proofGuarantee||'—'}].map(r=>`<div class="result-box"><div class="result-box-label">${r.label}</div><div class="result-box-val">${r.val}</div></div>`).join('');
+  document.getElementById('result-grid-output').innerHTML=[{label:'Who you\'re for',val:who||'-'},{label:'Core differentiator',val:diffBetter||diffOne||'-'},{label:'Their real problem',val:probE||probP||'-'},{label:'The proof',val:proofNums||proofResult||'-'},{label:'Outcome they want',val:outcome||'-'},{label:'Your guarantee',val:proofGuarantee||'-'}].map(r=>`<div class="result-box"><div class="result-box-label">${r.label}</div><div class="result-box-val">${r.val}</div></div>`).join('');
   const warns=[];
   if(!diffBetter&&!diffOne)warns.push('Your differentiator is empty. This is the most important part. Go back and be specific.');
   if(!who)warns.push('"Everyone" is not a target market. The more specific your customer, the better your marketing converts.');
-  if(!proofNums&&!proofResult)warns.push('No proof points. Even your Google star rating counts — add something specific.');
+  if(!proofNums&&!proofResult)warns.push('No proof points. Even your Google star rating counts - add something specific.');
   if(!compCommon)warns.push('You didn\'t analyze competitors. You might be saying the same thing as everyone else without knowing it.');
   const wb=document.getElementById('warnings-output');
-  wb.innerHTML=warns.length?'<strong>Before you use this — gaps to close:</strong><br><br>'+warns.map((w,i)=>`${i+1}. ${w}`).join('<br><br>'):'<strong style="color:var(--green)">Solid work.</strong> You\'ve built a real positioning foundation. Refine it until it sounds exactly like you.';
+  wb.innerHTML=warns.length?'<strong>Before you use this - gaps to close:</strong><br><br>'+warns.map((w,i)=>`${i+1}. ${w}`).join('<br><br>'):'<strong style="color:var(--green)">Solid work.</strong> You\'ve built a real positioning foundation. Refine it until it sounds exactly like you.';
   wb.style.borderLeftColor=warns.length?'var(--red)':'var(--green)';
   wb.style.background=warns.length?'rgba(255,92,124,0.07)':'rgba(79,255,176,0.07)';
   const steps=[{t:'Put it on your homepage today',d:'Take your core differentiator and make it the first headline on your website. Not your name. Not "welcome." The reason someone should choose you.'},
     {t:'Test it on your next ad',d:'Run your next Google or Meta ad using your positioning statement as the headline. Compare it against your current headline. See which gets more clicks.'},
-    {t:'Add it to your Google Business profile',d:'Your business description is free real estate most businesses waste. Put your positioning statement there — you\'ll stand out from every competitor on the map.'}];
+    {t:'Add it to your Google Business profile',d:'Your business description is free real estate most businesses waste. Put your positioning statement there - you\'ll stand out from every competitor on the map.'}];
   document.getElementById('next-steps-output').innerHTML=`<div class="usage-items">${steps.map((s,i)=>`<div class="usage-item"><div class="usage-item-num">${i+1}</div><div class="usage-item-text"><strong>${s.t}</strong><span>${s.d}</span></div></div>`).join('')}</div>`;
   document.querySelectorAll('.step-block').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.step-nav-item').forEach(i=>{i.classList.remove('active');i.classList.add('done');});
   document.getElementById('step-results').classList.add('active');
   document.getElementById('progress-inner').style.width='100%';
-  document.getElementById('progress-text').textContent='Complete — Your positioning is ready';
+  document.getElementById('progress-text').textContent='Complete - Your positioning is ready';
   document.getElementById('progress-pct').textContent='100% complete';
   window.scrollTo(0,0);
 }
