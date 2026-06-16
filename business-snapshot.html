@@ -317,7 +317,11 @@ let bizData             = {};
 let searchTimeout;
 
 function escHtml(s) {
-  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escAttr(s) {
+  // For use inside HTML attribute values (double-quoted)
+  return String(s || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 function checkReady() {
@@ -356,11 +360,23 @@ function showAutocomplete(suggestions) {
     const main  = place.mainText?.text  || place.text?.text || '';
     const full  = place.text?.text || '';
     const id    = place.placeId || '';
-    return `<div class="sb-option" onclick="selectPlace('${id}','${escHtml(main)}','${escHtml(full)}')">
-      <div class="sb-opt-name">${main}</div>
-      <div class="sb-opt-addr">${full}</div>
+    // Use data attributes — avoids the apostrophe/quote inline-onclick escaping bug
+    return `<div class="sb-option"
+      data-place-id="${escAttr(id)}"
+      data-main="${escAttr(main)}"
+      data-full="${escAttr(full)}">
+      <div class="sb-opt-name">${escHtml(main)}</div>
+      <div class="sb-opt-addr">${escHtml(full)}</div>
     </div>`;
   }).join('');
+
+  // Attach click listeners — data survives as-is, no JS string parsing
+  list.querySelectorAll('.sb-option').forEach(el => {
+    el.addEventListener('click', function() {
+      selectPlace(this.dataset.placeId, this.dataset.main, this.dataset.full);
+    });
+  });
+
   list.classList.add('open');
 }
 
