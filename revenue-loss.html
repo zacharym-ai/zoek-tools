@@ -157,6 +157,8 @@ body{background:var(--navy);color:var(--white);font-family:'Plus Jakarta Sans',s
 .cta-btn-main:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,0.25);}
 .cta-phone{font-size:0.78rem;color:rgba(255,255,255,0.65);text-align:right;}
 .cta-phone a{color:rgba(255,255,255,0.9);text-decoration:none;font-weight:700;}
+.cta-btn-alt{background:transparent;color:rgba(255,255,255,0.92);border:1.5px solid rgba(255,255,255,0.45);padding:0.75rem 1.5rem;border-radius:5px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;}
+.cta-btn-alt:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.75);}
 
 .btn-recalc{padding:0.6rem 1.25rem;background:transparent;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:600;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.15s;}
 .btn-recalc:hover{color:var(--white);border-color:rgba(255,255,255,0.3);}
@@ -496,6 +498,18 @@ function recalc(){
   const annualBench=benchRevenue*12;
   const annualTop=topRevenue*12;
 
+  // Keep the computed figures so the emailed report carries real context —
+  // a rep opening this lead should see WHY they're losing money.
+  window.__zoekResult = {
+    monthlyGap: Math.round(monthlyGap),
+    annualGap: Math.round(annualGap),
+    convRate, benchConv: industry.benchConv,
+    industry: industry.label,
+    visitors, acv,
+    currentLeads: Math.round(currentLeads),
+    leadsGap: Math.round(leadsGap),
+  };
+
   panel.innerHTML=`
     ${monthlyGap>0?`
     <div class="loss-hero">
@@ -582,11 +596,40 @@ function recalc(){
       </div>
       <div class="cta-actions">
         <a href="https://calendly.com/expert-sales" target="_blank" class="cta-btn-main">Book a Free Call →</a>
+        <button class="cta-btn-alt" onclick="emailBreakdown()">Email me this breakdown</button>
         <div class="cta-phone">Or call us: <a href="tel:18887379635">1-888-737-9635</a></div>
       </div>
     </div>
 
     <div style="text-align:center"><button class="btn-recalc" onclick="resetCalc()">Reset &amp; recalculate</button></div>`;
+}
+
+function emailBreakdown(){
+  var r = window.__zoekResult || {};
+  var weak = [];
+  if (r.convRate < r.benchConv) weak.push('Converts at ' + r.convRate + '% vs ' + r.benchConv + '% industry average');
+  if (r.leadsGap > 0) weak.push('Missing about ' + r.leadsGap + ' leads a month from existing traffic');
+  if (r.monthlyGap > 0) weak.push('Estimated $' + r.monthlyGap.toLocaleString() + '/mo in lost revenue');
+
+  // A rough 0-100 read on how healthy the site is, so sales can triage.
+  var score = r.benchConv ? Math.max(0, Math.min(100, Math.round((r.convRate / r.benchConv) * 70))) : null;
+
+  ZoekCapture.ask({
+    tool: 'revenue_loss',
+    overall_score: score,
+    weak_areas: weak,
+    industry: r.industry || null,
+    extra: {
+      monthly_gap: r.monthlyGap,
+      annual_gap: r.annualGap,
+      conversion_rate: r.convRate,
+      monthly_visitors: r.visitors,
+      avg_client_value: r.acv,
+      result_summary: r.monthlyGap
+        ? 'Losing about $' + r.monthlyGap.toLocaleString() + '/mo ($' + r.annualGap.toLocaleString() + '/yr) at ' + r.convRate + '% conversion against a ' + r.benchConv + '% ' + r.industry + ' benchmark.'
+        : 'Conversion rate is at or above the ' + r.industry + ' benchmark.'
+    }
+  });
 }
 
 function resetCalc(){
@@ -620,84 +663,5 @@ document.addEventListener('click',function(e){
 });
 </script>
 
-<script>
-// Inject benchmark CSS
-
-
-// Build selector
-
-
-function showRevenueBenchmarks(industryKey) {
-  if (!industryKey) { document.getElementById('dynamic-bench-grid').style.display='none'; return; }
-  var bm = getBenchmark(industryKey);
-  var select = document.getElementById('bm-industry-select');
-  select.style.borderColor = '#ED0875';
-
-  // Get current user values from the page
-  var userConv = parseFloat(document.getElementById && document.querySelector('[id*="conv"]') ? 
-    (document.getElementById('conv-rate') || document.getElementById('conversion-rate') || {value:0}).value : 0) || 0;
-  var userRevenue = parseFloat((document.getElementById('avg-revenue') || document.getElementById('revenue') || {value:0}).value) || 0;
-
-  var cards = [
-    {
-      label: 'Conversion Rate',
-      avg: bm.conversionRate + '%',
-      you: userConv > 0 ? userConv + '%' : 'Enter above',
-      youNum: userConv,
-      avgNum: bm.conversionRate,
-      higherBetter: true
-    },
-    {
-      label: 'Avg Order Value',
-      avg: '$' + bm.avgOrderValue.toLocaleString(),
-      you: userRevenue > 0 ? '$' + userRevenue.toLocaleString() : 'Enter above',
-      youNum: userRevenue,
-      avgNum: bm.avgOrderValue,
-      higherBetter: true
-    },
-    {
-      label: 'Close Rate',
-      avg: bm.closeRate + '%',
-      you: '—',
-      youNum: 0,
-      avgNum: bm.closeRate,
-      higherBetter: true,
-      note: true
-    },
-    {
-      label: 'Monthly Lead Volume',
-      avg: bm.leadVolume + ' leads',
-      you: '—',
-      youNum: 0,
-      avgNum: bm.leadVolume,
-      higherBetter: true,
-      note: true
-    }
-  ];
-
-  var cardsHtml = cards.map(function(c) {
-    var delta = '';
-    if (c.youNum > 0 && !c.note) {
-      var diff = ((c.youNum - c.avgNum) / c.avgNum * 100).toFixed(0);
-      var cls = (c.higherBetter ? c.youNum >= c.avgNum : c.youNum <= c.avgNum) ? 'bm-delta-good' : 'bm-delta-bad';
-      var sign = diff > 0 ? '+' : '';
-      delta = '<span class="bm-card-delta ' + cls + '">' + sign + diff + '% vs industry</span>';
-    }
-    return '<div class="bm-card">' +
-      '<div class="bm-card-label">' + c.label + '</div>' +
-      '<div class="bm-card-avg">Industry avg: ' + c.avg + '</div>' +
-      (c.youNum > 0 && !c.note ? '<div class="bm-card-you">You: ' + c.you + '</div>' : '') +
-      delta +
-      '</div>';
-  }).join('');
-
-  var resultsEl = document.getElementById('dynamic-bench-grid');
-  resultsEl.innerHTML = cardsHtml +
-    '<div class="bm-card" style="grid-column:1/-1">' +
-      '<div class="bm-insight"><strong>' + bm.label + ' Industry Insight</strong>' + bm.notes + '</div>' +
-    '</div>';
-  resultsEl.style.display = 'grid';
-}
-</script>
 </body>
 </html>
